@@ -1,0 +1,13 @@
+INSERT EN LA TABLA MODULOS
+'ID', 'sol_tc.php', 'Solicitar TC', '1'
+'ID', 'apertura_cn.php', 'Apertura Cuenta Persona Natural', '1'
+
+
+ADMINISTRADOR
+CREAR CONTENIDO SOLICITAR TC
+    EDITAR EN BD CAMPO ID_HERRAMIENTA FINANCIERA ID DEL MODULO
+
+ARCHIVOS
+Banplus_3\site\modulos\sol_tc.php
+Banplus_3\site\modulos\apertura_cn.php
+Banplus_3\site\js\new_js.js

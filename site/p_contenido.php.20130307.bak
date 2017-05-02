@@ -1,0 +1,161 @@
+<?
+	ob_start();
+	session_start();
+	setlocale(LC_TIME,"es_ES");
+	//ini_set ("display_errors","On" );
+	//ini_set ('error_reporting', E_ALL & ~E_NOTICE);
+
+	$Id = intval($_REQUEST["id"]);
+	$Ids = intval($_REQUEST["ids"]);
+	$Idc = intval($_REQUEST["idc"]);
+	$Idn = intval($_REQUEST["idn"]);
+	$BuscarSrc = $_REQUEST["buscar"];
+	$NumP = intval($_GET["np"]);
+	
+	if ($Id==""){
+		//header('Location: p_contenido.php?id=1');
+		header('Location: http://www.banplus.com/site/p_contenido.php?id=1');
+		//header('Location: http://172.16.48.211/calidad/banplus/site/p_contenido.php?id=1');
+		//header('Location: http://www.adverweb.com/banplus/site/p_contenido.php?id=1');
+		exit();
+	}
+	
+	if ($Idc=="") {
+		$Idsb=$Id; 
+	}else{
+		$Idsb=$Idc;	
+	}
+	include "includes/i_generales.php";
+	include "includes/i_funciones.php";
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+	<head> 
+		<link href='ban.ico' rel='shortcut icon' type='image/x-icon'>
+		<!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
+		<meta http-equiv="X-UA-Compatible" content="IE=8"/>
+		<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<META NAME="keywords" content="<? echo Keywords; ?>">
+		<META NAME="Description" CONTENT="<? echo Description; ?>">
+		<title><? echo TITLE_SITE; ?><? echo $Title; ?></title>		
+		<!--link href="http://code.google.com/apis/maps/documentation/javascript/examples/standard.css" rel="stylesheet" type="text/css" /-->
+		<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+			
+		<script src="<? echo URL_SITE; ?>js/i_lenguaje.js" type="text/javascript"></script>
+		<script src="<? echo URL_SITE; ?>js/i_generales.js" type="text/javascript"></script>	
+		<link href="<? echo URL_SITE; ?>css/site.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="<? echo URL_SITE; ?>css/layout.css" type="text/css" media="screen" charset="utf-8" />
+		<link rel="stylesheet" href="<? echo URL_SITE; ?>css/jd.gallery.css" type="text/css" media="screen" charset="utf-8" />
+		<!--script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script-->	
+		  <SCRIPT src="<? echo URL_SITE; ?>js/jquery-1.8.1.min.js" type="text/javascript"></SCRIPT>
+		<script type="text/javascript" src="<? echo URL_SITE; ?>js/ddsmoothmenu.js">
+		/***********************************************
+		* Smooth Navigational Menu- (c) Dynamic Drive DHTML code library (www.dynamicdrive.com)
+		* This notice MUST stay intact for legal use
+		* Visit Dynamic Drive at http://www.dynamicdrive.com/ for full source code
+		***********************************************/
+		</script>
+		<SCRIPT src="<? echo URL_SITE; ?>/js/autoNumeric-1.7.5.js" type="text/javascript"></SCRIPT>
+		
+		<script src="<? echo URL_SITE; ?>js/mootools-1.2.1-core-yc.js" type="text/javascript"></script>
+		<script src="<? echo URL_SITE; ?>js/mootools-1.2-more.js" type="text/javascript"></script>
+		<script src="<? echo URL_SITE; ?>js/jd.gallery.js" type="text/javascript"></script>
+		<script src="<? echo URL_SITE; ?>js/i_marquee.js" type="text/javascript"></script>
+		<? if ($Idc=="") { ?>
+		<script type="text/javascript">
+		/*mookieExampleOne = new Mooquee({
+			element:'mooqueecarousel',
+			cssitem: 'mooquee_item',
+			firstitem:0,
+			trans:{'tin':'fade', 'tout':'right'},
+			duration:3,
+			pause:2,
+			pauseOnHover: true,
+			startOnLoad:false,
+			onTransitionStart: function(ci,pi){
+					$('item' + (pi)).removeClass('selected');
+					$('item' + (pi)).addClass('unselected');
+					$('item' + (ci)).addClass('next');
+					$('item' + (ci)).removeClass('unselected');
+			},
+			onTransitionComplete: function(ci,pi){
+					$('item' + (ci)).removeClass('next');
+					$('item' + (ci)).addClass('selected');
+			}
+		});*/
+		
+		mookieDefaultExample = new Mooquee({
+			trans:{'tin':'up', 'tout':'up'},
+			duration:3,
+			pause:6
+
+		});
+		</script>
+		<? } ?>
+		
+		
+		
+		<script type="text/javascript">
+		ddsmoothmenu.init({
+			 mainmenuid: "smoothmenu1", //menu DIV id
+			 orientation: 'h', //Horizontal or vertical menu: Set to "h" or "v"
+			 classname: 'ddsmoothmenu', //class added to menu's outer DIV
+			 //customtheme: ["#1c5a80", "#18374a"],
+			 contentsource: "markup" //"markup" or ["container_id", "path_to_menu_file"]
+		})
+	</script>
+	
+	<script>
+	jQuery(function($) {
+    $('input.auto').autoNumeric({aSep: '.', aDec: ','});
+  }); 
+	</script>
+
+	<link rel="stylesheet" type="text/css" href="<? echo URL_SITE; ?>css/ddsmoothmenu.css" />
+
+	</head>
+
+	<body  <? if ($Idc==28) { ?> onLoad="cargform(); "<? }
+			 else { ?> onLoad="cargform();" <? } ?> >
+		<? if ($Idc=="") { ?>
+		<script type="text/javascript">
+			function startGallery() {
+				var myGallery = new gallery($('myGallery'), {
+					timed: true,
+					showArrows: true,
+					showCarousel: false,
+					embedLinks: true,
+					showInfopane: false
+				});
+			}
+			window.addEvent('domready',startGallery);		
+		</script>
+		<? } ?>
+
+		<div id="body_id">
+		<div id="principal">
+			<?
+				include "includes/i_header.php";
+			?>
+			<?
+				if ($Idc=="") {
+					include "includes/i_home.php";
+				}else{
+					include "includes/i_cuerpo.php";
+				}
+			?>
+		
+		</div>
+		<div id="sombra">
+			<?
+				include "includes/i_footer.php";
+			?>	
+		</div>
+		<div id="footer_bottom">
+			<?
+				include "includes/i_footer2.php";
+			?>
+		</div>
+		</div>
+	</body>
+</html>
