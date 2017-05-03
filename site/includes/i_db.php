@@ -9,7 +9,7 @@
 	function abrirConexion()
 	{
 		global $conexion;
-		$conexion = @mysql_connect("192.168.1.134","admin","12345");
+		$conexion = @mysql_connect("localhost","root","");
 		if(mysql_errno()){
 			die("Discupe!<br>Un error ha ocurrido. Intente mas tarde. 1");
 		}else{
