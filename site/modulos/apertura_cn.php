@@ -14,14 +14,23 @@
 </style>
 
 <?php
-$Estados = execute_sql("get_estados", array());
+$Estados = execute_sql("get_estados2", array());
+
+
 $_opc_estados = '';
 foreach ($Estados as $estado) {
-    $_opc_estados .= '  <option value="' . $estado['id_estado'] . '">' . $estado['nombre'];
+    $_opc_estados .= '  <option value="' . $estado['id_estado'] . '">' . $estado['estado'];
 }
 
 $Ciudades = execute_sql("get_ciudad", array());
 $_opc_ciudades = '';
+
+$_codigo_areas = ['0412', '0426', '0416', '0424', '0414', '0248', '0281', '0240', '0243', '0273', '0284', '0241', '0258', '0287', '0212', '0259', '0235', '0251', '0271', '0212', '0287', '0295', '0255', '0293', '0275', '0271', '0212', '0251', '0262'];
+
+foreach ($_codigo_areas as $codigo) {
+
+    $_opc_area .= '  <option value="' . $codigo . '">' . $codigo;
+}
 ?>
 <script    src="https://code.jquery.com/jquery-3.2.1.min.js"    ></script>
 <script>
@@ -29,7 +38,7 @@ $_opc_ciudades = '';
     var Ciudades = {};
 <?php
 foreach ($Ciudades as $Ciudad) {
-    echo "Ciudades['" . $Ciudad['id_estado'] . "_" . $Ciudad['id_ciudad'] . "']='" . $Ciudad['nombre'] . "';";
+    echo "Ciudades['" . $Ciudad['id_estado'] . "_" . $Ciudad['id_ciudad'] . "']='" . $Ciudad['ciudad'] . "';";
 }
 ?>
 
@@ -54,15 +63,18 @@ foreach ($Ciudades as $Ciudad) {
 
 
         $('#form_ap_cuenta').submit(function () {
-            alert();
+
             var validado = true;
             $('.requerido_').each(function () {
                 if ($(this).val().length <= 0) {
-                    $(this).css('background', 'rgba(255, 0, 0, 0.30)');
+                    $(this).css('background', 'rgba(255,0,0,0.30)');
                     validado = false;
                 }
 
             });
+
+            if (!validado)
+                alert('Por Favor rellene los campos se\u00f1alados');
 
             return validado;
 
@@ -156,30 +168,37 @@ foreach ($Ciudades as $Ciudad) {
         </div>
 
         <div style="width:100%; margin-top:10px;float:left;"></div>
-        <div style="float:left;padding:5px;width:31.5%;">
+        <div style="float:left;padding:5px;">
             <label for="tp_pais">Pa&iacute;s de nacimiento:<span  style="color:red">*</span></label><br>
-            <select class="requerido_" name="tp_pais" id="tp_pais" style="width:100%">
+<!--            <select class="requerido_" name="tp_pais" id="tp_pais" style="width:100%">
+                <option value="">Seleccione...
+                <option value="C">Venezuela
+                <option value="p">Casado
+                <option value="p">Viudo
+            </select>-->
+             <input class="requerido_" onkeypress="return solo_letras(event)" type="text" name="tp_pais" id="tp_pais" value="" style="width:235px;">
+     
+        </div>
+        <div style="float:left;padding:5px;">
+            <label for="tp_estado">Estado de nacimiento:<span  style="color:red">*</span></label><br>
+<!--            <select class="requerido_" name="tp_estado" id="tp_estado" style="width:100%;">
                 <option value="">Seleccione...
                 <option value="C">Soltero
                 <option value="p">Casado
                 <option value="p">Viudo
-            </select>
+            </select>-->
+             <input class="requerido_" onkeypress="return solo_letras(event)" type="text" name="tp_estado" id="tp_estado" value="" style="width:235px;">
         </div>
-        <div style="float:left;width:31.5%;padding:5px;">
-            <label for="tp_estado">Estado de nacimiento:<span  style="color:red">*</span></label><br>
-            <select class="requerido_" name="tp_estado" id="tp_estado" style="width:100%;">
-                <option value="C">Soltero
-                <option value="p">Casado
-                <option value="p">Viudo
-            </select>
-        </div>
-        <div style="float:left;width:31.5%;padding:5px;">
+        <div style="float:left;padding:5px;">
             <label for="tp_ciudad">Ciudad de nacimiento:<span  style="color:red">*</span></label><br>
-            <select class="requerido_" name="tp_ciudad" id="tp_ciudad" style="width:100%;">
+<!--            <select class="requerido_" name="tp_ciudad" id="tp_ciudad" style="width:100%;">
+                <option value="">Seleccione...
                 <option value="C">Soltero
                 <option value="p">Casado
                 <option value="p">Viudo
-            </select>
+            </select>-->
+              <input class="requerido_" onkeypress="return solo_letras(event)" type="text" name="tp_ciudad" id="tp_ciudad" value="" style="width:235px;">
+   
         </div>
 
         <div style="width:100%; margin-top:10px;float:left;"></div>
@@ -187,6 +206,7 @@ foreach ($Ciudades as $Ciudad) {
         <div style="float:left;width:30%;padding:5px;">
             <label for="tp_profecion">Profesi&oacute;n u oficio:<span  style="color:red">*</span></label><br>
             <select class="requerido_" name="tp_profecion" id="tp_profecion" style="width:100%;">
+                 <option value="">Seleccione...
                 <option value="C">Soltero
                 <option value="p">Casado
                 <option value="p">Viudo
@@ -195,6 +215,7 @@ foreach ($Ciudades as $Ciudad) {
         <div style="float:left;width:30%;padding:5px;">
             <label for="tp_ocupacion">Ocupaci&oacute;n:<span  style="color:red">*</span></label><br>
             <select class="requerido_" name="tp_ocupacion" id="tp_ocupacion" style="width:100%;">
+                 <option value="">Seleccione...
                 <option value="C">Soltero
                 <option value="p">Casado
                 <option value="p">Viudo
@@ -294,6 +315,7 @@ foreach ($Ciudades as $Ciudad) {
         <div style="float:left;padding:5px;">
             <label for="tp_inmueble">Tipo inmueble:<span  style="color:red">*</span></label><br>
             <select class="requerido_" name="tp_inmueble" id="tp_inmueble" style="width:200px;">
+                <option value="">Seleccione...
                 <option value="C">Soltero
                 <option value="p">Casado
                 <option value="p">Viudo
@@ -307,9 +329,8 @@ foreach ($Ciudades as $Ciudad) {
         <div style="float:left;padding:5px;">
             <label for="dtp_telefono">Tel&eacute;fono:<span  style="color:red">*</span></label><br>
             <select class="requerido_" name="dtp_telefono" id="dtp_telefono" style="width:70px;">
-                <option value="C">0212
-                <option value="p">Casado
-                <option value="p">Viudo
+                <option value="">
+                    <?php echo $_opc_area; ?>
             </select>
             <input class="requerido_" onkeypress="return solo_numeros(event)" style="width:100px;" type="text" name="d_telefono" id="d_telefono" value="">
         </div>
@@ -327,9 +348,8 @@ foreach ($Ciudades as $Ciudad) {
         <div style="float:left;padding:5px;">
             <label for="dctp_telefono">Tel&eacute;fono del Arrendador:</label><br>
             <select  name="dctp_telefono" id="dctp_telefono" style="width:70px;">
-                <option value="C">0212
-                <option value="p">Casado
-                <option value="p">Viudo
+                <option value="">
+                    <?php echo $_opc_area; ?>
             </select>
             <input  onkeypress="return solo_numeros(event)" style="width:100px;" type="text" name="cd_telefono" id="cd_telefono" value="">
         </div>
@@ -357,6 +377,7 @@ foreach ($Ciudades as $Ciudad) {
         <div style="float:left;padding:5px;">
             <label for="etp_relacion">Relaci&oacute;n laboral:<span  style="color:red">*</span></label><br>
             <select class="requerido_" name="etp_relacion" id="etp_relacion" style="width:186px;">
+                 <option value="">Seleccione...
                 <option value="C">Soltero
                 <option value="p">Casado
                 <option value="p">Viudo
@@ -429,9 +450,8 @@ foreach ($Ciudades as $Ciudad) {
         <div style="float:left;padding:5px;">
             <label for="edctp_telefono">Tel&eacute;fono:</label><br>
             <select class="requerido_" name="edctp_telefono" id="edctp_telefono" style="width:70px;">
-                <option value="C">0212
-                <option value="p">Casado
-                <option value="p">Viudo
+                <option value="">
+                    <?php echo $_opc_area; ?>
             </select>
             <input onkeypress="return solo_numeros(event)" style="width:100px;" type="text" name="ecd_telefono" id="ecd_telefono" value="">
         </div>
@@ -508,9 +528,8 @@ foreach ($Ciudades as $Ciudad) {
         <div style="float:left;padding:5px;">
             <label for="rtp_telefono">Tel&eacute;fono:</label><br>
             <select class="requerido_" name="rtp_telefono" id="rtp_telefono" style="width:70px;">
-                <option value="C">0212
-                <option value="p">Casado
-                <option value="p">Viudo
+                <option value="">
+                    <?php echo $_opc_area; ?>
             </select>
             <input class="requerido_" onkeypress="return solo_numeros(event)" style="width:100px;" type="text" name="r_telefono" id="r_telefono" value="">
         </div>
@@ -576,7 +595,7 @@ foreach ($Ciudades as $Ciudad) {
         </div>
 
 
-        <div style="float:left;padding:5px;width: 90%;text-align: right;">
+        <div style="float:left;padding:5px;width: 95%;text-align: right;margin-top: 20px;">
             <button type="submit" value="Submit">Submit</button>
         </div>
 
@@ -587,7 +606,7 @@ foreach ($Ciudades as $Ciudad) {
 
 <?php
 /* 
-Created on:28/04/2017, 11:40:47 AM
+Created on:28/04/2017,11:40:47 AM
 Author    :Roberto Delgado
 */
 

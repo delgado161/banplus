@@ -141,6 +141,10 @@ function execute_sql($nombre, $ArrParams = NULL) {
             // exit;
             break;
 
+
+        case 'get_estados2':
+            $sql = "SELECT * FROM estados order by estado";
+            break;
         case 'get_parametro_link_online':
             $sql = "SELECT a.valor
 						FROM parametros AS a
@@ -175,9 +179,7 @@ function execute_sql($nombre, $ArrParams = NULL) {
             break;
 
         case 'get_ciudad':
-            $sql = "SELECT a.*
-						FROM ciudad AS a
-						WHERE a.estatus=1";
+            $sql = "SELECT a.* FROM ciudades AS a order by ciudad";
             break;
 
         case 'get_estado_id':
