@@ -6,7 +6,7 @@
 
 
 function solo_letras(event) {
-    var regex = new RegExp("^[a-zA-z]+$");
+    var regex = new RegExp("^[a-zA-z ]+$");
     if (event.keyCode != 9) {
         var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
         if (!regex.test(key)) {
@@ -20,7 +20,7 @@ function solo_letras(event) {
 
 
 function solo_letras2(event) {
-    var regex = new RegExp("^[a-zA-z0-9]+$");
+    var regex = new RegExp("^[a-zA-z0-9 ]+$");
     if (event.keyCode != 9) {
         var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
         if (!regex.test(key)) {
@@ -33,7 +33,7 @@ function solo_letras2(event) {
 }
 
 function solo_letras3(event) {
-    var regex = new RegExp("^[a-zA-z0-9.]+$");
+    var regex = new RegExp("^[a-zA-z0-9. ]+$");
     if (event.keyCode != 9) {
         var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
         if (!regex.test(key)) {
