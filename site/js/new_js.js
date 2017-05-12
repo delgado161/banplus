@@ -95,8 +95,10 @@ function solo_numeros(event) {
     }
 }
 
+
+
 function solo_moneda(event) {
-    var regex = new RegExp("^[0-9.,]+$");
+    var regex = new RegExp("^[0-9]+$");
     if (event.keyCode != 9) {
         var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
         if (!regex.test(key)) {

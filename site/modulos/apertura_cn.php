@@ -45,6 +45,7 @@ foreach ($tp_paises as $tp_pais)
 <script    src="https://code.jquery.com/jquery-3.2.1.min.js"    ></script>
 <script src = "js/UI/external/jquery/jquery.js" ></script>
 <script src="js/UI/jquery-ui.js"></script>
+<script src="js/jquery.mask.js"></script>
 <script>
 
     var Ciudades = {};
@@ -98,33 +99,71 @@ foreach ($Ciudades as $Ciudad)
                 alert('Por Favor rellene los campos se\u00f1alados');
             return validado;
         });
-        $("#fc_nac").datepicker({
+        $("#fc_nac,#ccfc_nac").datepicker({
             dateFormat: "dd/mm/yy",
-            yearRange: '-200:+0'
+            yearRange: '-200:-18'
         });
+
         $("#fc_nac").change(function () {
             fecha = $(this).val().split("/");
             $('#edad').val(calcular_edad(fecha[0], fecha[1], fecha[2]));
         });
+
+        $("#ccfc_nac").change(function () {
+            fecha = $(this).val().split("/");
+            $('#ccedad').val(calcular_edad(fecha[0], fecha[1], fecha[2]));
+        });
+
         $('#tp_inmueble').change(function () {
 
             if ($(this).val() == "ARRENDADA")
                 $('.cannon').show();
             else
                 $('.cannon').hide();
-
         });
+        $('#canon,#sueldo,#comision,#libre_ejercicio,#otros_ingresos').val(0, 00);
+        $('#canon,#sueldo,#comision,#libre_ejercicio,#otros_ingresos,.moneda_,.moneda_2').mask("###0,00", {reverse: true});
+
+        $('#canon,#sueldo,#comision,#libre_ejercicio,#otros_ingresos').keyup(function () {
+            suma = parseFloat($('#sueldo').val().replace(",", ".")) + parseFloat($('#comision').val().replace(",", ".")) + parseFloat($('#libre_ejercicio').val().replace(",", ".")) + parseFloat($('#otros_ingresos').val().replace(",", "."));
+            $('#total_ingresos').val(parseFloat(suma.toFixed(2)));
+            $('#total_ingresos').val($('#total_ingresos').val().replace(".", ","));
+        });
+        $('.telefono_').mask('000-0000');
+        $('.cta_banco').mask('0000-0000-00-00-00000000');
 
 
-        $('#canon').keyup(function () {
-            $(this).val(function (index, value) {
-                return value
-                        .replace(/\D/g, "")
-                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                        ;
+        $('.moneda_').keyup(function () {
+            var suma2 = 0;
+
+            $('.moneda_').each(function () {
+                suma2 = parseFloat($(this).val().replace(",", ".")) + suma2;
             });
-
+            $('#go_total_ingresos').val(parseFloat(suma2.toFixed(2)));
+            $('#go_total_ingresos').val($('#go_total_ingresos').val().replace(".", ","));
         });
+
+        $('.moneda_2').keyup(function () {
+            var suma2 = 0;
+
+            $('.moneda_2').each(function () {
+                suma2 = parseFloat($(this).val().replace(",", ".")) + suma2;
+            });
+            $('#igf_total_ingresos').val(parseFloat(suma2.toFixed(2)));
+            $('#igf_total_ingresos').val($('#igf_total_ingresos').val().replace(".", ","));
+        });
+
+        $('.moneda_3').keyup(function () {
+            var suma2 = 0;
+
+            $('.moneda_3').each(function () {
+                suma2 = parseFloat($(this).val().replace(",", ".")) + suma2;
+            });
+            $('#cctotal_ingresos').val(parseFloat(suma2.toFixed(2)));
+            $('#cctotal_ingresos').val($('#cctotal_ingresos').val().replace(".", ","));
+        });
+
+
 
     });</script>
 
@@ -281,6 +320,7 @@ foreach ($Ciudades as $Ciudad)
 
         <p class="titulo" > Direcci&oacute;n de Habitaci&oacute;n:</p>
         <div class="separador_" style=""></div>
+
         <div class="div_form">
             <label for="dtp_estado">Estado:<span  style="color:red">*</span></label><br>
             <select class="_estados requerido_" name="dtp_estado" id="dtp_estado" style="width:216px;">
@@ -336,7 +376,7 @@ foreach ($Ciudades as $Ciudad)
                 <option value="">
                     <?php echo $_opc_area; ?>
             </select>
-            <input class="requerido_" onkeypress="return solo_numeros(event)" style="width:100px;" type="text" name="d_telefonoh" id="d_telefonoh" value="">
+            <input class="requerido_ telefono_" onkeypress="return solo_numeros(event)" style="width:100px;" type="text" name="d_telefonoh" id="d_telefonoh" value="">
         </div>
 
         <div class="div_form">
@@ -345,7 +385,7 @@ foreach ($Ciudades as $Ciudad)
                 <option value="">
                     <?php echo $_opc_area; ?>
             </select>
-            <input class="requerido_" onkeypress="return solo_numeros(event)" style="width:100px;" type="text" name="d_telefono2" id="d_telefono2" value="">
+            <input class="requerido_ telefono_" onkeypress="return solo_numeros(event)" style="width:100px;" type="text" name="d_telefono2" id="d_telefono2" value="">
         </div>
 
         <div class="div_form">
@@ -354,7 +394,7 @@ foreach ($Ciudades as $Ciudad)
                 <option value="">
                     <?php echo $_opc_cel; ?>
             </select>
-            <input class="requerido_" onkeypress="return solo_numeros(event)" style="width:100px;" type="text" name="d_celular" id="d_celular" value="">
+            <input class="requerido_ telefono_" onkeypress="return solo_numeros(event)" style="width:100px;" type="text" name="d_celular" id="d_celular" value="">
         </div>
 
         <div class="div_form">
@@ -389,8 +429,9 @@ foreach ($Ciudades as $Ciudad)
         </div>
 
         <!--DATOS LABORABLES ######################################-->
-        <div class="separador_" style=""></div>
+
         <p class="titulo" > Datos Laborales:</p>
+        <div class="separador_" style=""></div>
 
         <div class="div_form">
             <label for="n_empresa">Nombre de la empresa:<span  style="color:red">*</span></label><br>
@@ -456,13 +497,14 @@ foreach ($Ciudades as $Ciudad)
 
         <div style="float:right;padding:5px;">
             <label for="total_ingresos">Total ingresos:<span  style="color:red">*</span></label><br>
-            <input class="requerido_" style="width:350px;background: #e6e6e6;text-align: right;" type="text" name="total_ingresos" id="otros_ingresos" value="0,00" readonly >Bs.
+            <input class="requerido_" style="width:350px;background: #e6e6e6;text-align: right;" type="text" name="total_ingresos" id="total_ingresos" value="0,00" readonly >Bs.
         </div>
 
 
         <!--DIRECCION EMPRESA ######################################-->
-        <div class="separador_" style=""></div>
+
         <p class="titulo" > Direcci&oacute;n de Empresa:</p>
+        <div class="separador_" style=""></div>
 
         <div class="div_form">
             <label for="etp_estado">Estado:<span  style="color:red">*</span></label><br>
@@ -478,8 +520,8 @@ foreach ($Ciudades as $Ciudad)
             </select>
         </div>
         <div class="div_form">
-            <label for="e_calle">C&oacute;digo postal:<span  style="color:red">*</span></label><br>
-            <input class="requerido_" onkeypress="return solo_letras2(event)" style="width:79px;" type="text" name="e_calle" id="e_calle" value="" >
+            <label for="e_postal">C&oacute;digo postal:<span  style="color:red">*</span></label><br>
+            <input class="requerido_" onkeypress="return solo_letras2(event)" style="width:79px;" type="text" name="e_postal" id="e_postal" value="" >
         </div>
 
         <div class="div_form">
@@ -518,7 +560,7 @@ foreach ($Ciudades as $Ciudad)
                 <option value="">
                     <?php echo $_opc_area; ?>
             </select>
-            <input onkeypress="return solo_numeros(event)" style="width:100px;" type="text" name="ecd_telefono" id="ecd_telefono" value="">
+            <input class="telefono_" onkeypress="return solo_numeros(event)" style="width:100px;" type="text" name="ecd_telefono" id="ecd_telefono" value="">
         </div>
 
         <div class="div_form">
@@ -527,13 +569,14 @@ foreach ($Ciudades as $Ciudad)
                 <option value="">
                     <?php echo $_opc_area; ?>
             </select>
-            <input onkeypress="return solo_numeros(event)" style="width:100px;" type="text" name="ecd_telefono2" id="ecd_telefono2" value="">
+            <input class="telefono_" onkeypress="return solo_numeros(event)" style="width:100px;" type="text" name="ecd_telefono2" id="ecd_telefono2" value="">
         </div>
 
 
         <!--PRODUCTOS BANPLUS  ######################################-->
-        <div class="separador_" style=""></div>
+
         <p class="titulo" >Datos de los productos que posee en Banplus:</p>
+        <div class="separador_" style=""></div>
 
         <?php
         for ($i = 0; $i <= 3; $i++) {
@@ -558,8 +601,10 @@ foreach ($Ciudades as $Ciudad)
         ?>
 
         <!--REFERENCIAS  ######################################-->
-        <div class="separador_" style=""></div>
+
         <p class="titulo" >Referencias Bancarias:</p>
+        <div class="separador_" style=""></div>
+
         <?php
         for ($i = 0; $i <= 2; $i++) {
             ?>
@@ -574,7 +619,7 @@ foreach ($Ciudades as $Ciudad)
             </div>
             <div class="div_form">
                 <label for="cuenta<?= $i; ?>">N&ordm; de Cuenta o TDC:<span  style="color:red">*</span></label><br>
-                <input class="requerido_" onkeypress="return solo_numeros(event)" style="width:134px;" type="text" name="cuenta<?= $i; ?>" id="cuenta<?= $i; ?>" value="" >
+                <input class="requerido_ cta_banco" size="24" onkeypress="return solo_numeros(event)" style="width:134px;" type="text" name="cuenta<?= $i; ?>" id="cuenta<?= $i; ?>" value="" >
             </div>
             <div class="div_form">
                 <label for="tp_cuenta<?= $i; ?>">Tipo de cuenta:<span  style="color:red">*</span></label><br>
@@ -609,8 +654,10 @@ foreach ($Ciudades as $Ciudad)
 
 
         <!--REFERENCIAS  ######################################-->
-        <div class="separador_" style=""></div>
+
         <p class="titulo" >Referencias Comerciales:</p>
+        <div class="separador_" style=""></div>
+
         <?php
         for ($i = 0; $i <= 1; $i++) {
             ?>
@@ -651,8 +698,8 @@ foreach ($Ciudades as $Ciudad)
         ?>
 
         <!--REFERENCIA PERSONALES NO FAMILAIRES ######################################-->
-        <div class="separador_" style=""></div>
         <p class="titulo" > Referencias personales no familiares:</p>
+        <div class="separador_" style=""></div>
 
         <?php
         for ($i = 10; $i <= 11; $i++) {
@@ -688,8 +735,9 @@ foreach ($Ciudades as $Ciudad)
         ?>
 
         <!--CONYUGE ######################################-->
-        <div class="separador_" style=""></div>
+
         <p class="titulo" >Datos del c&oacute;nyuge o concubino:</p>
+        <div class="separador_" style=""></div>
 
         <div class="div_form">
             <label for="ccp_nombre">Primer Nombre:<span  style="color:red">*</span></label><br>
@@ -847,25 +895,25 @@ foreach ($Ciudades as $Ciudad)
 
 
         <!--INGRESOS CONYUGE ######################################-->
-        <div class="separador_" style=""></div>
-        <p class="titulo" >INGRESO DEL CONYUGE O CONCUBINO:</p>
 
+        <p class="titulo" >INGRESO DEL CONYUGE O CONCUBINO:</p>
+        <div class="separador_" style=""></div>
 
         <div class="div_form">
             <label for="ccsueldo">Sueldo b&aacute;sico:<span  style="color:red">*</span></label><br>
-            <input class="requerido_" onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="ccsueldo" id="ccsueldo" value="0,00" >Bs.
+            <input class="requerido_ moneda_3" onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="ccsueldo" id="ccsueldo" value="0,00" >Bs.
         </div>
         <div class="div_form">
             <label for="cccomision">Bonificaci&oacute;n o comisiones:<span  style="color:red">*</span></label><br>
-            <input class="requerido_" onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="cccomision" id="cccomision" value="0,00" >Bs.
+            <input class="requerido_ moneda_3" onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="cccomision" id="cccomision" value="0,00" >Bs.
         </div>
         <div class="div_form">
             <label for="cclibre_ejercicio">Libre ejercicio de la profesi&oacute;n:<span  style="color:red">*</span></label><br>
-            <input class="requerido_" onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="cclibre_ejercicio" id="cclibre_ejercicio" value="0,00" >Bs.
+            <input class="requerido_ moneda_3" onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="cclibre_ejercicio" id="cclibre_ejercicio" value="0,00" >Bs.
         </div>
         <div class="div_form">
             <label for="ccotros_ingresos">Otros ingresos:<span  style="color:red">*</span></label><br>
-            <input class="requerido_" onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="ccotros_ingresos" id="ccotros_ingresos" value="0,00" >Bs.
+            <input class="requerido_ moneda_3" onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="ccotros_ingresos" id="ccotros_ingresos" value="0,00" >Bs.
         </div>
 
         <!--##################### DIV SEPARADOR ############################-->    
@@ -873,29 +921,29 @@ foreach ($Ciudades as $Ciudad)
 
         <div style="float:right;padding:5px;">
             <label for="cctotal_ingresos">Total ingresos:<span  style="color:red">*</span></label><br>
-            <input class="requerido_" style="width:350px;background: #e6e6e6;text-align: right;" type="text" name="cctotal_ingresos" id="ccotros_ingresos" value="0,00" readonly >Bs.
+            <input class="requerido_" style="width:350px;background: #e6e6e6;text-align: right;" type="text" name="cctotal_ingresos" id="cctotal_ingresos" value="0,00" readonly >Bs.
         </div>
 
         <!--INGRESOS GRUPO FAMILIAR ######################################-->
-        <div class="separador_" style=""></div>
-        <p class="titulo" >INGRESO MENSUAL GRUPO FAMILIAR:</p>
 
+        <p class="titulo" >INGRESO MENSUAL GRUPO FAMILIAR:</p>
+        <div class="separador_" style=""></div>
 
         <div class="div_form">
             <label for="igf_sueldo">Sueldo b&aacute;sico:<span  style="color:red">*</span></label><br>
-            <input class="requerido_" onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="igf_sueldo" id="igf_sueldo" value="0,00" >Bs.
+            <input class="requerido_ moneda_2" onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="igf_sueldo" id="igf_sueldo" value="0,00" >Bs.
         </div>
         <div class="div_form">
             <label for="igf_comision">Bonificaci&oacute;n o comisiones:<span  style="color:red">*</span></label><br>
-            <input class="requerido_" onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="igf_comision" id="igf_comision" value="0,00" >Bs.
+            <input class="requerido_ moneda_2" onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="igf_comision" id="igf_comision" value="0,00" >Bs.
         </div>
         <div class="div_form">
             <label for="igf_libre_ejercicio">Libre ejercicio de la profesi&oacute;n:<span  style="color:red">*</span></label><br>
-            <input class="requerido_" onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="igf_libre_ejercicio" id="igf_libre_ejercicio" value="0,00" >Bs.
+            <input class="requerido _moneda_2 " onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="igf_libre_ejercicio" id="igf_libre_ejercicio" value="0,00" >Bs.
         </div>
         <div class="div_form">
             <label for="igf_otros_ingresos">Otros ingresos:<span  style="color:red">*</span></label><br>
-            <input class="requerido_" onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="igf_otros_ingresos" id="igf_otros_ingresos" value="0,00" >Bs.
+            <input class="requerido_ moneda_2" onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="igf_otros_ingresos" id="igf_otros_ingresos" value="0,00" >Bs.
         </div>
 
         <!--##################### DIV SEPARADOR ############################-->    
@@ -903,30 +951,30 @@ foreach ($Ciudades as $Ciudad)
 
         <div style="float:right;padding:5px;">
             <label for="igf_total_ingresos">Total ingresos:<span  style="color:red">*</span></label><br>
-            <input class="requerido_" style="width:350px;background: #e6e6e6;text-align: right;" type="text" name="igf_total_ingresos" id="igf_otros_ingresos" value="0,00" readonly >Bs.
+            <input class="requerido_" style="width:350px;background: #e6e6e6;text-align: right;" type="text" name="igf_total_ingresos" id="igf_total_ingresos" value="0,00" readonly >Bs.
         </div>
 
 
         <!--GASTOS MENSUAL PROMEDIOS ######################################-->
-        <div class="separador_" style=""></div>
+
         <p class="titulo" >GASTOS MENSUAL PROMEDIO DEL GRUPO FAMILIAR:</p>
+        <div class="separador_" style=""></div>
 
-
         <div class="div_form">
-            <label for="igf_servicios">servicios b&aacute;sicos:<span  style="color:red">*</span></label><br>
-            <input class="requerido_" onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="igf_sueldo" id="igf_sueldo" value="0,00" >Bs.
+            <label for="go_servicios">servicios b&aacute;sicos:<span  style="color:red">*</span></label><br>
+            <input class="requerido_ moneda_" onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="go_sueldo" id="go_sueldo" value="0,00" >Bs.
         </div>
         <div class="div_form">
-            <label for="igf_alquiler">alquiler:<span  style="color:red">*</span></label><br>
-            <input class="requerido_" onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="igf_comision" id="igf_comision" value="0,00" >Bs.
+            <label for="go_alquiler">alquiler:<span  style="color:red">*</span></label><br>
+            <input class="requerido_ moneda_" onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="go_comision" id="go_comision" value="0,00" >Bs.
         </div>
         <div class="div_form">
-            <label for="igf_telefono">telefon&iacute;a:<span  style="color:red">*</span></label><br>
-            <input class="requerido_" onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="igf_libre_ejercicio" id="igf_libre_ejercicio" value="0,00" >Bs.
+            <label for="go_telefono">telefon&iacute;a:<span  style="color:red">*</span></label><br>
+            <input class="requerido_ moneda_" onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="go_libre_ejercicio" id="go_libre_ejercicio" value="0,00" >Bs.
         </div>
         <div class="div_form">
-            <label for="igf_alimentos">alimentos:<span  style="color:red">*</span></label><br>
-            <input class="requerido_" onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="igf_otros_ingresos" id="igf_otros_ingresos" value="0,00" >Bs.
+            <label for="go_alimentos">alimentos:<span  style="color:red">*</span></label><br>
+            <input class="requerido_ moneda_" onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="go_otros_ingresos" id="go_otros_ingresos" value="0,00" >Bs.
         </div>
 
 
@@ -934,30 +982,30 @@ foreach ($Ciudades as $Ciudad)
         <div class="sep_2"></div>
 
         <div class="div_form">
-            <label for="igf_estudios">colegios o estudios:<span  style="color:red">*</span></label><br>
-            <input class="requerido_" onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="igf_estudios" id="igf_estudios" value="0,00" >Bs.
+            <label for="go_estudios">colegios o estudios:<span  style="color:red">*</span></label><br>
+            <input class="requerido_ moneda_" onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="go_estudios" id="go_estudios" value="0,00" >Bs.
         </div>
         <div class="div_form">
-            <label for="igf_creditos">cr&eacute;ditos:<span  style="color:red">*</span></label><br>
-            <input class="requerido_" onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="igf_creditos" id="igf_creditos" value="0,00" >Bs.
+            <label for="go_creditos">cr&eacute;ditos:<span  style="color:red">*</span></label><br>
+            <input class="requerido_ moneda_" onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="go_creditos" id="go_creditos" value="0,00" >Bs.
         </div>
         <div class="div_form">
-            <label for="igf_tarjetas">tarjeta de cr&eacute;ditos:<span  style="color:red">*</span></label><br>
-            <input class="requerido_" onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="igf_tarjetas" id="igf_tarjetas" value="0,00" >Bs.
+            <label for="go_tarjetas">tarjeta de cr&eacute;ditos:<span  style="color:red">*</span></label><br>
+            <input class="requerido_ moneda_" onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="go_tarjetas" id="go_tarjetas" value="0,00" >Bs.
         </div>
         <div class="div_form">
-            <label for="igf_otros_ingresos">Otros Gastos:<span  style="color:red">*</span></label><br>
-            <input class="requerido_" onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="igf_otros_ingresos" id="igf_otros_ingresos" value="0,00" >Bs.
+            <label for="go_otros_ingresos">Otros Gastos:<span  style="color:red">*</span></label><br>
+            <input class="requerido_ moneda_" onkeypress="return solo_moneda(event)" style="width:155px;text-align: right;" type="text" name="go_otros_ingresos" id="go_otros_ingresos" value="0,00" >Bs.
         </div>
 
         <div class="div_form">
-            <label for="igf_otros_eso">Especifique Otro Gastos:<span  style="color:red">*</span></label><br>
-            <input class="requerido_" onkeypress="return solo_letras(event)" style="width:155px;text-align: right;" type="text" name="igf_otros_eso" id="igf_otros_eso" value="" >Bs.
+            <label for="go_otros_eso">Especifique Otro Gastos:<span  style="color:red">*</span></label><br>
+            <input class="requerido_" onkeypress="return solo_letras(event)" style="width:155px;text-align: right;" type="text" name="go_otros_eso" id="go_otros_eso" value="" >
         </div>
 
         <div style="float:right;padding:5px;">
-            <label for="igf_total_ingresos">Total ingresos:<span  style="color:red">*</span></label><br>
-            <input class="requerido_" style="width:350px;background: #e6e6e6;text-align: right;" type="text" name="igf_total_ingresos" id="igf_otros_ingresos" value="0,00" readonly >Bs.
+            <label for="go_total_ingresos">Total ingresos:<span  style="color:red">*</span></label><br>
+            <input class="requerido_" style="width:350px;background: #e6e6e6;text-align: right;" type="text" name="go_total_ingresos" id="go_total_ingresos" value="0,00" readonly >Bs.
         </div>
 
 
