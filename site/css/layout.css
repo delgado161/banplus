@@ -123,3 +123,54 @@ h4
 .cannon{
     display: none;
 }
+
+
+.custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+}
+.custom-file-input::before {
+    content: 'Seleccione Archivo';
+    display: inline-block;
+    background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+    border: 1px solid #999;
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    text-shadow: 1px 1px #fff;
+/*    font-weight: 700;*/
+/*    font-size: 10pt;*/
+}
+.custom-file-input:hover::before {
+    border-color: black;
+}
+.custom-file-input:active::before {
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+#accordion h3{
+    width: 768px !important;
+    text-transform: uppercase;
+    font-weight: bold;
+
+}
+
+.ui-state-default{
+    color: white !important;
+    background:#002554 !important;
+}
+
+.ui-state-active{
+    background:#87BE28 !important;
+}
+
+.ui-accordion .ui-accordion-content{
+    padding: 0px !important;
+}
+
+.ui-accordion .ui-accordion-content{
+    height: auto !important;;
+    overflow-x: hidden !important;;
+}
