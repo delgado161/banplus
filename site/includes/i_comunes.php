@@ -490,12 +490,14 @@ function execute_sql($nombre, $ArrParams = NULL) {
         case 'get_tp_productos':
             $sql = "SELECT * FROM tipos_productos order by tipo asc";
             break;
-        
-         case 'get_tp_cuenta':
+
+        case 'get_tp_cuenta':
             $sql = "SELECT * FROM tipo_cuenta order by tipo asc";
             break;
-        
-        
+
+        case 'get_paises':
+            $sql = "SELECT * FROM paises where visibilidad=1 order by nombre asc";
+            break;
     }
 
     abrirConexion();

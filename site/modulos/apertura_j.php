@@ -12,6 +12,20 @@
     .form_n {
         font-size:12px;
     }
+
+    .titulo{
+        width:100%;
+        float:left;
+        text-transform: uppercase;
+        margin-top: 20px !important;
+        margin-bottom: -8px !important;
+
+    }
+
+    .separador_{
+        width:100%; margin-bottom:10px;float:left;border:1px solid  #87BE28;
+    }
+
 </style>
 
 <?php
@@ -115,8 +129,8 @@ foreach ($Ciudades as $Ciudad) {
 
 
     <div style="background-color:#F4F4F4;overflow:auto;overflow-x:hidden;" class="form_n" > 
-        <p class="titulo" style="width:100%;float:left;text-transform: uppercase">Datos De la Empresa:</p>
-
+        <p class="titulo" >Datos De la Empresa:</p>
+        <div class="separador_" style=""></div>
 
         <div style="float:left;padding:5px;">
             <label for="s_apellido">Nombre de la empresa:<span  style="color:red">*</span></label><br>
@@ -173,8 +187,9 @@ foreach ($Ciudades as $Ciudad) {
 
 
         <!--DIRECCION EMPRESA ######################################-->
-        <div style="width:100%; margin-top:10px;margin-bottom:10px;float:left;border:1px solid  #87BE28;"></div>
-        <p class="titulo" style="width:100%;float:left;text-transform: uppercase"> Direcci&oacute;n de Empresa:</p>
+        <p class="titulo" > Direcci&oacute;n de Empresa:</p>
+        <div class="separador_" style=""></div>
+
 
         <div style="float:left;padding:5px;">
             <label for="etp_estado">Estado:<span  style="color:red">*</span></label><br>
@@ -308,8 +323,9 @@ foreach ($Ciudades as $Ciudad) {
 
 
         <!--EMPRESAS RELACIONADAS ######################################-->
-        <div style="width:100%; margin-top:10px;margin-bottom:10px;float:left;border:1px solid  #87BE28;"></div>
-        <p class="titulo" style="width:100%;float:left;text-transform: uppercase"> empresas relacionadas:</p>
+        <p class="titulo" > empresas relacionadas:</p>
+        <div class="separador_" style=""></div>
+
 
         <?php
         for ($i = 0; $i <= 2; $i++) {
@@ -344,8 +360,8 @@ foreach ($Ciudades as $Ciudad) {
         ?>
 
         <!--PRODUCTOS BANPLUS  ######################################-->
-        <div style="width:100%; margin-top:10px;margin-bottom:10px;float:left;border:1px solid  #87BE28;"></div>
-        <p class="titulo" style="width:100%;float:left;text-transform: uppercase">Datos de los productos que posee en Banplus:</p>
+        <p class="titulo" >Datos de los productos que posee en Banplus:</p>
+        <div class="separador_" style=""></div>
 
         <?php
         for ($i = 0; $i <= 3; $i++) {
@@ -370,8 +386,9 @@ foreach ($Ciudades as $Ciudad) {
         ?>
 
         <!--REFERENCIAS  ######################################-->
-        <div style="width:100%; margin-top:10px;margin-bottom:10px;float:left;border:1px solid  #87BE28;"></div>
-        <p class="titulo" style="width:100%;float:left;text-transform: uppercase">Referencias Bancarias:</p>
+        <p class="titulo" >Referencias Bancarias:</p>
+        <div class="separador_" style=""></div>
+
         <?php
         for ($i = 0; $i <= 2; $i++) {
             ?>
@@ -398,7 +415,7 @@ foreach ($Ciudades as $Ciudad) {
 
             <div style="float:left;padding:5px;">
                 <label for="cuenta_antiguo<?= $i; ?>">Antig&uuml;edad:<span  style="color:red">*</span></label><br>
-                <input class="requerido_" onkeypress="return solo_numeros(event)" style="width:45px" type="number" name="cuenta_antiguo<?= $i; ?>" id="cuenta_antiguo<?= $i; ?>" value="" min="1" max="2000" >
+                <input class="requerido_" onkeypress="return solo_numeros(event)" style="width:45px" type="number" name="cuenta_antiguo<?= $i; ?>" id="cuenta_antiguo<?= $i; ?>" value="" min="0" max="2000" >
                 <select style="width:103px" class="requerido_" name="cuenta__antiguo_op<?= $i; ?>" id="cuenta__antiguo_op<?= $i; ?>" >
                     <option value="">Seleccione...
                     <option value="DIAS">D&iacute;as
@@ -419,8 +436,8 @@ foreach ($Ciudades as $Ciudad) {
         ?>
 
         <!--REFERENCIAS  ######################################-->
-        <div style="width:100%; margin-top:10px;margin-bottom:10px;float:left;border:1px solid  #87BE28;"></div>
-        <p class="titulo" style="width:100%;float:left;text-transform: uppercase">Referencias Comerciales:</p>
+        <p class="titulo" >Referencias Comerciales:</p>
+        <div class="separador_" style=""></div>
         <?php
         for ($i = 0; $i <= 1; $i++) {
             ?>
@@ -460,10 +477,282 @@ foreach ($Ciudades as $Ciudad) {
         }
         ?>
 
+
+        <!--DATOS REGISTRO DE LA EMPRESA  ######################################-->
+        <p class="titulo" >Datos De registro de la empresa:</p>
+        <div class="separador_" style=""></div>
+
+        <div style="float:left;padding:5px;">
+            <label for="s_apellido">oficina de registro:<span  style="color:red">*</span></label><br>
+            <input style="width: 430px;" class="requerido_" onkeypress="return solo_letras(event)" type="text" name="s_apellido" id="s_apellido" value="">
+        </div>
+        <div style="float:left;padding:5px;">
+            <label for="s_apellido">N&ordm; registro - tomo - fecha:<span  style="color:red">*</span></label><br>
+            <input style="width: 310px;" class="requerido_" onkeypress="return solo_letras(event)" type="text" name="s_apellido" id="s_apellido" value="">
+        </div>
+        <!--##################### DIV SEPARADOR ############################-->      
+        <div style="width:100%; margin-top:10px;float:left;"></div>
+
+        <div style="float:left;padding:5px;">
+            <label for="etp_estado">Estado:<span  style="color:red">*</span></label><br>
+            <select  class="_estados requerido_" name="etp_estado" id="etp_estado" style="width:180px;">
+                <option value="">Seleccione...
+                    <?php echo $_opc_estados; ?>
+            </select>
+        </div>
+        <div style="float:left;padding:5px;">
+            <label for="etp_ciudad">Cuidad:<span  style="color:red">*</span></label><br>
+            <select class="requerido_" name="etp_ciudad" id="etp_ciudad" style="width:180px;">
+                <option value="">Seleccione...
+            </select>
+        </div>
+
+        <div style="float:left;padding:5px;">
+            <label for="cuenta_antiguo2">duraci&oacute;n de la empresa:<span style="color:red">*</span></label><br>
+            <input class="requerido_" onkeypress="return solo_numeros(event)" style="width:43px" type="number" name="cuenta_antiguo2" id="cuenta_antiguo2" value="" min="0" max="2000">
+            <select style="width:100px" class="requerido_" name="cuenta__antiguo_op2" id="cuenta__antiguo_op2">
+                <option value="">Seleccione...
+                </option><option value="DIAS">Días
+                </option><option value="SEMANAS">Semanas
+                </option><option value="MESES">Meses
+                </option><option value="AÃ‘OS">Años
+                </option></select>   
+        </div>
+
+        <div style="float:left;padding:5px;">
+            <label for="cuenta_antiguo2">empleados:<span style="color:red">*</span></label><br>
+            <input class="requerido_" onkeypress="return solo_numeros(event)" style="width:59px" type="number" name="cuenta_antiguo2" id="cuenta_antiguo2" value="" min="0" max="99999999">
+        </div>
+
+        <div style="float:left;padding:5px;">
+            <label for="s_apellido">representante legal:<span  style="color:red">*</span></label><br>
+            <input style="width: 133px;" class="requerido_" onkeypress="return solo_letras(event)" type="text" name="s_apellido" id="s_apellido" value="">
+        </div>
+
+        <!--##################### DIV SEPARADOR ############################-->      
+        <div style="width:100%; margin-top:10px;float:left;"></div>
+
+
+
+        <div style="float:left;padding:5px;">
+            <label for="ccfc_nac">Fecha de cierre fiscal:<span  style="color:red">*</span></label><br>
+            <input class="requerido_" style="width:126px;" type="text" name="ccfc_nac" id="ccfc_nac" value="">
+        </div>
+
+        <div style="float:left;padding:5px;">
+            <label for="canon">capital suscrito:</label><br>
+            <input onkeypress="return solo_moneda(event)" style="width:170px;" type="text" name="canon" id="canon" value=""> Bs.
+        </div>
+        <div style="float:left;padding:5px;">
+            <label for="canon">capital pagado:</label><br>
+            <input onkeypress="return solo_moneda(event)" style="width:170px;" type="text" name="canon" id="canon" value=""> Bs.
+        </div>
+        <div style="float:left;padding:5px;">
+            <label for="canon">reservas de capital:</label><br>
+            <input onkeypress="return solo_moneda(event)" style="width:170px;" type="text" name="canon" id="canon" value=""> Bs.
+        </div>
+
+        <!--##################### DIV SEPARADOR ############################-->      
+        <div style="width:100%; margin-top:10px;float:left;"></div>
+
+        <div style="float:left;padding:5px;">
+            <label for="s_apellido">domicilio fiscal:<span  style="color:red">*</span></label><br>
+            <input style="width: 310px;" class="requerido_" onkeypress="return solo_letras(event)" type="text" name="s_apellido" id="s_apellido" value="">
+        </div>
+        <div style="float:left;padding:5px;">
+            <label for="s_apellido">objeto fiscal:<span  style="color:red">*</span></label><br>
+            <input style="width: 430px;" class="requerido_" onkeypress="return solo_letras(event)" type="text" name="s_apellido" id="s_apellido" value="">
+        </div>
+
+
+
+        <!--DATOS REGISTRO DE LA EMPRESA ULTIMA MODIFICACIOn  ######################################-->
+        <p class="titulo" >Datos De registro &uacute;ltima modificaci&oacute;n:</p>
+        <div class="separador_" style=""></div>
+
+
+        <div style="float:left;padding:5px;">
+            <label for="ccfc_nac">Fecha:<span  style="color:red">*</span></label><br>
+            <input class="requerido_" style="width:80px;" type="text" name="ccfc_nac" id="ccfc_nac" value="">
+        </div>
+
+        <div style="float:left;padding:5px;">
+            <label for="s_apellido">objeto fiscal:<span  style="color:red">*</span></label><br>
+            <input style="width: 408px;" class="requerido_" onkeypress="return solo_letras(event)" type="text" name="s_apellido" id="s_apellido" value="">
+        </div>
+
+        <div style="float:left;padding:5px;">
+            <label for="s_apellido">domicilio fiscal:<span  style="color:red">*</span></label><br>
+            <input style="width: 230px;" class="requerido_" onkeypress="return solo_letras(event)" type="text" name="s_apellido" id="s_apellido" value="">
+        </div>
+
+
+
+        <!--ACCIONISTAS  ######################################-->
+        <p class="titulo"  >ACCIONISTAS ACTUALES:</p>
+        <div class="separador_" style=""></div>
+
+        <?php
+        for ($i = 0; $i <= 4; $i++) {
+            ?>
+            <div style="float:left;padding:5px;">
+                <label for="p_nombre">Nombre / Raz&oacute;n social:<span  style="color:red">*</span></label><br>
+                <input style="width: 180px;" class="requerido_" onkeypress="return solo_letras(event)" type="text" name="p_nombre" id="p_nombre" value="">
+            </div>
+            <div style="float:left;padding:5px;">
+                <label for="tp_documento">C.I / R.I.F :<span  style="color:red">*</span></label><br>
+                <select name="tp_documento" id="tp_documento" class="requerido_">
+                    <option value="">
+                    <option value="C">C.I
+                    <option value="E">E
+                    <option value="P">P
+                </select>
+                <input style="width: 115px;" class="requerido_" onkeypress="return solo_letras2(event)" type="text" name="n_documento" id="n_documento" value="">
+            </div>
+
+            <div style="float:left;padding:5px;">
+                <label for="canon">capital suscrito:</label><br>
+                <input onkeypress="return solo_moneda(event)" style="width:143px;" type="text" name="canon" id="canon" value="">
+            </div>
+            <div style="float:left;padding:5px;">
+                <label for="canon">%:</label><br>
+                <input class="requerido_" onkeypress="return solo_numeros(event)" style="width:40px" type="number" name="cuenta_antiguo2" id="cuenta_antiguo2" value="" min="0" max="99999999">
+
+            </div>
+            <div style="float:left;padding:5px;">
+                <label for="canon">capital pagado:</label><br>
+                <input onkeypress="return solo_moneda(event)" style="width:143px;" type="text" name="canon" id="canon" value="">
+            </div>
+
+
+
+        <?php } ?>
+        <div style="float:left;padding:5px;width: 382px;">
+            <br>
+
+        </div>
+
+        <div style="float:left;padding:5px;">
+            <label for="canon">TOTAL suscrito:</label><br>
+            <input onkeypress="return solo_moneda(event)" style="width:143px;" type="text" name="canon" id="canon" value="">
+        </div>
+        <div style="float:left;padding:5px;">
+            <label for="canon">TOTAL %:</label><br>
+            <input class="requerido_" onkeypress="return solo_numeros(event)" style="width:40px" type="number" name="cuenta_antiguo2" id="cuenta_antiguo2" value="" min="0" max="99999999">
+
+        </div>
+        <div style="float:left;padding:5px;">
+            <label for="canon">TOTAL pagado:</label><br>
+            <input onkeypress="return solo_moneda(event)" style="width:143px;" type="text" name="canon" id="canon" value="">
+        </div>
+
+
+
+        <!--PERSONAS AUTORIZADAS A MANTENER RELACION CON LA ENTIDAD  ######################################-->
+        <p class="titulo"  >PERSONAS AUTORIZADAS A MANTENER RELACION CON LA ENTIDAD :</p>
+        <div class="separador_" style=""></div>
+
+        <?php
+        for ($i = 0; $i <= 3; $i++) {
+            ?>
+
+            <div style="float:left;padding:5px;">
+                <label for="p_nombre">Primer Nombre:<span  style="color:red">*</span></label><br>
+                <input style="width: 128px;" class="requerido_" onkeypress="return solo_letras(event)" type="text" name="p_nombre" id="p_nombre" value="">
+            </div>
+            <div style="float:left;padding:5px;">
+                <label for="s_nombre">Segundo Nombre:<span  style="color:red">*</span></label><br>
+                <input style="width: 128px;" class="requerido_" onkeypress="return solo_letras(event)" type="text" name="s_nombre" id="s_nombre" value="">
+            </div>
+            <div style="float:left;padding:5px;">
+                <label for="p_apellido">Primer Apellido:<span  style="color:red">*</span></label><br>
+                <input style="width: 128px;" class="requerido_" onkeypress="return solo_letras(event)" type="text" name="p_apellido" id="p_apellido" value="">
+            </div>
+            <div style="float:left;padding:5px;">
+                <label for="s_apellido">Segundo Apellido:<span  style="color:red">*</span></label><br>
+                <input style="width: 128px;" class="requerido_" onkeypress="return solo_letras(event)" type="text" name="s_apellido" id="s_apellido" value="">
+            </div>
+
+            <div style="float:left;padding:5px;">
+                <label for="tp_documento">C.I / R.I.F :<span  style="color:red">*</span></label><br>
+                <select name="tp_documento" id="tp_documento" class="requerido_">
+                    <option value="">
+                    <option value="C">C.I
+                    <option value="E">E
+                    <option value="P">P
+                </select>
+                <input style="width: 109px;" class="requerido_" onkeypress="return solo_letras2(event)" type="text" name="n_documento" id="n_documento" value="">
+            </div>
+
+        <?php } ?>
+ <!--##################### DIV SEPARADOR ############################-->      
+        <div style="width:100%; margin-top:10px;float:left;"></div>
+        <?php
+        for ($i = 0; $i <= 3; $i++) {
+            ?>
+            <div style="float:left;padding:5px;">
+                <label for="tp_pais">Nacionalidad:<span  style="color:red">*</span></label><br>
+    <!--            <select class="requerido_" name="tp_pais" id="tp_pais" style="width:100%">
+                    <option value="">Seleccione...
+                    <option value="C">Venezuela
+                    <option value="p">Casado
+                    <option value="p">Viudo
+                </select>-->
+                <input class="requerido_" onkeypress="return solo_letras(event)" type="text" name="tp_pais" id="tp_pais" value="" style="width:100px;">
+
+            </div>
+
+            <div style="float:left;padding:5px;">
+                <label for="tp_profecion">Profesi&oacute;n u oficio:<span  style="color:red">*</span></label><br>
+                <select class="requerido_" name="tp_profecion" id="tp_profecion" style="width:124px;">
+                    <option value="">Seleccione...
+                        <?php echo $_opc_profesion ?>
+                </select>
+            </div>
+
+            <div style="float:left;padding:5px;">
+                <label for="tp_ocupacion">Ocupaci&oacute;n:<span  style="color:red">*</span></label><br>
+                <select class="requerido_" name="tp_ocupacion" id="tp_ocupacion" style="width:113px">
+                    <option value="">Seleccione...
+                    <option value="C">Soltero
+                    <option value="p">Casado
+                    <option value="p">Viudo
+                </select>
+            </div>
+
+            <div style="float:left;padding:5px;">
+                <label for="dtp_telefonoH">Tel&eacute;fono Hab.:<span  style="color:red">*</span></label><br>
+                <select class="requerido_" name="dtp_telefonoH" id="dtp_telefonoH" style="width:60px;">
+                    <option value="">
+                        <?php echo $_opc_area; ?>
+                </select>
+                <input class="requerido_" onkeypress="return solo_numeros(event)" style="width:50px;" type="text" name="d_telefonoh" id="d_telefonoh" value="">
+            </div>
+
+            <div style="float:left;padding:5px;">
+                <label for="dtp_telefono2">Otro Tel&eacute;fono:<span  style="color:red">*</span></label><br>
+                <select class="requerido_" name="dtp_telefono2" id="dtp_telefono2" style="width:60px;">
+                    <option value="">
+                        <?php echo $_opc_area; ?>
+                </select>
+                <input class="requerido_" onkeypress="return solo_numeros(event)" style="width:50px;" type="text" name="d_telefono2" id="d_telefono2" value="">
+            </div>
+
+            <div style="float:left;padding:5px;">
+                <label for="dtp_celular">Celular:<span  style="color:red">*</span></label><br>
+                <select class="requerido_" name="dtp_celular" id="dtp_celular" style="width:60px;">
+                    <option value="">
+                        <?php echo $_opc_cel; ?>
+                </select>
+                <input class="requerido_" onkeypress="return solo_numeros(event)" style="width:50px;" type="text" name="d_celular" id="d_celular" value="">
+            </div>
+
+        <?php } ?>
+
+
         <div style="float:left;padding:5px;width: 95%;text-align: right;margin-top: 20px;">
             <button type="submit" value="Submit">Submit</button>
         </div>
-
 
     </div>
 </form>
