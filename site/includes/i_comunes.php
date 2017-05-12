@@ -141,6 +141,10 @@ function execute_sql($nombre, $ArrParams = NULL) {
             // exit;
             break;
 
+
+        case 'get_estados2':
+            $sql = "SELECT * FROM estados order by estado";
+            break;
         case 'get_parametro_link_online':
             $sql = "SELECT a.valor
 						FROM parametros AS a
@@ -175,9 +179,7 @@ function execute_sql($nombre, $ArrParams = NULL) {
             break;
 
         case 'get_ciudad':
-            $sql = "SELECT a.*
-						FROM ciudad AS a
-						WHERE a.estatus=1";
+            $sql = "SELECT a.* FROM ciudades AS a order by ciudad";
             break;
 
         case 'get_estado_id':
@@ -478,6 +480,23 @@ function execute_sql($nombre, $ArrParams = NULL) {
             $sql = "SELECT a.id_agencias, a.nombre
 						FROM agencias AS a, ciudad AS b, estado AS c
 						WHERE a.id_ciudad=b.id_ciudad AND b.id_estado=c.id_estado AND a.estatus=1 AND b.estatus=1 AND c.estatus=1 AND c.id_estado=" . $ArrParams;
+            break;
+
+        case 'get_profesiones':
+            $sql = "SELECT * FROM profesiones order by descripcion asc";
+            break;
+
+
+        case 'get_tp_productos':
+            $sql = "SELECT * FROM tipos_productos order by tipo asc";
+            break;
+
+        case 'get_tp_cuenta':
+            $sql = "SELECT * FROM tipo_cuenta order by tipo asc";
+            break;
+
+        case 'get_paises':
+            $sql = "SELECT * FROM paises where visibilidad=1 order by nombre asc";
             break;
     }
 
