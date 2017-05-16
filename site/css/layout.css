@@ -164,6 +164,7 @@ h4
 
 .ui-state-active{
     background:#87BE28 !important;
+    border: none !important;
 }
 
 .ui-accordion .ui-accordion-content{
