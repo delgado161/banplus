@@ -33,10 +33,10 @@ define('EW_USE_DOM_XML', ((!function_exists('xml_parser_create') && class_exists
 if (!isset($ADODB_OUTP)) $ADODB_OUTP = 'ew_SetDebugMsg';
 
 // Database connection info
-define("EW_CONN_HOST", 'localhost', TRUE);
+define("EW_CONN_HOST", '192.168.1.134', TRUE);
 define("EW_CONN_PORT", 3306, TRUE);
-define("EW_CONN_USER", 'root', TRUE);
-define("EW_CONN_PASS", '', TRUE);
+define("EW_CONN_USER", 'admin', TRUE);
+define("EW_CONN_PASS", '12345', TRUE);
 define("EW_CONN_DB", 'awvps_banplus', TRUE);
 
 // ADODB (Access/SQL Server)
