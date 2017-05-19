@@ -17,7 +17,7 @@ try {
     .seccion{text-align: center;width:100%;background: rgb(150,150,150);font-weight: bold;font-size: 11px;}
     .bloque{width:100%;border: none;}
     .bloque table{border:none;margin-left:-1px;width:100.3%;margin-top:-2px;}
-    .etiqueta{ border-top: none;text-align: center;background: rgb(193,193,193);font-weight: bold;font-size: 10px;}
+    .etiqueta{ border-top: none;text-align: center;background: rgb(193,193,193);font-weight: bold;font-size: 10px;vertical-align: middle;}
     .titulo{text-align: center;font-size: 12px;border:none;font-weight: bold;}
     .d_linea{font-size: 9px;}
     .b_left{border-left: none;}
@@ -619,6 +619,8 @@ try {
     <tr style="">
         <td class="etiqueta" style="font-size:8.5px;text-align:left;">
           &iquest;SU EMPRESA MANTIENE RELACIONES DE CONTRATOS CON EL ESTADO VENEZOLANO?
+            Si&nbsp;<input type="checkbox"  >&nbsp;
+            &nbsp;&nbsp;No&nbsp;<input type="checkbox"  >&nbsp;
         </td>
      </tr>
 <tr>
@@ -636,9 +638,9 @@ try {
             <table style="border-collapse: collapse;" >
                
                  <tr>
-                    <td class="etiqueta d_linea" style="width:20%;">DESEA REALIZAR OPERACIONES<BR>EN DIVISAS</td>
+                    <td class="etiqueta d_linea" style="width:22%;">DESEA REALIZAR OPERACIONES<BR>EN DIVISAS</td>
                     <td class="etiqueta" style="width:40%;">INDIQUE TIPO DE OPERACIONES</td>
-                    <td class="etiqueta" style="width:40%;" colspan="2">EN CASO DE TRANSFERENCIA INDIQUE</td>
+                    <td class="etiqueta" style="width:38%;" colspan="2">EN CASO DE TRANSFERENCIA INDIQUE</td>
                 </tr>
                <tr class="valores">
                     <td style="width:20%;font-size:12px;text-align:center;" rowspan="2">
@@ -650,13 +652,13 @@ try {
                      Compra de Divisas&nbsp;<input type="checkbox"  >&nbsp;
                      Transferencias&nbsp;<input type="checkbox"  >
                     </td>
-                    <td  style="width:20%;font-size:8px;height:5px;text-align:center;" >PA&Iacute;S DE ORIGEN</td>
-                    <td  style="width:20%;font-size:8px;height:5px;text-align:center;" >PA&Iacute;S DESTINO</td>
+                    <td  style="width:19%;font-size:8px;height:5px;text-align:center;" >PA&Iacute;S DE ORIGEN</td>
+                    <td  style="width:19%;font-size:8px;height:5px;text-align:center;" >PA&Iacute;S DESTINO</td>
                                        
                 </tr>
                 <tr class="valores">
-                    <td  style="width:20%;" ></td>
-                    <td  style="width:20%;" ></td>
+                    <td  style="width:19%;" ></td>
+                    <td  style="width:19%;" ></td>
                 </tr>
                 
             </table>
@@ -755,21 +757,96 @@ try {
         <td class="bloque">
             <table style="border-collapse: collapse;" >
                 <tr>
-                    <td class="etiqueta" style="width:25%;" >LUGAR</td>
-                    <td class="etiqueta" style="width:15%;"  >FECHA</td>
-                    <td class="etiqueta" style="width:60%;" colspan="3" >FIRMA DEL(LOS) SOLICITANTE(S)</td>
+                      <td class="etiqueta d_linea" style="width:33.33%;" colspan="2">HUELLA DACTILAR PRIMER AUTORIZADO<BR>PULGARES IZQUIERDO - DERECHO</td>
+                      <td class="etiqueta d_linea" style="width:33.33%;" colspan="2">HUELLA DACTILAR SEGUNDO AUTORIZADO<BR>PULGARES IZQUIERDO - DERECHO</td>
+                      <td class="etiqueta d_linea" style="width:33.33%;" colspan="2">HUELLA DACTILAR TERCER AUTORIZADO<BR>PULGARES IZQUIERDO - DERECHO</td>
                 </tr>
                 <tr class="valores" style="">
-                    <td style="width:25%;" rowspan="2"></td>
-                    <td style="width:15%;" rowspan="2"></td>
-                    <td style="width:20%;font-size:8px;height:5px;text-align:center;" >FIRMA 1</td>
-                    <td style="width:20%;font-size:8px;height:5px;text-align:center;" >FIRMA 2</td>
-                    <td style="width:20%;font-size:8px;height:5px;text-align:center;" >FIRMA 3</td>
+                    <td style="width:16.66%;height:40px;"></td>
+                    <td style="width:16.66%;"></td>
+                    <td style="width:16.66%;"></td>
+                    <td style="width:16.66%;"></td>
+                    <td style="width:16.66%;"></td>
+                    <td style="width:16.66%;"></td>
                 </tr> 
+                
+            </table>
+        </td>
+    </tr>
+     <tr style="">
+        <td class="seccion">
+          CONSTANCIA DE NO POSEER REFERENCIAS BANCARIAS Y/O COMERCIALES
+        </td>
+    </tr>
+    <tr>
+        <td class="bloque">
+            <table style="border-collapse: collapse;" >
+                 <tr class="valores">
+                    <td style="width:15%;border-right:none;">Declaro no poseer:</td>
+                    <td style="width:85%;font-size:12px;">
+                        Referencias Bancarias&nbsp;<input type="checkbox"  >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        Referencias Comerciales&nbsp;<input type="checkbox"  >
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+     <tr style="">
+        <td class="seccion">
+          DECLARACI&Oacute;N DE I.S.L.R
+        </td>
+    </tr>
+      <tr style="">
+        <td class="etiqueta" style="font-size:8.5px;text-align:left;">
+          &iquest;LA EMPRESA A LA CUAL REPRESENTA DECLARA IMPUESTOS SOBRE LA RENTA?
+        </td>
+     </tr>
+      <tr style="">
+      <td class="bloque">
+            <table style="border-collapse: collapse;" >
+               <tr class="valores">
+                    <td style="width:100%;font-weight:bold;tex-aling:left;">
+                      Declaro(amos) que mi (nuestra) representada no presenta declaracion del Impuesto Sobre la Renta (I.S.L.R), requerida por la Superintendencia de las Intituciones del Sector
+                      Bancario, por el motivo siguiente: <b>Otras Razones (EXPLIQUE):</b>
+                </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+     <tr style="">
+        <td class="seccion">
+          OBSERVACIONES
+        </td>
+    </tr>
+    <tr>
+        <td class="bloque">
+            <table style="border-collapse: collapse;" >
                  <tr class="valores" style="">
-                    <td style="width:20%;" ></td>
-                    <td style="width:20%;" ></td>
-                    <td style="width:20%;" ></td>
+                    <td style="width:100%;height:20px;" ></td>
+                </tr> 
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td class="bloque">
+            <table style="border-collapse: collapse;" >
+                <tr class="valores" style="">
+                    <td style="width:33.33%;">
+                    NOMBRE EJECUTIVO:<br><br>
+                    FECHA:<br><br>
+                    FIRMA:<br>
+                    </td>
+                    <td style="width:33.33%; " >
+                    NOMBRE GERENTE DE SERVICIO:<br><br>
+                    FECHA:<br><br>
+                    FIRMA:<br>
+                    </td>
+                    <td style="width:33.33%;" >
+                    NOMBRE GERENTE DE NEGOCIOS / ALIADO:<br><br>
+                    FECHA:<br><br>
+                    FIRMA:<br>
+                    
+                    </td>
                 </tr> 
             </table>
         </td>
