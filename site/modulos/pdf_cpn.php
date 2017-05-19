@@ -34,11 +34,11 @@ try {
             <table style="border-collapse: collapse;border:none;font-size:11px;" >
                 <tr>
                     <td  style="width:60%;border:none;" rowspan="2"><img src="../img/logo_banplus.jpg" width="200px;" /></td>
-                    <td  style="width:20%;border:none;">AGENCIA:</td>
-                    <td  style="width:20%;border:none;">FECHA: </td>
+                    <td  style="width:20%;border:none;font-weight: bold;">AGENCIA:</td>
+                    <td  style="width:20%;border:none;font-weight: bold;">FECHA: </td>
                 </tr>
                <tr>
-                    <td  style="width:40%;border:none;" colspan="2">N&ordm; DE CUENTA</td>
+                    <td  style="width:40%;border:none;font-weight: bold;" colspan="2">N&ordm; DE CUENTA:</td>
                     
                 </tr>
             </table>
@@ -483,7 +483,10 @@ try {
             </table>
         </td>
     </tr>
-</table>        
+</table> 
+<br>
+<span style="font-size:8px;font-weight: bold;">CyP / FFI-PN V.07/ VP.OPERACIONES/ OPERACIONES DE AGENCIAS / JUNIO 2016</span>
+
 </page>
 <page  backleft="0mm" backright="0mm">
 <table style=" border-collapse: collapse;">
@@ -637,8 +640,8 @@ try {
         </td>
     </tr>
     
-         <tr style="">
-      <td class="etiqueta" style="font-size:8.5px;text-align:left;">
+    <tr style="">
+         <td class="etiqueta" style="font-size:8.5px;text-align:left;">
           USTED EJERCI&Oacute; O EJERCE ACTUALMENTE ALGÚN CARGO PUBLICO COMO FUNCIONARIO DE GOBIERNO
         </td>
     </tr>
@@ -725,7 +728,7 @@ try {
             <table style="border-collapse: collapse;" >
                <tr class="valores">
                     <td style="width:100%;font-weight:bold;">
-                      Autorizo (amos) a Banplus, a realizar todas las investigaciones y verificaciones que considere pertinentes, a fin de conocer con toda precisi&oacute;n y exactitud los datos e informaci&oacute;n
+                      Autorizo(amos) a Banplus, a realizar todas las investigaciones y verificaciones que considere pertinentes, a fin de conocer con toda precisi&oacute;n y exactitud los datos e informaci&oacute;n
 suministrados por mi (nosotros) y principalmente la informaci&oacute;n referida a mis (nuestros) activos, pasivos y antecedentes crediticios, as&iacute; como cualquier otra que considere necesaria.
                     </td>
                 </tr>
@@ -879,14 +882,14 @@ suministrados por mi (nosotros) y principalmente la informaci&oacute;n referida 
                     
                     </td>
                 </tr> 
-               
-                
-                
             </table>
         </td>
     </tr>
     
 </table>
+<br>
+<span style="font-size:8px;font-weight: bold;">CyP / FFI-PN V.07/ VP.OPERACIONES/ OPERACIONES DE AGENCIAS / JUNIO 2016</span>
+
 </page>
 
 ';
