@@ -5,7 +5,7 @@
 // convert in PDF
 include_once "../includes/html2pdf/vendor/autoload.php";
 try {
-    $html2pdf = new HTML2PDF('P', 'A4', 'en', false, 'ISO-8859-15', array(3, 3, 3, 3));
+    $html2pdf = new HTML2PDF('P', 'A4', 'en', false, 'ISO-8859-15', array(3, 6, 3, 3));
 //      $html2pdf->setModeDebug();
     $html2pdf->setDefaultFont('Arial');
 
@@ -22,7 +22,7 @@ try {
     .d_linea{font-size: 9px;}
     .b_left{border-left: none;}
     .b_right{border-right: none;}
-    .valores td{height: 10px;vertical-align: bottom;padding: 2px;font-size: 10px;border-top: none;}
+    .valores td{height: 13px;vertical-align: bottom;padding: 2px;font-size: 10px;border-top: none;}
     .sub_td{border:none;width:100%;margin-left:-1px;}
     .sub_td td{border-left: none;border-right: none;padding: 0px 0 0px 0;height:5px;text-align: center;font-size: 8px;}
     
@@ -30,11 +30,22 @@ try {
 <page  backleft="0mm" backright="0mm">
 <table style=" border-collapse: collapse;">
     <tr>
-        <td>
-          LOGO
+        <td style="border:none;">
+            <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td  style="width:60%;border:none;" rowspan="2"><img src="../img/logo_banplus.jpg" width="200px;" /></td>
+                    <td  style="width:20%;border:none;">AGENCIA:</td>
+                    <td  style="width:20%;border:none;">FECHA: </td>
+                </tr>
+               <tr>
+                    <td  style="width:40%;border:none;" colspan="2">N&ordm; DE CUENTA</td>
+                    
+                </tr>
+            </table>
         </td>
-    </tr> 
-    
+    </tr>
+
+
     <tr>
         <td class="titulo">
            FICHA DE IDENTIFICACI&Oacute;N DEL CLIENTE PERSONA NATURAL
@@ -74,15 +85,15 @@ try {
                 </tr>
                 <tr class="valores">
                     <td style="width:28%;font-size:12px;">
-                        V&nbsp;<input type="checkbox" name="vehicle" value="Bike">
-                        E&nbsp;<input type="checkbox" name="vehicle" value="Bike">
-                        P&nbsp;<input type="checkbox" name="vehicle" value="Bike">
+                        V&nbsp;<input type="checkbox"  >
+                        E&nbsp;<input type="checkbox"  >
+                        P&nbsp;<input type="checkbox"  >
                     </td>
                     <td style="width:25%;">NATURALIZADO</td>
                     <td style="width:15%;">NACIONALIDAD</td>
                     <td style="width:10%;font-size:12px;">
-                        &nbsp;<input type="checkbox" name="vehicle" value="Bike"> M
-                        &nbsp;<input type="checkbox" name="vehicle" value="Bike"> F
+                        &nbsp;<input type="checkbox"  > M
+                        &nbsp;<input type="checkbox"  > F
                     </td>
                     <td style="width:14%;">ESTADO CIVIL</td>
                     <td style="width:8%;">EDAD</td>
@@ -170,9 +181,9 @@ try {
                 </tr>
                 <tr class="valores">
                     <td  style="width:23%;font-size:11.8px;">
-                        <input type="checkbox" name="vehicle" value="Bike">PROPIA 
-                        <input type="checkbox" name="vehicle" value="Bike">ARRENDADA<br>
-                        <input type="checkbox" name="vehicle" value="Bike">OTROS
+                        <input type="checkbox"  >PROPIA 
+                        <input type="checkbox"  >ARRENDADA<br>
+                        <input type="checkbox"  >OTROS
                     </td>
                     <td class="" style="width:10%;"></td>
                     <td class="" style="width:20%;"></td>
@@ -442,9 +453,9 @@ try {
                 </tr>
                 <tr class="valores">
                     <td style="width:30%;font-size:12px;">
-                        V&nbsp;<input type="checkbox" name="vehicle" value="Bike">
-                        E&nbsp;<input type="checkbox" name="vehicle" value="Bike">
-                        P&nbsp;<input type="checkbox" name="vehicle" value="Bike">
+                        V&nbsp;<input type="checkbox"  value="">
+                        E&nbsp;<input type="checkbox"  value="">
+                        P&nbsp;<input type="checkbox"  value="">
                     </td>
                     <td style="width:26%;">NATURALIZADO</td>
                     <td style="width:18%;">NACIONALIDAD</td>
@@ -687,13 +698,13 @@ try {
                 </tr>
                <tr class="valores">
                     <td style="width:20%;font-size:12px;text-align:center;">
-                     Si&nbsp;<input type="checkbox" name="vehicle" value="Bike">&nbsp;
-                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No&nbsp;<input type="checkbox" name="vehicle" value="Bike">&nbsp;
+                     Si&nbsp;<input type="checkbox"  >&nbsp;
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No&nbsp;<input type="checkbox"  >&nbsp;
                     </td>
                     <td style="width:40%;font-size:11px;">
-                     Venta de Divisas&nbsp;<input type="checkbox" name="vehicle" value="Bike">&nbsp;
-                     Compra de Divisas&nbsp;<input type="checkbox" name="vehicle" value="Bike">&nbsp;
-                     Transferencias&nbsp;<input type="checkbox" name="vehicle" value="Bike">
+                     Venta de Divisas&nbsp;<input type="checkbox"  >&nbsp;
+                     Compra de Divisas&nbsp;<input type="checkbox"  >&nbsp;
+                     Transferencias&nbsp;<input type="checkbox"  >
                     </td>
                     <td style="width:20%;">
                         <table style="border-collapse: collapse;"  class="sub_td"><tr><td>PAIS ORIGEN</td></tr></table>
@@ -752,11 +763,133 @@ suministrados por mi (nosotros) y principalmente la informaci&oacute;n referida 
             </table>
         </td>
     </tr>
+    <tr style="">
+        <td class="seccion">
+          CONSTANCIA DE NO POSEER REFERENCIAS BANCARIAS Y/O COMERCIALES
+        </td>
+    </tr>
+    <tr>
+        <td class="bloque">
+            <table style="border-collapse: collapse;" >
+                 <tr class="valores">
+                    <td style="width:15%;border-right:none;">Declaro no poseer:</td>
+                    <td style="width:85%;font-size:12px;">
+                        Referencias Bancarias&nbsp;<input type="checkbox"  >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        Referencias Comerciales&nbsp;<input type="checkbox"  >
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td class="bloque">
+            <table style="border-collapse: collapse;" >
+                <tr>
+                    <td class="etiqueta" style="width:24%;" >LUGAR</td>
+                    <td class="etiqueta" style="width:30%;"  >FIRMA DEL SOLICITANTE</td>
+                    <td class="etiqueta" style="width:46%;" colspan="2" >HUELLA DACTILAR DEL AUTORIZADO</td>
+                </tr>
+                <tr class="valores" style="">
+                    <td style="width:24%;height:5px;border-bottom:none;"></td>
+                    <td style="width:30%;height:5px;" rowspan="4"></td>
+                    <td style="width:23%;font-size:8px;height:5px;text-align:center;" >PULGAR IZQUIERDO</td>
+                    <td style="width:23%;font-size:8px;height:5px;text-align:center;" >PULGAR DERECHO</td>
+                </tr> 
+                <tr class="valores">
+                <td style="width:23%;"></td>
+                    <td style="width:23%;height:40px;" rowspan="3"></td>
+                    <td style="width:23%;" rowspan="3" ></td>
+                </tr> 
+                <tr>
+                    <td class="etiqueta" style="width:24%;" >FECHA</td>
+                </tr>
+              <tr class="valores" style="">
+                    <td style="width:24%;height:24px;" ></td>
+                </tr> 
+                
+            </table>
+        </td>
+    </tr>
+    
 </table> 
+<br>
+<table style=" border-collapse: collapse;">
+     <tr style="">
+        <td class="seccion">
+          ESPACIO PARA SER ULTILIZADO POR LA ENTIDAD - RECAUDOS SOLICITADOS AL CLIENTE
+        </td>
+    </tr>
+    <tr>
+        <td class="bloque">
+            <table style="border-collapse: collapse;" >
+                 <tr class="valores">
+                    <td style="width:32%;font-size:9px;">
+                        <input type="checkbox"  > FOTOCOPIA(S) DE LA C&Eacute;DULA DE IDENTIDAD<br>
+                        <input type="checkbox"  > REFERENCIA(S) BANCARIA(S)
+                    </td>
+                     <td style="width:44%;font-size:9px;">
+                        <input type="checkbox"  > CERTIFICACI&Oacute;N DE INGRESOS Y/O CONSTANCIAS DE TRABAJO<br>
+                        <input type="checkbox"  > REFERENCIA(S) COMERCIAL(ES)
+                    </td>
+                     <td style="width:24%;font-size:9px;">
+                        <input type="checkbox"  > RECIBO DE SERVICIOS P&Uacute;BLICOS<br>
+                        <input type="checkbox"  > REFERENCIA(S) PERSONAL(ES)
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr style="">
+        <td class="seccion">
+          OBSERVACIONES
+        </td>
+    </tr>
+    <tr>
+        <td class="bloque">
+            <table style="border-collapse: collapse;" >
+                 <tr class="valores" style="">
+                    <td style="width:100%;height:40px;" ></td>
+                </tr> 
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td class="bloque">
+            <table style="border-collapse: collapse;" >
+                <tr>
+                    <td class="etiqueta" style="width:33.33%%;" >ELABORADO POR:</td>
+                    <td class="etiqueta" style="width:66.66%;" colspan="2"  >VERIFICADO SEG&Uacute;N RESOLUCI&Oacute;N 119.10 DE LA SUDEBAN ART. 41 POR:</td>
+                    
+                </tr>
+                <tr class="valores" style="">
+                    <td style="width:33.33%;">
+                    NOMBRE EJECUTIVO:<br><br><br><br>
+                    FECHA:<br><br><br><br>
+                    FIRMA:<br><br><br>
+                    </td>
+                    <td style="width:33.33%%; " >
+                    NOMBRE GERENTE DE SERVICIO:<br><br><br><br>
+                    FECHA:<br><br><br><br>
+                    FIRMA:<br><br><br>
+                    </td>
+                    <td style="width:33.33%%;" >
+                    NOMBRE GERENTE DE NEGOCIOS / ALIADO:<br><br><br><br>
+                    FECHA:<br><br><br><br>
+                    FIRMA:<br><br><br>
+                    
+                    </td>
+                </tr> 
+               
+                
+                
+            </table>
+        </td>
+    </tr>
+    
+</table>
 </page>
 
 ';
-
 
 
 
