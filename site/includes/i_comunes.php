@@ -145,6 +145,7 @@ function execute_sql($nombre, $ArrParams = NULL) {
         case 'get_estados2':
             $sql = "SELECT * FROM estados order by estado";
             break;
+        
         case 'get_parametro_link_online':
             $sql = "SELECT a.valor
 						FROM parametros AS a
@@ -496,8 +497,28 @@ function execute_sql($nombre, $ArrParams = NULL) {
             break;
 
         case 'get_paises':
-            $sql = "SELECT * FROM paises where visibilidad=1 order by nombre asc";
+            $sql = "SELECT * FROM _paises where visibilidad=1 order by nombre asc";
             break;
+        
+        case 'get_civil':
+            $sql = "SELECT * FROM estado_civil where visibilidad=1 order by nombre asc";
+            break;
+        
+          case 'get_actividad_e':
+            $sql = "SELECT * FROM actividad_economica where visibilidad=1 order by actividad asc";
+            break;
+        
+          case 'get_estados_new':
+            $sql = "SELECT * FROM _estados where visibilidad=1 and lf_estado_pais='VENVE' order by nombre asc";
+            break;
+        
+        case 'get_ciudad_new':
+            $sql = "SELECT * FROM _ciudad where visibilidad=1 order by ciudad asc";
+            break;
+        
+        
+        
+        
     }
 
     abrirConexion();

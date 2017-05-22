@@ -1,12 +1,29 @@
 <?php
-$Estados = execute_sql("get_estados2", array());
+
+$CIVIL= execute_sql("get_civil", array());
+$_opc_civil = '';
+foreach ($CIVIL as $civil_)
+    $_opc_civil .= '  <option value="' . $civil_['nombre'] . '">' . $civil_['nombre'];
+
+$act_eco= execute_sql("get_actividad_e", array());
+$_opc_acteco = '';
+foreach ($act_eco as $economica)
+    $_opc_acteco .= '  <option value="' . $economica['actividad'] . '">' . $economica['actividad'];
+
+$tp_paises = execute_sql("get_paises", array());
+$_opc_tp_pais = '';
+foreach ($tp_paises as $tp_pais)
+    $_opc_tp_pais .= '  <option value="' . $tp_pais['nombre'] . '">' . $tp_pais['nombre'];
+
+
+
+$Estados = execute_sql("get_estados_new", array());
 $_opc_estados = '';
 foreach ($Estados as $estado)
-    $_opc_estados .= '  <option value="' . $estado['id_estado'] . '">' . $estado['estado'];
+    $_opc_estados .= '  <option value="' . $estado['id2_estado'] . '">' . $estado['nombre'];
 
 
-$Ciudades = execute_sql("get_ciudad", array());
-$_opc_ciudades = '';
+
 $_codigo_areas = ['0248', '0281', '0240', '0243', '0273', '0284', '0241', '0258', '0287', '0212', '0259', '0235', '0251', '0271', '0212', '0287', '0295', '0255', '0293', '0275', '0271', '0212', '0251', '0262'];
 $_codigo_cel = ['0412', '0426', '0416', '0424', '0414'];
 foreach ($_codigo_areas as $codigo)
@@ -33,10 +50,6 @@ $_opc_tp_cuenta = '';
 foreach ($tp_cuentas as $tp_cuenta)
     $_opc_tp_cuenta .= '  <option value="' . $tp_cuenta['id_cuenta'] . '">' . $tp_cuenta['tipo'];
 
-$tp_paises = execute_sql("get_paises", array());
-$_opc_tp_pais = '';
-foreach ($tp_paises as $tp_pais)
-    $_opc_tp_pais .= '  <option value="' . $tp_pais['nombre'] . '">' . $tp_pais['nombre'];
 
 $_opc_tp_nacionalidad = '';
 foreach ($tp_paises as $tp_pais)
@@ -50,8 +63,12 @@ foreach ($tp_paises as $tp_pais)
 
     var Ciudades = {};
 <?php
+
+$Ciudades = execute_sql("get_ciudad_new", array());
+$_opc_ciudades = '';
 foreach ($Ciudades as $Ciudad)
-    echo "Ciudades['" . $Ciudad['id_estado'] . "_" . $Ciudad['id_ciudad'] . "']='" . $Ciudad['ciudad'] . "';";
+    echo "Ciudades['" . $Ciudad['lf_estado'] . "_" . $Ciudad['id_banplus'] . "']='" . $Ciudad['ciudad'] . "';";
+
 ?>
 
     $(document).ready(function () {
