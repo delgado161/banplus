@@ -22,21 +22,26 @@ $_opc_estados = '';
 foreach ($Estados as $estado)
     $_opc_estados .= '  <option value="' . $estado['id2_estado'] . '">' . $estado['nombre'];
 
+$cod_postal=execute_sql("get_codpostal_new", array());
+$_postal = '';
+foreach ($cod_postal as $post)
+    $_postal .= '  <option value="' . $post['codigo'] . '">' . $post['codigo'];
 
 
-$_codigo_areas = ['0248', '0281', '0240', '0243', '0273', '0284', '0241', '0258', '0287', '0212', '0259', '0235', '0251', '0271', '0212', '0287', '0295', '0255', '0293', '0275', '0271', '0212', '0251', '0262'];
-$_codigo_cel = ['0412', '0426', '0416', '0424', '0414'];
+
+$_codigo_areas = execute_sql("get_codtele_new", array());
 foreach ($_codigo_areas as $codigo)
-    $_opc_area .= '  <option value="' . $codigo . '">' . $codigo;
+    $_opc_area .= '  <option value="' . $codigo['codigo'] . '">' . $codigo['codigo'];
 
+$_codigo_cel = execute_sql("get_codcel_new", array());
 foreach ($_codigo_cel as $codigo)
-    $_opc_cel .= '  <option value="' . $codigo . '">' . $codigo;
+    $_opc_cel .= '  <option value="' . $codigo['codigo'] . '">' . $codigo['codigo'];
 
 
 $profesiones = execute_sql("get_profesiones", array());
 $_opc_profesion = '';
 foreach ($profesiones as $prof)
-    $_opc_profesion .= '  <option value="' . $prof['id_profesion'] . '">' . $prof['descripcion'];
+    $_opc_profesion .= '  <option value="' . $prof['descripcion'] . '">' . $prof['descripcion'];
 
 
 $productos = execute_sql("get_tp_productos", array());
@@ -49,6 +54,12 @@ $tp_cuentas = execute_sql("get_tp_productos", array());
 $_opc_tp_cuenta = '';
 foreach ($tp_cuentas as $tp_cuenta)
     $_opc_tp_cuenta .= '  <option value="' . $tp_cuenta['id_cuenta'] . '">' . $tp_cuenta['tipo'];
+
+
+$tp_banco = execute_sql("get_banco_new", array());
+$_opc_tp_banco = '';
+foreach ($tp_banco as $tp_banco_)
+    $_opc_tp_banco .= '  <option value="' . $tp_banco_['banco'] . '">' . $tp_banco_['banco'];
 
 
 $_opc_tp_nacionalidad = '';

@@ -1,11 +1,32 @@
-
+<br><br>
+<?php
+var_dump($_POST);
+//
+//var_dump(json_encode($_POST));
+?>
 <?php include 'pre_apertura.php' ?>
 
 
-<br><br>
 
-<!--<a href="modulos/pdf_cpn.php">sd </a>-->
 
+<a href="modulos/pdf_cpn.php" class="link_doc">sd </a>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: 'modulos/pdf_cpn.php',
+            data: <?php echo json_encode($_POST) ?>,
+            error: function (xhr, status, error) {
+//                var err = eval("(" + xhr.responseText + ")");
+//                alert(error);
+            },
+//            dataType: 'json',
+            success: function (data) {
+//                alert();
+            },
+            type: 'POST'
+        });
+    });
+</script>
 
 <form method="POST" id="form_ap_cuenta" enctype="multipart/form-data">
 
@@ -136,7 +157,7 @@
                 <div class="div_form">
                     <label for="tp_ocupacion">Ocupaci&oacute;n:<span  style="color:red">*</span></label><br>
                     <input class="requerido_" onkeypress="return solo_letras(event)" type="text" name="tp_ocupacion" id="tp_ocupacion" value="" style="width:287px;">
-           
+
                 </div>
 
                 <div class="div_form">
@@ -163,7 +184,10 @@
                 </div>
                 <div class="div_form">
                     <label for="d_postal">C&oacute;digo postal:<span  style="color:red">*</span></label><br>
-                    <input class="requerido_" onkeypress="return solo_numeros(event)" style="width:79px;" type="text" name="d_postal" id="d_postal" value="" >
+                    <select class="_estados requerido_" name="d_postal" id="d_postal" style="width:92px;">
+                        <option value="">
+                            <?php echo $_postal; ?>
+                    </select>
                 </div>
 
                 <div class="div_form">
@@ -339,7 +363,10 @@
                 </div>
                 <div class="div_form">
                     <label for="e_postal">C&oacute;digo postal:<span  style="color:red">*</span></label><br>
-                    <input class="requerido_" onkeypress="return solo_letras2(event)" style="width:79px;" type="text" name="e_postal" id="e_postal" value="" >
+                    <select class="_estados requerido_" name="e_postal" id="e_postal" style="width:92px;">
+                        <option value="">
+                            <?php echo $_postal; ?>
+                    </select>
                 </div>
 
                 <div class="div_form">
@@ -400,17 +427,17 @@
 
                     <div style = "float:left;padding:5px;">
                         <label for = "tp_producto<?php echo $i; ?>">Tipo de Producto:</label><br>
-    <!--                        <select class = "requerido_" name = "tp_producto<?= $i; ?>" id = "tp_producto<?= $i; ?>" style = "width:120px;">
+                        <select class = "" name = "tp_producto<?= $i; ?>" id = "tp_producto<?= $i; ?>" style = "width:155px;">
                             <option value = "">Seleccione...
-                        <?php echo $_opc_productos
-                        ?>
-                        </select>    -->
-                        <input class="requerido_" onkeypress="return solo_letras2(event)" style="width:145px;" type="text" name="tp_producto<?= $i; ?>" id="tp_producto<?= $i; ?>" value="" >
+                                <?php echo $_opc_productos
+                                ?>
+                        </select>   
+                        <!--<input class="requerido_" onkeypress="return solo_letras2(event)" style="width:145px;" type="text" name="tp_producto<?= $i; ?>" id="tp_producto<?= $i; ?>" value="" >-->
 
                     </div>
                     <div class="div_form">
                         <label for="numero_prod<?= $i; ?>">N&uacute;mero:</label><br>
-                        <input class="requerido_" onkeypress="return solo_numeros(event)" style="width:200px;" type="text" name="numero_prod<?= $i; ?>" id="numero_prod<?= $i; ?>" value="" >
+                        <input class="" onkeypress="return solo_numeros(event)" style="width:200px;" type="text" name="numero_prod<?= $i; ?>" id="numero_prod<?= $i; ?>" value="" >
                     </div>
 
                     <?php
@@ -428,13 +455,17 @@
 
                     <div class="div_form">
                         <label for="tp_banco<?= $i; ?>">Banco:</label><br>
-                        <input class="" onkeypress="return solo_letras2(event)" style="width:175px;" type="text" name="tp_banco<?= $i; ?>" id="tp_banco<?= $i; ?>" value="" >
-
+                        <select  class="" name="tp_banco<?= $i; ?>" id="tp_banco<?= $i; ?>" style="width:187px;">
+                            <option value="">Seleccione...
+                                <?php echo $_opc_tp_banco; ?>
+                        </select>
                     </div>
+
                     <div class="div_form">
                         <label for="cuenta<?= $i; ?>">N&ordm; de Cuenta o TDC:</label><br>
                         <input class=" cta_banco" size="24" onkeypress="return solo_numeros(event)" style="width:170px;" type="text" name="cuenta<?= $i; ?>" id="cuenta<?= $i; ?>" value="" >
                     </div>
+
                     <div class="div_form">
                         <label for="tp_cuenta<?= $i; ?>">Tipo de cuenta:</label><br>
     <!--                        <select class="requerido_" name="tp_cuenta<?= $i; ?>" id="tp_cuenta<?= $i; ?>" style="width:105px;">
@@ -481,30 +512,30 @@
                     ?>
                     <div class="div_form">
                         <label for="rc_empresa<?= $i; ?>">Empresa / Comercio:<span  style="color:red">*</span></label><br>
-                        <input class="requerido_" style="width: 202px;" onkeypress="return solo_letras2(event)" type="text" name="rc_empresa<?= $i; ?>" id="rc_empresa<?= $i; ?>" value="">
+                        <input class="" style="width: 202px;" onkeypress="return solo_letras2(event)" type="text" name="rc_empresa<?= $i; ?>" id="rc_empresa<?= $i; ?>" value="">
                     </div>
 
                     <div class="div_form">
                         <label for="rctp_ramo<?= $i; ?>">Activida / Ramo:<span  style="color:red">*</span></label><br>
-                        <input class="requerido_" onkeypress="return solo_letras2(event)" type="text" name="rctp_ramo<?= $i; ?>" id="rctp_ramo<?= $i; ?>" value="">
+                        <input class="" onkeypress="return solo_letras2(event)" type="text" name="rctp_ramo<?= $i; ?>" id="rctp_ramo<?= $i; ?>" value="">
                     </div>
 
                     <div class="div_form">
                         <label for="rtp_telefonoH<?= $i; ?>">Tel&eacute;fono Hab.:<span  style="color:red">*</span></label><br>
-                        <select class="requerido_" name="dtp_telefonoH<?= $i; ?>" id="dtp_telefonoH<?= $i; ?>" style="width:70px;">
+                        <select class="" name="dtp_telefonoH<?= $i; ?>" id="dtp_telefonoH<?= $i; ?>" style="width:70px;">
                             <option value="">
                                 <?php echo $_opc_area; ?>
                         </select>
-                        <input class="requerido_" onkeypress="return solo_numeros(event)" style="width:100px;" type="text" name="d_telefonoh<?= $i; ?>" id="d_telefonoh<?= $i; ?>" value="">
+                        <input class="telefono_" onkeypress="return solo_numeros(event)" style="width:100px;" type="text" name="d_telefonoh<?= $i; ?>" id="d_telefonoh<?= $i; ?>" value="">
                     </div>
 
                     <div class="div_form">
                         <label for="dtp_telefono2<?= $i; ?>">Otro Tel&eacute;fono:<span  style="color:red">*</span></label><br>
-                        <select class="requerido_" name="dtp_telefono2<?= $i; ?>" id="dtp_telefono2<?= $i; ?>" style="width:70px;">
+                        <select class="" name="dtp_telefono2<?= $i; ?>" id="dtp_telefono2<?= $i; ?>" style="width:70px;">
                             <option value="">
                                 <?php echo $_opc_area; ?>
                         </select>
-                        <input class="requerido_" onkeypress="return solo_numeros(event)" style="width:100px;" type="text" name="d_telefono2<?= $i; ?>" id="d_telefono2<?= $i; ?>" value="">
+                        <input class="telefono_" onkeypress="return solo_numeros(event)" style="width:100px;" type="text" name="d_telefono2<?= $i; ?>" id="d_telefono2<?= $i; ?>" value="">
                     </div>
 
                     <?php
@@ -541,7 +572,7 @@
                             <option value="">
                                 <?php echo $_opc_area; ?>
                         </select>
-                        <input class="requerido_" onkeypress="return solo_numeros(event)" style="width:100px;" type="text" name="d_telefonoh<?= $i; ?>" id="d_telefonoh<?= $i; ?>" value="">
+                        <input class="requerido_ telefono_" onkeypress="return solo_numeros(event)" style="width:100px;" type="text" name="d_telefonoh<?= $i; ?>" id="d_telefonoh<?= $i; ?>" value="">
                     </div>
                     <?php
                 }
@@ -579,12 +610,12 @@
                         <option value="E">E
                         <option value="P">P
                     </select>
-                    <input style="width: 140px;" class="" onkeypress="return solo_numeros(event)" type="text" name="n_documento" id="n_documento" value="">
+                    <input style="width: 139px;" class="" onkeypress="return solo_numeros(event)" type="text" name="CCn_documento" id="CCn_documento" value="">
                 </div>
 
                 <div class="div_form">
                     <label for="ccnaturalizado">naturalizado N&ordm; C.I anteriol:</label><br>
-                    <input style="width: 170px;" class="" onkeypress="return solo_numeros(event)" type="text" name="ccnaturalizado" id="ccnaturalizado" value="">
+                    <input style="width: 160px;" class="" onkeypress="return solo_numeros(event)" type="text" name="ccnaturalizado" id="ccnaturalizado" value="">
                 </div>
 
                 <div class="div_form">
@@ -596,11 +627,21 @@
                 </div>
 
                 <div class="div_form">
-                    <label for="cctp_sexo" >Sexo:</label>
-                    <div style="width:100%;height: 4px;" ></div>
-                    M<input type="radio" value="M" name="cctp_sexo">
-                    F<input type="radio" value="F" name="cctp_sexo">
+                    <label for="cctp_civil">Estado Civil:</label><br>
+                    <select style="    width: 98px;" class="" name="cctp_civil" id="cctp_civil">
+                        <option value="">Seleccione...
+                        <option value="SOLTERO">Soltero
+                        <option value="CASADO">Casado
+                        <option value="VIUDO">Viudo
+                        <option value="DIVORCIADO">Divorciado                
+                    </select>
                 </div>
+                
+                <div class="div_form">
+                    <label for="ccg_familiar">Carga familiar:</label><br>
+                    <input class="" onkeypress="return solo_numeros(event)" style="width:76px;" type="number" name="ccg_familiar" id="ccg_familiar" min="0" max="100">
+                </div>
+
                 <!--##################### DIV SEPARADOR ############################-->
                 <div class="sep_2"></div>
 
@@ -639,54 +680,23 @@
 
 
                 <div class="div_form">
-                    <label for="cctp_civil">Estado Civil:</label><br>
-                    <select style="    width: 115px;" class="" name="cctp_civil" id="cctp_civil">
-                        <option value="">Seleccione...
-                        <option value="SOLTERO">Soltero
-                        <option value="CASADO">Casado
-                        <option value="VIUDO">Viudo
-                        <option value="DIVORCIADO">Divorciado                
-                    </select>
-                </div>
-
-                <div class="div_form">
-                    <label for="ccg_familiar">Carga familiar:</label><br>
-                    <input class="" onkeypress="return solo_numeros(event)" style="width:80px;" type="number" name="ccg_familiar" id="ccg_familiar" min="0" max="100">
-                </div>
-
-                <div class="div_form">
-                    <label for="cctp_activida">Actividad Econ&oacute;mica:</label><br>
-                    <select class="" name="cctp_activida" id="cctp_activida" style="width:260px;">
-                        <option value="">Seleccione...
-
-                    </select>
-                </div>
-
-                <div class="div_form">
                     <label for="cctp_profecion">Profesi&oacute;n u oficio:</label><br>
-                    <select class="" name="cctp_profecion" id="cctp_profecion" style="width:274px;">
+                    <select class="" name="cctp_profecion" id="cctp_profecion" style="width:228px;">
                         <option value="">Seleccione...
                             <?php echo $_opc_profesion ?>
                     </select>
                 </div>
 
 
-                <!--##################### DIV SEPARADOR ############################-->  
-                <div class="sep_2"></div>
-
                 <div class="div_form">
                     <label for="cctp_ocupacion">Ocupaci&oacute;n:</label><br>
-                    <select class="" name="cctp_ocupacion" id="cctp_ocupacion" style="width:300px">
-                        <option value="">Seleccione...
-                        <option value="C">Soltero
-                        <option value="p">Casado
-                        <option value="p">Viudo
-                    </select>
+                    <input class="" onkeypress="return solo_letras(event)" type="text" name="cctp_ocupacion" id="cctp_ocupacion" value="" style="width:200px;">
+
                 </div>
 
                 <div class="div_form">
                     <label for="ccemail">Correo electr&oacute;nico:</label><br>
-                    <input class="" onkeypress="return solo_email(event)" type="text" name="ccemail" id="ccemail" value="" style="width:450px;">
+                    <input class="" onkeypress="return solo_email(event)" type="text" name="ccemail" id="ccemail" value="" style="width:300px;">
                 </div>
 
 
@@ -817,16 +827,17 @@
 
             <h3>Documentos Requeridos:</h3>
             <div>
-
-
-
-
                 <div style="float:left;padding:5px;">
                     <label for="go_total_ingresos" style="font-size: 12px;">Copia legible de la c&eacute;dula de identidad del solicitante, vigente.:<span  style="color:red">*</span></label><br><br>
                     <input type="file" class="custom-file-input">
                 </div>
                 <div class="separador_" style=""></div>
 
+                <div style="float:left;padding:5px;">
+                    <label for="go_total_ingresos" style="font-size: 12px;">Copia del Registro de Informaci&oacute;n Fiscal RIF del solicitante, vigente.:<span  style="color:red">*</span></label><br><br>
+                    <input type="file" class="custom-file-input">
+                </div>
+                <div class="separador_" style=""></div>
 
                 <div style="float:left;padding:5px;">
                     <label for="go_total_ingresos" style="font-size: 12px;">Copia del Registro de Informaci&Oacute;n Fiscal RIF del solicitante, vigente.<span  style="color:red">*</span></label><br><br>
@@ -835,14 +846,13 @@
                 <div class="separador_" style=""></div>
 
                 <div style="float:left;padding:5px;">
-                    <label for="go_total_ingresos" style="font-size: 12px;">Constancia de trabajo original membretada con firma y sello de la empresa, con vigencia máxima de tres (3) meses indicando ingreso mensual o anual, cargo que desempeña y antigüedad en la empresa (no menor a doce (12) meses). Si es profesional de libre ejercicio certificación de ingresos firmada por un contador p&Uacute;blico colegiado donde indique y confirme la profesi&Iacute;n del solicitante y el origen de los fondos. Si eres estudiante mayor de edad constancia de estudios actualizada.:<span  style="color:red">*</span></label><br><br>
+                    <label for="go_total_ingresos" style="font-size: 12px;">Constancia de trabajo original membretada con firma y sello de la empresa, con vigencia m&aacute;xima de tres (3) meses indicando ingreso mensual o anual, cargo que desempe&ntilde;a y antigüedad en la empresa (no menor a doce (12) meses). Si es profesional de libre ejercicio certificaci&oacute;n de ingresos firmada por un contador p&Uacute;blico colegiado donde indique y confirme la profesi&Iacute;n del solicitante y el origen de los fondos. Si eres estudiante mayor de edad constancia de estudios actualizada.:<span  style="color:red">*</span></label><br><br>
                     <input type="file" class="custom-file-input">
                 </div>
                 <div class="separador_" style=""></div>
 
-
                 <div style="float:left;padding:5px;">
-                    <label for="go_total_ingresos" style="font-size: 12px;">Una (1) Referencia Bancaria o Comercial de cada uno de los firmantes (excepto a las personas que abren cuenta por primera vez). No más de 30 d&Iacute;as emitidos.:<span  style="color:red">*</span></label><br><br>
+                    <label for="go_total_ingresos" style="font-size: 12px;">Una (1) Referencia Bancaria o Comercial de cada uno de los firmantes (excepto a las personas que abren cuenta por primera vez). No m&aacute;s de 30 d&Iacute;as emitidos.:<span  style="color:red">*</span></label><br><br>
                     <input type="file" class="custom-file-input">
                 </div>
                 <div class="separador_" style=""></div>
@@ -853,11 +863,9 @@
                 </div>
                 <div class="separador_" style=""></div>
                 <div style="float:left;padding:5px;">
-                    <label for="go_total_ingresos" style="font-size: 12px;">Si eres firma personal última declaración de Impuesto Sobre la Renta (ISLR) emitida por el SENIAT.:<span  style="color:red">*</span></label><br><br>
+                    <label for="go_total_ingresos" style="font-size: 12px;">Si eres firma personal &uacute;ltima declaraci&oacute;n de Impuesto Sobre la Renta (ISLR) emitida por el SENIAT.:<span  style="color:red">*</span></label><br><br>
                     <input type="file" class="custom-file-input">
                 </div>
-
-
             </div>
 
 

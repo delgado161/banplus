@@ -515,6 +515,22 @@ function execute_sql($nombre, $ArrParams = NULL) {
         case 'get_ciudad_new':
             $sql = "SELECT * FROM _ciudad where visibilidad=1 order by ciudad asc";
             break;
+           
+        case 'get_codpostal_new':
+            $sql = "SELECT * FROM _codigo_postal where visibilidad=1 order by codigo asc";
+            break;
+        
+        case 'get_codtele_new':
+            $sql = "SELECT * FROM _cod_telefono where visibilidad=1 and cod_cel=0 order by codigo asc";
+            break;
+        
+          case 'get_codcel_new':
+            $sql = "SELECT * FROM _cod_telefono where visibilidad=1 and cod_cel=1 order by codigo asc";
+            break;
+        
+         case 'get_banco_new':
+            $sql = "SELECT * FROM _bancos where visibilidad=1 order by banco asc";
+            break;
         
         
         

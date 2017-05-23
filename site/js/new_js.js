@@ -46,12 +46,12 @@ $(document).ready(function () {
     });
     $("#fc_nac").datepicker({
         dateFormat: "dd/mm/yy",
-        yearRange: '-200:-18'
+        yearRange: '-100:-18'
     });
     
     $(".fechas,#cierre_fiscal,#ult_registro").datepicker({
         dateFormat: "dd/mm/yy",
-        yearRange: '-200:+0'
+        yearRange: '-100:+0'
     });
 
     $("#fc_nac").change(function () {
