@@ -31,15 +31,142 @@ $(document).ready(function () {
 
     $('#form_ap_cuenta').submit(function () {
         var validado = true;
-        $('.requerido_').each(function () {
-            if ($(this).val().length <= 0 || $(this).val()=="" || parseFloat($(this).val())<=0 ) {
-                $(this).css('background', 'rgba(255,0,0,0.30)');
+
+
+
+        if (($('.requerido_2').val().length <= 0 || $('.requerido_2').val() == "" || parseFloat($('.requerido_2').val()) <= 0) && ($('.requerido_21').val().length <= 0 || $('.requerido_21').val() == "")) {
+            $('.requerido_2,.requerido_21').css('background', 'rgba(132, 189, 0, 0.15)');
+        } else {
+            if (($('.requerido_2').val().length <= 0 || $('.requerido_2').val() == "" || parseFloat($('.requerido_2').val()) <= 0)) {
+                $('.requerido_2').css('background', 'rgba(255,0,0,0.30)');
                 validado = false;
-            }else{
-                  $(this).css('background', 'rgba(132, 189, 0, 0.15)');
+            } else {
+                $('.requerido_2').css('background', 'rgba(132, 189, 0, 0.15)');
+            }
+
+            if (($('.requerido_21').val().length <= 0 || $('.requerido_21').val() == "")) {
+                $('.requerido_21').css('background', 'rgba(255,0,0,0.30)');
+                validado = false;
+            } else {
+                $('.requerido_21').css('background', 'rgba(132, 189, 0, 0.15)');
+            }
+        }
+
+
+
+
+        $('.prod_banplus,.cc_banplus,.ref_ban_comer').each(function () {
+            var validado2 = true;
+            var campos = $(this).find('.valida_prod').length;
+            var contador = 1;
+
+
+            $(this).find('.valida_prod').each(function () {
+                if ($(this).val().length <= 0 || $(this).val() == "" || parseFloat($(this).val()) <= 0) {
+                } else {
+                    if (campos == contador) {
+                        validado2 = true;
+                    } else {
+                        validado2 = false;
+                    }
+                    contador = contador + 1;
+                }
+            });
+
+
+            if (!validado2) {
+                $(this).find('.valida_prod').css('background', 'rgba(255,0,0,0.30)');
+                validado = false;
+            }
+            else
+                $(this).find('.valida_prod').css('background', 'rgba(132, 189, 0, 0.15)');
+
+
+            if ($(this).hasClass('cc_banplus')) {
+                if (!validado2) {
+                    $('.cc_banplus2').find('input').each(function () {
+                        $(this).addClass('requerido_');
+                    });
+                }
+                else {
+                    $('.cc_banplus2').find('input').each(function () {
+                        $(this).css('background', 'rgba(132, 189, 0, 0.15)');
+                        $(this).removeClass('requerido_');
+                    });
+                }
+
+            }
+
+
+            if ($(this).hasClass('ref_ban_comer')) {
+
+                if (!validado) {
+                    $('.ref_adjunto').addClass('requerido_');
+                }
+                else {
+                    $('.ref_adjunto').css('background', 'rgba(132, 189, 0, 0.15)');
+                    $('.ref_adjunto').removeClass('requerido_');
+
+                }
+
             }
 
         });
+
+
+
+
+
+        $('.custom-file-input').each(function () {
+
+            var ext = $(this).val().split('.').pop().toLowerCase();
+
+            if ($(this).val().length <= 0 || $(this).val() == "" || parseFloat($(this).val()) <= 0) {
+                $(this).css('background', 'rgba(132, 189, 0, 0.15)');
+            } else {
+                if ($.inArray(ext, ['jpg', 'jpeg', 'pdf', 'JPG', 'JPGE', 'PDF']) == -1) {
+                    $(this).css('background', 'rgba(255,0,0,0.30)');
+                    validado = false;
+                    $(this).next('span').html(' FORMATO INVALIDO SOLO SE PERMITEN PNG, JPG, JPEG, PDF');
+                } else {
+                    var file_size = $(this)[0].files[0].size;
+                    if (file_size > 2097152) {
+                        $(this).css('background', 'rgba(255,0,0,0.30)');
+                        validado = false;
+                        $(this).next('span').html('EL ARCHIVO DEBE PESAR MENOR A 2MB');
+                    } else {
+                        $(this).next('span').html('');
+                        $(this).css('background', 'rgba(132, 189, 0, 0.15)');
+                    }
+                }
+
+
+
+
+            }
+
+
+
+
+
+        });
+
+
+
+        $('.requerido_').each(function () {
+            if ($(this).val().length <= 0 || $(this).val() == "" || parseFloat($(this).val()) <= 0) {
+                $(this).css('background', 'rgba(255,0,0,0.30)');
+                validado = false;
+            } else {
+                $(this).css('background', 'rgba(132, 189, 0, 0.15)');
+            }
+
+
+        });
+
+
+
+
         if (!validado)
             alert('Por Favor rellene los campos se\u00f1alados');
         return validado;
@@ -48,8 +175,8 @@ $(document).ready(function () {
         dateFormat: "dd/mm/yy",
         yearRange: '-100:-18'
     });
-    
-    $(".fechas,#cierre_fiscal,#ult_registro").datepicker({
+
+    $(".fechas,#cierre_fiscal,#ult_registro,#ccfc_nac").datepicker({
         dateFormat: "dd/mm/yy",
         yearRange: '-100:+0'
     });
@@ -66,7 +193,7 @@ $(document).ready(function () {
 
     $('#tp_inmueble,#d_vivienda').change(function () {
 
-        if ($(this).val() == "ARRENDADA" || $(this).val() == "ALQUILADO" || $(this).val() == "4" )
+        if ($(this).val() == "ARRENDADA" || $(this).val() == "ALQUILADO" || $(this).val() == "4")
             $('.cannon').show();
         else
             $('.cannon').hide();
@@ -92,8 +219,8 @@ $(document).ready(function () {
         $('#go_total_ingresos').val(parseFloat(suma2.toFixed(2)));
         $('#go_total_ingresos').val($('#go_total_ingresos').val().replace(".", ","));
     });
-    
-    
+
+
     $('.jmoneda2s').keyup(function () {
         var suma2 = 0;
 
@@ -103,7 +230,7 @@ $(document).ready(function () {
         $('#act_total_sus').val(parseFloat(suma2.toFixed(2)));
         $('#act_total_sus').val($('#act_total_sus').val().replace(".", ","));
     });
-    
+
     $('.jmoneda2_p').keyup(function () {
         var suma2 = 0;
 
@@ -113,8 +240,8 @@ $(document).ready(function () {
         $('#act_total_percent').val(parseFloat(suma2.toFixed(2)));
         $('#act_total_percent').val($('#act_total_percent').val().replace(".", ","));
     });
-    
-     $('.jmoneda2p').keyup(function () {
+
+    $('.jmoneda2p').keyup(function () {
         var suma2 = 0;
 
         $('.jmoneda2p').each(function () {
@@ -123,9 +250,9 @@ $(document).ready(function () {
         $('#act_total_pagado').val(parseFloat(suma2.toFixed(2)));
         $('#act_total_pagado').val($('#act_total_pagado').val().replace(".", ","));
     });
-    
-    
-    
+
+
+
 
     $('.moneda_2').keyup(function () {
         var suma2 = 0;
