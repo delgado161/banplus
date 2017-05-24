@@ -1,43 +1,14 @@
 <br><br>
-<?php
-var_dump($_POST);
-//
-//var_dump(json_encode($_POST));
 
-$uploaddir = dirname(__FILE__) . '/tmp_apertura/';
-$uploadfile = $uploaddir . basename($_FILES['userfile']['name']);
-
-echo '<pre>';
-if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
-    echo "File is valid, and was successfully uploaded.\n";
-} else {
-    echo "Possible file upload attack!\n";
-}
-
-?>
+<?php include 'envia_correos.php' ?>
 <?php include 'pre_apertura.php' ?>
 
 
 
-<script>
-    $(document).ready(function () {
-        $.ajax({
-            url: 'modulos/pdf_cpn.php',
-            data: <?php echo json_encode($_POST) ?>,
-            error: function (xhr, status, error) {
-//                var err = eval("(" + xhr.responseText + ")");
-//                alert(error);
-            },
-//            dataType: 'json',
-            success: function (data) {
-//                alert();
-            },
-            type: 'POST'
-        });
-    });
-</script>
+
 
 <form method="POST" id="form_ap_cuenta" enctype="multipart/form-data">
+    <input   type="hidden" name="p_formulario" id="p_formulario" value="NATURAL">
 
     <div style="background-color:#F4F4F4;overflow:auto;overflow-x:hidden;" class="form_n" > 
         <div id="accordion">
@@ -839,7 +810,7 @@ for ($i = 10; $i <= 11; $i++) {
             <div>
                 <div style="float:left;padding:5px;">
                     <label for="go_total_ingresos" style="font-size: 12px;">Copia legible de la c&eacute;dula de identidad del solicitante, vigente.:<span  style="color:red">*</span></label><br><br>
-                    <input name="f_cedula" type="file" class="custom-file-input requerido_" style="width: 100%;"><span class='error' style="padding: 5px;"></span>
+                    <input name="f_cedula" id="f_cedula" type="file" class="custom-file-input requerido_" style="width: 100%;"><span class='error' style="padding: 5px;"></span>
                 </div>
                 <div class="separador_" style=""></div>
 
@@ -857,18 +828,18 @@ for ($i = 10; $i <= 11; $i++) {
 
                 <div style="float:left;padding:5px;">
                     <label for="go_total_ingresos" style="font-size: 12px;">Una (1) Referencia Bancaria o Comercial de cada uno de los firmantes (excepto a las personas que abren cuenta por primera vez). No m&aacute;s de 30 d&Iacute;as emitidos.:<span  style="color:red">*</span></label><br><br>
-                    <input type="file" class="custom-file-input ref_adjunto" style="width: 100%;"><span class='error' style="padding: 5px;"></span>
+                    <input name="f_referencia" type="file" class="custom-file-input ref_adjunto" style="width: 100%;"><span class='error' style="padding: 5px;"></span>
                 </div>
                 <div class="separador_" style=""></div>
 
                 <div style="float:left;padding:5px;">
                     <label for="go_total_ingresos" style="font-size: 12px;">Si eres firma personal copia certificada de los documentos constitutivos de la firma unipersonal debidamente inscritos en el Registro de Comercio, vigente, legible, sellada y firmada por el ente regulador. :<span  style="color:red">*</span></label><br><br>
-                    <input type="file" class="custom-file-input" style="width: 100%;"><span class='error' style="padding: 5px;"></span>
+                    <input name="f_firma" type="file" class="custom-file-input" style="width: 100%;"><span class='error' style="padding: 5px;"></span>
                 </div>
                 <div class="separador_" style=""></div>
                 <div style="float:left;padding:5px;">
                     <label for="go_total_ingresos" style="font-size: 12px;">Si eres firma personal &uacute;ltima declaraci&oacute;n de Impuesto Sobre la Renta (ISLR) emitida por el SENIAT.:<span  style="color:red">*</span></label><br><br>
-                    <input type="file" class="custom-file-input" style="width: 100%;"><span class='error' style="padding: 5px;"></span>
+                    <input name="f_declaracion" type="file" class="custom-file-input" style="width: 100%;"><span class='error' style="padding: 5px;"></span>
                 </div>
             </div>
 

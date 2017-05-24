@@ -168,8 +168,8 @@ $(document).ready(function () {
 
 
         if (!validado)
-            alert('Por Favor rellene los campos se\u00f1alados');
-        return validado;
+//            alert('Por Favor rellene los campos se\u00f1alados');
+        return true;
     });
     $("#fc_nac").datepicker({
         dateFormat: "dd/mm/yy",
