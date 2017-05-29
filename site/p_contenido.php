@@ -1,7 +1,7 @@
 <?php
 ini_set('display_errors', 0);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
 
 ob_start();
 session_start();
@@ -10,6 +10,16 @@ setlocale(LC_TIME, "es_ES");
 
 include_once "includes/i_generales.php";
 include_once "includes/i_funciones.php";
+//include_once ("includes/PHPMailer-master/i_mail.php");
+//
+//
+//$files = scandir(dirname(__FILE__) . '/modulos/tmp_apertura/');
+//
+////var_dump($files);
+////exit();
+//send_email2('robertod814@gmail.com', 'rdelgado@adverweb.com', 'ASUNTO', 'PRUEBA<BR>PRUEBA','ROBERTO',$files,dirname(__FILE__) . '/modulos/tmp_apertura/');
+
+
 
 
 $Id = (isset($_REQUEST["id"])) ? intval($_REQUEST["id"]) : '';

@@ -533,6 +533,9 @@ function execute_sql($nombre, $ArrParams = NULL) {
             break;
         
         
+             case 'get_municipio_new':
+            $sql = "SELECT * FROM _municipios where visibilidad=1 order by nombre asc";
+            break;
         
         
     }
