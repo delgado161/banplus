@@ -145,7 +145,7 @@ function execute_sql($nombre, $ArrParams = NULL) {
         case 'get_estados2':
             $sql = "SELECT * FROM estados order by estado";
             break;
-        
+
         case 'get_parametro_link_online':
             $sql = "SELECT a.valor
 						FROM parametros AS a
@@ -499,45 +499,49 @@ function execute_sql($nombre, $ArrParams = NULL) {
         case 'get_paises':
             $sql = "SELECT * FROM _paises where visibilidad=1 order by nombre asc";
             break;
-        
+
         case 'get_civil':
             $sql = "SELECT * FROM estado_civil where visibilidad=1 order by nombre asc";
             break;
-        
-          case 'get_actividad_e':
+
+        case 'get_actividad_e':
             $sql = "SELECT * FROM actividad_economica where visibilidad=1 order by actividad asc";
             break;
-        
-          case 'get_estados_new':
+
+        case 'get_estados_new':
             $sql = "SELECT * FROM _estados where visibilidad=1 and lf_estado_pais='VENVE' order by nombre asc";
             break;
-        
+
         case 'get_ciudad_new':
             $sql = "SELECT * FROM _ciudad where visibilidad=1 order by ciudad asc";
             break;
-           
+
         case 'get_codpostal_new':
             $sql = "SELECT * FROM _codigo_postal where visibilidad=1 order by codigo asc";
             break;
-        
+
         case 'get_codtele_new':
             $sql = "SELECT * FROM _cod_telefono where visibilidad=1 and cod_cel=0 order by codigo asc";
             break;
-        
-          case 'get_codcel_new':
+
+        case 'get_codcel_new':
             $sql = "SELECT * FROM _cod_telefono where visibilidad=1 and cod_cel=1 order by codigo asc";
             break;
-        
-         case 'get_banco_new':
+
+        case 'get_banco_new':
             $sql = "SELECT * FROM _bancos where visibilidad=1 order by banco asc";
             break;
-        
-        
-             case 'get_municipio_new':
+
+
+        case 'get_municipio_new':
             $sql = "SELECT * FROM _municipios where visibilidad=1 order by nombre asc";
             break;
-        
-        
+
+        case 'get_fecha_new':
+            $sql = "SELECT * FROM calendario where fecha > '" . date("Y-m-d") . " 00:00:00' and estatus=1 ";
+
+          
+            break;
     }
 
     abrirConexion();

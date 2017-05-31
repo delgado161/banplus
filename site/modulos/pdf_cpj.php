@@ -5,7 +5,7 @@
 // convert in PDF
 include_once "../includes/html2pdf/vendor/autoload.php";
 try {
-    $html2pdf = new HTML2PDF('P', 'A4', 'en', false, 'ISO-8859-15', array(3, 6, 3, 3));
+    $html2pdf = new HTML2PDF('P', 'A4', 'en', false, 'ISO-8859-15', array(3, 4, 3, 3));
 //      $html2pdf->setModeDebug();
     $html2pdf->setDefaultFont('Arial');
 
@@ -22,7 +22,7 @@ try {
     .d_linea{font-size: 9px;}
     .b_left{border-left: none;}
     .b_right{border-right: none;}
-    .valores td{height: 13px;vertical-align: middle;padding: 2px;font-size: 10px;border-top: none;}
+    .valores td{height: 12px;vertical-align: middle;padding: 2px;font-size: 10px;border-top: none;}
     .sub_td{border:none;width:100%;margin-left:-1px;}
     .sub_td td{border-left: none;border-right: none;padding: 0px 0 0px 0;height:5px;text-align: center;font-size: 8px;}
     
@@ -108,7 +108,7 @@ try {
                     <td style="width:20%;font-size:8px;height:5px;text-align:center;">CHEQUE</td>
                 </tr>
                  <tr class="valores">
-                    <td style="width:20%;">' . $_POST['p_efectivo'] . '</td>
+                    <td style="width:20%;border-left:none;">' . $_POST['p_efectivo'] . '</td>
                     <td style="width:20%;">' . $_POST['p_cheque'] . '</td>
                 </tr>
             </table>
@@ -161,7 +161,7 @@ try {
                     <td  style="width:16%;font-size:8px;height:5px;text-align:center;border-bottom:none;" >COD. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N&Uacute;MERO </td>
                 </tr>
                  <tr class="valores">
-                    <td  style="width:16%;" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['edctp_telefono'] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['ecd_telefono'] . '</td>
+                    <td  style="width:16%;border-left:none;" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['edctp_telefono'] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['ecd_telefono'] . '</td>
                     <td  style="width:16%;" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['edctp_telefono2'] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['ecd_telefono2'] . '</td>
                 </tr>
                              
@@ -220,7 +220,7 @@ try {
                     <td  style="width:20%;font-size:8px;height:5px;text-align:center;border-bottom:none;" >COD. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N&Uacute;MERO </td>
                 </tr>
                  <tr class="valores">
-                    <td  style="width:20%;" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['cannon_telefono'] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['cad_telefono'] . '</td>
+                    <td  style="width:20%;border-left:none;" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['cannon_telefono'] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['cad_telefono'] . '</td>
                     <td  style="width:20%;" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['cannon_telefono2'] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['cad_telefono2'] . '</td>
                 </tr>
                              
@@ -249,7 +249,7 @@ try {
                     <td  style="width:20%;font-size:8px;height:5px;text-align:center;border-bottom:none;" >COD. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N&Uacute;MERO </td>
                 </tr>
                  <tr class="valores">
-                    <td  style="width:20%;" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['rele_telefono0'] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['erele_telefono0'] . '</td>
+                    <td  style="width:20%;border-left:none;" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['rele_telefono0'] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['erele_telefono0'] . '</td>
                     <td  style="width:20%;" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['rele_telefono20'] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['2rele_telefono20'] . '</td>
                 </tr>
                 
@@ -517,35 +517,35 @@ try {
                 </tr>
                 <tr class="valores">
                     <td  style="width:26%;">' . $_POST['act_nombre0'] . '</td>
-                    <td  style="width:20%;">' . $_POST['tp_documento0'] . '' . $_POST['actp_ndocumento0'] . '</td>
+                    <td  style="width:20%;">' . $_POST['actp_documento0'] . '' . $_POST['actp_ndocumento0'] . '</td>
                     <td  style="width:23%;">' . $_POST['ac_capital0'] . '</td>
                     <td  style="width:8%;">' . $_POST['ac_porcentaje0'] . '</td>
                     <td  style="width:23%;">' . $_POST['act_pagado0'] . '</td>
                 </tr>
                   <tr class="valores">
                  <td  style="width:26%;">' . $_POST['act_nombre1'] . '</td>
-                    <td  style="width:20%;">' . $_POST['tp_documento1'] . '' . $_POST['actp_ndocumento1'] . '</td>
+                    <td  style="width:20%;">' . $_POST['actp_documento1'] . '' . $_POST['actp_ndocumento1'] . '</td>
                     <td  style="width:23%;">' . $_POST['ac_capital1'] . '</td>
                     <td  style="width:8%;">' . $_POST['ac_porcentaje1'] . '</td>
                     <td  style="width:23%;">' . $_POST['act_pagado1'] . '</td>
                 </tr>
                   <tr class="valores">
                      <td  style="width:26%;">' . $_POST['act_nombre2'] . '</td>
-                    <td  style="width:20%;">' . $_POST['tp_documento2'] . '' . $_POST['actp_ndocumento2'] . '</td>
+                    <td  style="width:20%;">' . $_POST['actp_documento2'] . '' . $_POST['actp_ndocumento2'] . '</td>
                     <td  style="width:23%;">' . $_POST['ac_capital2'] . '</td>
                     <td  style="width:8%;">' . $_POST['ac_porcentaje2'] . '</td>
                     <td  style="width:23%;">' . $_POST['act_pagado2'] . '</td>
                 </tr>
                   <tr class="valores">
                      <td  style="width:26%;">' . $_POST['act_nombre3'] . '</td>
-                    <td  style="width:20%;">' . $_POST['tp_documento3'] . '' . $_POST['actp_ndocumento3'] . '</td>
+                    <td  style="width:20%;">' . $_POST['actp_documento3'] . '' . $_POST['actp_ndocumento3'] . '</td>
                     <td  style="width:23%;">' . $_POST['ac_capital3'] . '</td>
                     <td  style="width:8%;">' . $_POST['ac_porcentaje3'] . '</td>
                     <td  style="width:23%;">' . $_POST['act_pagado3'] . '</td>
                 </tr>
                   <tr class="valores">
                     <td  style="width:26%;">' . $_POST['act_nombre4'] . '</td>
-                    <td  style="width:20%;">' . $_POST['tp_documento4'] . '' . $_POST['actp_ndocumento4'] . '</td>
+                    <td  style="width:20%;">' . $_POST['actp_documento4'] . '' . $_POST['actp_ndocumento4'] . '</td>
                     <td  style="width:23%;">' . $_POST['ac_capital4'] . '</td>
                     <td  style="width:8%;">' . $_POST['ac_porcentaje4'] . '</td>
                     <td  style="width:23%;">' . $_POST['act_pagado4'] . '</td>
@@ -640,7 +640,8 @@ try {
         $conte .= 'P&nbsp;<input type="checkbox"  >';
 
     $conte .='   ' . $_POST['n_documento2'] . '   
-                </tr>
+</td>                
+</tr>
                  <tr class="valores">
                      <td style="width:35%;">' . $_POST['p_apellido3'] . ' ' . $_POST['s_apellido3'] . '</td>
                      <td style="width:35%;">' . $_POST['p_nombre3'] . ' ' . $_POST['s_nombre3'] . '</td>
@@ -661,7 +662,7 @@ try {
     else
         $conte .= 'P&nbsp;<input type="checkbox"  >';
 
-    $conte .='   ' . $_POST['n_documento3'] . ' 
+    $conte .='   ' . $_POST['n_documento3'] . ' </td>
                 </tr>
                 
             </table>
@@ -687,7 +688,7 @@ try {
                     <td  style="width:16%;font-size:8px;height:5px;text-align:center;border-bottom:none;" >COD. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N&Uacute;MERO </td>
                 </tr>
                  <tr class="valores">
-                    <td  style="width:15%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['dtp_telefonoH0'] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['d_telefonoh0'] . '</td>
+                    <td  style="width:15%;border-left:none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['dtp_telefonoH0'] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['d_telefonoh0'] . '</td>
                     <td  style="width:15%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['dtp_telefono20'] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['d_telefono20'] . '</td>
                     <td  style="width:16%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['dtp_celular0'] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['d_celular0'] . '</td>
                 </tr>

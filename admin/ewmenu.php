@@ -54,6 +54,17 @@ $RootMenu->AddMenuItem(25, $Language->MenuPhrase("25", "MenuText"), "usuarioslis
 $RootMenu->AddMenuItem(116, $Language->MenuPhrase("116", "MenuText"), "usuarioniveleslist.php", 114, "", (@$_SESSION[EW_SESSION_USER_LEVEL] & EW_ALLOW_ADMIN) == EW_ALLOW_ADMIN, FALSE);
 $RootMenu->AddMenuItem(113, $Language->MenuPhrase("113", "MenuText"), "", -1, "", True, FALSE);
 $RootMenu->AddMenuItem(115, $Language->MenuPhrase("115", "MenuText"), "zmenulist.php", 113, "", AllowListMenu('menu'), FALSE);
+
+
+$RootMenu->AddMenuItem(995, $Language->MenuPhrase("995", "MenuText"), "z_bancoslist.php", 113, "", AllowListMenu('menu'), FALSE);
+$RootMenu->AddMenuItem(985, $Language->MenuPhrase("985", "MenuText"), "z_cod_telefonolist.php", 113, "", AllowListMenu('menu'), FALSE);
+$RootMenu->AddMenuItem(785, $Language->MenuPhrase("785", "MenuText"), "z_codigo_postallist.php", 113, "", AllowListMenu('menu'), FALSE);
+$RootMenu->AddMenuItem(786, $Language->MenuPhrase("786", "MenuText"), "actividad_economicalist.php", 113, "", AllowListMenu('menu'), FALSE);
+$RootMenu->AddMenuItem(787, $Language->MenuPhrase("787", "MenuText"), "profesioneslist.php", 113, "", AllowListMenu('menu'), FALSE);
+$RootMenu->AddMenuItem(788, $Language->MenuPhrase("788", "MenuText"), "z_paiseslist.php", 113, "", AllowListMenu('menu'), FALSE);
+
+
+
 $RootMenu->AddMenuItem(12, $Language->MenuPhrase("12", "MenuText"), "estadolist.php", 113, "", AllowListMenu('estado'), FALSE);
 $RootMenu->AddMenuItem(7, $Language->MenuPhrase("7", "MenuText"), "ciudadlist.php", 113, "", AllowListMenu('ciudad'), FALSE);
 $RootMenu->AddMenuItem(6, $Language->MenuPhrase("6", "MenuText"), "calendariolist.php", 113, "", AllowListMenu('calendario'), FALSE);

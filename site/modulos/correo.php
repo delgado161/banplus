@@ -99,46 +99,100 @@ Usted tiene una nueva solicitud de apertura de cuenta persona natural por proces
     enviar_email_3($from_name, $from_mail, $message, $path, $filename, $subject, $mail_to);
 }
 
-function enviar_email_2($from_name, $from_mail, $message, $path, $filename, $subject, $mail_to) {
-// a random hash will be necessary to send mixed content
-    $separator = md5(time());
 
-// carriage return type (RFC)
-    $eol = "\r\n";
 
-// main header (multipart mandatory)
-    $headers = "From:" . $from_name . $from_mail . $eol;
-    $headers .= "MIME-Version: 1.0" . $eol;
-    $headers .= "Content-Type: multipart/mixed; boundary=\"" . $separator . "\"" . $eol;
-    $headers .= "Content-Transfer-Encoding: 7bit" . $eol;
-    $headers .= "This is a MIME encoded message." . $eol;
-
-// message
-    $body = "--" . $separator . $eol;
-    $body .= "Content-Type: text/html; charset=\"utf-8\"" . $eol;
-//    $body .= "Content-Transfer-Encoding: 8bit" . $eol;
-    $body .= $message . $eol;
+if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "JURIDICO") {
 
 
 
-// Attachment location
+    $subject = 'PREAPERTURA DE CUENTA PERSONA JURIDICA.';
+    $mail_to = $_POST['email'];
+    $message = '
+<html>
+<head>
+  <title>CORREO DE PREAPERTURA DE CUENTA PERSONA JURIDICA.</title>
+</head>
+<body>
+<p style="text-align:justify">Sr.(a) ----. <br><br><br>
+Gracias por utilizar el servicio de apertura de cuentas de Banplus Banco Universal. 
+Te informamos que se te ha otorgado una cita para formalizar la apertura de tu cuenta 
+jurídica de la Empresa: <b>"' . $_POST['n_empresa'] . '"</b>, el día “Fecha de la Cita” en la Oficina 
+“Nombre Oficina” Dirección: “Dirección de Oficina”. en el horario comprendido de 08:30 am - 03:30 pm. 
+Para la cita debes consignar los siguientes recaudos en el orden señalado en 
+una (1) carpeta manila tamaño oficio:
+<ul>
+<li>Solicitud de Apertura de Cuenta. </li>
+<li>Copia del Registro de Información Fiscal (RIF), vigente y actualizado.</li>
+<li>Fotocopia de los Documentos Constitutivos de la Empresa, sus Estatutos Sociales y modificaciones posteriores, debidamente inscritos en el Registro competente.</li>
+<li>Una (1) Referencia Bancaria o Comercial. No más de 30 días emitida.</li>
+<li>Ultima Declaración del Impuesto Sobre la Renta emitida por el SENIAT.</li>
+</ul>
+<br></br>
+Banplus te invita a visitar la página web wwww.banplus.com, para que conozcas nuestros productos y servicios adicionales a tu disposición.
+</p>
+  
+</body>
+</html>
+';
 
-    $file = $path . $filename;
-    $content = file_get_contents($file);
-    $content = chunk_split(base64_encode($content));
-    ob_start();
-// attachment
-    $body .= "--" . $separator . $eol;
-    $body .= "Content-Type: application/octet-stream; name=\"" . $filename . "\"" . $eol;
-    $body .= "Content-Transfer-Encoding: base64" . $eol;
-    $body .= "Content-Disposition: attachment" . $eol;
-    $body .= $content . $eol;
-    $body .= "--" . $separator . "--";
+    /* Email Detials */
+    $Coreo = execute_sql("get_parametro", array(63));
+    $from_mail = "<" . $Coreo[1]["valor"] . ">";
 
-//SEND Mail
-    mail($mail_to, $subject, $body, $headers);
+    $Coreo_nombre = execute_sql("get_parametro", array(64));
+    $from_name = $Coreo_nombre[1]["valor"];
 
+    $path = dirname(__FILE__) . '/tmp_apertura/J_' . $_POST['rif'] . "/";
+    $filename = 'J_' . $_POST['rif'] . '/J_' . $_POST['rif'] . '_APERTURAPJ.pdf';
+
+    enviar_email_2($from_name, $from_mail, $message, $path, $filename, $subject, $mail_to);
+
+//    $myfile = fopen(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'] . '.zip', "w") or die("Unable to open file!");
+//    fclose($myfile);
+
+
+    $zip = new ZipArchive;
+    if ($zip->open(dirname(__FILE__) . '/tmp_apertura/' . 'J_' . $_POST['rif']. '.zip', ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
+
+
+        if ($handle = opendir($path)) {
+// Add all files inside the directory
+            while (false !== ($entry = readdir($handle))) {
+                if ($entry != "." && $entry != ".." && !is_dir($path. $entry)) {
+                    $zip->addFile($path . $entry, 'J_' . $_POST['rif'] . "/" . $entry);
+                }
+            }
+            closedir($handle);
+        }
+        $zip->close();
+    }
+
+
+    $message = '
+<html>
+<head>
+  <title>Solicitudes de preapertura de cuenta página web Persona Jurídica.</title>
+</head>
+<body>
+<p style="text-align:justify">
+Solicitudes de preapertura de cuenta página web Persona Jurídica.<br><br>
+<b>Nombre de la Empresa: :</b> ' . $_POST['n_empresa'] . '. <br><br>
+<b>Rif: :</b> J-' . $_POST['rif'] . '. <br><br>
+
+<br></br>
+</p>
+  
+</body>
+</html>
+';
+
+
+    $subject = 'Solicitudes de preapertura de cuenta página web Persona Jurídica';
+    $filename = 'J_' . $_POST['rif']. '.zip';
+    $path = dirname(__FILE__) . '/tmp_apertura/';
+    enviar_email_3($from_name, $from_mail, $message, $path, $filename, $subject, $mail_to);
 }
+
 
 function enviar_email_3($from_name, $from_mail, $message, $path, $filename, $subject, $mail_to) {
 // a random hash will be necessary to send mixed content
@@ -171,6 +225,46 @@ function enviar_email_3($from_name, $from_mail, $message, $path, $filename, $sub
 // attachment
     $body .= "--" . $separator . $eol;
     $body .= "Content-Type: application/zip; name=\"" . $filename . "\"" . $eol;
+    $body .= "Content-Transfer-Encoding: base64" . $eol;
+    $body .= "Content-Disposition: attachment" . $eol;
+    $body .= $content . $eol;
+    $body .= "--" . $separator . "--";
+
+//SEND Mail
+    mail($mail_to, $subject, $body, $headers);
+
+}
+function enviar_email_2($from_name, $from_mail, $message, $path, $filename, $subject, $mail_to) {
+// a random hash will be necessary to send mixed content
+    $separator = md5(time());
+
+// carriage return type (RFC)
+    $eol = "\r\n";
+
+// main header (multipart mandatory)
+    $headers = "From:" . $from_name . $from_mail . $eol;
+    $headers .= "MIME-Version: 1.0" . $eol;
+    $headers .= "Content-Type: multipart/mixed; boundary=\"" . $separator . "\"" . $eol;
+    $headers .= "Content-Transfer-Encoding: 7bit" . $eol;
+    $headers .= "This is a MIME encoded message." . $eol;
+
+// message
+    $body = "--" . $separator . $eol;
+    $body .= "Content-Type: text/html; charset=\"utf-8\"" . $eol;
+//    $body .= "Content-Transfer-Encoding: 8bit" . $eol;
+    $body .= $message . $eol;
+
+
+
+// Attachment location
+
+    $file = $path . $filename;
+    $content = file_get_contents($file);
+    $content = chunk_split(base64_encode($content));
+    ob_start();
+// attachment
+    $body .= "--" . $separator . $eol;
+    $body .= "Content-Type: application/octet-stream; name=\"" . $filename . "\"" . $eol;
     $body .= "Content-Transfer-Encoding: base64" . $eol;
     $body .= "Content-Disposition: attachment" . $eol;
     $body .= $content . $eol;

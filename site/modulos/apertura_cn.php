@@ -9,7 +9,7 @@
 
         <div style="background-color:#F4F4F4;overflow:auto;overflow-x:hidden;" class="form_n" > 
             <div id="accordion">
-                <h3>Datos Personales:</h3>
+                <h3>Datos Personales:<span style="float:right;display: none;"><img src="img/Error-128.png" alt="" height="25" width="25"style="margin-top: -5px;"></span> </h3>
                 <div>
                     <div class="div_form">
                         <label for="p_nombre">Primer Nombre:<span  style="color:red">*</span></label><br>
@@ -144,7 +144,7 @@
 
 
                 </div>
-                <h3> Direcci&oacute;n de Habitaci&oacute;n:</h3>
+                <h3> Direcci&oacute;n de Habitaci&oacute;n:<span style="float:right;display: none;"><img src="img/Error-128.png" alt="" height="25" width="25"style="margin-top: -5px;"></span></h3>
                 <div>
                     <div class="div_form">
                         <label for="dtp_estado">Estado:<span  style="color:red">*</span></label><br>
@@ -256,7 +256,7 @@
                         </div>
                     </div>
                 </div>
-                <h3>Datos Laborales:</h3>
+                <h3>Datos Laborales:<span style="float:right;display: none;"><img src="img/Error-128.png" alt="" height="25" width="25"style="margin-top: -5px;"></span></h3>
                 <div>
                     <div class="div_form">
                         <label for="n_empresa">Nombre de la empresa:<span  style="color:red">*</span></label><br>
@@ -323,7 +323,7 @@
 
                 </div>
 
-                <h3>Direcci&oacute;n de Empresa:</h3>
+                <h3>Direcci&oacute;n de Empresa:<span style="float:right;display: none;"><img src="img/Error-128.png" alt="" height="25" width="25"style="margin-top: -5px;"></span></h3>
                 <div>
                     <div class="div_form">
                         <label for="etp_estado">Estado:<span  style="color:red">*</span></label><br>
@@ -395,7 +395,7 @@
                     </div>
                 </div>
 
-                <h3>Datos de los productos que posee en Banplus:</h3>
+                <h3>Datos de los productos que posee en Banplus:<span style="float:right;display: none;"><img src="img/Error-128.png" alt="" height="25" width="25"style="margin-top: -5px;"></span></h3>
                 <div>
 
                     <?php
@@ -422,7 +422,7 @@
                     ?>
                 </div>
 
-                <h3>Referencias Bancarias:</h3>
+                <h3>Referencias Bancarias:<span style="float:right;display: none;"><img src="img/Error-128.png" alt="" height="25" width="25"style="margin-top: -5px;"></span></h3>
                 <div>
 
 
@@ -482,7 +482,7 @@
                     ?>
                 </div>
 
-                <h3>Referencias Comerciales:</h3>
+                <h3>Referencias Comerciales:<span style="float:right;display: none;"><img src="img/Error-128.png" alt="" height="25" width="25"style="margin-top: -5px;"></span></h3>
                 <div>
                     <?php
                     for ($i = 0; $i <= 1; $i++) {
@@ -521,7 +521,7 @@
                     ?>   
                 </div> 
 
-                <h3>Referencias personales no familiares:</h3>
+                <h3>Referencias personales no familiares:<span style="float:right;display: none;"><img src="img/Error-128.png" alt="" height="25" width="25"style="margin-top: -5px;"></span></h3>
                 <div>
                     <?php
                     for ($i = 10; $i <= 11; $i++) {
@@ -553,7 +553,7 @@
                     ?>
                 </div>
 
-                <h3>Datos del c&oacute;nyuge o concubino:</h3>
+                <h3>Datos del c&oacute;nyuge o concubino:<span style="float:right;display: none;"><img src="img/Error-128.png" alt="" height="25" width="25"style="margin-top: -5px;"></span></h3>
                 <div class="cc_banplus"> 
 
                     <div class="div_form">
@@ -677,7 +677,7 @@
                 </div>
 
 
-                <h3>INGRESO DEL CONYUGE O CONCUBINO:</h3>
+                <h3>INGRESO DEL CONYUGE O CONCUBINO:<span style="float:right;display: none;"><img src="img/Error-128.png" alt="" height="25" width="25"style="margin-top: -5px;"></span></h3>
                 <div class="cc_banplus2"> 
 
                     <div class="div_form">
@@ -708,7 +708,7 @@
                 </div>
 
 
-                <h3>INGRESO MENSUAL GRUPO FAMILIAR:</h3>
+                <h3>INGRESO MENSUAL GRUPO FAMILIAR:<span style="float:right;display: none;"><img src="img/Error-128.png" alt="" height="25" width="25"style="margin-top: -5px;"></span></h3>
                 <div>
 
 
@@ -742,7 +742,7 @@
                 </div>
 
 
-                <h3>GASTOS MENSUAL PROMEDIO DEL GRUPO FAMILIAR:</h3>
+                <h3>GASTOS MENSUAL PROMEDIO DEL GRUPO FAMILIAR:<span style="float:right;display: none;"><img src="img/Error-128.png" alt="" height="25" width="25"style="margin-top: -5px;"></span></h3>
                 <div>
 
 
@@ -799,43 +799,65 @@
 
 
 
-                <h3>Documentos Requeridos:</h3>
+                <h3>Documentos Requeridos:<span style="float:right;display: none;"><img src="img/Error-128.png" alt="" height="25" width="25"style="margin-top: -5px;"></span></h3>
                 <div>
-                    <div style="float:left;padding:5px;">
+                    <div style="float:left;padding:5px;width: 97%;">
                         <label for="go_total_ingresos" style="font-size: 12px;">Copia legible de la c&eacute;dula de identidad del solicitante, vigente.:<span  style="color:red">*</span></label><br><br>
                         <input name="f_cedula" id="f_cedula" type="file" class="custom-file-input requerido_" style="width: 100%;"><span class='error' style="padding: 5px;"></span>
                     </div>
                     <div class="separador_" style=""></div>
 
-                    <div style="float:left;padding:5px;">
+                    <div style="float:left;padding:5px;width: 97%;">
                         <label for="go_total_ingresos" style="font-size: 12px;">Copia del Registro de Informaci&Oacute;n Fiscal RIF del solicitante, vigente.<span  style="color:red">*</span></label><br><br>
                         <input name="f_rif" type="file" class="custom-file-input requerido_" style="width: 100%;"><span class='error' style="padding: 5px;"></span>
                     </div>
                     <div class="separador_" style=""></div>
 
-                    <div style="float:left;padding:5px;">
+                    <div style="float:left;padding:5px;width: 97%;">
                         <label for="go_total_ingresos" style="font-size: 12px;">Constancia de trabajo original membretada con firma y sello de la empresa, con vigencia m&aacute;xima de tres (3) meses indicando ingreso mensual o anual, cargo que desempe&ntilde;a y antigüedad en la empresa (no menor a doce (12) meses). Si es profesional de libre ejercicio certificaci&oacute;n de ingresos firmada por un contador p&Uacute;blico colegiado donde indique y confirme la profesi&Iacute;n del solicitante y el origen de los fondos. Si eres estudiante mayor de edad constancia de estudios actualizada.:<span  style="color:red">*</span></label><br><br>
                         <input name="f_constancia" type="file" class="custom-file-input requerido_" style="width: 100%;"><span class='error' style="padding: 5px;"></span>
                     </div>
                     <div class="separador_" style=""></div>
 
-                    <div style="float:left;padding:5px;">
+                    <div style="float:left;padding:5px;width: 97%;">
                         <label for="go_total_ingresos" style="font-size: 12px;">Una (1) Referencia Bancaria o Comercial de cada uno de los firmantes (excepto a las personas que abren cuenta por primera vez). No m&aacute;s de 30 d&Iacute;as emitidos.:<span  style="color:red">*</span></label><br><br>
                         <input name="f_referencia" type="file" class="custom-file-input ref_adjunto" style="width: 100%;"><span class='error' style="padding: 5px;"></span>
                     </div>
                     <div class="separador_" style=""></div>
 
-                    <div style="float:left;padding:5px;">
+                    <div style="float:left;padding:5px;width: 97%;">
                         <label for="go_total_ingresos" style="font-size: 12px;">Si eres firma personal copia certificada de los documentos constitutivos de la firma unipersonal debidamente inscritos en el Registro de Comercio, vigente, legible, sellada y firmada por el ente regulador. :<span  style="color:red">*</span></label><br><br>
                         <input name="f_firma" type="file" class="custom-file-input" style="width: 100%;"><span class='error' style="padding: 5px;"></span>
                     </div>
                     <div class="separador_" style=""></div>
-                    <div style="float:left;padding:5px;">
+                    <div style="float:left;padding:5px;width: 97%;">
                         <label for="go_total_ingresos" style="font-size: 12px;">Si eres firma personal &uacute;ltima declaraci&oacute;n de Impuesto Sobre la Renta (ISLR) emitida por el SENIAT.:<span  style="color:red">*</span></label><br><br>
                         <input name="f_declaracion" type="file" class="custom-file-input" style="width: 100%;"><span class='error' style="padding: 5px;"></span>
                     </div>
                 </div>
 
+                <h3>Agencia:<span style="float:right;display: none;"><img src="img/Error-128.png" alt="" height="25" width="25"style="margin-top: -5px;"></span></h3>
+                <div>
+                    <div class="div_form" >
+                        <label for="fn_agencia">Aegencia:</label><br>
+                        <select class="requerido_" name="fn_agencia" id="fn_agencia" style="width:400px;">
+                            <option value="">Seleccione...
+                                <?php echo $_opc_agencia ?>
+                        </select>
+                    </div>
+                    <div class="div_form" style="float:right;">
+                        <label for="fc_cita">Fecha de Cita:<span  style="color:red">*</span></label><br>
+                        <input class="requerido_" style="width:110px;background: #e6e6e6;" type="text" name="fc_cita" id="fc_cita" value="" readonly>
+                    </div>
+
+
+                    <!--##################### DIV SEPARADOR ############################-->    
+                    <div class="sep_2"></div>
+                    <div class="div_form">
+                        <label for="agencia_direccion" style="font-size: 12px;">Dirección:</label><br>
+                        <input id="agencia_direccion" name="agencia_direccion" type="text" class="" style="width: 760px;background: #e6e6e6;"></span>
+                    </div>
+                </div>
 
 
             </div>

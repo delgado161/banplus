@@ -122,27 +122,31 @@ if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "NATURAL") {
 
 if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "JURIDICO") {
 
-//    Foreach ($Estados as $estado) {
-//        if ($estado['id2_estado'] == $_POST['dtp_estado'])
-//            $_POST['dtp_estado'] = $estado['nombre'];
+    Foreach ($Estados as $estado) {
+        if ($estado['id2_estado'] == $_POST['etp_estado'])
+            $_POST['etp_estado'] = $estado['nombre'];
+    }
 //
-//        if ($estado['id2_estado'] == $_POST['etp_estado'])
-//            $_POST['etp_estado'] = $estado['nombre'];
-//    }
-//
-//    $_POST['dtp_ciudad'] = explode(",", $_POST['dtp_ciudad']);
+//    $_POST['etp_ciudad'] = explode(",", $_POST['etp_ciudad']);
 //    $_POST['etp_ciudad'] = explode(",", $_POST['etp_ciudad']);
 //
-//    foreach ($Ciudades as $Ciudad) {
+    $_POST['etp_ciudad'] = explode(",", $_POST['etp_ciudad']);
+   
+    $_POST['etp_municipio'] = explode(",", $_POST['etp_municipio']);
+
+    foreach ($Ciudades as $Ciudad) {
 //
-//        if ($Ciudad['lf_estado'] == $_POST['dtp_ciudad'][0] && $_POST['dtp_ciudad'][1] == $Ciudad['id_banplus']) {
-//            $_POST['dtp_ciudad'] = $Ciudad['ciudad'];
-//        }
+        if ($Ciudad['lf_estado'] == $_POST['etp_ciudad'][0] && 10 == $Ciudad['id_banplus'])
+            $_POST['etp_ciudad'] = $Ciudad['ciudad'];;
+    }
+
+    foreach ($Municipios as $municipio) {
 //
-//
-//        if ($Ciudad['lf_estado'] == $_POST['etp_ciudad'][0] && $_POST['etp_ciudad'][1] == $Ciudad['id_banplus'])
-//            $_POST['etp_ciudad'] = $Ciudad['ciudad'];
-//    }
+        if ($municipio['lf_estado'] == $_POST['etp_municipio'][0] && $_POST['etp_municipio'][1] == $municipio['pk_municipio'])
+            $_POST['etp_municipio'] = $municipio['nombre'];;
+    }
+
+
 
 
     if (!file_exists(dirname(__FILE__) . '/tmp_apertura/J_' . $_POST['rif'])) {
@@ -211,22 +215,22 @@ if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "JURIDICO") {
                 },
                 success: function (data) {
 
-//                    $.ajax({
-//                        url: 'modulos/correo.php',
-//                        data: <?php echo json_encode($_POST) ?>,
-//                        error: function (xhr, status, error) {
-//
-//                        },
-//                        success: function (data) {
-//                            var r = confirm("\u00bfDesea realizar la solicitud de TDC?");
-//                            if (r == true) {
-//                                txt = "You pressed OK!";
-//                            } else {
-//                                txt = "You pressed Cancel!";
-//                            }
-//                        },
-//                        type: 'POST'
-//                    });
+                                        $.ajax({
+                                            url: 'modulos/correo.php',
+                                            data: <?php echo json_encode($_POST) ?>,
+                                            error: function (xhr, status, error) {
+                    
+                                            },
+                                            success: function (data) {
+                                                var r = confirm("\u00bfDesea realizar la solicitud de TDC?");
+                                                if (r == true) {
+                                                    txt = "You pressed OK!";
+                                                } else {
+                                                    txt = "You pressed Cancel!";
+                                                }
+                                            },
+                                            type: 'POST'
+                                        });
                 },
                 type: 'POST'
             });

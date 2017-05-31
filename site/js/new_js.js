@@ -41,29 +41,27 @@ $(document).ready(function () {
             } else {
                 if (($('.requerido_2').val().length <= 0 || $('.requerido_2').val() == "" || parseFloat($('.requerido_2').val()) <= 0)) {
                     $('.requerido_2').css('background', 'rgba(255,0,0,0.30)');
-                    $(this).parent('div').parent('div').prev().css("cssText", "background: rgba(255,0,0,0.7) !important;");
+                    $(this).parent('div').parent('div').prev().find('span').show();
 
                     validado = false;
                 } else {
                     $('.requerido_2').css('background', 'rgba(132, 189, 0, 0.15)');
-                    $(this).parent('div').parent('div').prev().css("cssText", "background: rgba(132, 189, 0, 0.7) !important;");
-
+                    $(this).parent('div').parent('div').prev().find('span').hide();
                 }
 
                 if (($('.requerido_21').val().length <= 0 || $('.requerido_21').val() == "")) {
                     $('.requerido_21').css('background', 'rgba(255,0,0,0.30)');
-                    $(this).parent('div').parent('div').prev().css("cssText", "background: rgba(255,0,0,0.7) !important;");
+                    $(this).parent('div').parent('div').prev().find('span').show();
 
                     validado = false;
                 } else {
                     $('.requerido_21').css('background', 'rgba(132, 189, 0, 0.15)');
-                    $(this).parent('div').parent('div').prev().css("cssText", "background: rgba(132, 189, 0, 0.7) !important;");
-
+                    $(this).parent('div').parent('div').prev().find('span').hide();
                 }
             }
 
         }
-       
+
 
 
         $('.prod_banplus,.cc_banplus,.ref_ban_comer').each(function () {
@@ -87,13 +85,14 @@ $(document).ready(function () {
 
             if (!validado2) {
                 $(this).find('.valida_prod').css('background', 'rgba(255,0,0,0.30)');
-                $(this).parent('div').parent('div').prev().css("cssText", "background: rgba(255,0,0,0.7) !important;");
+                $(this).parent('div').parent('div').prev().find('span').show();
+//                $(this).parent('div').parent('div').prev().css("cssText", "background: rgba(255,0,0,0.7) !important;");
 
                 validado = false;
             }
             else {
                 $(this).find('.valida_prod').css('background', 'rgba(132, 189, 0, 0.15)');
-                $(this).parent('div').parent('div').prev().css("cssText", "background: rgba(132, 189, 0, 0.7) !important;");
+                $(this).parent('div').parent('div').prev().find('span').hide();
             }
 
 
@@ -106,8 +105,7 @@ $(document).ready(function () {
                 else {
                     $('.cc_banplus2').find('input').each(function () {
                         $(this).css('background', 'rgba(132, 189, 0, 0.15)');
-                        $(this).parent('div').parent('div').prev().css("cssText", "background: rgba(132, 189, 0, 0.7) !important;");
-
+                        $(this).parent('div').parent('div').prev().find('span').hide();
                         $(this).removeClass('requerido_');
                     });
                 }
@@ -122,8 +120,7 @@ $(document).ready(function () {
                 }
                 else {
                     $('.ref_adjunto').css('background', 'rgba(132, 189, 0, 0.15)');
-                    $(this).parent('div').parent('div').prev().css("cssText", "background: rgba(132, 189, 0, 0.7) !important;");
-
+                    $(this).parent('div').parent('div').prev().find('span').hide();
                     $('.ref_adjunto').removeClass('requerido_');
 
                 }
@@ -145,22 +142,20 @@ $(document).ready(function () {
             } else {
                 if ($.inArray(ext, ['jpg', 'jpeg', 'pdf', 'JPG', 'JPGE', 'PDF']) == -1) {
                     $(this).css('background', 'rgba(255,0,0,0.30)');
-                    $(this).parent('div').parent('div').prev().css("cssText", "background: rgba(255,0,0,0.7) !important;");
-
+                    $(this).parent('div').parent('div').prev().find('span').show();
                     validado = false;
                     $(this).next('span').html(' FORMATO INVALIDO SOLO SE PERMITEN PNG, JPG, JPEG, PDF');
                 } else {
                     var file_size = $(this)[0].files[0].size;
                     if (file_size > 2097152) {
                         $(this).css('background', 'rgba(255,0,0,0.30)');
-                        $(this).parent('div').parent('div').prev().css("cssText", "background: rgba(255,0,0,0.7) !important;");
-
+                        $(this).parent('div').parent('div').prev().find('span').show();
                         validado = false;
                         $(this).next('span').html('EL ARCHIVO DEBE PESAR MENOR A 2MB');
                     } else {
                         $(this).next('span').html('');
                         $(this).css('background', 'rgba(132, 189, 0, 0.15)');
-                        $(this).parent('div').parent('div').prev().css("cssText", "background: rgba(132, 189, 0, 0.7) !important;");
+                        $(this).parent('div').parent('div').prev().find('span').show();
 
                     }
                 }
@@ -172,11 +167,11 @@ $(document).ready(function () {
         $('.requerido_').each(function () {
             if ($(this).val().length <= 0 || $(this).val() == "" || parseFloat($(this).val()) <= 0) {
                 $(this).css('background', 'rgba(255,0,0,0.30)');
-
-                $(this).parent('div').parent('div').prev().css("cssText", "background: rgba(255,0,0,0.7) !important;");
+                $(this).parent('div').parent('div').prev().find('span').show();
                 validado = false;
             } else {
-                $(this).parent('div').parent('div').prev().css("cssText", "background: rgba(132, 189, 0, 0.7) !important;");
+
+                $(this).parent('div').parent('div').prev().find('span').hide();
                 $(this).css('background', 'rgba(132, 189, 0, 0.15)');
             }
 
@@ -206,6 +201,27 @@ $(document).ready(function () {
         dateFormat: "dd/mm/yy",
         yearRange: '-300:+0'
     });
+
+
+    
+//
+//    $("#fc_cita").datepicker({
+//        dateFormat: "dd/mm/yy",
+//        yearRange: '-0:+0',
+//        minDate: +19,
+//        maxDate: +150,
+//        beforeShowDay: function (date) {
+//            var show = true;
+//            var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+//            
+//
+//            if (date.getDay() == 6 || date.getDay() == 0 || array.indexOf(string) != -1)
+//                show = false
+//
+//            return [show];
+//        }
+//    });
+
 
 
 

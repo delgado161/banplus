@@ -1,4 +1,10 @@
 <?php
+$AGENCIA = execute_sql("get_agencia_all", array());
+$_opc_agencia = '';
+foreach ($AGENCIA as $agencia)
+    $_opc_agencia .= '  <option value="' . $agencia['id_agencias'] . '">' . $agencia['nombre'];
+
+
 $CIVIL = execute_sql("get_civil", array());
 $_opc_civil = '';
 foreach ($CIVIL as $civil_)
@@ -46,7 +52,7 @@ foreach ($profesiones as $prof)
 $productos = execute_sql("get_tp_productos", array());
 $_opc_productos = '';
 foreach ($productos as $prod)
-    $_opc_productos .= '  <option value="' . $prod['id_producto'] . '">' . $prod['tipo'];
+    $_opc_productos .= '  <option value="' . $prod['tipo'] . '">' . $prod['tipo'];
 
 
 $tp_cuentas = execute_sql("get_tp_productos", array());
@@ -64,15 +70,23 @@ foreach ($tp_banco as $tp_banco_)
 $_opc_tp_nacionalidad = '';
 foreach ($tp_paises as $tp_pais)
     $_opc_tp_nacionalidad .= '  <option value="' . $tp_pais['nacionalidad'] . '">' . $tp_pais['nacionalidad'];
-?>
+
+$tp_feriado = execute_sql("get_fecha_new", array());
+foreach ($tp_feriado as $feriado)
+    
+    ?>
+
 <script    src="https://code.jquery.com/jquery-3.2.1.min.js"    ></script>
 <script src = "js/UI/external/jquery/jquery.js" ></script>
 <script src="js/UI/jquery-ui.js"></script>
 <script src="js/jquery.mask.js"></script>
+<script src="<?php echo URL_SITE; ?>js/new_js.js" type="text/javascript"></script>	
 <script>
-
-    var Ciudades = {};
-    var Municipios = {};
+    $(document).ready(function () {
+        var Ciudades = {};
+        var Municipios = {};
+        var Agencia = {};
+        var Feriado = {};
 <?php
 $Ciudades = execute_sql("get_ciudad_new", array());
 
@@ -83,9 +97,12 @@ $Municipios = execute_sql("get_municipio_new", array());
 $_opc_municipios = '';
 foreach ($Municipios as $municipio)
     echo "Municipios['" . $municipio['lf_estado'] . "_" . $municipio['pk_municipio'] . "']='" . $municipio['nombre'] . "';";
+
+foreach ($AGENCIA as $agencia)
+    echo "Agencia['" . $agencia['id_agencias'] . "']='" . $agencia['direccion'] . "';";
 ?>
 
-    $(document).ready(function () {
+
 
         $('._estados').change(function () {
             var KEY = $(this).val();
@@ -100,9 +117,9 @@ foreach ($Municipios as $municipio)
             });
 
 
-            
+
             var ID_SELECT = ($(this).parent().next('div').next('.municipio').find('select').attr('id'));
-           
+
             $('#' + ID_SELECT).find('option').remove().end();
             $('#' + ID_SELECT).append($("<option></option>").attr("value", '').text('Seleccione...'));
             $.each(Municipios, function (index, value) {
@@ -115,8 +132,65 @@ foreach ($Municipios as $municipio)
 
         });
 
+<?php
+echo "array =[";
+foreach ($tp_feriado as $feriado)
+    echo '"' . substr($feriado['fecha'], 0, 10) . '",';
+
+echo "];";
+?>
+
+        $('#fn_agencia').change(function () {
+            var valor_ = false;
+            var KEY = $(this).val();
+            $('#fc_cita').val('');
+            $.each(Agencia, function (index, value) {
+                if (KEY == index) {
+                    $('#agencia_direccion').val(value);
+                    valor_ = true;
+                }
+            });
+            if (!valor_)
+                $('#agencia_direccion').val('');
+
+            $("#fc_cita").datepicker({
+                dateFormat: "dd/mm/yy",
+                yearRange: '-0:+0',
+                minDate: +19,
+                maxDate: +150,
+                beforeShowDay: function (date) {
+                    var show = true;
+                    var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
 
 
+                    if (date.getDay() == 6 || date.getDay() == 0 || array.indexOf(string) != -1)
+                        show = false
+
+                    return [show];
+                }
+            });
+
+
+        });
+
+
+//        var array = ["2017-06-22", "2017-06-29", "2017-07-06"];
+        $("#fc_cita").datepicker({
+            dateFormat: "dd/mm/yy",
+            yearRange: '-0:+0',
+            minDate: +19,
+            maxDate: +150,
+            beforeShowDay: function (date) {
+                var show = true;
+                var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+
+
+                if (date.getDay() == 6 || date.getDay() == 0 || array.indexOf(string) != -1)
+                    show = false
+
+                return [show];
+            }
+        });
 
     });</script>
 
