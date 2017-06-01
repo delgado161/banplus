@@ -17,6 +17,7 @@
 				die("Discupe!<br>Un error ha ocurrido. Intente mas tarde. 2");
 			}else{
 				mysql_select_db("awvps_banplus");
+                                mysql_set_charset('utf8',$conexion);
 			}
 		}
 	}	

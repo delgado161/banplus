@@ -187,8 +187,8 @@ try {
                     <td class="etiqueta" style="width:15%;">CELULAR</td>
                 </tr>
                 <tr class="valores">
-                    <td  style="width:20%;height:5px;text-align:center;" rowspan="2">' . '--------' . '</td>
-                    <td  style="width:16%;height:5px;text-align:center;"  rowspan="2">' . '--------' . '</td>
+                    <td  style="width:20%;height:5px;text-align:center;" rowspan="2">' . $_POST['dtp_estado'] . '</td>
+                    <td  style="width:16%;height:5px;text-align:center;"  rowspan="2">' . $_POST['dtp_ciudad'] . '</td>
                     <td  style="width:15%;height:5px;text-align:center;"  rowspan="2">' . $_POST['d_postal'] . '</td>
                     <td  style="width:17%;font-size:8px;height:5px;text-align:center;border-bottom:none;" >COD. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N&Uacute;MERO </td>
                     <td  style="width:17%;font-size:8px;height:5px;text-align:center;border-bottom:none;" >COD. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N&Uacute;MERO </td>
@@ -332,8 +332,8 @@ try {
                    
                 </tr>
                    <tr class="valores">
-                        <td  style="width:25%;" rowspan="2">' . '---------' . '</td>
-                        <td  style="width:24%;" rowspan="2">' . '---------' . '</td>
+                        <td  style="width:25%;" rowspan="2">' . $_POST['etp_estado'] . '</td>
+                        <td  style="width:24%;" rowspan="2">' . $_POST['etp_ciudad'] . '</td>
                         <td  style="width:15%;" rowspan="2">' . $_POST['e_postal'] . '</td>
                         <td  style="width:18%;font-size:8px;height:5px;text-align:center;border-bottom:none;" >COD. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N&Uacute;MERO </td>
                         <td  style="width:18%;font-size:8px;height:5px;text-align:center;border-bottom:none;" >COD. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N&Uacute;MERO </td>
@@ -457,8 +457,8 @@ try {
     $conte .= (isset($_POST['rc_empresa0'])) ? ' <td style="width:20%;border-left:none;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;' . $_POST['dtp_telefonoH0'] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['d_telefonoh0'] . '
                     </td>' : ' <td style="width:20%;border-left:none;"></td>';
-    $conte .= (isset($_POST['dtp_telefono20'])) ? ' <td style="width:20%;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;' . $_POST['edctp_telefono2'] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['d_telefono20'] . '
+    $conte .= (isset($_POST['rc_empresa0'])) ? ' <td style="width:20%;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;' . $_POST['dtp_telefono20'] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['d_telefono20'] . '
                     </td>' : ' <td style="width:20%;"></td>';
 
     $conte .= '
@@ -467,11 +467,11 @@ try {
 
     $conte .= (isset($_POST['rc_empresa1'])) ? ' <td style="width:25%;">' . $_POST['rc_empresa1'] . '</td>' : ' <td style="width:25%;"></td>';
     $conte .= (isset($_POST['rctp_ramo1'])) ? ' <td style="width:35%;">' . $_POST['rctp_ramo1'] . '</td>' : ' <td style="width:35%;"></td>';
-    $conte .= (isset($_POST['dtp_telefonoH1'])) ? ' <td style="width:20%;border-left:none;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    $conte .= (isset($_POST['rc_empresa1'])) ? ' <td style="width:20%;border-left:none;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['dtp_telefonoH1'] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['d_telefonoh1'] . '
                     </td>' : ' <td style="width:20%;border-left:none;"></td>';
-    $conte .= (isset($_POST['dtp_telefono21'])) ? ' <td style="width:20%;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['edctp_telefono1'] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['d_telefono21'] . '
+    $conte .= (isset($_POST['rc_empresa1'])) ? ' <td style="width:20%;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['dtp_telefono21'] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['d_telefono21'] . '
                     </td>' : ' <td style="width:20%;"></td>';
 
     $conte .= ' 
@@ -748,7 +748,7 @@ try {
     
     <tr style="">
          <td class="etiqueta" style="font-size:8.5px;text-align:left;">
-          USTED EJERCI&Oacute; O EJERCE ACTUALMENTE ALGÚN CARGO PUBLICO COMO FUNCIONARIO DE GOBIERNO
+          USTED EJERCI&Oacute; O EJERCE ACTUALMENTE ALG&Uacute;N CARGO PUBLICO COMO FUNCIONARIO DE GOBIERNO
            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
@@ -886,7 +886,7 @@ suministrados por mi (nosotros) y principalmente la informaci&oacute;n referida 
                <tr class="valores">
                     <td style="width:100%;">
                       Declaro bajo f&eacute; de juramento que los fondos utilizados para la apertura y movilizacion de la cuenta, se originan y utilizar&aacute;n en actividades l&iacute;citas, con estricto apego a la legislaci&oacute;n
-                        venezolana vigente y a la Resoluci&oacute;n N° 119-10, de Fecha 09 de marzo de 2010, emanada de la Superintendencia de Bancos y Otras Instituciones Financieras
+                        venezolana vigente y a la Resoluci&oacute;n N&ordm; 119-10, de Fecha 09 de marzo de 2010, emanada de la Superintendencia de Bancos y Otras Instituciones Financieras
                     </td>
                 </tr>
             </table>
@@ -898,8 +898,8 @@ suministrados por mi (nosotros) y principalmente la informaci&oacute;n referida 
                <tr class="valores">
                     <td style="width:100%;">
                         Declaro que acepto y estoy conforme, a tenor de lo dispuesto en el art&iacute;culo 22 de la Resoluci&oacute;n No. 063.15 de fecha 12 de junio de 2015, emanada de la SUDEBAN, con el
-                        contenido del Contrato Único de Cuentas de Ahorro, Corriente y Dep&oacute;sitos, inscrito ante el Registro Público del Segundo Circuito del Municipio Baruta del Estado Miranda, en fecha
-                        31 de Marzo de 2014, bajo el No. 8, Folio 49 del Tomo 4 del Protocolo de Transcripci&oacute;n del año 2014, autorizado por la SUDEBAN, mediante Oficio No. SIB-DSB-CJ-OD-03308, de fecha 3
+                        contenido del Contrato &Uacute;nico de Cuentas de Ahorro, Corriente y Dep&oacute;sitos, inscrito ante el Registro P&uacute;blico del Segundo Circuito del Municipio Baruta del Estado Miranda, en fecha
+                        31 de Marzo de 2014, bajo el No. 8, Folio 49 del Tomo 4 del Protocolo de Transcripci&oacute;n del a&ntilde;o 2014, autorizado por la SUDEBAN, mediante Oficio No. SIB-DSB-CJ-OD-03308, de fecha 3
                         de Febrero de 2014.
                     </td>
                 </tr>
@@ -1034,9 +1034,13 @@ suministrados por mi (nosotros) y principalmente la informaci&oacute;n referida 
 
 ';
 
+    if (!file_exists(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'])) {
+        mkdir(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'], 0777, true);
+    }
+
 
     $html2pdf->writeHTML($conte);
-    $html2pdf->Output(dirname(__FILE__) . '/tmp_apertura/exemple00.pdf');
+    $html2pdf->Output(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'] . '/' . $_POST['tp_documento'] . $_POST['n_documento'] . '_APERTURA.pdf', 'F');
     exit();
 } catch (HTML2PDF_exception $e) {
     echo $e;

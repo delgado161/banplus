@@ -340,6 +340,24 @@
 </menu>
 <menu id="113"><phrase id="menutext" value="Configuraciones"/>
 </menu>
+
+<menu id="995"><phrase id="menutext" value="Bancos"/>
+</menu>
+<menu id="985"><phrase id="menutext" value="Cod. Tel&amp;eacute;fonos"/>
+</menu>
+<menu id="785"><phrase id="menutext" value="Cod. Postales"/>
+</menu>
+<menu id="786"><phrase id="menutext" value="Actividad Econom&amp;iacute;ca"/>
+</menu>
+<menu id="787"><phrase id="menutext" value="Profesiones"/>
+</menu>
+<menu id="788"><phrase id="menutext" value="Pa&amp;iacute;s"/>
+</menu>
+
+
+
+
+
 <menu id="115"><phrase id="menutext" value="Menu"/>
 </menu>
 <menu id="12"><phrase id="menutext" value="Estado"/>
@@ -790,5 +808,108 @@
 <field id="titulo"><phrase id="fldcaption" value="titulo"/>
 </field>
 </table>
+
+<table id="z_bancos"><phrase id="tblcaption" value=" bancos"/>
+<field id="id_bancos"><phrase id="fldcaption" value="id bancos"/>
+</field>
+<field id="banco"><phrase id="fldcaption" value="banco"/>
+</field>
+<field id="visibilidad"><phrase id="fldcaption" value="visibilidad"/>
+</field>
+</table>
+
+
+<table id="z_ciudad"><phrase id="tblcaption" value=" ciudad"/>
+<field id="id_ciudad"><phrase id="fldcaption" value="id ciudad"/>
+</field>
+<field id="lf_estado"><phrase id="fldcaption" value="lf estado"/>
+</field>
+<field id="id_banplus"><phrase id="fldcaption" value="id banplus"/>
+</field>
+<field id="ciudad"><phrase id="fldcaption" value="ciudad"/>
+</field>
+<field id="visibilidad"><phrase id="fldcaption" value="visibilidad"/>
+</field>
+</table>
+
+<table id="z_cod_telefono"><phrase id="tblcaption" value=" cod telefono"/>
+<field id="id_cod_telefono"><phrase id="fldcaption" value="id cod telefono"/>
+</field>
+<field id="codigo"><phrase id="fldcaption" value="codigo"/>
+</field>
+<field id="cod_cel"><phrase id="fldcaption" value="cod cel"/>
+</field>
+<field id="visibilidad"><phrase id="fldcaption" value="visibilidad"/>
+</field>
+<field id="descripcion"><phrase id="fldcaption" value="descripcion"/>
+</field>
+</table>
+
+<table id="z_codigo_postal"><phrase id="tblcaption" value=" codigo postal"/>
+<field id="id_codigo_postal"><phrase id="fldcaption" value="id codigo postal"/>
+</field>
+<field id="codigo"><phrase id="fldcaption" value="codigo"/>
+</field>
+<field id="descripcion"><phrase id="fldcaption" value="Descripcion"/>
+</field>
+<field id="visibilidad"><phrase id="fldcaption" value="visibilidad"/>
+</field>
+</table>
+
+<table id="z_estados"><phrase id="tblcaption" value=" estados"/>
+<field id="nombre"><phrase id="fldcaption" value="nombre"/>
+</field>
+<field id="lf_estado_pais"><phrase id="fldcaption" value="lf estado pais"/>
+</field>
+<field id="visibilidad"><phrase id="fldcaption" value="visibilidad"/>
+</field>
+<field id="id2_estado"><phrase id="fldcaption" value="id 2 estado"/>
+</field>
+</table>
+
+<table id="z_municipios"><phrase id="tblcaption" value=" municipios"/>
+<field id="lp_municipio_id"><phrase id="fldcaption" value="lp municipio id"/>
+</field>
+<field id="nombre"><phrase id="fldcaption" value="nombre"/>
+</field>
+<field id="visibilidad"><phrase id="fldcaption" value="visibilidad"/>
+</field>
+<field id="lf_estado"><phrase id="fldcaption" value="lf estado"/>
+</field>
+<field id="pk_municipio"><phrase id="fldcaption" value="pk municipio"/>
+</field>
+</table>
+
+<table id="z_paises"><phrase id="tblcaption" value=" paises"/>
+<field id="lp_pais_id"><phrase id="fldcaption" value="lp pais id"/>
+</field>
+<field id="nombre"><phrase id="fldcaption" value="nombre"/>
+</field>
+<field id="nacionalidad"><phrase id="fldcaption" value="nacionalidad"/>
+</field>
+<field id="visibilidad"><phrase id="fldcaption" value="visibilidad"/>
+</field>
+</table>
+
+<table id="z_parroquias"><phrase id="tblcaption" value=" parroquias"/>
+<field id="lp_parroquia_id"><phrase id="fldcaption" value="lp parroquia id"/>
+</field>
+<field id="nombre"><phrase id="fldcaption" value="nombre"/>
+</field>
+<field id="lf_parroquia_municipio"><phrase id="fldcaption" value="lf parroquia municipio"/>
+</field>
+<field id="visibilidad"><phrase id="fldcaption" value="visibilidad"/>
+</field>
+</table>
+
+<table id="actividad_economica"><phrase id="tblcaption" value="actividad economica"/>
+<field id="id_acteconomica"><phrase id="fldcaption" value="id acteconomica"/>
+</field>
+<field id="actividad"><phrase id="fldcaption" value="actividad"/>
+</field>
+<field id="visibilidad"><phrase id="fldcaption" value="visibilidad"/>
+</field>
+</table>
+
 </project>
 </ew-language>
