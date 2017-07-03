@@ -7,7 +7,6 @@ ob_start(); // Turn on output buffering
 <?php include_once "phpfn8.php" ?>
 <?php include_once "agenciasinfo.php" ?>
 <?php include_once "agencias_serviciosinfo.php" ?>
-<?php include_once "usuariosinfo.php" ?>
 <?php include_once "userfn8.php" ?>
 <?php ew_Header(FALSE) ?>
 <?php
@@ -50,12 +49,6 @@ agencias_list.ValidateRequired = false; // no JavaScript validation
 
 //-->
 </script>
-<script type="text/javascript">
-<!--
-var ew_DHTMLEditors = [];
-
-//-->
-</script>
 <script language="JavaScript" type="text/javascript">
 <!--
 
@@ -65,6 +58,23 @@ var ew_DHTMLEditors = [];
 </script>
 <?php } ?>
 <?php if (($agencias->Export == "") || (EW_EXPORT_MASTER_RECORD && $agencias->Export == "print")) { ?>
+<?php
+$gsMasterReturnUrl = "agencias_servicioslist.php";
+if ($agencias_list->DbMasterFilter <> "" && $agencias->getCurrentMasterTable() == "agencias_servicios") {
+	if ($agencias_list->MasterRecordExists) {
+		if ($agencias->getCurrentMasterTable() == $agencias->TableVar) $gsMasterReturnUrl .= "?" . EW_TABLE_SHOW_MASTER . "=";
+?>
+<p class="phpmaker ewTitle"><?php echo $Language->Phrase("MasterRecord") ?><?php echo $agencias_servicios->TableCaption() ?>
+&nbsp;&nbsp;<?php $agencias_list->ExportOptions->Render("body"); ?>
+</p>
+<?php if ($agencias->Export == "") { ?>
+<p class="phpmaker"><a href="<?php echo $gsMasterReturnUrl ?>"><?php echo $Language->Phrase("BackToMasterPage") ?></a></p>
+<?php } ?>
+<?php include_once "agencias_serviciosmaster.php" ?>
+<?php
+	}
+}
+?>
 <?php } ?>
 <?php
 	$bSelectLimit = EW_SELECT_LIMIT;
@@ -83,9 +93,10 @@ var ew_DHTMLEditors = [];
 		$agencias_list->Recordset = $agencias_list->LoadRecordset($agencias_list->StartRec-1, $agencias_list->DisplayRecs);
 ?>
 <p class="phpmaker ewTitle" style="white-space: nowrap;"><?php echo $Language->Phrase("TblTypeTABLE") ?><?php echo $agencias->TableCaption() ?>
+<?php if ($agencias->getCurrentMasterTable() == "") { ?>
 &nbsp;&nbsp;<?php $agencias_list->ExportOptions->Render("body"); ?>
+<?php } ?>
 </p>
-<?php if ($Security->CanSearch()) { ?>
 <?php if ($agencias->Export == "" && $agencias->CurrentAction == "") { ?>
 <a href="javascript:ew_ToggleSearchPanel(agencias_list);" style="text-decoration: none;"><img id="agencias_list_SearchImage" src="phpimages/collapse.gif" alt="" width="9" height="9" border="0"></a><span class="phpmaker">&nbsp;<?php echo $Language->Phrase("Search") ?></span><br>
 <div id="agencias_list_SearchPanel">
@@ -103,7 +114,6 @@ var ew_DHTMLEditors = [];
 </div>
 </form>
 </div>
-<?php } ?>
 <?php } ?>
 <?php $agencias_list->ShowPageHeader(); ?>
 <?php
@@ -297,14 +307,10 @@ if ($agencias_list->Recordset)
 	<td>
 	<span class="phpmaker"><?php echo $Language->Phrase("Record") ?>&nbsp;<?php echo $agencias_list->Pager->FromIndex ?>&nbsp;<?php echo $Language->Phrase("To") ?>&nbsp;<?php echo $agencias_list->Pager->ToIndex ?>&nbsp;<?php echo $Language->Phrase("Of") ?>&nbsp;<?php echo $agencias_list->Pager->RecordCount ?></span>
 <?php } else { ?>
-	<?php if ($Security->CanList()) { ?>
 	<?php if ($agencias_list->SearchWhere == "0=101") { ?>
 	<span class="phpmaker"><?php echo $Language->Phrase("EnterSearchCriteria") ?></span>
 	<?php } else { ?>
 	<span class="phpmaker"><?php echo $Language->Phrase("NoRecord") ?></span>
-	<?php } ?>
-	<?php } else { ?>
-	<span class="phpmaker"><?php echo $Language->Phrase("NoPermission") ?></span>
 	<?php } ?>
 <?php } ?>
 		</td>
@@ -313,12 +319,7 @@ if ($agencias_list->Recordset)
 </form>
 <?php } ?>
 <span class="phpmaker">
-<?php if ($Security->CanAdd()) { ?>
 <a class="ewGridLink" href="<?php echo $agencias_list->AddUrl ?>"><?php echo $Language->Phrase("AddLink") ?></a>&nbsp;&nbsp;
-<?php if ($agencias_servicios->DetailAdd && $Security->AllowAdd('agencias_servicios')) { ?>
-<a class="ewGridLink" href="<?php echo $agencias->AddUrl() . "?" . EW_TABLE_SHOW_DETAIL . "=agencias_servicios" ?>"><?php echo $Language->Phrase("AddLink") ?>&nbsp;<?php echo $agencias->TableCaption() ?>/<?php echo $agencias_servicios->TableCaption() ?></a>&nbsp;&nbsp;
-<?php } ?>
-<?php } ?>
 </span>
 </div>
 <?php } ?>
@@ -506,7 +507,7 @@ class cagencias_list {
 		$this->ExportXmlUrl = $this->PageUrl() . "export=xml";
 		$this->ExportCsvUrl = $this->PageUrl() . "export=csv";
 		$this->ExportPdfUrl = $this->PageUrl() . "export=pdf";
-		$this->AddUrl = "agenciasadd.php?" . EW_TABLE_SHOW_DETAIL . "=";
+		$this->AddUrl = "agenciasadd.php";
 		$this->InlineAddUrl = $this->PageUrl() . "a=add";
 		$this->GridAddUrl = $this->PageUrl() . "a=gridadd";
 		$this->GridEditUrl = $this->PageUrl() . "a=gridedit";
@@ -515,9 +516,6 @@ class cagencias_list {
 
 		// Table object (agencias_servicios)
 		if (!isset($GLOBALS['agencias_servicios'])) $GLOBALS['agencias_servicios'] = new cagencias_servicios();
-
-		// Table object (usuarios)
-		if (!isset($GLOBALS['usuarios'])) $GLOBALS['usuarios'] = new cusuarios();
 
 		// Page ID
 		if (!defined("EW_PAGE_ID"))
@@ -548,25 +546,6 @@ class cagencias_list {
 	function Page_Init() {
 		global $gsExport, $gsExportFile, $UserProfile, $Language, $Security, $objForm;
 		global $agencias;
-
-		// Security
-		$Security = new cAdvancedSecurity();
-		if (!$Security->IsLoggedIn()) $Security->AutoLogin();
-		if (!$Security->IsLoggedIn()) {
-			$Security->SaveLastUrl();
-			$this->Page_Terminate("login.php");
-		}
-		$Security->TablePermission_Loading();
-		$Security->LoadCurrentUserLevel($this->TableName);
-		$Security->TablePermission_Loaded();
-		if (!$Security->IsLoggedIn()) {
-			$Security->SaveLastUrl();
-			$this->Page_Terminate("login.php");
-		}
-		if (!$Security->CanList()) {
-			$Security->SaveLastUrl();
-			$this->Page_Terminate("login.php");
-		}
 
 		// Get grid add count
 		$gridaddcnt = @$_GET[EW_TABLE_GRID_ADD_ROW_COUNT];
@@ -649,6 +628,9 @@ class cagencias_list {
 			// Handle reset command
 			$this->ResetCmd();
 
+			// Set up master detail parameters
+			$this->SetUpMasterParms();
+
 			// Hide all options
 			if ($agencias->Export <> "" ||
 				$agencias->CurrentAction == "gridadd" ||
@@ -706,10 +688,28 @@ class cagencias_list {
 
 		// Build filter
 		$sFilter = "";
-		if (!$Security->CanList())
-			$sFilter = "(0=1)"; // Filter all records
+
+		// Restore master/detail filter
+		$this->DbMasterFilter = $agencias->getMasterFilter(); // Restore master filter
+		$this->DbDetailFilter = $agencias->getDetailFilter(); // Restore detail filter
 		ew_AddFilter($sFilter, $this->DbDetailFilter);
 		ew_AddFilter($sFilter, $this->SearchWhere);
+
+		// Load master record
+		if ($agencias->getMasterFilter() <> "" && $agencias->getCurrentMasterTable() == "agencias_servicios") {
+			global $agencias_servicios;
+			$rsmaster = $agencias_servicios->LoadRs($this->DbMasterFilter);
+			$this->MasterRecordExists = ($rsmaster && !$rsmaster->EOF);
+			if (!$this->MasterRecordExists) {
+				$this->setFailureMessage($Language->Phrase("NoRecord")); // Set no record found
+				$this->Page_Terminate($agencias->getReturnUrl()); // Return to caller
+			} else {
+				$agencias_servicios->LoadListRowValues($rsmaster);
+				$agencias_servicios->RowType = EW_ROWTYPE_MASTER; // Master row
+				$agencias_servicios->RenderListRow();
+				$rsmaster->Close();
+			}
+		}
 
 		// Set up filter in session
 		$agencias->setSessionWhere($sFilter);
@@ -722,7 +722,6 @@ class cagencias_list {
 		$sKeyword = ew_AdjustSql($Keyword);
 		$sWhere = "";
 		$this->BuildBasicSearchSQL($sWhere, $agencias->nombre, $Keyword);
-		if (is_numeric($Keyword)) $this->BuildBasicSearchSQL($sWhere, $agencias->id_ciudad, $Keyword);
 		$this->BuildBasicSearchSQL($sWhere, $agencias->direccion, $Keyword);
 		$this->BuildBasicSearchSQL($sWhere, $agencias->telef_1, $Keyword);
 		$this->BuildBasicSearchSQL($sWhere, $agencias->horario_agencia, $Keyword);
@@ -748,7 +747,6 @@ class cagencias_list {
 	function BasicSearchWhere() {
 		global $Security, $agencias;
 		$sSearchStr = "";
-		if (!$Security->CanSearch()) return "";
 		$sSearchKeyword = $agencias->BasicSearchKeyword;
 		$sSearchType = $agencias->BasicSearchType;
 		if ($sSearchKeyword <> "") {
@@ -847,6 +845,14 @@ class cagencias_list {
 			if (strtolower($sCmd) == "reset" || strtolower($sCmd) == "resetall")
 				$this->ResetSearchParms();
 
+			// Reset master/detail keys
+			if (strtolower($sCmd) == "resetall") {
+				$agencias->setCurrentMasterTable(""); // Clear master table
+				$this->DbMasterFilter = "";
+				$this->DbDetailFilter = "";
+				$agencias->id_agencias->setSessionValue("");
+			}
+
 			// Reset sorting order
 			if (strtolower($sCmd) == "resetsort") {
 				$sOrderBy = "";
@@ -869,25 +875,19 @@ class cagencias_list {
 		// "view"
 		$item =& $this->ListOptions->Add("view");
 		$item->CssStyle = "white-space: nowrap;";
-		$item->Visible = $Security->CanView();
+		$item->Visible = TRUE;
 		$item->OnLeft = FALSE;
 
 		// "edit"
 		$item =& $this->ListOptions->Add("edit");
 		$item->CssStyle = "white-space: nowrap;";
-		$item->Visible = $Security->CanEdit();
+		$item->Visible = TRUE;
 		$item->OnLeft = FALSE;
 
 		// "delete"
 		$item =& $this->ListOptions->Add("delete");
 		$item->CssStyle = "white-space: nowrap;";
-		$item->Visible = $Security->CanDelete();
-		$item->OnLeft = FALSE;
-
-		// "detail_agencias_servicios"
-		$item =& $this->ListOptions->Add("detail_agencias_servicios");
-		$item->CssStyle = "white-space: nowrap;";
-		$item->Visible = $Security->AllowList('agencias_servicios');
+		$item->Visible = TRUE;
 		$item->OnLeft = FALSE;
 
 		// Call ListOptions_Load event
@@ -901,30 +901,19 @@ class cagencias_list {
 
 		// "view"
 		$oListOpt =& $this->ListOptions->Items["view"];
-		if ($Security->CanView() && $oListOpt->Visible)
+		if ($oListOpt->Visible)
 			$oListOpt->Body = "<a class=\"ewRowLink\" href=\"" . $this->ViewUrl . "\">" . $Language->Phrase("ViewLink") . "</a>";
 
 		// "edit"
 		$oListOpt =& $this->ListOptions->Items["edit"];
-		if ($Security->CanEdit() && $oListOpt->Visible) {
+		if ($oListOpt->Visible) {
 			$oListOpt->Body = "<a class=\"ewRowLink\" href=\"" . $this->EditUrl . "\">" . $Language->Phrase("EditLink") . "</a>";
 		}
 
 		// "delete"
 		$oListOpt =& $this->ListOptions->Items["delete"];
-		if ($Security->CanDelete() && $oListOpt->Visible)
+		if ($oListOpt->Visible)
 			$oListOpt->Body = "<a class=\"ewRowLink\"" . "" . " href=\"" . $this->DeleteUrl . "\">" . $Language->Phrase("DeleteLink") . "</a>";
-
-		// "detail_agencias_servicios"
-		$oListOpt =& $this->ListOptions->Items["detail_agencias_servicios"];
-		if ($Security->AllowList('agencias_servicios')) {
-			$oListOpt->Body = $Language->Phrase("DetailLink") . $Language->TablePhrase("agencias_servicios", "TblCaption");
-			$oListOpt->Body = "<a class=\"ewRowLink\" href=\"agencias_servicioslist.php?" . EW_TABLE_SHOW_MASTER . "=agencias&id_agencias=" . urlencode(strval($agencias->id_agencias->CurrentValue)) . "\">" . $oListOpt->Body . "</a>";
-			$links = "";
-			if ($GLOBALS["agencias_servicios"]->DetailEdit && $Security->CanEdit() && $Security->AllowEdit('agencias_servicios'))
-				$links .= "<a class=\"ewRowLink\" href=\"" . $agencias->EditUrl(EW_TABLE_SHOW_DETAIL . "=agencias_servicios") . "\">" . $Language->Phrase("EditLink") . "</a>&nbsp;";
-			if ($links <> "") $oListOpt->Body .= "<br>" . $links;
-		}
 		$this->RenderListOptionsExt();
 
 		// Call ListOptions_Rendered event
@@ -1030,12 +1019,13 @@ class cagencias_list {
 		$agencias->Row_Selected($row);
 		$agencias->id_agencias->setDbValue($rs->fields('id_agencias'));
 		$agencias->nombre->setDbValue($rs->fields('nombre'));
-		$agencias->id_ciudad->setDbValue($rs->fields('id_ciudad'));
 		$agencias->direccion->setDbValue($rs->fields('direccion'));
+		$agencias->id_ciudad->setDbValue($rs->fields('id_ciudad'));
 		$agencias->telef_1->setDbValue($rs->fields('telef_1'));
 		$agencias->horario_agencia->setDbValue($rs->fields('horario_agencia'));
 		$agencias->horario_taq_auto->setDbValue($rs->fields('horario_taq_auto'));
 		$agencias->coordenadas->setDbValue($rs->fields('coordenadas'));
+		$agencias->citas_diarias->setDbValue($rs->fields('citas_diarias'));
 		$agencias->estatus->setDbValue($rs->fields('estatus'));
 	}
 
@@ -1080,15 +1070,20 @@ class cagencias_list {
 		// Common render codes for all row types
 		// id_agencias
 		// nombre
-		// id_ciudad
 		// direccion
+		// id_ciudad
 		// telef_1
 		// horario_agencia
 		// horario_taq_auto
 		// coordenadas
+		// citas_diarias
 		// estatus
 
 		if ($agencias->RowType == EW_ROWTYPE_VIEW) { // View row
+
+			// id_agencias
+			$agencias->id_agencias->ViewValue = $agencias->id_agencias->CurrentValue;
+			$agencias->id_agencias->ViewCustomAttributes = "";
 
 			// nombre
 			$agencias->nombre->ViewValue = $agencias->nombre->CurrentValue;
@@ -1116,18 +1111,6 @@ class cagencias_list {
 			}
 			$agencias->id_ciudad->ViewCustomAttributes = "";
 
-			// direccion
-			$agencias->direccion->ViewValue = $agencias->direccion->CurrentValue;
-			$agencias->direccion->ViewCustomAttributes = "";
-
-			// telef_1
-			$agencias->telef_1->ViewValue = $agencias->telef_1->CurrentValue;
-			$agencias->telef_1->ViewCustomAttributes = "";
-
-			// horario_agencia
-			$agencias->horario_agencia->ViewValue = $agencias->horario_agencia->CurrentValue;
-			$agencias->horario_agencia->ViewCustomAttributes = "";
-
 			// horario_taq_auto
 			$agencias->horario_taq_auto->ViewValue = $agencias->horario_taq_auto->CurrentValue;
 			$agencias->horario_taq_auto->ViewCustomAttributes = "";
@@ -1135,6 +1118,10 @@ class cagencias_list {
 			// coordenadas
 			$agencias->coordenadas->ViewValue = $agencias->coordenadas->CurrentValue;
 			$agencias->coordenadas->ViewCustomAttributes = "";
+
+			// citas_diarias
+			$agencias->citas_diarias->ViewValue = $agencias->citas_diarias->CurrentValue;
+			$agencias->citas_diarias->ViewCustomAttributes = "";
 
 			// estatus
 			if (strval($agencias->estatus->CurrentValue) <> "") {
@@ -1180,28 +1167,54 @@ class cagencias_list {
 			$agencias->Row_Rendered();
 	}
 
-	// Export PDF
-	function ExportPDF($html) {
-		global $gsExportFile;
-		include_once "dompdf060b2/dompdf_config.inc.php";
-		@ini_set("memory_limit", EW_PDF_MEMORY_LIMIT);
-		set_time_limit(EW_PDF_TIME_LIMIT);
-		$dompdf = new DOMPDF();
-		$dompdf->load_html($html);
-		$dompdf->set_paper("a4", "portrait");
-		$dompdf->render();
-		ob_end_clean();
-		ew_DeleteTmpImages();
-		$dompdf->stream($gsExportFile . ".pdf", array("Attachment" => 1)); // 0 to open in browser, 1 to download
+	// Set up master/detail based on QueryString
+	function SetUpMasterParms() {
+		global $agencias;
+		$bValidMaster = FALSE;
 
-//		exit();
+		// Get the keys for master table
+		if (@$_GET[EW_TABLE_SHOW_MASTER] <> "") {
+			$sMasterTblVar = $_GET[EW_TABLE_SHOW_MASTER];
+			if ($sMasterTblVar == "") {
+				$bValidMaster = TRUE;
+				$this->DbMasterFilter = "";
+				$this->DbDetailFilter = "";
+			}
+			if ($sMasterTblVar == "agencias_servicios") {
+				$bValidMaster = TRUE;
+				if (@$_GET["id_agencias"] <> "") {
+					$GLOBALS["agencias_servicios"]->id_agencias->setQueryStringValue($_GET["id_agencias"]);
+					$agencias->id_agencias->setQueryStringValue($GLOBALS["agencias_servicios"]->id_agencias->QueryStringValue);
+					$agencias->id_agencias->setSessionValue($agencias->id_agencias->QueryStringValue);
+					if (!is_numeric($GLOBALS["agencias_servicios"]->id_agencias->QueryStringValue)) $bValidMaster = FALSE;
+				} else {
+					$bValidMaster = FALSE;
+				}
+			}
+		}
+		if ($bValidMaster) {
+
+			// Save current master table
+			$agencias->setCurrentMasterTable($sMasterTblVar);
+
+			// Reset start record counter (new master key)
+			$this->StartRec = 1;
+			$agencias->setStartRecordNumber($this->StartRec);
+
+			// Clear previous master key from Session
+			if ($sMasterTblVar <> "agencias_servicios") {
+				if ($agencias->id_agencias->QueryStringValue == "") $agencias->id_agencias->setSessionValue("");
+			}
+		}
+		$this->DbMasterFilter = $agencias->getMasterFilter(); //  Get master filter
+		$this->DbDetailFilter = $agencias->getDetailFilter(); // Get detail filter
 	}
 
-	// Write Audit Trail start/end for grid update
-	function WriteAuditTrailDummy($typ) {
-		$table = 'agencias';
-	  $usr = CurrentUserName();
-		ew_WriteAuditTrail("log", ew_StdCurrentDateTime(), ew_ScriptName(), $usr, $typ, $table, "", "", "", "");
+	// PDF Export
+	function ExportPDF($html) {
+		echo($html);
+		ew_DeleteTmpImages();
+		exit();
 	}
 
 	// Page Load event

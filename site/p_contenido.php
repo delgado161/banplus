@@ -3,6 +3,8 @@ ini_set('display_errors', 0);
 //ini_set('display_startup_errors', 1);
 //error_reporting(E_ALL);
 
+//phpinfo();
+//exit();
 ob_start();
 session_start();
 setlocale(LC_TIME, "es_ES");

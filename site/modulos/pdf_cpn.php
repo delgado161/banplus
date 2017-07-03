@@ -8,6 +8,11 @@
 // convert in PDF
 include_once "../includes/html2pdf/vendor/autoload.php";
 try {
+
+    foreach ($_POST as $key => $post) {
+        $_POST[$key] = htmlentities($post);
+    }
+
     $html2pdf = new HTML2PDF('P', 'A4', 'en', false, 'ISO-8859-15', array(3, 6, 3, 3));
 //      $html2pdf->setModeDebug();
     $html2pdf->setDefaultFont('Arial');
@@ -37,8 +42,8 @@ try {
             <table style="border-collapse: collapse;border:none;font-size:11px;" >
                 <tr>
                     <td  style="width:60%;border:none;" rowspan="2"><img src="../img/logo_banplus.jpg" width="200px;" /></td>
-                    <td  style="width:20%;border:none;font-weight: bold;">AGENCIA:</td>
-                    <td  style="width:20%;border:none;font-weight: bold;">FECHA: </td>
+                    <td  style="width:20%;border:none;"><b>AGENCIA:</b> ' . $_POST['fn_agencia'] . '</td>
+                    <td  style="width:20%;border:none;"><b>FECHA:</b>  ' . $_POST['fc_cita'] . '</td>
                 </tr>
                <tr>
                     <td  style="width:40%;border:none;font-weight: bold;" colspan="2">N&ordm; DE CUENTA:</td>
@@ -71,7 +76,7 @@ try {
                     <td style="width:33%;">' . $_POST['p_apellido'] . ' ' . $_POST['s_apellido'] . '</td>
                     <td style="width:33%;">' . $_POST['p_nombre'] . ' ' . $_POST['s_nombre'] . '</td>
                     <td style="width:24%;">' . $_POST['tp_pais'] . ' ' . $_POST['tp_estado'] . ' ' . $_POST['tp_ciudad'] . '</td>
-                    <td style="width:10%;">' . $_POST['fc_nac'] . '</td>
+                    <td style="width:10%;text-align:center;">' . $_POST['fc_nac'] . '</td>
                 </tr>
             </table>
         </td>
@@ -81,7 +86,7 @@ try {
             <table style="border-collapse: collapse;" >
                 <tr>
                     <td class="etiqueta" style="width:28%;">C.I O N&ordm; PASAPORTE</td>
-                    <td class="etiqueta d_linea" style="width:25%;">SI ES NATURALIZADO INDIQUE N&ordm; C.I<br>ANTERIOL</td>
+                    <td class="etiqueta d_linea" style="width:25%;">SI ES NATURALIZADO INDIQUE N&ordm; C.I<br>ANTERIOR</td>
                     <td class="etiqueta" style="width:15%;">NACIONALIDAD</td>
                     <td class="etiqueta" style="width:10%;">SEXO</td>
                     <td class="etiqueta" style="width:14%;">ESTADO CIVIL</td>
@@ -124,8 +129,8 @@ try {
 
     $conte .=' 
                     </td>
-                    <td style="width:14%;">' . $_POST['tp_civil'] . '</td>
-                    <td style="width:8%;">' . $_POST['edad'] . '</td>
+                    <td style="width:14%;text-align:center;">' . $_POST['tp_civil'] . '</td>
+                    <td style="width:8%;text-align:center;">' . $_POST['edad'] . '</td>
                 </tr>
             </table>
         </td>
@@ -135,17 +140,17 @@ try {
             <table style="border-collapse: collapse;" >
                 <tr>
                     <td class="etiqueta" style="width:23%;">ACTIVIDAD ECON&Oacute;MICA</td>
-                    <td class="etiqueta" style="width:20%;">PROFESI&Oacute; U OFICIO</td>
-                    <td class="etiqueta" style="width:15%;">OCUPACI&Oacute;N</td>
-                     <td class="etiqueta" style="width:14%;">CARGA FAMILIAR</td>
-                    <td class="etiqueta" style="width:28%;">CORREO ELECTRONICO</td>
+                    <td class="etiqueta" style="width:20%;">PROFESI&Oacute;N U OFICIO</td>
+                    <td class="etiqueta" style="width:19%;">OCUPACI&Oacute;N</td>
+                     <td class="etiqueta" style="width:13%;">CARGA FAMILIAR</td>
+                    <td class="etiqueta" style="width:25%;">CORREO ELECTRONICO</td>
                 </tr>
                 <tr class="valores">
                     <td style="width:23%;">' . $_POST['tp_sctivida'] . '</td>
                     <td style="width:20%;">' . $_POST['tp_profecion'] . '</td>
-                    <td style="width:15%;">' . $_POST['tp_ocupacion'] . '</td>
-                    <td style="width:14%;">' . $_POST['g_familiar'] . '</td>
-                    <td style="width:28%;">' . $_POST['email'] . '</td>
+                    <td style="width:19%;">' . $_POST['tp_ocupacion'] . '</td>
+                    <td style="width:13%;text-align:center;">' . $_POST['g_familiar'] . '</td>
+                    <td style="width:25%;">' . $_POST['email'] . '</td>
                 </tr>
             </table>
         </td>
@@ -167,8 +172,8 @@ try {
                 </tr>
                 <tr class="valores">
                     <td style="width:26%;">' . $_POST['d_ceq'] . '</td>
-                    <td style="width:8%;">' . $_POST['d_piso'] . '</td>
-                    <td style="width:8%;">' . $_POST['d_apartamento'] . '</td>
+                    <td style="width:8%;text-align:center;">' . $_POST['d_piso'] . '</td>
+                    <td style="width:8%;text-align:center;">' . $_POST['d_apartamento'] . '</td>
                     <td style="width:38%;">' . $_POST['d_calle'] . '</td>
                     <td style="width:20%;">' . $_POST['d_urbanizacion'] . '</td>
                 </tr>
@@ -233,7 +238,7 @@ try {
 
     $conte .= '    
             </td>
-                    <td class="" style="width:10%;"  rowspan="2">' . $_POST['ano_vivienda'] . '</td>
+                    <td class="" style="width:10%;text-align:center;"  rowspan="2">' . $_POST['ano_vivienda'] . '</td>
                     <td class="" style="width:20%;text-align:right;"  rowspan="2">' . $_POST['canon'] . ' Bs.</td>
                     <td style="width:25%;"  rowspan="2">' . $_POST['canon_nombre'] . '</td>
                     <td  style="width:15%;font-size:8px;height:5px;text-align:center;border-bottom:none;" >COD. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N&Uacute;MERO </td>
@@ -267,7 +272,7 @@ try {
                     <td  style="width:20%;">' . $_POST['ramo_empresa'] . '</td>
                     <td  style="width:16%;">' . $_POST['cargo_empresa'] . '</td>
                     <td  style="width:19%;">' . $_POST['relacion_l'] . '</td>
-                    <td  style="width:12%;">' . $_POST['e_antiguo'] . ' ' . $_POST['e_antiguo_op'] . '</td>
+                    <td  style="width:12%;text-align:center;">' . $_POST['e_antiguo'] . ' ' . $_POST['e_antiguo_op'] . '</td>
                 </tr>
                 
             </table>
@@ -312,9 +317,9 @@ try {
                 </tr>
                 <tr class="valores">
                    <td  style="width:26%;">' . $_POST['e_ceq'] . '</td>
-                    <td  style="width:8%;">' . $_POST['e_piso'] . '</td>
-                    <td  style="width:7%;">' . $_POST['e_Oficina'] . '</td>
-                    <td  style="width:8%;">' . $_POST['e_local'] . '</td>
+                    <td  style="width:8%;text-align:center;">' . $_POST['e_piso'] . '</td>
+                    <td  style="width:7%;text-align:center;">' . $_POST['e_Oficina'] . '</td>
+                    <td  style="width:8%;text-align:center;">' . $_POST['e_local'] . '</td>
                     <td  style="width:35%;">' . $_POST['e_calle'] . '</td>
                     <td  style="width:16%;">' . $_POST['e_urbanizacion'] . '</td>
                 </tr>
@@ -332,20 +337,20 @@ try {
                    
                 </tr>
                    <tr class="valores">
-                        <td  style="width:25%;" rowspan="2">' . $_POST['etp_estado'] . '</td>
-                        <td  style="width:24%;" rowspan="2">' . $_POST['etp_ciudad'] . '</td>
-                        <td  style="width:15%;" rowspan="2">' . $_POST['e_postal'] . '</td>
+                        <td  style="width:25%;text-align:center;" rowspan="2">' . $_POST['etp_estado'] . '</td>
+                        <td  style="width:24%;text-align:center;" rowspan="2">' . $_POST['etp_ciudad'] . '</td>
+                        <td  style="width:15%;text-align:center;" rowspan="2">' . $_POST['e_postal'] . '</td>
                         <td  style="width:18%;font-size:8px;height:5px;text-align:center;border-bottom:none;" >COD. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N&Uacute;MERO </td>
                         <td  style="width:18%;font-size:8px;height:5px;text-align:center;border-bottom:none;" >COD. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N&Uacute;MERO </td>
                 </tr>
                 
                 <tr class="valores">
                     <td  style="width:18%;;border-left:none;">
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                     &nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['edctp_telefono'] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['ecd_telefono'] . '
                         </td>
                           <td  style="width:18%;;">
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                     &nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['edctp_telefono2'] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_POST['ecd_telefono2'] . '
                         </td>
               
@@ -370,18 +375,18 @@ try {
                 
                 <tr class="valores">';
 
-    $conte .= (isset($_POST['tp_producto0'])) ? ' <td style="width:20%;">' . $_POST['tp_producto0'] . '</td>' : ' <td style="width:20%;"></td>';
+    $conte .= (isset($_POST['tp_producto0'])) ? ' <td style="width:20%;text-align:center;">' . $_POST['tp_producto0'] . '</td>' : ' <td style="width:20%;"></td>';
     $conte .= (isset($_POST['numero_prod0'])) ? ' <td style="width:30%;">' . $_POST['numero_prod0'] . '</td>' : ' <td style="width:30%;"></td>';
 
-    $conte .= (isset($_POST['tp_producto1'])) ? ' <td style="width:20%;">' . $_POST['tp_producto1'] . '</td>' : ' <td style="width:20%;"></td>';
+    $conte .= (isset($_POST['tp_producto1'])) ? ' <td style="width:20%;text-align:center;">' . $_POST['tp_producto1'] . '</td>' : ' <td style="width:20%;"></td>';
     $conte .= (isset($_POST['numero_prod1'])) ? ' <td style="width:30%;">' . $_POST['numero_prod1'] . '</td>' : ' <td style="width:30%;"></td>';
 
     $conte .='</tr>      
                   <tr class="valores">';
-    $conte .= (isset($_POST['tp_producto2'])) ? ' <td style="width:20%;">' . $_POST['tp_producto2'] . '</td>' : ' <td style="width:20%;"></td>';
+    $conte .= (isset($_POST['tp_producto2'])) ? ' <td style="width:20%;text-align:center;">' . $_POST['tp_producto2'] . '</td>' : ' <td style="width:20%;"></td>';
     $conte .= (isset($_POST['numero_prod2'])) ? ' <td style="width:30%;">' . $_POST['numero_prod2'] . '</td>' : ' <td style="width:30%;"></td>';
 
-    $conte .= (isset($_POST['tp_producto3'])) ? ' <td style="width:20%;">' . $_POST['tp_producto3'] . '</td>' : ' <td style="width:20%;"></td>';
+    $conte .= (isset($_POST['tp_producto3'])) ? ' <td style="width:20%;text-align:center;">' . $_POST['tp_producto3'] . '</td>' : ' <td style="width:20%;"></td>';
     $conte .= (isset($_POST['numero_prod3'])) ? ' <td style="width:30%;">' . $_POST['numero_prod3'] . '</td>' : ' <td style="width:30%;"></td>';
 
     $conte .='</tr>
@@ -406,26 +411,26 @@ try {
                 <tr class="valores">';
 
     $conte .= (isset($_POST['tp_banco0'])) ? ' <td style="width:20%;">' . $_POST['tp_banco0'] . '</td>' : ' <td style="width:20%;"></td>';
-    $conte .= (isset($_POST['cuenta0'])) ? ' <td style="width:25%;">' . $_POST['cuenta0'] . '</td>' : ' <td style="width:25%;"></td>';
+    $conte .= (isset($_POST['cuenta0'])) ? ' <td style="width:25%;text-align:center;">' . $_POST['cuenta0'] . '</td>' : ' <td style="width:25%;"></td>';
     $conte .= (isset($_POST['tp_cuenta0'])) ? ' <td style="width:25%;">' . $_POST['tp_cuenta0'] . '</td>' : ' <td style="width:25%;"></td>';
-    $conte .= (isset($_POST['cuenta_antiguo0'])) ? ' <td style="width:15%;">' . $_POST['cuenta_antiguo0'] . '</td>' : ' <td style="width:15%;"></td>';
+    $conte .= (isset($_POST['cuenta_antiguo0'])) ? ' <td style="width:15%;text-align:center;">' . $_POST['cuenta_antiguo0'] . '</td>' : ' <td style="width:15%;"></td>';
     $conte .= (isset($_POST['ag_origen0'])) ? ' <td style="width:15%;">' . $_POST['ag_origen0'] . '</td>' : ' <td style="width:15%;"></td>';
     $conte .='</tr>      
                   <tr class="valores">';
 
 
     $conte .= (isset($_POST['tp_banco1'])) ? ' <td style="width:20%;">' . $_POST['tp_banco1'] . '</td>' : ' <td style="width:20%;"></td>';
-    $conte .= (isset($_POST['cuenta1'])) ? ' <td style="width:25%;">' . $_POST['cuenta1'] . '</td>' : ' <td style="width:25%;"></td>';
+    $conte .= (isset($_POST['cuenta1'])) ? ' <td style="width:25%;text-align:center;">' . $_POST['cuenta1'] . '</td>' : ' <td style="width:25%;"></td>';
     $conte .= (isset($_POST['tp_cuenta1'])) ? ' <td style="width:25%;">' . $_POST['tp_cuenta1'] . '</td>' : ' <td style="width:25%;"></td>';
-    $conte .= (isset($_POST['cuenta_antiguo1'])) ? ' <td style="width:15%;">' . $_POST['cuenta_antiguo1'] . '</td>' : ' <td style="width:15%;"></td>';
+    $conte .= (isset($_POST['cuenta_antiguo1'])) ? ' <td style="width:15%;text-align:center;">' . $_POST['cuenta_antiguo1'] . '</td>' : ' <td style="width:15%;"></td>';
     $conte .= (isset($_POST['ag_origen1'])) ? ' <td style="width:15%;">' . $_POST['ag_origen1'] . '</td>' : ' <td style="width:15%;"></td>';
 
     $conte .='</tr>      
                   <tr class="valores">';
     $conte .= (isset($_POST['tp_banco2'])) ? ' <td style="width:20%;">' . $_POST['tp_banco2'] . '</td>' : ' <td style="width:20%;"></td>';
-    $conte .= (isset($_POST['cuenta2'])) ? ' <td style="width:25%;">' . $_POST['cuenta2'] . '</td>' : ' <td style="width:25%;"></td>';
+    $conte .= (isset($_POST['cuenta2'])) ? ' <td style="width:25%;text-align:center;">' . $_POST['cuenta2'] . '</td>' : ' <td style="width:25%;"></td>';
     $conte .= (isset($_POST['tp_cuenta2'])) ? ' <td style="width:25%;">' . $_POST['tp_cuenta2'] . '</td>' : ' <td style="width:25%;"></td>';
-    $conte .= (isset($_POST['cuenta_antiguo2'])) ? ' <td style="width:15%;">' . $_POST['cuenta_antiguo2'] . '</td>' : ' <td style="width:15%;"></td>';
+    $conte .= (isset($_POST['cuenta_antiguo2'])) ? ' <td style="width:15%;text-align:center;">' . $_POST['cuenta_antiguo2'] . '</td>' : ' <td style="width:15%;"></td>';
     $conte .= (isset($_POST['ag_origen2'])) ? ' <td style="width:15%;">' . $_POST['ag_origen2'] . '</td>' : ' <td style="width:15%;"></td>';
 
     $conte .= ' </tr>        
@@ -498,14 +503,14 @@ try {
     $conte .= (isset($_POST['rfa_nombre10'])) ? ' <td style="width:20%;" > ' . $_POST['rfa_nombre10'] . '</td>' : ' <td style="width:20%;" ></td>';
     $conte .= (isset($_POST['rf_ocupacion10'])) ? ' <td style="width:20%;" > ' . $_POST['rf_ocupacion10'] . '</td>' : ' <td style="width:20%;" ></td>';
     $conte .= (isset($_POST['rf_direccion10'])) ? ' <td style="width:40%;" >' . $_POST['rf_direccion10'] . '</td>' : ' <td style="width:40%;" ></td>';
-    $conte .= (isset($_POST['dtp_telefonoH10'])) ? ' <td style="width:20%;" > ' . $_POST['dtp_telefonoH10'] . ' ' . $_POST['d_telefonoh10'] . '</td>' : ' <td style="width:20%;" ></td>';
+    $conte .= (isset($_POST['dtp_telefonoH10'])) ? ' <td style="width:20%;text-align:center;" > ' . $_POST['dtp_telefonoH10'] . ' ' . $_POST['d_telefonoh10'] . '</td>' : ' <td style="width:20%;" ></td>';
     $conte .= '
                 </tr>   
                 <tr class="valores">';
     $conte .= (isset($_POST['rfa_nombre11'])) ? ' <td style="width:20%;" > ' . $_POST['rfa_nombre11'] . '</td>' : ' <td style="width:20%;" ></td>';
     $conte .= (isset($_POST['rf_ocupacion11'])) ? ' <td style="width:20%;" > ' . $_POST['rf_ocupacion11'] . '</td>' : ' <td style="width:20%;" ></td>';
     $conte .= (isset($_POST['rf_direccion11'])) ? ' <td style="width:40%;" >' . $_POST['rf_direccion11'] . '</td>' : ' <td style="width:40%;" ></td>';
-    $conte .= (isset($_POST['dtp_telefonoH11'])) ? ' <td style="width:20%;" > ' . $_POST['dtp_telefonoH11'] . ' ' . $_POST['d_telefonoh11'] . '</td>' : ' <td style="width:20%;" ></td>';
+    $conte .= (isset($_POST['dtp_telefonoH11'])) ? ' <td style="width:20%;text-align:center;" > ' . $_POST['dtp_telefonoH11'] . ' ' . $_POST['d_telefonoh11'] . '</td>' : ' <td style="width:20%;" ></td>';
     $conte .= '
                 </tr>   
             </table>
@@ -522,13 +527,13 @@ try {
                 <tr>
                     <td class="etiqueta" style="width:33%;">APELLIDOS</td>
                     <td class="etiqueta" style="width:33%;">NOMBRES</td>
-                    <td class="etiqueta" style="width:34%; colspan="2">LUGAR Y FECHA DE NACIMIENTO</td>
+                    <td class="etiqueta" style="width:34%;" colspan="2">LUGAR Y FECHA DE NACIMIENTO</td>
                 </tr>
                   <tr class="valores">
                     <td style="width:33%;">' . $_POST['ccp_apellido'] . ' ' . $_POST['ccs_apellido'] . '</td>
                     <td style="width:33%;">' . $_POST['ccp_nombre'] . ' ' . $_POST['ccs_nombre'] . '</td>
                     <td style="width:24%;">' . $_POST['cctp_pais'] . ' ' . $_POST['cctp_estado'] . ' ' . $_POST['cctp_ciudad'] . '</td>
-                    <td style="width:10%;">' . $_POST['ccfc_nac'] . '</td>
+                    <td style="width:10%;text-align:center;">' . $_POST['ccfc_nac'] . '</td>
                 </tr>
             </table>
         </td>
@@ -538,7 +543,7 @@ try {
             <table style="border-collapse: collapse;" >
                 <tr>
                     <td class="etiqueta" style="width:30%;">C.I O N&ordm; PASAPORTE</td>
-                    <td class="etiqueta d_linea" style="width:26%;">SI ES NATURALIZADO INDIQUE N&ordm; C.I<br>ANTERIOL</td>
+                    <td class="etiqueta d_linea" style="width:26%;">SI ES NATURALIZADO INDIQUE N&ordm; C.I<br>ANTERIOR</td>
                     <td class="etiqueta" style="width:18%;">NACIONALIDAD</td>
                     <td class="etiqueta" style="width:16%;">ESTADO CIVIL</td>
                     <td class="etiqueta" style="width:10%;">EDAD</td>
@@ -563,8 +568,8 @@ try {
     $conte .=' ' . $_POST['CCn_documento'] . '   </td>
                     <td style="width:26%;">' . $_POST['ccnaturalizado'] . '</td>
                     <td style="width:18%;">' . $_POST['cctp_nacionalidad'] . '</td>
-                    <td style="width:16%;">' . $_POST['cctp_civil'] . '</td>
-                    <td style="width:10%;">' . $_POST['ccedad'] . '</td>
+                    <td style="width:16%;text-align:center;">' . $_POST['cctp_civil'] . '</td>
+                    <td style="width:10%;text-align:center;">' . $_POST['ccedad'] . '</td>
                 </tr>
             </table>
         </td>
@@ -573,7 +578,7 @@ try {
         <td class="bloque">
             <table style="border-collapse: collapse;" >
                 <tr>
-                    <td class="etiqueta" style="width:25%;">PROFESI&Oacute;</td>
+                    <td class="etiqueta" style="width:25%;">PROFESI&Oacute;N</td>
                     <td class="etiqueta" style="width:23%;">OCUPACI&Oacute;N / OFICIO</td>
                      <td class="etiqueta" style="width:18%;">CARGA FAMILIAR</td>
                     <td class="etiqueta" style="width:34%;">CORREO ELECTRONICO</td>
@@ -581,7 +586,7 @@ try {
                  <tr class="valores">
                     <td style="width:25%;">' . $_POST['cctp_profecion'] . '</td>
                     <td style="width:23%;">' . $_POST['cctp_ocupacion'] . '</td>
-                    <td style="width:18%;">' . $_POST['ccg_familiar'] . '</td>
+                    <td style="width:18%;text-align:center;">' . $_POST['ccg_familiar'] . '</td>
                     <td style="width:34%;">' . $_POST['ccemail'] . '</td>
                 </tr>
             </table>
@@ -610,11 +615,11 @@ try {
                     <td class="etiqueta" style="width:17%;">TOTAL INGRESOS</td>
                 </tr>
                   <tr class="valores">
-                    <td style="width:20%;">' . $_POST['ccsueldo'] . '</td>
-                    <td style="width:23%;">' . $_POST['cccomision'] . '</td>
-                    <td style="width:23%;">' . $_POST['cctp_ocupacion'] . '</td>
-                    <td style="width:17%;">' . $_POST['ccotros_ingresos'] . '</td>
-                    <td style="width:17%;">' . $_POST['cctotal_ingresos'] . '</td>
+                    <td style="width:20%;text-align:right;">' . $_POST['ccsueldo'] . ' Bs.</td>
+                    <td style="width:23%;text-align:right;">' . $_POST['cccomision'] . ' Bs.</td>
+                    <td style="width:23%;text-align:right;">' . $_POST['cctp_ocupacion'] . ' Bs.</td>
+                    <td style="width:17%;text-align:right;">' . $_POST['ccotros_ingresos'] . ' Bs.</td>
+                    <td style="width:17%;text-align:right;">' . $_POST['cctotal_ingresos'] . ' Bs.</td>
                 </tr>
                 
             </table>
@@ -636,11 +641,11 @@ try {
                     <td class="etiqueta" style="width:17%;">TOTAL INGRESOS</td>
                 </tr>
                 <tr class="valores">
-                    <td style="width:20%;">' . $_POST['igf_sueldo'] . '</td>
-                    <td style="width:23%;">' . $_POST['igf_comision'] . '</td>
-                    <td style="width:23%;">' . $_POST['igf_libre_ejercicio'] . '</td>
-                    <td style="width:17%;">' . $_POST['igf_otros_ingresos'] . '</td>
-                    <td style="width:17%;">' . $_POST['igf_total_ingresos'] . '</td>
+                    <td style="width:20%;;text-align:right;">' . $_POST['igf_sueldo'] . ' Bs.</td>
+                    <td style="width:23%;;text-align:right;">' . $_POST['igf_comision'] . ' Bs.</td>
+                    <td style="width:23%;;text-align:right;">' . $_POST['igf_libre_ejercicio'] . ' Bs.</td>
+                    <td style="width:17%;;text-align:right;">' . $_POST['igf_otros_ingresos'] . ' Bs.</td>
+                    <td style="width:17%;;text-align:right;">' . $_POST['igf_total_ingresos'] . ' Bs.</td>
                 </tr>
                 
             </table>
@@ -662,11 +667,11 @@ try {
                     <td class="etiqueta" style="width:21%;">COLEGIOS O ESTUDIOS</td>
                 </tr>
                  <tr class="valores">
-                    <td style="width:28%;">' . $_POST['gpm_servicios'] . '</td>
-                    <td style="width:17%;">' . $_POST['gpm_alquiler'] . '</td>
-                    <td style="width:17%;">' . $_POST['gpm_telefono'] . '</td>
-                    <td style="width:17%;">' . $_POST['gpm_alimentos'] . '</td>
-                    <td style="width:21%;">' . $_POST['go_estudios'] . '</td>
+                    <td style="width:28%;;text-align:right;">' . $_POST['gpm_servicios'] . ' Bs.</td>
+                    <td style="width:17%;;text-align:right;">' . $_POST['gpm_alquiler'] . ' Bs.</td>
+                    <td style="width:17%;;text-align:right;">' . $_POST['gpm_telefono'] . ' Bs.</td>
+                    <td style="width:17%;;text-align:right;">' . $_POST['gpm_alimentos'] . ' Bs.</td>
+                    <td style="width:21%;;text-align:right;">' . $_POST['go_estudios'] . ' Bs.</td>
                 </tr>
                
                
@@ -686,11 +691,11 @@ try {
                     <td class="etiqueta" style="width:17%;">TOTAL GASTOS</td>
                 </tr>
                 <tr class="valores">
-                    <td style="width:21%;">' . $_POST['go_creditos'] . '</td>
-                    <td style="width:10%;">' . $_POST['go_tarjetas'] . '</td>
-                    <td style="width:25%;">' . $_POST['go_otros_ingresos'] . '</td>
-                    <td style="width:17%;">' . $_POST['go_otros_eso'] . '</td>
-                    <td style="width:17%;">' . $_POST['go_total_ingresos'] . '</td>
+                    <td style="width:21%;;text-align:right;">' . $_POST['go_creditos'] . ' Bs.</td>
+                    <td style="width:10%;;text-align:right;">' . $_POST['go_tarjetas'] . ' Bs.</td>
+                    <td style="width:25%;;text-align:right;">' . $_POST['go_otros_ingresos'] . ' Bs.</td>
+                    <td style="width:17%;;text-align:right;">' . $_POST['go_otros_eso'] . '</td>
+                    <td style="width:17%;;text-align:right;">' . $_POST['go_total_ingresos'] . ' Bs.</td>
                 </tr>
                 
             </table>

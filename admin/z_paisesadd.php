@@ -52,9 +52,6 @@ z_paises_add.ValidateForm = function(fobj) {
 		elm = fobj.elements["x" + infix + "_visibilidad"];
 		if (elm && !ew_HasValue(elm))
 			return ew_OnError(this, elm, ewLanguage.Phrase("EnterRequiredField") + " - <?php echo ew_JsEncode2($z_paises->visibilidad->FldCaption()) ?>");
-		elm = fobj.elements["x" + infix + "_visibilidad"];
-		if (elm && !ew_CheckInteger(elm.value))
-			return ew_OnError(this, elm, "<?php echo ew_JsEncode2($z_paises->visibilidad->FldErrMsg()) ?>");
 
 		// Set up row object
 		var row = {};
@@ -152,7 +149,27 @@ $z_paises_add->ShowMessage();
 	<tr id="r_visibilidad"<?php echo $z_paises->RowAttributes() ?>>
 		<td class="ewTableHeader"><?php echo $z_paises->visibilidad->FldCaption() ?><?php echo $Language->Phrase("FieldRequiredIndicator") ?></td>
 		<td<?php echo $z_paises->visibilidad->CellAttributes() ?>><span id="el_visibilidad">
-<input type="text" name="x_visibilidad" id="x_visibilidad" size="30" value="<?php echo $z_paises->visibilidad->EditValue ?>"<?php echo $z_paises->visibilidad->EditAttributes() ?>>
+<div id="tp_x_visibilidad" class="<?php echo EW_ITEM_TEMPLATE_CLASSNAME ?>"><label><input type="radio" name="x_visibilidad" id="x_visibilidad" value="{value}"<?php echo $z_paises->visibilidad->EditAttributes() ?>></label></div>
+<div id="dsl_x_visibilidad" data-repeatcolumn="5" class="ewItemList">
+<?php
+$arwrk = $z_paises->visibilidad->EditValue;
+if (is_array($arwrk)) {
+	$rowswrk = count($arwrk);
+	$emptywrk = TRUE;
+	for ($rowcntwrk = 0; $rowcntwrk < $rowswrk; $rowcntwrk++) {
+		$selwrk = (strval($z_paises->visibilidad->CurrentValue) == strval($arwrk[$rowcntwrk][0])) ? " checked=\"checked\"" : "";
+		if ($selwrk <> "") $emptywrk = FALSE;
+
+		// Note: No spacing within the LABEL tag
+?>
+<?php echo ew_RepeatColumnTable($rowswrk, $rowcntwrk, 5, 1) ?>
+<label><input type="radio" name="x_visibilidad" id="x_visibilidad" value="<?php echo ew_HtmlEncode($arwrk[$rowcntwrk][0]) ?>"<?php echo $selwrk ?><?php echo $z_paises->visibilidad->EditAttributes() ?>><?php echo $arwrk[$rowcntwrk][1] ?></label>
+<?php echo ew_RepeatColumnTable($rowswrk, $rowcntwrk, 5, 2) ?>
+<?php
+	}
+}
+?>
+</div>
 </span><?php echo $z_paises->visibilidad->CustomMsg ?></td>
 	</tr>
 <?php } ?>
@@ -579,7 +596,20 @@ class cz_paises_add {
 			$z_paises->nacionalidad->ViewCustomAttributes = "";
 
 			// visibilidad
-			$z_paises->visibilidad->ViewValue = $z_paises->visibilidad->CurrentValue;
+			if (strval($z_paises->visibilidad->CurrentValue) <> "") {
+				switch ($z_paises->visibilidad->CurrentValue) {
+					case "1":
+						$z_paises->visibilidad->ViewValue = $z_paises->visibilidad->FldTagCaption(1) <> "" ? $z_paises->visibilidad->FldTagCaption(1) : $z_paises->visibilidad->CurrentValue;
+						break;
+					case "0":
+						$z_paises->visibilidad->ViewValue = $z_paises->visibilidad->FldTagCaption(2) <> "" ? $z_paises->visibilidad->FldTagCaption(2) : $z_paises->visibilidad->CurrentValue;
+						break;
+					default:
+						$z_paises->visibilidad->ViewValue = $z_paises->visibilidad->CurrentValue;
+				}
+			} else {
+				$z_paises->visibilidad->ViewValue = NULL;
+			}
 			$z_paises->visibilidad->ViewCustomAttributes = "";
 
 			// lp_pais_id
@@ -617,7 +647,10 @@ class cz_paises_add {
 
 			// visibilidad
 			$z_paises->visibilidad->EditCustomAttributes = "";
-			$z_paises->visibilidad->EditValue = ew_HtmlEncode($z_paises->visibilidad->CurrentValue);
+			$arwrk = array();
+			$arwrk[] = array("1", $z_paises->visibilidad->FldTagCaption(1) <> "" ? $z_paises->visibilidad->FldTagCaption(1) : "1");
+			$arwrk[] = array("0", $z_paises->visibilidad->FldTagCaption(2) <> "" ? $z_paises->visibilidad->FldTagCaption(2) : "0");
+			$z_paises->visibilidad->EditValue = $arwrk;
 
 			// Edit refer script
 			// lp_pais_id
@@ -660,11 +693,8 @@ class cz_paises_add {
 		if (!is_null($z_paises->nombre->FormValue) && $z_paises->nombre->FormValue == "") {
 			ew_AddMessage($gsFormError, $Language->Phrase("EnterRequiredField") . " - " . $z_paises->nombre->FldCaption());
 		}
-		if (!is_null($z_paises->visibilidad->FormValue) && $z_paises->visibilidad->FormValue == "") {
+		if ($z_paises->visibilidad->FormValue == "") {
 			ew_AddMessage($gsFormError, $Language->Phrase("EnterRequiredField") . " - " . $z_paises->visibilidad->FldCaption());
-		}
-		if (!ew_CheckInteger($z_paises->visibilidad->FormValue)) {
-			ew_AddMessage($gsFormError, $z_paises->visibilidad->FldErrMsg());
 		}
 
 		// Return validate result

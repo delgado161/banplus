@@ -6,7 +6,7 @@ ob_start(); // Turn on output buffering
 <?php include_once "ewmysql8.php" ?>
 <?php include_once "phpfn8.php" ?>
 <?php include_once "agenciasinfo.php" ?>
-<?php include_once "usuariosinfo.php" ?>
+<?php include_once "agencias_serviciosinfo.php" ?>
 <?php include_once "userfn8.php" ?>
 <?php ew_Header(FALSE) ?>
 <?php
@@ -273,8 +273,8 @@ class cagencias_delete {
 			$GLOBALS["Table"] =& $GLOBALS["agencias"];
 		}
 
-		// Table object (usuarios)
-		if (!isset($GLOBALS['usuarios'])) $GLOBALS['usuarios'] = new cusuarios();
+		// Table object (agencias_servicios)
+		if (!isset($GLOBALS['agencias_servicios'])) $GLOBALS['agencias_servicios'] = new cagencias_servicios();
 
 		// Page ID
 		if (!defined("EW_PAGE_ID"))
@@ -297,25 +297,6 @@ class cagencias_delete {
 	function Page_Init() {
 		global $gsExport, $gsExportFile, $UserProfile, $Language, $Security, $objForm;
 		global $agencias;
-
-		// Security
-		$Security = new cAdvancedSecurity();
-		if (!$Security->IsLoggedIn()) $Security->AutoLogin();
-		if (!$Security->IsLoggedIn()) {
-			$Security->SaveLastUrl();
-			$this->Page_Terminate("login.php");
-		}
-		$Security->TablePermission_Loading();
-		$Security->LoadCurrentUserLevel($this->TableName);
-		$Security->TablePermission_Loaded();
-		if (!$Security->IsLoggedIn()) {
-			$Security->SaveLastUrl();
-			$this->Page_Terminate("login.php");
-		}
-		if (!$Security->CanDelete()) {
-			$Security->SaveLastUrl();
-			$this->Page_Terminate("agenciaslist.php");
-		}
 
 		// Global Page Loading event (in userfn*.php)
 		Page_Loading();
@@ -438,12 +419,13 @@ class cagencias_delete {
 		$agencias->Row_Selected($row);
 		$agencias->id_agencias->setDbValue($rs->fields('id_agencias'));
 		$agencias->nombre->setDbValue($rs->fields('nombre'));
-		$agencias->id_ciudad->setDbValue($rs->fields('id_ciudad'));
 		$agencias->direccion->setDbValue($rs->fields('direccion'));
+		$agencias->id_ciudad->setDbValue($rs->fields('id_ciudad'));
 		$agencias->telef_1->setDbValue($rs->fields('telef_1'));
 		$agencias->horario_agencia->setDbValue($rs->fields('horario_agencia'));
 		$agencias->horario_taq_auto->setDbValue($rs->fields('horario_taq_auto'));
 		$agencias->coordenadas->setDbValue($rs->fields('coordenadas'));
+		$agencias->citas_diarias->setDbValue($rs->fields('citas_diarias'));
 		$agencias->estatus->setDbValue($rs->fields('estatus'));
 	}
 
@@ -459,15 +441,20 @@ class cagencias_delete {
 		// Common render codes for all row types
 		// id_agencias
 		// nombre
-		// id_ciudad
 		// direccion
+		// id_ciudad
 		// telef_1
 		// horario_agencia
 		// horario_taq_auto
 		// coordenadas
+		// citas_diarias
 		// estatus
 
 		if ($agencias->RowType == EW_ROWTYPE_VIEW) { // View row
+
+			// id_agencias
+			$agencias->id_agencias->ViewValue = $agencias->id_agencias->CurrentValue;
+			$agencias->id_agencias->ViewCustomAttributes = "";
 
 			// nombre
 			$agencias->nombre->ViewValue = $agencias->nombre->CurrentValue;
@@ -495,18 +482,6 @@ class cagencias_delete {
 			}
 			$agencias->id_ciudad->ViewCustomAttributes = "";
 
-			// direccion
-			$agencias->direccion->ViewValue = $agencias->direccion->CurrentValue;
-			$agencias->direccion->ViewCustomAttributes = "";
-
-			// telef_1
-			$agencias->telef_1->ViewValue = $agencias->telef_1->CurrentValue;
-			$agencias->telef_1->ViewCustomAttributes = "";
-
-			// horario_agencia
-			$agencias->horario_agencia->ViewValue = $agencias->horario_agencia->CurrentValue;
-			$agencias->horario_agencia->ViewCustomAttributes = "";
-
 			// horario_taq_auto
 			$agencias->horario_taq_auto->ViewValue = $agencias->horario_taq_auto->CurrentValue;
 			$agencias->horario_taq_auto->ViewCustomAttributes = "";
@@ -514,6 +489,10 @@ class cagencias_delete {
 			// coordenadas
 			$agencias->coordenadas->ViewValue = $agencias->coordenadas->CurrentValue;
 			$agencias->coordenadas->ViewCustomAttributes = "";
+
+			// citas_diarias
+			$agencias->citas_diarias->ViewValue = $agencias->citas_diarias->CurrentValue;
+			$agencias->citas_diarias->ViewCustomAttributes = "";
 
 			// estatus
 			if (strval($agencias->estatus->CurrentValue) <> "") {
@@ -523,6 +502,12 @@ class cagencias_delete {
 						break;
 					case "1":
 						$agencias->estatus->ViewValue = $agencias->estatus->FldTagCaption(2) <> "" ? $agencias->estatus->FldTagCaption(2) : $agencias->estatus->CurrentValue;
+						break;
+					case "3":
+						$agencias->estatus->ViewValue = $agencias->estatus->FldTagCaption(3) <> "" ? $agencias->estatus->FldTagCaption(3) : $agencias->estatus->CurrentValue;
+						break;
+					case "4":
+						$agencias->estatus->ViewValue = $agencias->estatus->FldTagCaption(4) <> "" ? $agencias->estatus->FldTagCaption(4) : $agencias->estatus->CurrentValue;
 						break;
 					default:
 						$agencias->estatus->ViewValue = $agencias->estatus->CurrentValue;
@@ -570,12 +555,7 @@ class cagencias_delete {
 			$rs->Close();
 			return FALSE;
 		}
-		if (!$Security->CanDelete()) {
-			$this->setFailureMessage($Language->Phrase("NoDeletePermission")); // No delete permission
-			return FALSE;
-		}
 		$conn->BeginTrans();
-		$this->WriteAuditTrailDummy($Language->Phrase("BatchDeleteBegin")); // Batch delete begin
 
 		// Clone old rows
 		$rsold = ($rs) ? $rs->GetRows() : array();
@@ -615,14 +595,8 @@ class cagencias_delete {
 		}
 		if ($DeleteRows) {
 			$conn->CommitTrans(); // Commit the changes
-			if ($DeleteRows) {
-				foreach ($rsold as $row)
-					$this->WriteAuditTrailOnDelete($row);
-			}
-			$this->WriteAuditTrailDummy($Language->Phrase("BatchDeleteSuccess")); // Batch delete success
 		} else {
 			$conn->RollbackTrans(); // Rollback changes
-			$this->WriteAuditTrailDummy($Language->Phrase("BatchDeleteRollback")); // Batch delete rollback
 		}
 
 		// Call Row Deleted event
@@ -632,45 +606,6 @@ class cagencias_delete {
 			}
 		}
 		return $DeleteRows;
-	}
-
-	// Write Audit Trail start/end for grid update
-	function WriteAuditTrailDummy($typ) {
-		$table = 'agencias';
-	  $usr = CurrentUserName();
-		ew_WriteAuditTrail("log", ew_StdCurrentDateTime(), ew_ScriptName(), $usr, $typ, $table, "", "", "", "");
-	}
-
-	// Write Audit Trail (delete page)
-	function WriteAuditTrailOnDelete(&$rs) {
-		global $agencias;
-		$table = 'agencias';
-
-		// Get key value
-		$key = "";
-		if ($key <> "")
-			$key .= EW_COMPOSITE_KEY_SEPARATOR;
-		$key .= $rs['id_agencias'];
-
-		// Write Audit Trail
-		$dt = ew_StdCurrentDateTime();
-		$id = ew_ScriptName();
-	  $curUser = CurrentUserName();
-		foreach (array_keys($rs) as $fldname) {
-			if (array_key_exists($fldname, $agencias->fields) && $agencias->fields[$fldname]->FldDataType <> EW_DATATYPE_BLOB) { // Ignore BLOB fields
-				if ($agencias->fields[$fldname]->FldDataType == EW_DATATYPE_MEMO) {
-					if (EW_AUDIT_TRAIL_TO_DATABASE)
-						$oldvalue = $rs[$fldname];
-					else
-						$oldvalue = "[MEMO]"; // Memo field
-				} elseif ($agencias->fields[$fldname]->FldDataType == EW_DATATYPE_XML) {
-					$oldvalue = "[XML]"; // XML field
-				} else {
-					$oldvalue = $rs[$fldname];
-				}
-				ew_WriteAuditTrail("log", $dt, $id, $curUser, "D", $table, $fldname, $key, $oldvalue, "");
-			}
-		}
 	}
 
 	// Page Load event

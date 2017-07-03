@@ -1041,7 +1041,20 @@ class cz_paises_list {
 			$z_paises->nacionalidad->ViewCustomAttributes = "";
 
 			// visibilidad
-			$z_paises->visibilidad->ViewValue = $z_paises->visibilidad->CurrentValue;
+			if (strval($z_paises->visibilidad->CurrentValue) <> "") {
+				switch ($z_paises->visibilidad->CurrentValue) {
+					case "1":
+						$z_paises->visibilidad->ViewValue = $z_paises->visibilidad->FldTagCaption(1) <> "" ? $z_paises->visibilidad->FldTagCaption(1) : $z_paises->visibilidad->CurrentValue;
+						break;
+					case "0":
+						$z_paises->visibilidad->ViewValue = $z_paises->visibilidad->FldTagCaption(2) <> "" ? $z_paises->visibilidad->FldTagCaption(2) : $z_paises->visibilidad->CurrentValue;
+						break;
+					default:
+						$z_paises->visibilidad->ViewValue = $z_paises->visibilidad->CurrentValue;
+				}
+			} else {
+				$z_paises->visibilidad->ViewValue = NULL;
+			}
 			$z_paises->visibilidad->ViewCustomAttributes = "";
 
 			// lp_pais_id

@@ -62,8 +62,11 @@ $RootMenu->AddMenuItem(785, $Language->MenuPhrase("785", "MenuText"), "z_codigo_
 $RootMenu->AddMenuItem(786, $Language->MenuPhrase("786", "MenuText"), "actividad_economicalist.php", 113, "", AllowListMenu('menu'), FALSE);
 $RootMenu->AddMenuItem(787, $Language->MenuPhrase("787", "MenuText"), "profesioneslist.php", 113, "", AllowListMenu('menu'), FALSE);
 $RootMenu->AddMenuItem(788, $Language->MenuPhrase("788", "MenuText"), "z_paiseslist.php", 113, "", AllowListMenu('menu'), FALSE);
-
-
+$RootMenu->AddMenuItem(788, $Language->MenuPhrase("789", "MenuText"), "estado_civillist.php", 113, "", AllowListMenu('menu'), FALSE);
+$RootMenu->AddMenuItem(788, $Language->MenuPhrase("790", "MenuText"), "z_municipioslist.php", 113, "", AllowListMenu('menu'), FALSE);
+$RootMenu->AddMenuItem(788, $Language->MenuPhrase("791", "MenuText"), "z_estadoslist.php", 113, "", AllowListMenu('menu'), FALSE);
+$RootMenu->AddMenuItem(788, $Language->MenuPhrase("792", "MenuText"), "z_ciudadlist.php", 113, "", AllowListMenu('menu'), FALSE);
+$RootMenu->AddMenuItem(788, $Language->MenuPhrase("793", "MenuText"), "tipos_productoslist.php", 113, "", AllowListMenu('menu'), FALSE);
 
 $RootMenu->AddMenuItem(12, $Language->MenuPhrase("12", "MenuText"), "estadolist.php", 113, "", AllowListMenu('estado'), FALSE);
 $RootMenu->AddMenuItem(7, $Language->MenuPhrase("7", "MenuText"), "ciudadlist.php", 113, "", AllowListMenu('ciudad'), FALSE);

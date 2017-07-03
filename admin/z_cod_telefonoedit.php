@@ -49,12 +49,6 @@ z_cod_telefono_edit.ValidateForm = function(fobj) {
 		elm = fobj.elements["x" + infix + "_cod_cel"];
 		if (elm && !ew_HasValue(elm))
 			return ew_OnError(this, elm, ewLanguage.Phrase("EnterRequiredField") + " - <?php echo ew_JsEncode2($z_cod_telefono->cod_cel->FldCaption()) ?>");
-		elm = fobj.elements["x" + infix + "_cod_cel"];
-		if (elm && !ew_CheckInteger(elm.value))
-			return ew_OnError(this, elm, "<?php echo ew_JsEncode2($z_cod_telefono->cod_cel->FldErrMsg()) ?>");
-		elm = fobj.elements["x" + infix + "_visibilidad"];
-		if (elm && !ew_CheckInteger(elm.value))
-			return ew_OnError(this, elm, "<?php echo ew_JsEncode2($z_cod_telefono->visibilidad->FldErrMsg()) ?>");
 
 		// Set up row object
 		var row = {};
@@ -145,7 +139,27 @@ $z_cod_telefono_edit->ShowMessage();
 	<tr id="r_cod_cel"<?php echo $z_cod_telefono->RowAttributes() ?>>
 		<td class="ewTableHeader"><?php echo $z_cod_telefono->cod_cel->FldCaption() ?><?php echo $Language->Phrase("FieldRequiredIndicator") ?></td>
 		<td<?php echo $z_cod_telefono->cod_cel->CellAttributes() ?>><span id="el_cod_cel">
-<input type="text" name="x_cod_cel" id="x_cod_cel" size="30" value="<?php echo $z_cod_telefono->cod_cel->EditValue ?>"<?php echo $z_cod_telefono->cod_cel->EditAttributes() ?>>
+<div id="tp_x_cod_cel" class="<?php echo EW_ITEM_TEMPLATE_CLASSNAME ?>"><label><input type="radio" name="x_cod_cel" id="x_cod_cel" value="{value}"<?php echo $z_cod_telefono->cod_cel->EditAttributes() ?>></label></div>
+<div id="dsl_x_cod_cel" data-repeatcolumn="5" class="ewItemList">
+<?php
+$arwrk = $z_cod_telefono->cod_cel->EditValue;
+if (is_array($arwrk)) {
+	$rowswrk = count($arwrk);
+	$emptywrk = TRUE;
+	for ($rowcntwrk = 0; $rowcntwrk < $rowswrk; $rowcntwrk++) {
+		$selwrk = (strval($z_cod_telefono->cod_cel->CurrentValue) == strval($arwrk[$rowcntwrk][0])) ? " checked=\"checked\"" : "";
+		if ($selwrk <> "") $emptywrk = FALSE;
+
+		// Note: No spacing within the LABEL tag
+?>
+<?php echo ew_RepeatColumnTable($rowswrk, $rowcntwrk, 5, 1) ?>
+<label><input type="radio" name="x_cod_cel" id="x_cod_cel" value="<?php echo ew_HtmlEncode($arwrk[$rowcntwrk][0]) ?>"<?php echo $selwrk ?><?php echo $z_cod_telefono->cod_cel->EditAttributes() ?>><?php echo $arwrk[$rowcntwrk][1] ?></label>
+<?php echo ew_RepeatColumnTable($rowswrk, $rowcntwrk, 5, 2) ?>
+<?php
+	}
+}
+?>
+</div>
 </span><?php echo $z_cod_telefono->cod_cel->CustomMsg ?></td>
 	</tr>
 <?php } ?>
@@ -153,7 +167,27 @@ $z_cod_telefono_edit->ShowMessage();
 	<tr id="r_visibilidad"<?php echo $z_cod_telefono->RowAttributes() ?>>
 		<td class="ewTableHeader"><?php echo $z_cod_telefono->visibilidad->FldCaption() ?></td>
 		<td<?php echo $z_cod_telefono->visibilidad->CellAttributes() ?>><span id="el_visibilidad">
-<input type="text" name="x_visibilidad" id="x_visibilidad" size="30" value="<?php echo $z_cod_telefono->visibilidad->EditValue ?>"<?php echo $z_cod_telefono->visibilidad->EditAttributes() ?>>
+<div id="tp_x_visibilidad" class="<?php echo EW_ITEM_TEMPLATE_CLASSNAME ?>"><label><input type="radio" name="x_visibilidad" id="x_visibilidad" value="{value}"<?php echo $z_cod_telefono->visibilidad->EditAttributes() ?>></label></div>
+<div id="dsl_x_visibilidad" data-repeatcolumn="5" class="ewItemList">
+<?php
+$arwrk = $z_cod_telefono->visibilidad->EditValue;
+if (is_array($arwrk)) {
+	$rowswrk = count($arwrk);
+	$emptywrk = TRUE;
+	for ($rowcntwrk = 0; $rowcntwrk < $rowswrk; $rowcntwrk++) {
+		$selwrk = (strval($z_cod_telefono->visibilidad->CurrentValue) == strval($arwrk[$rowcntwrk][0])) ? " checked=\"checked\"" : "";
+		if ($selwrk <> "") $emptywrk = FALSE;
+
+		// Note: No spacing within the LABEL tag
+?>
+<?php echo ew_RepeatColumnTable($rowswrk, $rowcntwrk, 5, 1) ?>
+<label><input type="radio" name="x_visibilidad" id="x_visibilidad" value="<?php echo ew_HtmlEncode($arwrk[$rowcntwrk][0]) ?>"<?php echo $selwrk ?><?php echo $z_cod_telefono->visibilidad->EditAttributes() ?>><?php echo $arwrk[$rowcntwrk][1] ?></label>
+<?php echo ew_RepeatColumnTable($rowswrk, $rowcntwrk, 5, 2) ?>
+<?php
+	}
+}
+?>
+</div>
 </span><?php echo $z_cod_telefono->visibilidad->CustomMsg ?></td>
 	</tr>
 <?php } ?>
@@ -161,7 +195,7 @@ $z_cod_telefono_edit->ShowMessage();
 	<tr id="r_descripcion"<?php echo $z_cod_telefono->RowAttributes() ?>>
 		<td class="ewTableHeader"><?php echo $z_cod_telefono->descripcion->FldCaption() ?></td>
 		<td<?php echo $z_cod_telefono->descripcion->CellAttributes() ?>><span id="el_descripcion">
-<input type="text" name="x_descripcion" id="x_descripcion" size="30" maxlength="45" value="<?php echo $z_cod_telefono->descripcion->EditValue ?>"<?php echo $z_cod_telefono->descripcion->EditAttributes() ?>>
+<textarea name="x_descripcion" id="x_descripcion" cols="0" rows="0"<?php echo $z_cod_telefono->descripcion->EditAttributes() ?>><?php echo $z_cod_telefono->descripcion->EditValue ?></textarea>
 </span><?php echo $z_cod_telefono->descripcion->CustomMsg ?></td>
 	</tr>
 <?php } ?>
@@ -533,11 +567,37 @@ class cz_cod_telefono_edit {
 			$z_cod_telefono->codigo->ViewCustomAttributes = "";
 
 			// cod_cel
-			$z_cod_telefono->cod_cel->ViewValue = $z_cod_telefono->cod_cel->CurrentValue;
+			if (strval($z_cod_telefono->cod_cel->CurrentValue) <> "") {
+				switch ($z_cod_telefono->cod_cel->CurrentValue) {
+					case "1":
+						$z_cod_telefono->cod_cel->ViewValue = $z_cod_telefono->cod_cel->FldTagCaption(1) <> "" ? $z_cod_telefono->cod_cel->FldTagCaption(1) : $z_cod_telefono->cod_cel->CurrentValue;
+						break;
+					case "0":
+						$z_cod_telefono->cod_cel->ViewValue = $z_cod_telefono->cod_cel->FldTagCaption(2) <> "" ? $z_cod_telefono->cod_cel->FldTagCaption(2) : $z_cod_telefono->cod_cel->CurrentValue;
+						break;
+					default:
+						$z_cod_telefono->cod_cel->ViewValue = $z_cod_telefono->cod_cel->CurrentValue;
+				}
+			} else {
+				$z_cod_telefono->cod_cel->ViewValue = NULL;
+			}
 			$z_cod_telefono->cod_cel->ViewCustomAttributes = "";
 
 			// visibilidad
-			$z_cod_telefono->visibilidad->ViewValue = $z_cod_telefono->visibilidad->CurrentValue;
+			if (strval($z_cod_telefono->visibilidad->CurrentValue) <> "") {
+				switch ($z_cod_telefono->visibilidad->CurrentValue) {
+					case "1":
+						$z_cod_telefono->visibilidad->ViewValue = $z_cod_telefono->visibilidad->FldTagCaption(1) <> "" ? $z_cod_telefono->visibilidad->FldTagCaption(1) : $z_cod_telefono->visibilidad->CurrentValue;
+						break;
+					case "0":
+						$z_cod_telefono->visibilidad->ViewValue = $z_cod_telefono->visibilidad->FldTagCaption(2) <> "" ? $z_cod_telefono->visibilidad->FldTagCaption(2) : $z_cod_telefono->visibilidad->CurrentValue;
+						break;
+					default:
+						$z_cod_telefono->visibilidad->ViewValue = $z_cod_telefono->visibilidad->CurrentValue;
+				}
+			} else {
+				$z_cod_telefono->visibilidad->ViewValue = NULL;
+			}
 			$z_cod_telefono->visibilidad->ViewCustomAttributes = "";
 
 			// descripcion
@@ -581,11 +641,17 @@ class cz_cod_telefono_edit {
 
 			// cod_cel
 			$z_cod_telefono->cod_cel->EditCustomAttributes = "";
-			$z_cod_telefono->cod_cel->EditValue = ew_HtmlEncode($z_cod_telefono->cod_cel->CurrentValue);
+			$arwrk = array();
+			$arwrk[] = array("1", $z_cod_telefono->cod_cel->FldTagCaption(1) <> "" ? $z_cod_telefono->cod_cel->FldTagCaption(1) : "1");
+			$arwrk[] = array("0", $z_cod_telefono->cod_cel->FldTagCaption(2) <> "" ? $z_cod_telefono->cod_cel->FldTagCaption(2) : "0");
+			$z_cod_telefono->cod_cel->EditValue = $arwrk;
 
 			// visibilidad
 			$z_cod_telefono->visibilidad->EditCustomAttributes = "";
-			$z_cod_telefono->visibilidad->EditValue = ew_HtmlEncode($z_cod_telefono->visibilidad->CurrentValue);
+			$arwrk = array();
+			$arwrk[] = array("1", $z_cod_telefono->visibilidad->FldTagCaption(1) <> "" ? $z_cod_telefono->visibilidad->FldTagCaption(1) : "1");
+			$arwrk[] = array("0", $z_cod_telefono->visibilidad->FldTagCaption(2) <> "" ? $z_cod_telefono->visibilidad->FldTagCaption(2) : "0");
+			$z_cod_telefono->visibilidad->EditValue = $arwrk;
 
 			// descripcion
 			$z_cod_telefono->descripcion->EditCustomAttributes = "";
@@ -632,14 +698,8 @@ class cz_cod_telefono_edit {
 		if (!is_null($z_cod_telefono->codigo->FormValue) && $z_cod_telefono->codigo->FormValue == "") {
 			ew_AddMessage($gsFormError, $Language->Phrase("EnterRequiredField") . " - " . $z_cod_telefono->codigo->FldCaption());
 		}
-		if (!is_null($z_cod_telefono->cod_cel->FormValue) && $z_cod_telefono->cod_cel->FormValue == "") {
+		if ($z_cod_telefono->cod_cel->FormValue == "") {
 			ew_AddMessage($gsFormError, $Language->Phrase("EnterRequiredField") . " - " . $z_cod_telefono->cod_cel->FldCaption());
-		}
-		if (!ew_CheckInteger($z_cod_telefono->cod_cel->FormValue)) {
-			ew_AddMessage($gsFormError, $z_cod_telefono->cod_cel->FldErrMsg());
-		}
-		if (!ew_CheckInteger($z_cod_telefono->visibilidad->FormValue)) {
-			ew_AddMessage($gsFormError, $z_cod_telefono->visibilidad->FldErrMsg());
 		}
 
 		// Return validate result

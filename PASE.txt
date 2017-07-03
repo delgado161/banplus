@@ -1,19 +1,49 @@
-INSERT EN LA TABLA MODULOS
-'ID', 'sol_tc.php', 'Solicitar TC', '1'
-'ID', 'apertura_cn.php', 'Apertura Cuenta Persona Natural', '1'
+###- INSERT EN LA TABLA MODULOS -###
+INSERT INTO modulos (plantilla,nombre,estatus)
+VALUES('apertura_cn.php','Apertura Cuenta Persona Natural','1'),('apertura_j.php','Apertura Cuenta Persona Juridica','1');
 
 
-ALTER TABLE `awvps_banplus`.`agencias` 
-ADD COLUMN `citas_diarias` INT NULL DEFAULT 0 AFTER `estatus`;
-
-ADMINISTRADOR
-CREAR CONTENIDO SOLICITAR TC
-    EDITAR EN BD CAMPO ID_HERRAMIENTA FINANCIERA ID DEL MODULO
-
-ARCHIVOS
-Banplus_3\site\modulos\sol_tc.php
-Banplus_3\site\modulos\apertura_cn.php
-Banplus_3\site\js\new_js.js
+###- AGREGAR CAMPO A AGENCIAS -###
+ALTER TABLE agencias ADD COLUMN citas_diarias INT NULL DEFAULT 0 AFTER estatus;
 
 
-C:\xampp\htdocs\Banplus_3\admin\ewmenu.php
+
+
+- Crear Contenido En el Administrador
+
+    Contenidos->Apertura De cuenta Persona Natural
+        Seleccionar para este contenido el modulo->Apertura Cuenta Persona Natural
+
+    Contenidos->Apertura De Cuetna Persona Juridica
+        Seleccionar para este contenido el modulo->Apertura Cuenta Persona Juridica
+
+- Agregar contenidos a la seccion correspondiente
+
+
+
+
+
+
+
+
+PAQUETE SITE
+
+\site\includes\i_db.php                     ->EDITAR CLAVE, USUARIO, HOST
+\site\includes\html2pdf\                    ->PASAR CARPETA COMPLETA
+\site\includes\i_comunes.php
+
+\site\css\                                  ->PASAR CARPETA COMPLETA
+\site\js\                                   ->PASAR CARPETA COMPLETA
+\site\img\Error-128.png
+\site\img\spiner.gif
+\site\modulos\tmp_apertura                  ->CREAR CARPETA CON PERMISOS 777
+
+\site\modulos\apertura_cn.php
+\site\modulos\apertura_j.php
+\site\modulos\envia_correos.php
+\site\modulos\pre_apertura.php
+\site\modulos\pdf_cpn.php
+\site\modulos\pdf_cpj.php
+\site\modulos\valida_fecha.php
+
+\site\p_contenido.php

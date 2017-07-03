@@ -1,5 +1,14 @@
+
 <?php
-$AGENCIA = execute_sql("get_agencia_all", array());
+session_start();
+$_SESSION = array();
+
+include("includes/captcha-master/simple-php-captcha.php");
+$_SESSION['captcha'] = simple_php_captcha();
+?>
+
+<?php
+$AGENCIA = execute_sql("get_agencia_all2", array());
 $_opc_agencia = '';
 foreach ($AGENCIA as $agencia)
     $_opc_agencia .= '  <option value="' . $agencia['id_agencias'] . '">' . $agencia['nombre'];
@@ -13,7 +22,7 @@ foreach ($CIVIL as $civil_)
 $act_eco = execute_sql("get_actividad_e", array());
 $_opc_acteco = '';
 foreach ($act_eco as $economica)
-    $_opc_acteco .= '  <option value="' . $economica['actividad'] . '">' . $economica['actividad'];
+    $_opc_acteco .= '  <option value="' . $economica['actividad'] . '_' . $economica['id_acteconomica'] . '">' . $economica['actividad'];
 
 $tp_paises = execute_sql("get_paises", array());
 $_opc_tp_pais = '';
@@ -72,9 +81,7 @@ foreach ($tp_paises as $tp_pais)
     $_opc_tp_nacionalidad .= '  <option value="' . $tp_pais['nacionalidad'] . '">' . $tp_pais['nacionalidad'];
 
 $tp_feriado = execute_sql("get_fecha_new", array());
-foreach ($tp_feriado as $feriado)
-    
-    ?>
+?>
 
 <script    src="https://code.jquery.com/jquery-3.2.1.min.js"    ></script>
 <script src = "js/UI/external/jquery/jquery.js" ></script>
@@ -83,6 +90,8 @@ foreach ($tp_feriado as $feriado)
 <script src="<?php echo URL_SITE; ?>js/new_js.js" type="text/javascript"></script>	
 <script>
     $(document).ready(function () {
+        
+        
         var Ciudades = {};
         var Municipios = {};
         var Agencia = {};
@@ -153,22 +162,42 @@ echo "];";
             if (!valor_)
                 $('#agencia_direccion').val('');
 
-            $("#fc_cita").datepicker({
-                dateFormat: "dd/mm/yy",
-                yearRange: '-0:+0',
-                minDate: +19,
-                maxDate: +150,
-                beforeShowDay: function (date) {
-                    var show = true;
-                    var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+
+            $.ajax({
+                url: 'modulos/valida_fecha.php',
+                data: {agencia: KEY},
+                error: function (xhr, status, error) {
+
+                },
+                success: function (data) {
+
+                    var array2 = "[" + data + "]";
+                    $("#fc_cita").datepicker("destroy");
+                    $("#fc_cita").datepicker({
+                        dateFormat: "dd/mm/yy",
+                        yearRange: '-0:+0',
+                        minDate: +19,
+                        maxDate: +150,
+                        beforeShowDay: function (date) {
+                            var show = true;
+                            var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
 
 
-                    if (date.getDay() == 6 || date.getDay() == 0 || array.indexOf(string) != -1)
-                        show = false
+                            if (date.getDay() == 0 || array.indexOf(string) != -1 || array2.indexOf(string) != -1)
+                                show = false
 
-                    return [show];
-                }
+                            return [show];
+                        }
+                    });
+
+                    $("#fc_cita").datepicker("refresh");
+                },
+                type: 'POST'
             });
+
+
+
+
 
 
         });

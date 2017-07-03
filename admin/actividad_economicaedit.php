@@ -49,9 +49,6 @@ actividad_economica_edit.ValidateForm = function(fobj) {
 		elm = fobj.elements["x" + infix + "_visibilidad"];
 		if (elm && !ew_HasValue(elm))
 			return ew_OnError(this, elm, ewLanguage.Phrase("EnterRequiredField") + " - <?php echo ew_JsEncode2($actividad_economica->visibilidad->FldCaption()) ?>");
-		elm = fobj.elements["x" + infix + "_visibilidad"];
-		if (elm && !ew_CheckInteger(elm.value))
-			return ew_OnError(this, elm, "<?php echo ew_JsEncode2($actividad_economica->visibilidad->FldErrMsg()) ?>");
 
 		// Set up row object
 		var row = {};
@@ -142,7 +139,27 @@ $actividad_economica_edit->ShowMessage();
 	<tr id="r_visibilidad"<?php echo $actividad_economica->RowAttributes() ?>>
 		<td class="ewTableHeader"><?php echo $actividad_economica->visibilidad->FldCaption() ?><?php echo $Language->Phrase("FieldRequiredIndicator") ?></td>
 		<td<?php echo $actividad_economica->visibilidad->CellAttributes() ?>><span id="el_visibilidad">
-<input type="text" name="x_visibilidad" id="x_visibilidad" size="30" value="<?php echo $actividad_economica->visibilidad->EditValue ?>"<?php echo $actividad_economica->visibilidad->EditAttributes() ?>>
+<div id="tp_x_visibilidad" class="<?php echo EW_ITEM_TEMPLATE_CLASSNAME ?>"><label><input type="radio" name="x_visibilidad" id="x_visibilidad" value="{value}"<?php echo $actividad_economica->visibilidad->EditAttributes() ?>></label></div>
+<div id="dsl_x_visibilidad" data-repeatcolumn="5" class="ewItemList">
+<?php
+$arwrk = $actividad_economica->visibilidad->EditValue;
+if (is_array($arwrk)) {
+	$rowswrk = count($arwrk);
+	$emptywrk = TRUE;
+	for ($rowcntwrk = 0; $rowcntwrk < $rowswrk; $rowcntwrk++) {
+		$selwrk = (strval($actividad_economica->visibilidad->CurrentValue) == strval($arwrk[$rowcntwrk][0])) ? " checked=\"checked\"" : "";
+		if ($selwrk <> "") $emptywrk = FALSE;
+
+		// Note: No spacing within the LABEL tag
+?>
+<?php echo ew_RepeatColumnTable($rowswrk, $rowcntwrk, 5, 1) ?>
+<label><input type="radio" name="x_visibilidad" id="x_visibilidad" value="<?php echo ew_HtmlEncode($arwrk[$rowcntwrk][0]) ?>"<?php echo $selwrk ?><?php echo $actividad_economica->visibilidad->EditAttributes() ?>><?php echo $arwrk[$rowcntwrk][1] ?></label>
+<?php echo ew_RepeatColumnTable($rowswrk, $rowcntwrk, 5, 2) ?>
+<?php
+	}
+}
+?>
+</div>
 </span><?php echo $actividad_economica->visibilidad->CustomMsg ?></td>
 	</tr>
 <?php } ?>
@@ -502,7 +519,20 @@ class cactividad_economica_edit {
 			$actividad_economica->actividad->ViewCustomAttributes = "";
 
 			// visibilidad
-			$actividad_economica->visibilidad->ViewValue = $actividad_economica->visibilidad->CurrentValue;
+			if (strval($actividad_economica->visibilidad->CurrentValue) <> "") {
+				switch ($actividad_economica->visibilidad->CurrentValue) {
+					case "1":
+						$actividad_economica->visibilidad->ViewValue = $actividad_economica->visibilidad->FldTagCaption(1) <> "" ? $actividad_economica->visibilidad->FldTagCaption(1) : $actividad_economica->visibilidad->CurrentValue;
+						break;
+					case "0":
+						$actividad_economica->visibilidad->ViewValue = $actividad_economica->visibilidad->FldTagCaption(2) <> "" ? $actividad_economica->visibilidad->FldTagCaption(2) : $actividad_economica->visibilidad->CurrentValue;
+						break;
+					default:
+						$actividad_economica->visibilidad->ViewValue = $actividad_economica->visibilidad->CurrentValue;
+				}
+			} else {
+				$actividad_economica->visibilidad->ViewValue = NULL;
+			}
 			$actividad_economica->visibilidad->ViewCustomAttributes = "";
 
 			// id_acteconomica
@@ -532,7 +562,10 @@ class cactividad_economica_edit {
 
 			// visibilidad
 			$actividad_economica->visibilidad->EditCustomAttributes = "";
-			$actividad_economica->visibilidad->EditValue = ew_HtmlEncode($actividad_economica->visibilidad->CurrentValue);
+			$arwrk = array();
+			$arwrk[] = array("1", $actividad_economica->visibilidad->FldTagCaption(1) <> "" ? $actividad_economica->visibilidad->FldTagCaption(1) : "1");
+			$arwrk[] = array("0", $actividad_economica->visibilidad->FldTagCaption(2) <> "" ? $actividad_economica->visibilidad->FldTagCaption(2) : "0");
+			$actividad_economica->visibilidad->EditValue = $arwrk;
 
 			// Edit refer script
 			// id_acteconomica
@@ -569,11 +602,8 @@ class cactividad_economica_edit {
 		if (!is_null($actividad_economica->actividad->FormValue) && $actividad_economica->actividad->FormValue == "") {
 			ew_AddMessage($gsFormError, $Language->Phrase("EnterRequiredField") . " - " . $actividad_economica->actividad->FldCaption());
 		}
-		if (!is_null($actividad_economica->visibilidad->FormValue) && $actividad_economica->visibilidad->FormValue == "") {
+		if ($actividad_economica->visibilidad->FormValue == "") {
 			ew_AddMessage($gsFormError, $Language->Phrase("EnterRequiredField") . " - " . $actividad_economica->visibilidad->FldCaption());
-		}
-		if (!ew_CheckInteger($actividad_economica->visibilidad->FormValue)) {
-			ew_AddMessage($gsFormError, $actividad_economica->visibilidad->FldErrMsg());
 		}
 
 		// Return validate result

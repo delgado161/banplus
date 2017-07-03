@@ -1017,7 +1017,20 @@ class cz_bancos_list {
 			$z_bancos->banco->ViewCustomAttributes = "";
 
 			// visibilidad
-			$z_bancos->visibilidad->ViewValue = $z_bancos->visibilidad->CurrentValue;
+			if (strval($z_bancos->visibilidad->CurrentValue) <> "") {
+				switch ($z_bancos->visibilidad->CurrentValue) {
+					case "1":
+						$z_bancos->visibilidad->ViewValue = $z_bancos->visibilidad->FldTagCaption(1) <> "" ? $z_bancos->visibilidad->FldTagCaption(1) : $z_bancos->visibilidad->CurrentValue;
+						break;
+					case "0":
+						$z_bancos->visibilidad->ViewValue = $z_bancos->visibilidad->FldTagCaption(2) <> "" ? $z_bancos->visibilidad->FldTagCaption(2) : $z_bancos->visibilidad->CurrentValue;
+						break;
+					default:
+						$z_bancos->visibilidad->ViewValue = $z_bancos->visibilidad->CurrentValue;
+				}
+			} else {
+				$z_bancos->visibilidad->ViewValue = NULL;
+			}
 			$z_bancos->visibilidad->ViewCustomAttributes = "";
 
 			// id_bancos
