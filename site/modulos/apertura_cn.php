@@ -855,7 +855,7 @@
                     <div class="sep_2"></div>
                     <div class="div_form">
                         <label for="agencia_direccion" style="font-size: 12px;">Dirección:</label><br>
-                        <input id="agencia_direccion" name="agencia_direccion" type="text" class="" style="width: 760px;background: #e6e6e6;"></span>
+                        <input id="agencia_direccion" name="agencia_direccion" type="text" class="" style="width: 760px;background: #e6e6e6;" readonly></span>
                     </div>
                 </div>
 
@@ -876,7 +876,7 @@
 
 <?php } else { ?>
     <br><br><br><br><br>
-    <h3 style="width: 100%;border:none;    text-align: center;">Espere un momento mientras procesamos el envio de su solictud</h3>
+    <h3 style="width: 100%;border:none;text-align: center;">Espere un momento mientras procesamos el envio de su solictud</h3>
 
     <?php
 }

@@ -7,6 +7,17 @@ Author     : Roberto Delgado
 
 if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "NATURAL") {
 
+
+
+    $data = '';
+    foreach ($_POST as $key => $valores) {
+        $data .= ($key) . "_" . ($valores) . ",";
+    }
+
+//    var_dump($_data);
+    actualizar_campo('insertar_cita', [15, $_POST['fc_cita'], "'ACPN_" . $_POST['tp_documento'] . $_POST['n_documento'] . "'", "'" . $data . "'"]);
+
+
     Foreach ($Estados as $estado) {
         if ($estado['id2_estado'] == $_POST['dtp_estado'])
             $_POST['dtp_estado'] = $estado['nombre'];
@@ -131,7 +142,7 @@ if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "JURIDICO") {
 //    $_POST['etp_ciudad'] = explode(",", $_POST['etp_ciudad']);
 //
     $_POST['etp_ciudad'] = explode(",", $_POST['etp_ciudad']);
-   
+
     $_POST['etp_municipio'] = explode(",", $_POST['etp_municipio']);
 
     foreach ($Ciudades as $Ciudad) {
@@ -215,22 +226,22 @@ if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "JURIDICO") {
                 },
                 success: function (data) {
 
-                                        $.ajax({
-                                            url: 'modulos/correo.php',
-                                            data: <?php echo json_encode($_POST) ?>,
-                                            error: function (xhr, status, error) {
-                    
-                                            },
-                                            success: function (data) {
-                                                var r = confirm("\u00bfDesea realizar la solicitud de TDC?");
-                                                if (r == true) {
-                                                    txt = "You pressed OK!";
-                                                } else {
-                                                    txt = "You pressed Cancel!";
-                                                }
-                                            },
-                                            type: 'POST'
-                                        });
+                    $.ajax({
+                        url: 'modulos/correo.php',
+                        data: <?php echo json_encode($_POST) ?>,
+                        error: function (xhr, status, error) {
+
+                        },
+                        success: function (data) {
+                            var r = confirm("\u00bfDesea realizar la solicitud de TDC?");
+                            if (r == true) {
+                                txt = "You pressed OK!";
+                            } else {
+                                txt = "You pressed Cancel!";
+                            }
+                        },
+                        type: 'POST'
+                    });
                 },
                 type: 'POST'
             });

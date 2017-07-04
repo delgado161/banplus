@@ -16,7 +16,6 @@ function sql_quote($value) {
         }
     }
     return $value;
-
 }
 
 function execute_sql($nombre, $ArrParams = NULL) {
@@ -540,7 +539,7 @@ function execute_sql($nombre, $ArrParams = NULL) {
         case 'get_fecha_new':
             $sql = "SELECT * FROM calendario where fecha > '" . date("Y-m-d") . " 00:00:00' and estatus=1 ";
 
-          
+
             break;
     }
 
@@ -568,10 +567,10 @@ function execute_sql($nombre, $ArrParams = NULL) {
     mysql_free_result($ejecutar_sql);
     cerrarConexion();
     return $object;
-
 }
 
 function actualizar_campo($nombre, $ArrParams = NULL) {
+//    var_dump($ArrParams[3]);
     switch ($nombre) {
         case 'actualiza_menu':
             $sql = "UPDATE respuestas SET contador=contador+1 WHERE id_respuestas='" . $ArrParams[0] . "'";
@@ -588,6 +587,14 @@ function actualizar_campo($nombre, $ArrParams = NULL) {
             $sql = " UPDATE usuarios SET llave=md5(acceso) WHERE id_usuario=" . $ArrParams[0] . " ";
             //echo $sql;
             break;
+
+        case 'insertar_cita':
+            $sql = "INSERT INTO _cita (fk_agencia,fecha,solicitud,valores)
+                    VALUES($ArrParams[0],'" . $ArrParams[1] . "'," . $ArrParams[2] . ",'" . ($ArrParams[3]) . "');";
+            echo $sql;
+            break;
+
+
         default:
             return NULL;
     }
@@ -602,7 +609,6 @@ function actualizar_campo($nombre, $ArrParams = NULL) {
 
     cerrarConexion();
     return($ejecutar_sql);
-
 }
 
 function traer_totales($nombre, $ArrParams = NULL) {
@@ -627,7 +633,6 @@ function traer_totales($nombre, $ArrParams = NULL) {
     echo "<li>" . $num_rows;
     cerrarConexion();
     return $num_rows;
-
 }
 
 function seteo($cadena) {
@@ -637,7 +642,6 @@ function seteo($cadena) {
     //echo "cadena cad1='".$cad1."' ///";
     $cad = $cad . $cad1;
     return $cad;
-
 }
 
 ?>
