@@ -1,10 +1,15 @@
 
 <?php
+
+
+
 session_start();
 $_SESSION = array();
 
 include("includes/captcha-master/simple-php-captcha.php");
 $_SESSION['captcha'] = simple_php_captcha();
+
+
 ?>
 
 <?php
@@ -19,10 +24,15 @@ $_opc_civil = '';
 foreach ($CIVIL as $civil_)
     $_opc_civil .= '  <option value="' . $civil_['nombre'] . '">' . $civil_['nombre'];
 
+
+
 $act_eco = execute_sql("get_actividad_e", array());
+
 $_opc_acteco = '';
 foreach ($act_eco as $economica)
     $_opc_acteco .= '  <option value="' . $economica['actividad'] . '_' . $economica['id_acteconomica'] . '">' . $economica['actividad'];
+
+
 
 $tp_paises = execute_sql("get_paises", array());
 $_opc_tp_pais = '';
@@ -81,6 +91,8 @@ foreach ($tp_paises as $tp_pais)
     $_opc_tp_nacionalidad .= '  <option value="' . $tp_pais['nacionalidad'] . '">' . $tp_pais['nacionalidad'];
 
 $tp_feriado = execute_sql("get_fecha_new", array());
+
+
 ?>
 
 <script    src="https://code.jquery.com/jquery-3.2.1.min.js"    ></script>

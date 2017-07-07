@@ -14,7 +14,7 @@ try {
         $_POST[$key] = htmlentities($post);
     }
 
-    $html2pdf = new HTML2PDF('L', 'A4', 'en', false, 'ISO-8859-15', array(2, 2, 2, 2));
+    $html2pdf = new HTML2PDF('L', 'A4', 'en', false, 'ISO-8859-15', array(1, 1, 1, 1));
 //      $html2pdf->setModeDebug();
     $html2pdf->setDefaultFont('Arial');
 
@@ -27,7 +27,7 @@ try {
     .bloque{width:100%;border: none;}
     .bloque table{border:none;margin-left:-1px;width:100.3%;margin-top:-2px;}
     .etiqueta{ border: none;text-align: left;font-size: 9px;vertical-align: top;}
-    .titulo{text-align: center;font-size: 12px;border:none;font-weight: bold;}
+    .titulo{text-align: center;font-size: 16px;border:none;font-weight: bold;}
      .titulo2{text-align: center;font-size: 12px;border:none;font-weight: bold; background: rgb(0,37,84);color:white;border-radius:8px;}
     .d_linea{font-size: 9px;}
     .b_left{border-left: none;}
@@ -40,7 +40,7 @@ try {
 <page  backleft="0mm" backright="0mm">
 <table style=" border-collapse: collapse;">
     <tr>
-        <td  style="width:33.33%;border:none;padding-right:5px;vertical-align: top;">
+        <td  style="width:33.33%;border:none;padding-right:10px;vertical-align: top;">
         <table style="border-collapse: collapse;border:none;font-size:11px;" >
                 <tr>
                     <td style="border:none;">
@@ -53,13 +53,27 @@ try {
                     </td>               
                 </tr>
                 <tr>
+                    <td class="titulo" style="text-align:right;">
+                       <input type="checkbox" checked="checked" > <img src="../img/visa.png" width="50px;" /> 
+ &nbsp;&nbsp;                      
+<input type="checkbox" checked="checked" > <img src="../img/MasterCard.png" width="40px;" /> &nbsp;&nbsp; 
+                    </td>               
+                </tr>
+                 <tr>
+                    <td class="etiqueta" style="width:100%;borde: none;height:2px;"   >  </td>
+                </tr>   
+                <tr>
                     <td class="titulo2">
                         DATOS PERSONALES
                     </td>               
                 </tr>
             </table>
+           
             <table style="border-collapse: collapse;border:none;font-size:11px;" >
-                <tr>
+ <tr>
+                    <td class="etiqueta" style="width:100%;borde: none;height:2px;" colspan="2"  >  </td>
+                </tr>                  
+<tr>
                     <td class="etiqueta" style="width:80%;border-right: 1px solid rgb(129,129,129);">Nombres y Apellidos:</td>
                     <td class="etiqueta" style="width:20%;">Sexo</td>
                 </tr>
@@ -201,7 +215,7 @@ try {
                 <tr>
                     <td class="etiqueta" style="width:100%;" colspan="3"> <b>DIRECCI&Oacute;N HABITACI&Oacute;N </b></td>
                 </tr>                
-                  <tr class="valores">
+                  <tr >
                     <td class="etiqueta" style="width:32%;border-right: 1px solid rgb(129,129,129);" > Avenida: </td>
                    <td class="etiqueta" style="width:32%;border-right: 1px solid rgb(129,129,129);" > Calle: </td>
                     <td class="etiqueta" style="width:36%;" > 
@@ -359,7 +373,7 @@ try {
 
 
 </td>
-        <td  style="width:33.33%;border:none;vertical-align: top;">
+        <td  style="width:33.33%;border:none;vertical-align: top;padding-right:10px;">
         
             <table style="border-collapse: collapse;border:none;font-size:11px;" >
                 <tr>
@@ -368,6 +382,7 @@ try {
                     </td>               
                 </tr>
             </table>
+            <br>
              <table style="border-collapse: collapse;border:none;font-size:11px;" >
                              
                 <tr>
@@ -422,7 +437,7 @@ try {
             </table>
             <br>
             <br>
-            <br>
+            
   <table style="border-collapse: collapse;border:none;font-size:11px;" >
                 <tr>
                     <td class="titulo2">
@@ -430,11 +445,663 @@ try {
                     </td>               
                 </tr>
             </table>
-    
+             <br>
+            <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                             
+                <tr>
+                    <td class="etiqueta" style="width:100%;" > Empresa donde trabaja (Actual): </td>
+               
+                </tr>
+                
+                 <tr class="valores">
+                    <td  style="width:100%;border-left:none;border-right:none;" > 
+                    sd
+                    </td>
+                    
+                </tr>
+            </table>
+              <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                             
+                  <tr >
+                    <td class="etiqueta" style="width:32%;border-right: 1px solid rgb(129,129,129);" > Avenida: </td>
+                   <td class="etiqueta" style="width:32%;border-right: 1px solid rgb(129,129,129);" > Calle: </td>
+                    <td class="etiqueta" style="width:36%;" > 
+                    Casa<input type="checkbox" checked="checked" >
+                    &nbsp;Quinta<input type="checkbox" checked="checked" >
+                    &nbsp;Edf.<input type="checkbox" checked="checked" ><br>
+                    Nombre o N&ordm;
+                    </td>
+                </tr>
+                
+                  <tr class="valores">
+                    <td  style="width:32%;border-left:none;" > s </td>
+                   <td  style="width:32%;" > f </td>
+                    <td  style="width:36%;border-right:none;" > g </td>
+                </tr>
+            </table>
+            <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                             
+                <tr>
+                    <td class="etiqueta" style="width:14%;border-right: 1px solid rgb(129,129,129);" > Piso: </td>
+                   <td class="etiqueta" style="width:14%;border-right: 1px solid rgb(129,129,129);" > Oficina: </td>
+                    <td class="etiqueta" style="width:36%;border-right: 1px solid rgb(129,129,129);" > Urbanizaci&oacute;n/Sector/Barrio: </td>
+                   <td class="etiqueta" style="width:36%;" > Parroquia: </td>
+                </tr>
+                
+                  <tr class="valores">
+                    <td  style="width:14%;border-left:none;" > s </td>
+                   <td  style="width:14%;" > f </td>
+                    <td  style="width:36%;" > g </td>
+                     <td  style="width:36%;border-right:none;" > g </td>
+                </tr>
+            </table>
+             <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                             
+                <tr>
+                    <td class="etiqueta" style="width:25%;border-right: 1px solid rgb(129,129,129);" > Municipio: </td>
+                   <td class="etiqueta" style="width:25%;border-right: 1px solid rgb(129,129,129);" > Estado: </td>
+                    <td class="etiqueta" style="width:25%;border-right: 1px solid rgb(129,129,129);" > Ciudad: </td>
+                   <td class="etiqueta" style="width:25%;" > Zona Postal: </td>
+                </tr>
+                
+                 <tr class="valores">
+                    <td  style="width:25%;border-left:none;" > s </td>
+                   <td  style="width:25%;" > f </td>
+                    <td  style="width:25%;" > g </td>
+                     <td  style="width:25%;border-right:none;" > g </td>
+                </tr>
+            </table>
+             <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                             
+                <tr>
+                    <td class="etiqueta" style="width:70%;border-right: 1px solid rgb(129,129,129);" > Tel&eacute;fonos Oficina: </td>
+                   <td class="etiqueta" style="width:30%;" >Fax Oficina:
+                    </td>
+                </tr>
+                
+                <tr class="valores">
+                    <td  style="width:70%;border-left:none;" > s </td>
+                     <td  style="width:30%;border-right:none;" > 
+                     d
+                    </td>
+                </tr>
+            </table>
+             <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                             
+                <tr>
+                    <td class="etiqueta" style="width:70%;border-right: 1px solid rgb(129,129,129);" > Correo Electr&oacute;nico: </td>
+                   <td class="etiqueta" style="width:30%;" >Sector Econ&oacute;mico:
+                    </td>
+                </tr>
+                
+                <tr class="valores">
+                    <td  style="width:70%;border-left:none;" > s </td>
+                     <td  style="width:30%;border-right:none;" > 
+                     d
+                    </td>
+                </tr>
+            </table>
+             <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                             
+                <tr>
+                    <td class="etiqueta" style="width:70%;border-right: 1px solid rgb(129,129,129);" > Cargo: </td>
+                   <td class="etiqueta" style="width:30%;" >Tiempo en la Empresa:
+                    </td>
+                </tr>
+                
+                <tr class="valores">
+                    <td  style="width:70%;border-left:none;" > s </td>
+                     <td  style="width:30%;border-right:none;" > 
+                     d
+                    </td>
+                </tr>
+            </table>
+             <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                             
+                <tr>
+                    <td class="etiqueta" style="width:50%;border-right: 1px solid rgb(129,129,129);" > Sueldo Mensual: </td>
+                   <td class="etiqueta" style="width:50%;" >Otros Ingresos:  </td>
+                </tr>
+                
+                <tr class="valores">
+                    <td  style="width:50%;border-left:none;" > s </td>
+                     <td  style="width:50%;border-right:none;" >    d                    </td>
+                </tr>
+            </table>
+             <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                             
+                <tr>
+                    <td class="etiqueta" style="width:100%;" > Por Concepto de: </td>
+               
+                </tr>
+                
+                 <tr class="valores">
+                    <td  style="width:100%;border-left:none;border-right:none;" > 
+                    sd
+                    </td>
+                    
+                </tr>
+            </table>
+            <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                             
+                <tr>
+                    <td class="etiqueta" style="width:70%;border-right: 1px solid rgb(129,129,129);" > Nombre de la Empresa donde trabajo anteriolmente: </td>
+                   <td class="etiqueta" style="width:30%;" >Sector Econ&oacute;mico:
+                    </td>
+                </tr>
+                
+                <tr class="valores">
+                    <td  style="width:70%;border-left:none;" > s </td>
+                     <td  style="width:30%;border-right:none;" > 
+                     d
+                    </td>
+                </tr>
+            </table>
+              <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                             
+                <tr>
+                    <td class="etiqueta" style="width:50%;border-right: 1px solid rgb(129,129,129);" > Cargo: </td>
+                   <td class="etiqueta" style="width:50%;" >Ingreso Mensual:  </td>
+                </tr>
+                
+                <tr class="valores">
+                    <td  style="width:50%;border-left:none;" > s </td>
+                     <td  style="width:50%;border-right:none;" >    d                    </td>
+                </tr>
+            </table>
+             <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                             
+                <tr>
+                    <td class="etiqueta" style="width:50%;border-right: 1px solid rgb(129,129,129);" > Fecha Egreso: </td>
+                   <td class="etiqueta" style="width:50%;" >Tiempo en la Empresa:  </td>
+                </tr>
+                
+                <tr class="valores">
+                    <td  style="width:50%;border-left:none;" > s </td>
+                     <td  style="width:50%;border-right:none;" >    d                    </td>
+                </tr>
+            </table>
+            <br>
+            <br>
+            <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="titulo2">
+                       DATOS FINANCIEROS
+                    </td>               
+                </tr>
+            </table>
+               <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                             
+                <tr>
+                    <td class="etiqueta" style="width:100%;" > <br>Balance al: </td>
+               
+                </tr>
+               
+            </table>
+            
+            <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                             
+                <tr>
+                    <td class="etiqueta" style="width:25%;border-bottom: 1px solid rgb(129,129,129);" ></td>
+                    <td class="etiqueta" style="width:25%;text-align:center;border-bottom: 1px solid rgb(129,129,129);" > <b>Activos</b></td>
+                    <td class="etiqueta" style="width:25%;border-bottom: 1px solid rgb(129,129,129);" > </td>
+                    <td class="etiqueta" style="width:25%;text-align:center;border-bottom: 1px solid rgb(129,129,129);" > <b>Pasivo y Patrimonio</b> </td>
+                </tr>
+               
+            </table>
+              <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                             
+                <tr class="valores">
+                    <td  style="width:25%;background:rgb(200,200,200);height:20px;border-left:none;border-right:none" >1. Banco</td>
+                    <td  style="width:25%;text-align:center;border-left:none;border-right:none" ></td>
+                    <td  style="width:25%;background:rgb(200,200,200);border-left:none;border-right:none" >7. Tarjetas de Cr&eacute;dito </td>
+                    <td  style="width:25%;text-align:center;border-right:none;" >  </td>
+                </tr>
+                <tr class="valores">
+                    <td  style="width:25%;background:rgb(200,200,200);height:20px;border-left:none;border-right:none" >2. Inversiones</td>
+                    <td  style="width:25%;text-align:center;border-left:none;border-right:none" ></td>
+                    <td  style="width:25%;background:rgb(200,200,200);border-left:none;border-right:none" >8. Pr&eacute;stamos  </td>
+                    <td  style="width:25%;text-align:center;border-right:none;" >  </td>
+                </tr>  
+                <tr class="valores">
+                    <td  style="width:25%;background:rgb(200,200,200);height:20px;border-left:none;border-right:none" >3. Moviliario</td>
+                    <td  style="width:25%;text-align:center;border-left:none;border-right:none" ></td>
+                    <td  style="width:25%;background:rgb(200,200,200);border-left:none;border-right:none" >9. Hipotecas por Pagar  </td>
+                    <td  style="width:25%;text-align:center;border-right:none;" >  </td>
+                </tr> 
+                 <tr class="valores">
+                    <td  style="width:25%;background:rgb(200,200,200);height:20px;border-left:none;border-right:none" >4. Veh&iacute;culos</td>
+                    <td  style="width:25%;text-align:center;border-left:none;border-right:none" ></td>
+                    <td  style="width:25%;background:rgb(200,200,200);border-left:none;border-right:none" ><b>10. Total Pasivo</b><br>(7+8+9)</td>
+                    <td  style="width:25%;text-align:center;border-right:none;" >  </td>
+                </tr> 
+                 <tr class="valores">
+                    <td  style="width:25%;background:rgb(200,200,200);height:20px;border-left:none;border-right:none" >5. Inmuebles</td>
+                    <td  style="width:25%;text-align:center;border-left:none;border-right:none" ></td>
+                    <td  style="width:25%;background:rgb(200,200,200);border-left:none;border-right:none" >11. Patrimonio (6-10)</td>
+                    <td  style="width:25%;text-align:center;border-right:none;" >  </td>
+                </tr> 
+                 <tr class="valores">
+                    <td  style="width:25%;background:rgb(200,200,200);height:20px;border-left:none;border-right:none" ><b>6. Total Activos</b><br>(1+2+3+4+5)</td>
+                    <td  style="width:25%;text-align:center;border-left:none;border-right:none" ></td>
+                    <td  style="width:25%;background:rgb(200,200,200);border-left:none;border-right:none;" ><b>10. Total Pasivo y Patrimonio</b></td>
+                    <td  style="width:25%;text-align:center;border-right:none;" >  </td>
+                </tr> 
+
+            </table>
+            
 
 
 </td>
-        <td  style="width:33.33%;border:none;"><b>FECHA:</b>  ' . $_POST['fc_cita'] . '</td>
+        <td  style="width:33.33%;border:none;vertical-align: top;padding-right:10px;">
+        <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="titulo2">
+                       REFERENCIAS BANCARIAS
+                    </td>               
+                </tr>
+            </table>
+            
+                 <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                   <tr>
+                    <td class="etiqueta" style="width:100%;borde: none;height:2px;"  colspan="3">  </td>
+                </tr>          
+                <tr>
+                    <td class="etiqueta" style="vertical-align:middle;text-align:center;width:24%;border-right: 1px solid rgb(129,129,129);background:rgb(200,200,200);height:15px;" > BANCO </td>
+                     <td class="etiqueta" style="vertical-align:middle;text-align:center;width:68%;border-right: 1px solid rgb(129,129,129);background:rgb(200,200,200);height:15px;" > C&Oacute;DIGO CUENTA CORRIENTE (C= Corriente / A= Ahorro) </td>
+                   <td class="etiqueta" style="vertical-align:middle;text-align:center;width:8%;background:rgb(200,200,200);height:15px;" >TIPO  </td>
+                </tr>
+                
+                <tr class="valores">
+                    <td  style="width:24%;border-left:none;" > s </td>
+                    <td  style="width:68%;border-left:none;" > s </td>
+                     <td  style="width:8%;border-right:none;" >  
+                      &nbsp;<input type="checkbox" checked="checked" >C <br>
+                    &nbsp;<input type="checkbox" checked="checked" >A               
+                     </td>
+                </tr>
+                <tr class="valores">
+                    <td  style="width:24%;border-left:none;" > s </td>
+                    <td  style="width:68%;border-left:none;" > s </td>
+                     <td  style="width:8%;border-right:none;" >  
+                      &nbsp;<input type="checkbox" checked="checked" >C <br>
+                    &nbsp;<input type="checkbox" checked="checked" >A               
+                     </td>
+                </tr>
+                <tr class="valores">
+                    <td  style="width:24%;border-left:none;" > s </td>
+                    <td  style="width:68%;border-left:none;" > s </td>
+                     <td  style="width:8%;border-right:none;" >  
+                      &nbsp;<input type="checkbox" checked="checked" >C <br>
+                    &nbsp;<input type="checkbox" checked="checked" >A               
+                     </td>
+                </tr>
+                <tr class="valores">
+                    <td  style="width:24%;border-left:none;" > s </td>
+                    <td  style="width:68%;border-left:none;" > s </td>
+                     <td  style="width:8%;border-right:none;" >  
+                      &nbsp;<input type="checkbox" checked="checked" >C <br>
+                    &nbsp;<input type="checkbox" checked="checked" >A               
+                     </td>
+                </tr>
+                  <tr>
+                    <td class="etiqueta" style="width:100%;borde: none;height:2px;"  colspan="3">  </td>
+                </tr>   
+                
+            </table>
+          
+          
+  <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="titulo2">
+                       REFERENCIAS DE TARJETAS DE CREDITO
+                    </td>               
+                </tr>
+            </table>
+           
+            <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="etiqueta" style="width:100%;borde: none;height:2px;"  colspan="3">  </td>
+                </tr>        
+                <tr>
+                    <td class="etiqueta" style="width:30%;border-right: 1px solid rgb(129,129,129);" > Banco </td>
+                     <td class="etiqueta" style=width:62%;border-right: 1px solid rgb(129,129,129);" > Tarjeta N&ordm; </td>
+                   <td class="etiqueta" style="width:8%;" >&nbsp;<input type="checkbox" checked="checked" >T </td>
+                </tr>
+                <tr class="valores">
+                    <td  style="width:30%;border-left:none;" > s </td>
+                    <td  style="width:62%;border-left:none;" > s </td>
+                     <td  style="width:8%;border-right:none;" >  
+                     &nbsp;<input type="checkbox" checked="checked" >s               
+                     </td>
+                </tr>
+              
+            </table> 
+             <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="etiqueta" style="width:30%;border-right: 1px solid rgb(129,129,129);" > 
+                    &nbsp;<input type="checkbox" checked="checked" >Cl&aacute;sica
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" checked="checked" >Dorada<br>
+                    &nbsp;<input type="checkbox" checked="checked" >Platinum
+                    &nbsp;&nbsp;<input type="checkbox" checked="checked" >Black
+                    </td>
+                     <td class="etiqueta" style=width:35%;" > L&iacute;mite de Cr&eacute;dito </td>
+                   <td class="etiqueta" style="width:35%;" >Saldo Actual</td>
+                </tr>
+                <tr class="valores">
+                    <td  style="width:30%;border-left:none;" >
+                    
+                    &nbsp;<input type="checkbox" checked="checked" >Otros 
+                    </td>
+                    <td  style="width:35%;border-left:none;border-right:none;" > s </td>
+                     <td  style="width:35%;border-left:none;border-right:none;" >  
+                                   
+                     </td>
+                </tr>
+              
+            </table> 
+              <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="etiqueta" style="width:30%;border-right: 1px solid rgb(129,129,129);" > Banco </td>
+                     <td class="etiqueta" style=width:62%;border-right: 1px solid rgb(129,129,129);" > Tarjeta N&ordm; </td>
+                   <td class="etiqueta" style="width:8%;" >&nbsp;<input type="checkbox" checked="checked" >T </td>
+                </tr>
+                <tr class="valores">
+                    <td  style="width:30%;border-left:none;" > s </td>
+                    <td  style="width:62%;border-left:none;" > s </td>
+                     <td  style="width:8%;border-right:none;" >  
+                     &nbsp;<input type="checkbox" checked="checked" >s               
+                     </td>
+                </tr>
+              
+            </table> 
+             <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="etiqueta" style="width:30%;border-right: 1px solid rgb(129,129,129);" > 
+                    &nbsp;<input type="checkbox" checked="checked" >Cl&aacute;sica
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" checked="checked" >Dorada<br>
+                    &nbsp;<input type="checkbox" checked="checked" >Platinum
+                    &nbsp;&nbsp;<input type="checkbox" checked="checked" >Black
+                    </td>
+                     <td class="etiqueta" style=width:35%;" > L&iacute;mite de Cr&eacute;dito </td>
+                   <td class="etiqueta" style="width:35%;" >Saldo Actual</td>
+                </tr>
+                <tr class="valores">
+                    <td  style="width:30%;border-left:none;" >
+                    
+                    &nbsp;<input type="checkbox" checked="checked" >Otros 
+                    </td>
+                    <td  style="width:35%;border-left:none;border-right:none;" > s </td>
+                     <td  style="width:35%;border-left:none;border-right:none;" >  
+                                   
+                     </td>
+                </tr>
+              
+            </table> 
+             <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="etiqueta" style="width:30%;border-right: 1px solid rgb(129,129,129);" > Banco </td>
+                     <td class="etiqueta" style=width:62%;border-right: 1px solid rgb(129,129,129);" > Tarjeta N&ordm; </td>
+                   <td class="etiqueta" style="width:8%;" >&nbsp;<input type="checkbox" checked="checked" >T </td>
+                </tr>
+                <tr class="valores">
+                    <td  style="width:30%;border-left:none;" > s </td>
+                    <td  style="width:62%;border-left:none;" > s </td>
+                     <td  style="width:8%;border-right:none;" >  
+                     &nbsp;<input type="checkbox" checked="checked" >s               
+                     </td>
+                </tr>
+              
+            </table> 
+             <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="etiqueta" style="width:30%;border-right: 1px solid rgb(129,129,129);" > 
+                    &nbsp;<input type="checkbox" checked="checked" >Cl&aacute;sica
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" checked="checked" >Dorada<br>
+                    &nbsp;<input type="checkbox" checked="checked" >Platinum
+                    &nbsp;&nbsp;<input type="checkbox" checked="checked" >Black
+                    </td>
+                     <td class="etiqueta" style=width:35%;" > L&iacute;mite de Cr&eacute;dito </td>
+                   <td class="etiqueta" style="width:35%;" >Saldo Actual</td>
+                </tr>
+                <tr class="valores">
+                    <td  style="width:30%;border-left:none;" >
+                    
+                    &nbsp;<input type="checkbox" checked="checked" >Otros 
+                    </td>
+                    <td  style="width:35%;border-left:none;border-right:none;" > s </td>
+                     <td  style="width:35%;border-left:none;border-right:none;" >  
+                                   
+                     </td>
+                </tr>
+              
+            </table> 
+             <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="etiqueta" style="width:30%;border-right: 1px solid rgb(129,129,129);" > Banco </td>
+                     <td class="etiqueta" style=width:62%;border-right: 1px solid rgb(129,129,129);" > Tarjeta N&ordm; </td>
+                   <td class="etiqueta" style="width:8%;" >&nbsp;<input type="checkbox" checked="checked" >T </td>
+                </tr>
+                <tr class="valores">
+                    <td  style="width:30%;border-left:none;" > s </td>
+                    <td  style="width:62%;border-left:none;" > s </td>
+                     <td  style="width:8%;border-right:none;" >  
+                     &nbsp;<input type="checkbox" checked="checked" >s               
+                     </td>
+                </tr>
+              
+            </table> 
+             <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="etiqueta" style="width:30%;border-right: 1px solid rgb(129,129,129);" > 
+                    &nbsp;<input type="checkbox" checked="checked" >Cl&aacute;sica
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" checked="checked" >Dorada<br>
+                    &nbsp;<input type="checkbox" checked="checked" >Platinum
+                    &nbsp;&nbsp;<input type="checkbox" checked="checked" >Black
+                    </td>
+                     <td class="etiqueta" style=width:35%;" > L&iacute;mite de Cr&eacute;dito </td>
+                   <td class="etiqueta" style="width:35%;" >Saldo Actual</td>
+                </tr>
+                <tr class="valores">
+                    <td  style="width:30%;border-left:none;" >
+                    
+                    &nbsp;<input type="checkbox" checked="checked" >Otros 
+                    </td>
+                    <td  style="width:35%;border-left:none;border-right:none;" > s </td>
+                     <td  style="width:35%;border-left:none;border-right:none;" >  
+                                   
+                     </td>
+                </tr>
+                  <tr>
+                    <td class="etiqueta" style="width:100%;borde: none;height:2px;"  colspan="3">  </td>
+                </tr>     
+              
+            </table> 
+            
+            <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="titulo2">
+                       AUTORIZACI&Oacute;N DE CARGO EN CUENTA
+                    </td>               
+                </tr>
+            </table>
+             <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                 <tr>
+                    <td class="etiqueta" style="width:100%;borde: none;height:2px;"  >  </td>
+                </tr> 
+                <tr>
+                   <td class="etiqueta" style="width:100%;" >
+                   Autorizo a cargar mensualmente el pago
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total<input type="checkbox" checked="checked" >
+                &nbsp;&nbsp;&nbsp;M&iacute;nimo<input type="checkbox" checked="checked" >
+                </td>
+                </tr>
+                <tr class="valores">
+                      <td  style="width:100%;border-left:none;border-right:none;" >  
+                            sd
+                     </td>
+                </tr>
+              
+            </table> 
+             <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                   <td class="etiqueta" style="width:100%;" >
+                   En mi cuenta Banplus N&ordm;
+                </td>
+                </tr>
+                <tr class="valores">
+                      <td  style="width:100%;border-left:none;border-right:none;" >  
+                            sd
+                     </td>
+                </tr>
+                <tr>
+                    <td class="etiqueta" style="width:100%;borde: none;height:2px;"  >  </td>
+                </tr> 
+              
+            </table> 
+            
+            <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="titulo2">
+                       DIRECCI&Oacute;N DE CORRESPONDENCIA
+                    </td>               
+                </tr>
+            </table>
+             <table style="border-collapse: collapse;border:none;font-size:11px;" >
+              <tr>
+                    <td class="etiqueta" style="width:100%;borde: none;height:2px;"  >  </td>
+                </tr>    
+                <tr>
+                   <td class="etiqueta" style="width:100%;" >
+                  ENV&Iacute;O TARJETA DE CR&Eacute;DITO
+                </td>
+                </tr>
+                <tr class="valores">
+                      <td  style="width:100%;border-left:none;border-right:none;" >  
+                          Agencia Banplus:
+                     </td>
+                </tr>
+              
+            </table> 
+            
+            <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                   <td class="etiqueta" style="width:100%;" >
+                  ESTADOS DE CUENTA Y CORRESPONDENCIA
+                </td>
+                </tr>
+                <tr class="valores">
+                      <td  style="width:100%;border-left:none;border-right:none;" >  
+                          <input type="checkbox" checked="checked" >Correo Electr&oacute;nico:
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="checkbox" checked="checked" >Habitaci&oacute;n
+                          <input type="checkbox" checked="checked" >Oficina
+
+                     </td>
+                </tr>
+              <tr>
+                    <td class="etiqueta" style="width:100%;borde: none;height:2px;"  >  </td>
+                </tr> 
+            </table> 
+             
+            <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="titulo2">
+                       SOLICITUD DE TARJETAS SUPLEMENTARIAS
+                    </td>               
+                </tr>
+            </table>
+             <table style="border-collapse: collapse;border:none;font-size:11px;" >
+              <tr>
+                    <td class="etiqueta" style="width:100%;borde: none;height:2px;" colspan="2"  >  </td>
+                </tr>   
+                <tr>
+                    <td class="etiqueta" style="width:80%;border-right: 1px solid rgb(129,129,129);">Nombres y Apellidos:</td>
+                    <td class="etiqueta" style="width:20%;">Sexo</td>
+                </tr>
+                
+                  <tr class="valores">
+                    <td  style="width:80%;border-left:none;">NOMBRES Y APELLIDOS</td>
+                    <td  style="width:20%;border-right:none;">
+                    &nbsp;&nbsp;M<input type="checkbox" checked="checked" >
+                    &nbsp;&nbsp;F<input type="checkbox" checked="checked" >
+                    </td>
+                </tr>
+
+            </table>
+             <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="etiqueta" style="width:50%;border-right: 1px solid rgb(129,129,129);"> Fecha de Nacimiento:</td>
+                    <td class="etiqueta" style="width:50%;"> C&eacute;dula de Identidad:
+                     &nbsp;&nbsp;V<input type="checkbox" checked="checked" >
+                    &nbsp;&nbsp;E<input type="checkbox" checked="checked" >
+                    </td>
+                   
+                </tr>
+                
+                 <tr class="valores">
+                    <td  style="width:50%;border-left:none;">                     sd                    </td>
+                    <td  style="width:50%;border-right:none;">                     sd                    </td>
+                </tr>
+            </table>
+            <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="etiqueta" style="width:50%;border-right: 1px solid rgb(129,129,129);"> Parentesco:</td>
+                    <td class="etiqueta" style="width:50%;"> Firma del Solicitante Suplementario</td>
+                   
+                </tr>
+                
+                 <tr class="valores">
+                    <td  style="width:50%;border-left:none;">                     sd                    </td>
+                    <td  style="width:50%;border-right:none;">                     sd                    </td>
+                </tr>
+            </table>
+              <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="etiqueta" style="width:80%;border-right: 1px solid rgb(129,129,129);">Nombres y Apellidos:</td>
+                    <td class="etiqueta" style="width:20%;">Sexo</td>
+                </tr>
+                
+                  <tr class="valores">
+                    <td  style="width:80%;border-left:none;">NOMBRES Y APELLIDOS</td>
+                    <td  style="width:20%;border-right:none;">
+                    &nbsp;&nbsp;M<input type="checkbox" checked="checked" >
+                    &nbsp;&nbsp;F<input type="checkbox" checked="checked" >
+                    </td>
+                </tr>
+
+            </table>
+             <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="etiqueta" style="width:50%;border-right: 1px solid rgb(129,129,129);"> Fecha de Nacimiento:</td>
+                    <td class="etiqueta" style="width:50%;"> C&eacute;dula de Identidad:
+                     &nbsp;&nbsp;V<input type="checkbox" checked="checked" >
+                    &nbsp;&nbsp;E<input type="checkbox" checked="checked" >
+                    </td>
+                   
+                </tr>
+                
+                 <tr class="valores">
+                    <td  style="width:50%;border-left:none;">                     sd                    </td>
+                    <td  style="width:50%;border-right:none;">                     sd                    </td>
+                </tr>
+            </table>
+             <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="etiqueta" style="width:50%;border-right: 1px solid rgb(129,129,129);"> Parentesco:</td>
+                    <td class="etiqueta" style="width:50%;"> Firma del Solicitante Suplementario</td>
+                   
+                </tr>
+                
+                 <tr class="valores">
+                    <td  style="width:50%;border-left:none;">                     sd                    </td>
+                    <td  style="width:50%;border-right:none;">                     sd                    </td>
+                </tr>
+            </table>
+            
+        </td>
     </tr>
     
 

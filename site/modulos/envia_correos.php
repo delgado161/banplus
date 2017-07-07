@@ -7,10 +7,12 @@ Author     : Roberto Delgado
 
 if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "NATURAL") {
 
+
     $_POST['act_economica'] = explode("_", $_POST['act_economica']);
     $_POST['act_economica'] = $_POST['act_economica'][0];
 
 //    var_dump($_POST);
+
 
     Foreach ($Estados as $estado) {
         if ($estado['id2_estado'] == $_POST['dtp_estado'])
@@ -233,7 +235,9 @@ if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "JURIDICO") {
 
                         },
                         success: function (data) {
+
                             $('.spiner_').hide();
+
                             var r = confirm("\u00bfDesea realizar la solicitud de TDC?");
                             if (r == true) {
                                 txt = "You pressed OK!";

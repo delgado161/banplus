@@ -1,6 +1,8 @@
 <br><br>
 
-<?php include 'pre_apertura.php' ?>
+<?php 
+
+include 'pre_apertura.php' ?>
 <?php include 'envia_correos.php'; ?>
 
 <?php if (!isset($_POST['p_formulario'])) { ?>

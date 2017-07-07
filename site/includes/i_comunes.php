@@ -16,7 +16,6 @@ function sql_quote($value) {
         }
     }
     return $value;
-
 }
 
 function execute_sql($nombre, $ArrParams = NULL) {
@@ -549,11 +548,13 @@ function execute_sql($nombre, $ArrParams = NULL) {
             $sql = "SELECT * FROM calendario where fecha > '" . date("Y-m-d") . " 00:00:00' and estatus=1 ";
 
 
+
             break;
 
         case 'get_fecha_restringida_cita':
             $sql = " Select * from (SELECT count(*) as cupos,fecha FROM awvps_banplus._cita where fk_agencia=$ArrParams[0] group by fecha) citas
                         where cupos>=(select citas_diarias from agencias where id_agencias=" . $ArrParams[0] . ")";
+
             break;
 
         case 'get_fecha_restringida_cita_2':
@@ -592,12 +593,13 @@ function execute_sql($nombre, $ArrParams = NULL) {
 //    mysqli_free_result($ejecutar_sql);
     cerrarConexion();
     return $object;
-
 }
 
 function actualizar_campo($nombre, $ArrParams = NULL) {
+
     abrirConexion();
     global $conexion;
+
     switch ($nombre) {
         case 'actualiza_menu':
             $sql = "UPDATE respuestas SET contador=contador+1 WHERE id_respuestas='" . $ArrParams[0] . "'";
@@ -614,6 +616,7 @@ function actualizar_campo($nombre, $ArrParams = NULL) {
             $sql = " UPDATE usuarios SET llave=md5(acceso) WHERE id_usuario=" . $ArrParams[0] . " ";
             //echo $sql;
             break;
+
         case 'inserta_cita':
             $ArrParams[3] = serialize($ArrParams[3]);
             $ArrParams[3] = $conexion->real_escape_string($ArrParams[3]);
@@ -621,6 +624,7 @@ function actualizar_campo($nombre, $ArrParams = NULL) {
             $sql = "INSERT INTO _cita(fk_agencia,fecha,solicitud,valores)
 VALUES(" . $ArrParams[0] . ",'" . $ArrParams[1] . "','" . $ArrParams[2] . "','" . $ArrParams[3] . "');";
             break;
+
         default:
             return NULL;
     }
@@ -633,7 +637,9 @@ VALUES(" . $ArrParams[0] . ",'" . $ArrParams[1] . "','" . $ArrParams[2] . "','" 
     }
 
     cerrarConexion();
+
     return;
+
 
 }
 
@@ -668,7 +674,6 @@ function traer_totales($nombre, $ArrParams = NULL) {
     echo "<li>" . $num_rows;
     cerrarConexion();
     return $num_rows;
-
 }
 
 function seteo($cadena) {
@@ -678,7 +683,6 @@ function seteo($cadena) {
     //echo "cadena cad1='".$cad1."' ///";
     $cad = $cad . $cad1;
     return $cad;
-
 }
 
 ?>
