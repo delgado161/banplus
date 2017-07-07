@@ -20,7 +20,7 @@ if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "NATURAL") {
 <p style="text-align:justify">Sr.(a) ' . $_POST['p_nombre'] . ' ' . $_POST['s_nombre'] . ' ' . $_POST['p_apellido'] . ' ' . $_POST['s_apellido'] . '. <br><br><br>
 Gracias por utilizar el servicio de apertura de cuentas de Banplus Banco Universal. Te 
 informamos que se te ha otorgado una cita para formalizar la apertura de tu cuenta, el día 
-"Fecha Cita" en la Oficina "Nombre Oficina" Dirección: "Dirección de Oficina". en el horario comprendido de 
+' . $_POST['fc_cita'] . ' en la Oficina ' . $_POST['fn_agencia'] . ' Dirección: ' . $_POST['agencia_direccion'] . '. en el horario comprendido de 
 08:30 am - 03:30 pm. Para la cita debes consignar los siguientes recaudos en el orden señalado en una 
 (1) carpeta manila tamaño oficio:
 <ul>
@@ -42,10 +42,10 @@ Banplus te invita a visitar la página web wwww.banplus.com, para que conozcas n
 ';
 
     /* Email Detials */
-    $Coreo = execute_sql("get_parametro", array(63));
-    $from_mail = "<" . $Coreo[1]["valor"] . ">";
+    $Coreo = execute_sql("get_parametro", array(64));
+    $from_mail = "< " . $Coreo[1]["valor"] . " >";
 
-    $Coreo_nombre = execute_sql("get_parametro", array(64));
+    $Coreo_nombre = execute_sql("get_parametro", array(65));
     $from_name = $Coreo_nombre[1]["valor"];
 
     $path = dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'] . "/";
@@ -116,8 +116,8 @@ if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "JURIDICO") {
 <p style="text-align:justify">Sr.(a) ----. <br><br><br>
 Gracias por utilizar el servicio de apertura de cuentas de Banplus Banco Universal. 
 Te informamos que se te ha otorgado una cita para formalizar la apertura de tu cuenta 
-jurídica de la Empresa: <b>"' . $_POST['n_empresa'] . '"</b>, el día “Fecha de la Cita” en la Oficina 
-“Nombre Oficina” Dirección: “Dirección de Oficina”. en el horario comprendido de 08:30 am - 03:30 pm. 
+jurídica de la Empresa: <b>"' . $_POST['n_empresa'] . '"</b>, el día  ' . $_POST['fc_cita'] . ' en la Oficina 
+ ' . $_POST['fn_agencia'] . ' Dirección:  ' . $_POST['agencia_direccion'] . '. en el horario comprendido de 08:30 am - 03:30 pm. 
 Para la cita debes consignar los siguientes recaudos en el orden señalado en 
 una (1) carpeta manila tamaño oficio:
 <ul>
@@ -137,16 +137,18 @@ Banplus te invita a visitar la página web wwww.banplus.com, para que conozcas n
 
     /* Email Detials */
     $Coreo = execute_sql("get_parametro", array(63));
-    $from_mail = "<" . $Coreo[1]["valor"] . ">";
-
+    $from_mail = "< " . $Coreo[1]["valor"] . " >";
+    
     $Coreo_nombre = execute_sql("get_parametro", array(64));
     $from_name = $Coreo_nombre[1]["valor"];
 
     $path = dirname(__FILE__) . '/tmp_apertura/J_' . $_POST['rif'] . "/";
-    $filename = 'J_' . $_POST['rif'] . '/J_' . $_POST['rif'] . '_APERTURAPJ.pdf';
+    $filename = 'J_' . $_POST['rif'] . '_APERTURAPJ.pdf';
 
+    
+    
     enviar_email_2($from_name, $from_mail, $message, $path, $filename, $subject, $mail_to);
-
+exit();
 //    $myfile = fopen(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'] . '.zip', "w") or die("Unable to open file!");
 //    fclose($myfile);
 
@@ -231,6 +233,7 @@ function enviar_email_3($from_name, $from_mail, $message, $path, $filename, $sub
     $body .= "--" . $separator . "--";
 
 //SEND Mail
+
     mail($mail_to, $subject, $body, $headers);
 
 }
@@ -240,7 +243,7 @@ function enviar_email_2($from_name, $from_mail, $message, $path, $filename, $sub
 
 // carriage return type (RFC)
     $eol = "\r\n";
-
+   
 // main header (multipart mandatory)
     $headers = "From:" . $from_name . $from_mail . $eol;
     $headers .= "MIME-Version: 1.0" . $eol;
@@ -271,6 +274,7 @@ function enviar_email_2($from_name, $from_mail, $message, $path, $filename, $sub
     $body .= "--" . $separator . "--";
 
 //SEND Mail
-    mail($mail_to, $subject, $body, $headers);
+        var_dump($mail_to,$subject);
+   echo  mail($mail_to, $subject, $body, $headers);
 
 }

@@ -6,7 +6,7 @@ ob_start(); // Turn on output buffering
 <?php include_once "ewmysql8.php" ?>
 <?php include_once "phpfn8.php" ?>
 <?php include_once "agenciasinfo.php" ?>
-<?php include_once "usuariosinfo.php" ?>
+<?php include_once "agencias_serviciosinfo.php" ?>
 <?php include_once "userfn8.php" ?>
 <?php ew_Header(FALSE) ?>
 <?php
@@ -63,20 +63,9 @@ agencias_view.ValidateRequired = false; // no JavaScript validation
 <?php if ($agencias->Export == "") { ?>
 <p class="phpmaker">
 <a href="<?php echo $agencias_view->ListUrl ?>"><?php echo $Language->Phrase("BackToList") ?></a>&nbsp;
-<?php if ($Security->CanAdd()) { ?>
 <a href="<?php echo $agencias_view->AddUrl ?>"><?php echo $Language->Phrase("ViewPageAddLink") ?></a>&nbsp;
-<?php } ?>
-<?php if ($Security->CanEdit()) { ?>
 <a href="<?php echo $agencias_view->EditUrl ?>"><?php echo $Language->Phrase("ViewPageEditLink") ?></a>&nbsp;
-<?php } ?>
-<?php if ($Security->CanDelete()) { ?>
 <a href="<?php echo $agencias_view->DeleteUrl ?>"><?php echo $Language->Phrase("ViewPageDeleteLink") ?></a>&nbsp;
-<?php } ?>
-<?php if ($Security->AllowList('agencias_servicios')) { ?>
-<a href="agencias_servicioslist.php?<?php echo EW_TABLE_SHOW_MASTER ?>=agencias&id_agencias=<?php echo urlencode(strval($agencias->id_agencias->CurrentValue)) ?>"><?php echo $Language->Phrase("ViewPageDetailLink") ?><?php echo $Language->TablePhrase("agencias_servicios", "TblCaption") ?>
-</a>
-&nbsp;
-<?php } ?>
 <?php } ?>
 </p>
 <?php $agencias_view->ShowPageHeader(); ?>
@@ -94,13 +83,6 @@ $agencias_view->ShowMessage();
 <div<?php echo $agencias->nombre->ViewAttributes() ?>><?php echo $agencias->nombre->ViewValue ?></div></td>
 	</tr>
 <?php } ?>
-<?php if ($agencias->id_ciudad->Visible) { // id_ciudad ?>
-	<tr id="r_id_ciudad"<?php echo $agencias->RowAttributes() ?>>
-		<td class="ewTableHeader"><?php echo $agencias->id_ciudad->FldCaption() ?></td>
-		<td<?php echo $agencias->id_ciudad->CellAttributes() ?>>
-<div<?php echo $agencias->id_ciudad->ViewAttributes() ?>><?php echo $agencias->id_ciudad->ViewValue ?></div></td>
-	</tr>
-<?php } ?>
 <?php if ($agencias->direccion->Visible) { // direccion ?>
 	<tr id="r_direccion"<?php echo $agencias->RowAttributes() ?>>
 		<td class="ewTableHeader"><?php echo $agencias->direccion->FldCaption() ?></td>
@@ -108,39 +90,18 @@ $agencias_view->ShowMessage();
 <div<?php echo $agencias->direccion->ViewAttributes() ?>><?php echo $agencias->direccion->ViewValue ?></div></td>
 	</tr>
 <?php } ?>
+<?php if ($agencias->id_ciudad->Visible) { // id_ciudad ?>
+	<tr id="r_id_ciudad"<?php echo $agencias->RowAttributes() ?>>
+		<td class="ewTableHeader"><?php echo $agencias->id_ciudad->FldCaption() ?></td>
+		<td<?php echo $agencias->id_ciudad->CellAttributes() ?>>
+<div<?php echo $agencias->id_ciudad->ViewAttributes() ?>><?php echo $agencias->id_ciudad->ViewValue ?></div></td>
+	</tr>
+<?php } ?>
 <?php if ($agencias->telef_1->Visible) { // telef_1 ?>
 	<tr id="r_telef_1"<?php echo $agencias->RowAttributes() ?>>
 		<td class="ewTableHeader"><?php echo $agencias->telef_1->FldCaption() ?></td>
 		<td<?php echo $agencias->telef_1->CellAttributes() ?>>
 <div<?php echo $agencias->telef_1->ViewAttributes() ?>><?php echo $agencias->telef_1->ViewValue ?></div></td>
-	</tr>
-<?php } ?>
-<?php if ($agencias->horario_agencia->Visible) { // horario_agencia ?>
-	<tr id="r_horario_agencia"<?php echo $agencias->RowAttributes() ?>>
-		<td class="ewTableHeader"><?php echo $agencias->horario_agencia->FldCaption() ?></td>
-		<td<?php echo $agencias->horario_agencia->CellAttributes() ?>>
-<div<?php echo $agencias->horario_agencia->ViewAttributes() ?>><?php echo $agencias->horario_agencia->ViewValue ?></div></td>
-	</tr>
-<?php } ?>
-<?php if ($agencias->horario_taq_auto->Visible) { // horario_taq_auto ?>
-	<tr id="r_horario_taq_auto"<?php echo $agencias->RowAttributes() ?>>
-		<td class="ewTableHeader"><?php echo $agencias->horario_taq_auto->FldCaption() ?></td>
-		<td<?php echo $agencias->horario_taq_auto->CellAttributes() ?>>
-<div<?php echo $agencias->horario_taq_auto->ViewAttributes() ?>><?php echo $agencias->horario_taq_auto->ViewValue ?></div></td>
-	</tr>
-<?php } ?>
-<?php if ($agencias->coordenadas->Visible) { // coordenadas ?>
-	<tr id="r_coordenadas"<?php echo $agencias->RowAttributes() ?>>
-		<td class="ewTableHeader"><?php echo $agencias->coordenadas->FldCaption() ?></td>
-		<td<?php echo $agencias->coordenadas->CellAttributes() ?>>
-<div<?php echo $agencias->coordenadas->ViewAttributes() ?>><?php echo $agencias->coordenadas->ViewValue ?></div></td>
-	</tr>
-<?php } ?>
-<?php if ($agencias->estatus->Visible) { // estatus ?>
-	<tr id="r_estatus"<?php echo $agencias->RowAttributes() ?>>
-		<td class="ewTableHeader"><?php echo $agencias->estatus->FldCaption() ?></td>
-		<td<?php echo $agencias->estatus->CellAttributes() ?>>
-<div<?php echo $agencias->estatus->ViewAttributes() ?>><?php echo $agencias->estatus->ViewValue ?></div></td>
 	</tr>
 <?php } ?>
 </table>
@@ -332,8 +293,8 @@ class cagencias_view {
 		$this->ExportCsvUrl = $this->PageUrl() . "export=csv" . $KeyUrl;
 		$this->ExportPdfUrl = $this->PageUrl() . "export=pdf" . $KeyUrl;
 
-		// Table object (usuarios)
-		if (!isset($GLOBALS['usuarios'])) $GLOBALS['usuarios'] = new cusuarios();
+		// Table object (agencias_servicios)
+		if (!isset($GLOBALS['agencias_servicios'])) $GLOBALS['agencias_servicios'] = new cagencias_servicios();
 
 		// Page ID
 		if (!defined("EW_PAGE_ID"))
@@ -361,25 +322,6 @@ class cagencias_view {
 	function Page_Init() {
 		global $gsExport, $gsExportFile, $UserProfile, $Language, $Security, $objForm;
 		global $agencias;
-
-		// Security
-		$Security = new cAdvancedSecurity();
-		if (!$Security->IsLoggedIn()) $Security->AutoLogin();
-		if (!$Security->IsLoggedIn()) {
-			$Security->SaveLastUrl();
-			$this->Page_Terminate("login.php");
-		}
-		$Security->TablePermission_Loading();
-		$Security->LoadCurrentUserLevel($this->TableName);
-		$Security->TablePermission_Loaded();
-		if (!$Security->IsLoggedIn()) {
-			$Security->SaveLastUrl();
-			$this->Page_Terminate("login.php");
-		}
-		if (!$Security->CanView()) {
-			$Security->SaveLastUrl();
-			$this->Page_Terminate("agenciaslist.php");
-		}
 
 		// Global Page Loading event (in userfn*.php)
 		Page_Loading();
@@ -527,12 +469,13 @@ class cagencias_view {
 		$agencias->Row_Selected($row);
 		$agencias->id_agencias->setDbValue($rs->fields('id_agencias'));
 		$agencias->nombre->setDbValue($rs->fields('nombre'));
-		$agencias->id_ciudad->setDbValue($rs->fields('id_ciudad'));
 		$agencias->direccion->setDbValue($rs->fields('direccion'));
+		$agencias->id_ciudad->setDbValue($rs->fields('id_ciudad'));
 		$agencias->telef_1->setDbValue($rs->fields('telef_1'));
 		$agencias->horario_agencia->setDbValue($rs->fields('horario_agencia'));
 		$agencias->horario_taq_auto->setDbValue($rs->fields('horario_taq_auto'));
 		$agencias->coordenadas->setDbValue($rs->fields('coordenadas'));
+		$agencias->citas_diarias->setDbValue($rs->fields('citas_diarias'));
 		$agencias->estatus->setDbValue($rs->fields('estatus'));
 	}
 
@@ -553,19 +496,28 @@ class cagencias_view {
 		// Common render codes for all row types
 		// id_agencias
 		// nombre
-		// id_ciudad
 		// direccion
+		// id_ciudad
 		// telef_1
 		// horario_agencia
 		// horario_taq_auto
 		// coordenadas
+		// citas_diarias
 		// estatus
 
 		if ($agencias->RowType == EW_ROWTYPE_VIEW) { // View row
 
+			// id_agencias
+			$agencias->id_agencias->ViewValue = $agencias->id_agencias->CurrentValue;
+			$agencias->id_agencias->ViewCustomAttributes = "";
+
 			// nombre
 			$agencias->nombre->ViewValue = $agencias->nombre->CurrentValue;
 			$agencias->nombre->ViewCustomAttributes = "";
+
+			// direccion
+			$agencias->direccion->ViewValue = $agencias->direccion->CurrentValue;
+			$agencias->direccion->ViewCustomAttributes = "";
 
 			// id_ciudad
 			if (strval($agencias->id_ciudad->CurrentValue) <> "") {
@@ -589,17 +541,9 @@ class cagencias_view {
 			}
 			$agencias->id_ciudad->ViewCustomAttributes = "";
 
-			// direccion
-			$agencias->direccion->ViewValue = $agencias->direccion->CurrentValue;
-			$agencias->direccion->ViewCustomAttributes = "";
-
 			// telef_1
 			$agencias->telef_1->ViewValue = $agencias->telef_1->CurrentValue;
 			$agencias->telef_1->ViewCustomAttributes = "";
-
-			// horario_agencia
-			$agencias->horario_agencia->ViewValue = $agencias->horario_agencia->CurrentValue;
-			$agencias->horario_agencia->ViewCustomAttributes = "";
 
 			// horario_taq_auto
 			$agencias->horario_taq_auto->ViewValue = $agencias->horario_taq_auto->CurrentValue;
@@ -609,6 +553,10 @@ class cagencias_view {
 			$agencias->coordenadas->ViewValue = $agencias->coordenadas->CurrentValue;
 			$agencias->coordenadas->ViewCustomAttributes = "";
 
+			// citas_diarias
+			$agencias->citas_diarias->ViewValue = $agencias->citas_diarias->CurrentValue;
+			$agencias->citas_diarias->ViewCustomAttributes = "";
+
 			// estatus
 			if (strval($agencias->estatus->CurrentValue) <> "") {
 				switch ($agencias->estatus->CurrentValue) {
@@ -617,6 +565,12 @@ class cagencias_view {
 						break;
 					case "1":
 						$agencias->estatus->ViewValue = $agencias->estatus->FldTagCaption(2) <> "" ? $agencias->estatus->FldTagCaption(2) : $agencias->estatus->CurrentValue;
+						break;
+					case "3":
+						$agencias->estatus->ViewValue = $agencias->estatus->FldTagCaption(3) <> "" ? $agencias->estatus->FldTagCaption(3) : $agencias->estatus->CurrentValue;
+						break;
+					case "4":
+						$agencias->estatus->ViewValue = $agencias->estatus->FldTagCaption(4) <> "" ? $agencias->estatus->FldTagCaption(4) : $agencias->estatus->CurrentValue;
 						break;
 					default:
 						$agencias->estatus->ViewValue = $agencias->estatus->CurrentValue;
@@ -631,40 +585,20 @@ class cagencias_view {
 			$agencias->nombre->HrefValue = "";
 			$agencias->nombre->TooltipValue = "";
 
-			// id_ciudad
-			$agencias->id_ciudad->LinkCustomAttributes = "";
-			$agencias->id_ciudad->HrefValue = "";
-			$agencias->id_ciudad->TooltipValue = "";
-
 			// direccion
 			$agencias->direccion->LinkCustomAttributes = "";
 			$agencias->direccion->HrefValue = "";
 			$agencias->direccion->TooltipValue = "";
 
+			// id_ciudad
+			$agencias->id_ciudad->LinkCustomAttributes = "";
+			$agencias->id_ciudad->HrefValue = "";
+			$agencias->id_ciudad->TooltipValue = "";
+
 			// telef_1
 			$agencias->telef_1->LinkCustomAttributes = "";
 			$agencias->telef_1->HrefValue = "";
 			$agencias->telef_1->TooltipValue = "";
-
-			// horario_agencia
-			$agencias->horario_agencia->LinkCustomAttributes = "";
-			$agencias->horario_agencia->HrefValue = "";
-			$agencias->horario_agencia->TooltipValue = "";
-
-			// horario_taq_auto
-			$agencias->horario_taq_auto->LinkCustomAttributes = "";
-			$agencias->horario_taq_auto->HrefValue = "";
-			$agencias->horario_taq_auto->TooltipValue = "";
-
-			// coordenadas
-			$agencias->coordenadas->LinkCustomAttributes = "";
-			$agencias->coordenadas->HrefValue = "";
-			$agencias->coordenadas->TooltipValue = "";
-
-			// estatus
-			$agencias->estatus->LinkCustomAttributes = "";
-			$agencias->estatus->HrefValue = "";
-			$agencias->estatus->TooltipValue = "";
 		}
 
 		// Call Row Rendered event
@@ -672,21 +606,11 @@ class cagencias_view {
 			$agencias->Row_Rendered();
 	}
 
-	// Export PDF
+	// PDF Export
 	function ExportPDF($html) {
-		global $gsExportFile;
-		include_once "dompdf060b2/dompdf_config.inc.php";
-		@ini_set("memory_limit", EW_PDF_MEMORY_LIMIT);
-		set_time_limit(EW_PDF_TIME_LIMIT);
-		$dompdf = new DOMPDF();
-		$dompdf->load_html($html);
-		$dompdf->set_paper("a4", "portrait");
-		$dompdf->render();
-		ob_end_clean();
+		echo($html);
 		ew_DeleteTmpImages();
-		$dompdf->stream($gsExportFile . ".pdf", array("Attachment" => 1)); // 0 to open in browser, 1 to download
-
-//		exit();
+		exit();
 	}
 
 	// Page Load event

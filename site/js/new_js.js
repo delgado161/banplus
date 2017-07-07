@@ -8,6 +8,8 @@
 
 
 $(document).ready(function () {
+    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    var regex2 = /^([0-9]{3})+\-(([0-9-]{4}))+$/;
 
     $.datepicker.regional['es'] = {
         closeText: 'Cerrar',
@@ -41,26 +43,30 @@ $(document).ready(function () {
             } else {
                 if (($('.requerido_2').val().length <= 0 || $('.requerido_2').val() == "" || parseFloat($('.requerido_2').val()) <= 0)) {
                     $('.requerido_2').css('background', 'rgba(255,0,0,0.30)');
-                    $(this).parent('div').parent('div').prev().find('span').show();
+                    $(this).parent('div').parent('div').prev().find('._alert_span').show();
 
                     validado = false;
                 } else {
                     $('.requerido_2').css('background', 'rgba(132, 189, 0, 0.15)');
-                    $(this).parent('div').parent('div').prev().find('span').hide();
+                    $(this).parent('div').parent('div').prev().find('._alert_span').hide();
                 }
 
                 if (($('.requerido_21').val().length <= 0 || $('.requerido_21').val() == "")) {
                     $('.requerido_21').css('background', 'rgba(255,0,0,0.30)');
-                    $(this).parent('div').parent('div').prev().find('span').show();
+                    $(this).parent('div').parent('div').prev().find('._alert_span').show();
 
                     validado = false;
                 } else {
                     $('.requerido_21').css('background', 'rgba(132, 189, 0, 0.15)');
-                    $(this).parent('div').parent('div').prev().find('span').hide();
+                    $(this).parent('div').parent('div').prev().find('._alert_span').hide();
                 }
             }
 
+
+
+
         }
+
 
 
 
@@ -84,15 +90,16 @@ $(document).ready(function () {
 
 
             if (!validado2) {
-                $(this).find('.valida_prod').css('background', 'rgba(255,0,0,0.30)');
-                $(this).parent('div').parent('div').prev().find('span').show();
+                $(this).find('.valida_prod').addClass('requerido_');
+//                $(this).parent('div').parent('div').prev().find('._alert_span').show();
 //                $(this).parent('div').parent('div').prev().css("cssText", "background: rgba(255,0,0,0.7) !important;");
 
-                validado = false;
+//                validado = false;
             }
             else {
+                $(this).find('.valida_prod').removeClass('requerido_');
                 $(this).find('.valida_prod').css('background', 'rgba(132, 189, 0, 0.15)');
-                $(this).parent('div').parent('div').prev().find('span').hide();
+//                $(this).parent('div').parent('div').prev().find('._alert_span').hide();
             }
 
 
@@ -105,22 +112,20 @@ $(document).ready(function () {
                 else {
                     $('.cc_banplus2').find('input').each(function () {
                         $(this).css('background', 'rgba(132, 189, 0, 0.15)');
-                        $(this).parent('div').parent('div').prev().find('span').hide();
+                        $(this).parent('div').parent('div').prev().find('._alert_span').hide();
                         $(this).removeClass('requerido_');
                     });
                 }
-
             }
 
 
             if ($(this).hasClass('ref_ban_comer')) {
-
                 if (!validado) {
                     $('.ref_adjunto').addClass('requerido_');
                 }
                 else {
                     $('.ref_adjunto').css('background', 'rgba(132, 189, 0, 0.15)');
-                    $(this).parent('div').parent('div').prev().find('span').hide();
+                    $(this).parent('div').parent('div').prev().find('._alert_span').hide();
                     $('.ref_adjunto').removeClass('requerido_');
 
                 }
@@ -142,20 +147,20 @@ $(document).ready(function () {
             } else {
                 if ($.inArray(ext, ['jpg', 'jpeg', 'pdf', 'JPG', 'JPGE', 'PDF']) == -1) {
                     $(this).css('background', 'rgba(255,0,0,0.30)');
-                    $(this).parent('div').parent('div').prev().find('span').show();
+                    $(this).parent('div').parent('div').prev().find('._alert_span').show();
                     validado = false;
                     $(this).next('span').html(' FORMATO INVALIDO SOLO SE PERMITEN PNG, JPG, JPEG, PDF');
                 } else {
                     var file_size = $(this)[0].files[0].size;
                     if (file_size > 2097152) {
                         $(this).css('background', 'rgba(255,0,0,0.30)');
-                        $(this).parent('div').parent('div').prev().find('span').show();
+                        $(this).parent('div').parent('div').prev().find('._alert_span').show();
                         validado = false;
                         $(this).next('span').html('EL ARCHIVO DEBE PESAR MENOR A 2MB');
                     } else {
                         $(this).next('span').html('');
                         $(this).css('background', 'rgba(132, 189, 0, 0.15)');
-                        $(this).parent('div').parent('div').prev().find('span').show();
+                        $(this).parent('div').parent('div').prev().find('._alert_span').show();
 
                     }
                 }
@@ -165,14 +170,31 @@ $(document).ready(function () {
 
 
         $('.requerido_').each(function () {
-            if ($(this).val().length <= 0 || $(this).val() == "" || parseFloat($(this).val()) <= 0) {
+            if ($(this).val().length <= 0 || $(this).val() == "") {
                 $(this).css('background', 'rgba(255,0,0,0.30)');
-                $(this).parent('div').parent('div').prev().find('span').show();
+                $(this).parent('div').parent('div').prev().find('._alert_span').show();
                 validado = false;
             } else {
 
-                $(this).parent('div').parent('div').prev().find('span').hide();
-                $(this).css('background', 'rgba(132, 189, 0, 0.15)');
+                if ($(this).hasClass('telefono_')) {
+
+                    if (!regex2.test($(this).val())) {
+                        $(this).css('background', 'rgba(255,0,0,0.30)');
+                        $(this).parent('div').parent('div').prev().find('._alert_span').show();
+                        validado = false;
+                    } else {
+                        $(this).parent('div').parent('div').prev().find('._alert_span').hide();
+                        $(this).css('background', 'rgba(132, 189, 0, 0.15)');
+                    }
+
+
+                } else {
+                    $(this).parent('div').parent('div').prev().find('._alert_span').hide();
+                    $(this).css('background', 'rgba(132, 189, 0, 0.15)');
+                }
+
+
+
             }
 
 
@@ -181,8 +203,107 @@ $(document).ready(function () {
 
 
 
-        if (!validado)
-            alert('Por Favor rellene los campos se\u00f1alados');
+
+
+
+        if ($('#edad').val() < 18) {
+            $('#edad').css('background', 'rgba(255,0,0,0.30)');
+            $('#edad').parent('div').parent('div').prev().find('._alert_span').show();
+            validado = false;
+        }
+
+
+        if (parseFloat($('#igf_total_ingresos').val()) <= 0) {
+            $('#igf_total_ingresos').css('background', 'rgba(255,0,0,0.30)');
+            $('#igf_total_ingresos').parent('div').parent('div').prev().find('._alert_span').show();
+            validado = false;
+        }
+
+        if (parseFloat($('#go_total_ingresos').val()) <= 0) {
+            $('#go_total_ingresos').css('background', 'rgba(255,0,0,0.30)');
+            $('#go_total_ingresos').parent('div').parent('div').prev().find('._alert_span').show();
+            validado = false;
+        }
+
+
+
+        if (!regex.test($('#email').val())) {
+            $('#email').css('background', 'rgba(255,0,0,0.30)');
+            $('#email').parent('div').parent('div').prev().find('._alert_span').show();
+            validado = false;
+        }
+
+
+
+        if ($('#p_formulario').val() == 'JURIDICO') {
+            if (parseFloat($('#act_total_sus').val()) <= 0) {
+                $('#act_total_sus').css('background', 'rgba(255,0,0,0.30)');
+                $('#act_total_sus').parent('div').parent('div').prev().find('._alert_span').show();
+                validado = false;
+            }
+
+            if (parseFloat($('#act_total_percent').val()) <= 99) {
+                $('#act_total_percent').css('background', 'rgba(255,0,0,0.30)');
+                $('#act_total_percent').parent('div').parent('div').prev().find('._alert_span').show();
+                validado = false;
+            }
+
+            if (parseFloat($('#act_total_pagado').val()) <= 99) {
+                $('#act_total_pagado').css('background', 'rgba(255,0,0,0.30)');
+                $('#act_total_pagado').parent('div').parent('div').prev().find('._alert_span').show();
+                validado = false;
+            }
+
+        }
+
+
+        $.ajax({
+            url: 'includes/captcha-master/valida_capt.php',
+            data: {code: $('#capt_').val()},
+            error: function (xhr, status, error) {
+
+            },
+            success: function (data) {
+                if (data == 0) {
+                  
+                    $('#capt_').css('background', 'rgba(255,0,0,0.30)');
+                    $('#capt_').val("");
+                    validado = false;
+                }else{
+                      $('#capt_').css('background', 'rgba(132, 189, 0, 0.15)');
+                }
+            },
+            type: 'POST'
+        });
+
+        if (!validado) {
+            alert('Por favor complete los campos se\u00f1alados');
+        } else {
+            $.ajax({
+                url: 'modulos/valida_fecha.php',
+                data: {agencia: KEY},
+                error: function (xhr, status, error) {
+
+                },
+                success: function (data) {
+                    if (data == 1) {
+                        $('#edad').css('background', 'rgba(255,0,0,0.30)');
+                        $('#edad').parent('div').parent('div').prev().find('._alert_span').show();
+                        alert('La fecha soleccionada para la cita ya no se encuentra disponible');
+                        validado = false;
+                    }
+                },
+                type: 'POST'
+            });
+
+        }
+
+
+
+
+
+
+
 
         return validado;
 
@@ -192,7 +313,7 @@ $(document).ready(function () {
         yearRange: '-100:-18'
     });
 
-    $(".fechas,#cierre_fiscal,#ult_fecha,#ccfc_nac").datepicker({
+    $(".fechas,#cierre_fiscal,#ult_fecha,#ccfc_nac,#fc_egreso,#balance_al").datepicker({
         dateFormat: "dd/mm/yy",
         yearRange: '-100:+0'
     });
@@ -203,7 +324,7 @@ $(document).ready(function () {
     });
 
 
-    
+
 //
 //    $("#fc_cita").datepicker({
 //        dateFormat: "dd/mm/yy",
@@ -237,25 +358,45 @@ $(document).ready(function () {
 
     $('#tp_inmueble,#d_vivienda').change(function () {
 
-        if ($(this).val() == "ARRENDADA" || $(this).val() == "ALQUILADO" || $(this).val() == "4")
+        if ($(this).val() == "ARRENDADA" || $(this).val() == "ALQUILADO" || $(this).val() == "4") {
+            $('.cann_on').addClass('requerido_');
             $('.cannon').show();
-        else
+        }
+
+        else {
             $('.cannon').hide();
+            $('.cann_on').removeClass('requerido_');
+        }
+
+
     });
+
+
     $('#canon,#sueldo,#comision,#libre_ejercicio,#otros_ingresos,.moneda_,.moneda_2,.jmoneda,.jmoneda2').val(0, 00);
     $('#canon,#sueldo,#comision,#libre_ejercicio,#otros_ingresos,.moneda_,.moneda_2,.jmoneda,.jmoneda2').mask("###0,00", {reverse: true});
 
     $('#canon,#sueldo,#comision,#libre_ejercicio,#otros_ingresos').keyup(function () {
+
+        if ($(this).val() == "" || $(this).val().length <= 0) {
+            $(this).val(0);
+        }
         suma = parseFloat($('#sueldo').val().replace(",", ".")) + parseFloat($('#comision').val().replace(",", ".")) + parseFloat($('#libre_ejercicio').val().replace(",", ".")) + parseFloat($('#otros_ingresos').val().replace(",", "."));
         $('#total_ingresos').val(parseFloat(suma.toFixed(2)));
         $('#total_ingresos').val($('#total_ingresos').val().replace(".", ","));
     });
+
+
+    $('#rif').mask('00000000-0');
     $('.telefono_').mask('000-0000');
-    $('.cta_banco').mask('0000-0000-00-00-00000000');
+    $('.cta_banco').mask('00000000000000000000');
 
 
     $('.moneda_').keyup(function () {
         var suma2 = 0;
+
+        if ($(this).val() == "" || $(this).val().length <= 0) {
+            $(this).val(0);
+        }
 
         $('.moneda_').each(function () {
             suma2 = parseFloat($(this).val().replace(",", ".")) + suma2;
@@ -268,6 +409,10 @@ $(document).ready(function () {
     $('.jmoneda2s').keyup(function () {
         var suma2 = 0;
 
+        if ($(this).val() == "" || $(this).val().length <= 0) {
+            $(this).val(0);
+        }
+
         $('.jmoneda2s').each(function () {
             suma2 = parseFloat($(this).val().replace(",", ".")) + suma2;
         });
@@ -278,6 +423,10 @@ $(document).ready(function () {
     $('.jmoneda2_p').keyup(function () {
         var suma2 = 0;
 
+        if ($(this).val() == "" || $(this).val().length <= 0) {
+            $(this).val(0);
+        }
+
         $('.jmoneda2_p').each(function () {
             suma2 = parseFloat($(this).val().replace(",", ".")) + suma2;
         });
@@ -287,6 +436,10 @@ $(document).ready(function () {
 
     $('.jmoneda2p').keyup(function () {
         var suma2 = 0;
+
+        if ($(this).val() == "" || $(this).val().length <= 0) {
+            $(this).val(0);
+        }
 
         $('.jmoneda2p').each(function () {
             suma2 = parseFloat($(this).val().replace(",", ".")) + suma2;
@@ -301,6 +454,10 @@ $(document).ready(function () {
     $('.moneda_2').keyup(function () {
         var suma2 = 0;
 
+        if ($(this).val() == "" || $(this).val().length <= 0) {
+            $(this).val(0);
+        }
+
         $('.moneda_2').each(function () {
             suma2 = parseFloat($(this).val().replace(",", ".")) + suma2;
         });
@@ -310,6 +467,10 @@ $(document).ready(function () {
 
     $('.moneda_3').keyup(function () {
         var suma2 = 0;
+
+        if ($(this).val() == "" || $(this).val().length <= 0) {
+            $(this).val(0);
+        }
 
         $('.moneda_3').each(function () {
             suma2 = parseFloat($(this).val().replace(",", ".")) + suma2;
@@ -323,6 +484,22 @@ $(document).ready(function () {
     $("#accordion").accordion({
         active: 0
     });
+
+
+    $("#act_economica").change(function () {
+        var act_economica = $(this).val().split('_');
+        if (act_economica[1] == 32 || act_economica[1] == 66 || act_economica[1] == 74 || act_economica[1] == 96) {
+            $("#act_otros").addClass('requerido_');
+            $("#act_otros").prop('disabled', false);
+        } else {
+            $("#act_otros").prop('disabled', true);
+            $("#act_otros").val("");
+            $("#act_otros").removeClass('requerido_');
+        }
+
+
+    });
+
 
 });
 

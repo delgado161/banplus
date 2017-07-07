@@ -7,8 +7,6 @@ ob_start(); // Turn on output buffering
 <?php include_once "phpfn8.php" ?>
 <?php include_once "agenciasinfo.php" ?>
 <?php include_once "agencias_serviciosinfo.php" ?>
-<?php include_once "usuariosinfo.php" ?>
-<?php include_once "agencias_serviciosgridcls.php" ?>
 <?php include_once "userfn8.php" ?>
 <?php ew_Header(FALSE) ?>
 <?php
@@ -46,29 +44,9 @@ agencias_add.ValidateForm = function(fobj) {
 	var rowcnt = 1;
 	for (i=0; i<rowcnt; i++) {
 		infix = "";
-		
-		elm = fobj.elements["x" + infix + "_telef_1"];
-		if (elm && !ew_HasValue(elm))
-			return ew_OnError(this, elm, ewLanguage.Phrase("EnterRequiredField") + " - <?php echo "Tel\u00e9fonos/Fax " ?>");
-		
-		elm = fobj.elements["x" + infix + "_horario_agencia"];
-		if (elm && !ew_HasValue(elm))
-			return ew_OnError(this, elm, ewLanguage.Phrase("EnterRequiredField") + " - <?php echo ew_JsEncode2($agencias->horario_agencia->FldCaption()) ?>");
-		
-		
-		
-		elm = fobj.elements["x" + infix + "_nombre"];
-		if (elm && !ew_HasValue(elm))
-			return ew_OnError(this, elm, ewLanguage.Phrase("EnterRequiredField") + " - <?php echo ew_JsEncode2($agencias->nombre->FldCaption()) ?>");
-		elm = fobj.elements["x" + infix + "_id_ciudad"];
-		if (elm && !ew_HasValue(elm))
-			return ew_OnError(this, elm, ewLanguage.Phrase("EnterRequiredField") + " - <?php echo ew_JsEncode2($agencias->id_ciudad->FldCaption()) ?>");
-		elm = fobj.elements["x" + infix + "_direccion"];
-		if (elm && !ew_HasValue(elm))
-			return ew_OnError(this, elm, ewLanguage.Phrase("EnterRequiredField") + " - <?php echo ew_JsEncode2($agencias->direccion->FldCaption()) ?>");
-		elm = fobj.elements["x" + infix + "_estatus"];
-		if (elm && !ew_HasValue(elm))
-			return ew_OnError(this, elm, ewLanguage.Phrase("EnterRequiredField") + " - <?php echo ew_JsEncode2($agencias->estatus->FldCaption()) ?>");
+		elm = fobj.elements["x" + infix + "_citas_diarias"];
+		if (elm && !ew_CheckInteger(elm.value))
+			return ew_OnError(this, elm, "<?php echo ew_JsEncode2($agencias->citas_diarias->FldErrMsg()) ?>");
 
 		// Set up row object
 		var row = {};
@@ -118,12 +96,6 @@ agencias_add.ValidateRequired = false; // no JavaScript validation
 
 //-->
 </script>
-<script type="text/javascript">
-<!--
-var ew_DHTMLEditors = [];
-
-//-->
-</script>
 <script language="JavaScript" type="text/javascript">
 <!--
 
@@ -146,15 +118,23 @@ $agencias_add->ShowMessage();
 <table cellspacing="0" class="ewTable">
 <?php if ($agencias->nombre->Visible) { // nombre ?>
 	<tr id="r_nombre"<?php echo $agencias->RowAttributes() ?>>
-		<td class="ewTableHeader"><?php echo $agencias->nombre->FldCaption() ?><?php echo $Language->Phrase("FieldRequiredIndicator") ?></td>
+		<td class="ewTableHeader"><?php echo $agencias->nombre->FldCaption() ?></td>
 		<td<?php echo $agencias->nombre->CellAttributes() ?>><span id="el_nombre">
-<input type="text" name="x_nombre" id="x_nombre" size="45" maxlength="45" value="<?php echo $agencias->nombre->EditValue ?>"<?php echo $agencias->nombre->EditAttributes() ?>>
+<input type="text" name="x_nombre" id="x_nombre" size="30" maxlength="45" value="<?php echo $agencias->nombre->EditValue ?>"<?php echo $agencias->nombre->EditAttributes() ?>>
 </span><?php echo $agencias->nombre->CustomMsg ?></td>
+	</tr>
+<?php } ?>
+<?php if ($agencias->direccion->Visible) { // direccion ?>
+	<tr id="r_direccion"<?php echo $agencias->RowAttributes() ?>>
+		<td class="ewTableHeader"><?php echo $agencias->direccion->FldCaption() ?></td>
+		<td<?php echo $agencias->direccion->CellAttributes() ?>><span id="el_direccion">
+<textarea name="x_direccion" id="x_direccion" cols="35" rows="4"<?php echo $agencias->direccion->EditAttributes() ?>><?php echo $agencias->direccion->EditValue ?></textarea>
+</span><?php echo $agencias->direccion->CustomMsg ?></td>
 	</tr>
 <?php } ?>
 <?php if ($agencias->id_ciudad->Visible) { // id_ciudad ?>
 	<tr id="r_id_ciudad"<?php echo $agencias->RowAttributes() ?>>
-		<td class="ewTableHeader"><?php echo $agencias->id_ciudad->FldCaption() ?><?php echo $Language->Phrase("FieldRequiredIndicator") ?></td>
+		<td class="ewTableHeader"><?php echo $agencias->id_ciudad->FldCaption() ?></td>
 		<td<?php echo $agencias->id_ciudad->CellAttributes() ?>><span id="el_id_ciudad">
 <select id="x_id_ciudad" name="x_id_ciudad"<?php echo $agencias->id_ciudad->EditAttributes() ?>>
 <?php
@@ -177,17 +157,9 @@ if (is_array($agencias->id_ciudad->EditValue)) {
 </span><?php echo $agencias->id_ciudad->CustomMsg ?></td>
 	</tr>
 <?php } ?>
-<?php if ($agencias->direccion->Visible) { // direccion ?>
-	<tr id="r_direccion"<?php echo $agencias->RowAttributes() ?>>
-		<td class="ewTableHeader"><?php echo $agencias->direccion->FldCaption() ?><?php echo $Language->Phrase("FieldRequiredIndicator") ?></td>
-		<td<?php echo $agencias->direccion->CellAttributes() ?>><span id="el_direccion">
-<textarea name="x_direccion" id="x_direccion" cols="45" rows="2"<?php echo $agencias->direccion->EditAttributes() ?>><?php echo $agencias->direccion->EditValue ?></textarea>
-</span><?php echo $agencias->direccion->CustomMsg ?></td>
-	</tr>
-<?php } ?>
 <?php if ($agencias->telef_1->Visible) { // telef_1 ?>
 	<tr id="r_telef_1"<?php echo $agencias->RowAttributes() ?>>
-		<td class="ewTableHeader"><?php echo $agencias->telef_1->FldCaption() ?> <?php echo $Language->Phrase("FieldRequiredIndicator") ?></td>
+		<td class="ewTableHeader"><?php echo $agencias->telef_1->FldCaption() ?></td>
 		<td<?php echo $agencias->telef_1->CellAttributes() ?>><span id="el_telef_1">
 <textarea name="x_telef_1" id="x_telef_1" cols="35" rows="4"<?php echo $agencias->telef_1->EditAttributes() ?>><?php echo $agencias->telef_1->EditValue ?></textarea>
 </span><?php echo $agencias->telef_1->CustomMsg ?></td>
@@ -195,7 +167,7 @@ if (is_array($agencias->id_ciudad->EditValue)) {
 <?php } ?>
 <?php if ($agencias->horario_agencia->Visible) { // horario_agencia ?>
 	<tr id="r_horario_agencia"<?php echo $agencias->RowAttributes() ?>>
-		<td class="ewTableHeader"><?php echo $agencias->horario_agencia->FldCaption() ?> <?php echo $Language->Phrase("FieldRequiredIndicator") ?></td>
+		<td class="ewTableHeader"><?php echo $agencias->horario_agencia->FldCaption() ?></td>
 		<td<?php echo $agencias->horario_agencia->CellAttributes() ?>><span id="el_horario_agencia">
 <textarea name="x_horario_agencia" id="x_horario_agencia" cols="35" rows="4"<?php echo $agencias->horario_agencia->EditAttributes() ?>><?php echo $agencias->horario_agencia->EditValue ?></textarea>
 </span><?php echo $agencias->horario_agencia->CustomMsg ?></td>
@@ -205,7 +177,7 @@ if (is_array($agencias->id_ciudad->EditValue)) {
 	<tr id="r_horario_taq_auto"<?php echo $agencias->RowAttributes() ?>>
 		<td class="ewTableHeader"><?php echo $agencias->horario_taq_auto->FldCaption() ?></td>
 		<td<?php echo $agencias->horario_taq_auto->CellAttributes() ?>><span id="el_horario_taq_auto">
-<textarea name="x_horario_taq_auto" id="x_horario_taq_auto" cols="45" rows="1"<?php echo $agencias->horario_taq_auto->EditAttributes() ?>><?php echo $agencias->horario_taq_auto->EditValue ?></textarea>
+<input type="text" name="x_horario_taq_auto" id="x_horario_taq_auto" size="30" maxlength="45" value="<?php echo $agencias->horario_taq_auto->EditValue ?>"<?php echo $agencias->horario_taq_auto->EditAttributes() ?>>
 </span><?php echo $agencias->horario_taq_auto->CustomMsg ?></td>
 	</tr>
 <?php } ?>
@@ -213,13 +185,21 @@ if (is_array($agencias->id_ciudad->EditValue)) {
 	<tr id="r_coordenadas"<?php echo $agencias->RowAttributes() ?>>
 		<td class="ewTableHeader"><?php echo $agencias->coordenadas->FldCaption() ?></td>
 		<td<?php echo $agencias->coordenadas->CellAttributes() ?>><span id="el_coordenadas">
-<input type="text" name="x_coordenadas" id="x_coordenadas" size="30" maxlength="30" value="<?php echo $agencias->coordenadas->EditValue ?>"<?php echo $agencias->coordenadas->EditAttributes() ?>>
+<input type="text" name="x_coordenadas" id="x_coordenadas" size="30" maxlength="45" value="<?php echo $agencias->coordenadas->EditValue ?>"<?php echo $agencias->coordenadas->EditAttributes() ?>>
 </span><?php echo $agencias->coordenadas->CustomMsg ?></td>
+	</tr>
+<?php } ?>
+<?php if ($agencias->citas_diarias->Visible) { // citas_diarias ?>
+	<tr id="r_citas_diarias"<?php echo $agencias->RowAttributes() ?>>
+		<td class="ewTableHeader"><?php echo $agencias->citas_diarias->FldCaption() ?></td>
+		<td<?php echo $agencias->citas_diarias->CellAttributes() ?>><span id="el_citas_diarias">
+<input type="text" name="x_citas_diarias" id="x_citas_diarias" size="30" value="<?php echo $agencias->citas_diarias->EditValue ?>"<?php echo $agencias->citas_diarias->EditAttributes() ?>>
+</span><?php echo $agencias->citas_diarias->CustomMsg ?></td>
 	</tr>
 <?php } ?>
 <?php if ($agencias->estatus->Visible) { // estatus ?>
 	<tr id="r_estatus"<?php echo $agencias->RowAttributes() ?>>
-		<td class="ewTableHeader"><?php echo $agencias->estatus->FldCaption() ?><?php echo $Language->Phrase("FieldRequiredIndicator") ?></td>
+		<td class="ewTableHeader"><?php echo $agencias->estatus->FldCaption() ?></td>
 		<td<?php echo $agencias->estatus->CellAttributes() ?>><span id="el_estatus">
 <select id="x_estatus" name="x_estatus"<?php echo $agencias->estatus->EditAttributes() ?>>
 <?php
@@ -245,12 +225,10 @@ if (is_array($agencias->estatus->EditValue)) {
 </table>
 </div>
 </td></tr></table>
-<p>
-<?php if ($agencias->getCurrentDetailTable() == "agencias_servicios" && $agencias_servicios->DetailAdd) { ?>
-<br>
-<?php include_once "agencias_serviciosgrid.php" ?>
-<br>
+<?php if (strval($agencias->id_agencias->getSessionValue()) <> "") { ?>
+<input type="hidden" name="x_id_agencias" id="x_id_agencias" value="<?php echo ew_HtmlEncode(strval($agencias->id_agencias->getSessionValue())) ?>">
 <?php } ?>
+<p>
 <input type="submit" name="btnAction" id="btnAction" value="<?php echo ew_BtnCaption($Language->Phrase("AddBtn")) ?>">
 </form>
 <?php
@@ -401,9 +379,6 @@ class cagencias_add {
 		// Table object (agencias_servicios)
 		if (!isset($GLOBALS['agencias_servicios'])) $GLOBALS['agencias_servicios'] = new cagencias_servicios();
 
-		// Table object (usuarios)
-		if (!isset($GLOBALS['usuarios'])) $GLOBALS['usuarios'] = new cusuarios();
-
 		// Page ID
 		if (!defined("EW_PAGE_ID"))
 			define("EW_PAGE_ID", 'add', TRUE);
@@ -425,25 +400,6 @@ class cagencias_add {
 	function Page_Init() {
 		global $gsExport, $gsExportFile, $UserProfile, $Language, $Security, $objForm;
 		global $agencias;
-
-		// Security
-		$Security = new cAdvancedSecurity();
-		if (!$Security->IsLoggedIn()) $Security->AutoLogin();
-		if (!$Security->IsLoggedIn()) {
-			$Security->SaveLastUrl();
-			$this->Page_Terminate("login.php");
-		}
-		$Security->TablePermission_Loading();
-		$Security->LoadCurrentUserLevel($this->TableName);
-		$Security->TablePermission_Loaded();
-		if (!$Security->IsLoggedIn()) {
-			$Security->SaveLastUrl();
-			$this->Page_Terminate("login.php");
-		}
-		if (!$Security->CanAdd()) {
-			$Security->SaveLastUrl();
-			$this->Page_Terminate("agenciaslist.php");
-		}
 
 		// Create form object
 		$objForm = new cFormObj();
@@ -491,14 +447,14 @@ class cagencias_add {
 	function Page_Main() {
 		global $objForm, $Language, $gsFormError, $agencias;
 
+		// Set up master/detail parameters
+		$this->SetUpMasterParms();
+
 		// Process form if post back
 		if (@$_POST["a_add"] <> "") {
 			$agencias->CurrentAction = $_POST["a_add"]; // Get form action
 			$this->CopyRecord = $this->LoadOldRecord(); // Load old recordset
 			$this->LoadFormValues(); // Load form values
-
-			// Set up detail parameters
-			$this->SetUpDetailParms();
 
 			// Validate form
 			if (!$this->ValidateForm()) {
@@ -526,9 +482,6 @@ class cagencias_add {
 			}
 		}
 
-		// Set up detail parameters
-		$this->SetUpDetailParms();
-
 		// Perform action based on action code
 		switch ($agencias->CurrentAction) {
 			case "I": // Blank record, no action required
@@ -543,10 +496,7 @@ class cagencias_add {
 				$agencias->SendEmail = TRUE; // Send email on add success
 				if ($this->AddRow($this->OldRecordset)) { // Add successful
 					$this->setSuccessMessage($Language->Phrase("AddSuccess")); // Set up success message
-					if ($agencias->getCurrentDetailTable() <> "") // Master/detail add
-						$sReturnUrl = $agencias->getDetailUrl();
-					else
-						$sReturnUrl = $agencias->getReturnUrl();
+					$sReturnUrl = $agencias->getReturnUrl();
 					if (ew_GetPageName($sReturnUrl) == "agenciasview.php")
 						$sReturnUrl = $agencias->ViewUrl(); // View paging, return to view page with keyurl directly
 					$this->Page_Terminate($sReturnUrl); // Clean up and return
@@ -580,10 +530,10 @@ class cagencias_add {
 		global $agencias;
 		$agencias->nombre->CurrentValue = NULL;
 		$agencias->nombre->OldValue = $agencias->nombre->CurrentValue;
-		$agencias->id_ciudad->CurrentValue = NULL;
-		$agencias->id_ciudad->OldValue = $agencias->id_ciudad->CurrentValue;
 		$agencias->direccion->CurrentValue = NULL;
 		$agencias->direccion->OldValue = $agencias->direccion->CurrentValue;
+		$agencias->id_ciudad->CurrentValue = NULL;
+		$agencias->id_ciudad->OldValue = $agencias->id_ciudad->CurrentValue;
 		$agencias->telef_1->CurrentValue = NULL;
 		$agencias->telef_1->OldValue = $agencias->telef_1->CurrentValue;
 		$agencias->horario_agencia->CurrentValue = NULL;
@@ -592,6 +542,7 @@ class cagencias_add {
 		$agencias->horario_taq_auto->OldValue = $agencias->horario_taq_auto->CurrentValue;
 		$agencias->coordenadas->CurrentValue = NULL;
 		$agencias->coordenadas->OldValue = $agencias->coordenadas->CurrentValue;
+		$agencias->citas_diarias->CurrentValue = 0;
 		$agencias->estatus->CurrentValue = NULL;
 		$agencias->estatus->OldValue = $agencias->estatus->CurrentValue;
 	}
@@ -604,11 +555,11 @@ class cagencias_add {
 		if (!$agencias->nombre->FldIsDetailKey) {
 			$agencias->nombre->setFormValue($objForm->GetValue("x_nombre"));
 		}
-		if (!$agencias->id_ciudad->FldIsDetailKey) {
-			$agencias->id_ciudad->setFormValue($objForm->GetValue("x_id_ciudad"));
-		}
 		if (!$agencias->direccion->FldIsDetailKey) {
 			$agencias->direccion->setFormValue($objForm->GetValue("x_direccion"));
+		}
+		if (!$agencias->id_ciudad->FldIsDetailKey) {
+			$agencias->id_ciudad->setFormValue($objForm->GetValue("x_id_ciudad"));
 		}
 		if (!$agencias->telef_1->FldIsDetailKey) {
 			$agencias->telef_1->setFormValue($objForm->GetValue("x_telef_1"));
@@ -622,6 +573,9 @@ class cagencias_add {
 		if (!$agencias->coordenadas->FldIsDetailKey) {
 			$agencias->coordenadas->setFormValue($objForm->GetValue("x_coordenadas"));
 		}
+		if (!$agencias->citas_diarias->FldIsDetailKey) {
+			$agencias->citas_diarias->setFormValue($objForm->GetValue("x_citas_diarias"));
+		}
 		if (!$agencias->estatus->FldIsDetailKey) {
 			$agencias->estatus->setFormValue($objForm->GetValue("x_estatus"));
 		}
@@ -632,12 +586,13 @@ class cagencias_add {
 		global $objForm, $agencias;
 		$this->LoadOldRecord();
 		$agencias->nombre->CurrentValue = $agencias->nombre->FormValue;
-		$agencias->id_ciudad->CurrentValue = $agencias->id_ciudad->FormValue;
 		$agencias->direccion->CurrentValue = $agencias->direccion->FormValue;
+		$agencias->id_ciudad->CurrentValue = $agencias->id_ciudad->FormValue;
 		$agencias->telef_1->CurrentValue = $agencias->telef_1->FormValue;
 		$agencias->horario_agencia->CurrentValue = $agencias->horario_agencia->FormValue;
 		$agencias->horario_taq_auto->CurrentValue = $agencias->horario_taq_auto->FormValue;
 		$agencias->coordenadas->CurrentValue = $agencias->coordenadas->FormValue;
+		$agencias->citas_diarias->CurrentValue = $agencias->citas_diarias->FormValue;
 		$agencias->estatus->CurrentValue = $agencias->estatus->FormValue;
 	}
 
@@ -672,12 +627,13 @@ class cagencias_add {
 		$agencias->Row_Selected($row);
 		$agencias->id_agencias->setDbValue($rs->fields('id_agencias'));
 		$agencias->nombre->setDbValue($rs->fields('nombre'));
-		$agencias->id_ciudad->setDbValue($rs->fields('id_ciudad'));
 		$agencias->direccion->setDbValue($rs->fields('direccion'));
+		$agencias->id_ciudad->setDbValue($rs->fields('id_ciudad'));
 		$agencias->telef_1->setDbValue($rs->fields('telef_1'));
 		$agencias->horario_agencia->setDbValue($rs->fields('horario_agencia'));
 		$agencias->horario_taq_auto->setDbValue($rs->fields('horario_taq_auto'));
 		$agencias->coordenadas->setDbValue($rs->fields('coordenadas'));
+		$agencias->citas_diarias->setDbValue($rs->fields('citas_diarias'));
 		$agencias->estatus->setDbValue($rs->fields('estatus'));
 	}
 
@@ -716,19 +672,28 @@ class cagencias_add {
 		// Common render codes for all row types
 		// id_agencias
 		// nombre
-		// id_ciudad
 		// direccion
+		// id_ciudad
 		// telef_1
 		// horario_agencia
 		// horario_taq_auto
 		// coordenadas
+		// citas_diarias
 		// estatus
 
 		if ($agencias->RowType == EW_ROWTYPE_VIEW) { // View row
 
+			// id_agencias
+			$agencias->id_agencias->ViewValue = $agencias->id_agencias->CurrentValue;
+			$agencias->id_agencias->ViewCustomAttributes = "";
+
 			// nombre
 			$agencias->nombre->ViewValue = $agencias->nombre->CurrentValue;
 			$agencias->nombre->ViewCustomAttributes = "";
+
+			// direccion
+			$agencias->direccion->ViewValue = $agencias->direccion->CurrentValue;
+			$agencias->direccion->ViewCustomAttributes = "";
 
 			// id_ciudad
 			if (strval($agencias->id_ciudad->CurrentValue) <> "") {
@@ -740,7 +705,7 @@ class cagencias_add {
 				$sWhereWrk .= "(" . $sFilterWrk . ")";
 			}
 			if ($sWhereWrk <> "") $sSqlWrk .= " WHERE " . $sWhereWrk;
-				$rswrk = $conn->Execute($sSqlWrk." order by nombre ASC");
+				$rswrk = $conn->Execute($sSqlWrk);
 				if ($rswrk && !$rswrk->EOF) { // Lookup values found
 					$agencias->id_ciudad->ViewValue = $rswrk->fields('nombre');
 					$rswrk->Close();
@@ -751,10 +716,6 @@ class cagencias_add {
 				$agencias->id_ciudad->ViewValue = NULL;
 			}
 			$agencias->id_ciudad->ViewCustomAttributes = "";
-
-			// direccion
-			$agencias->direccion->ViewValue = $agencias->direccion->CurrentValue;
-			$agencias->direccion->ViewCustomAttributes = "";
 
 			// telef_1
 			$agencias->telef_1->ViewValue = $agencias->telef_1->CurrentValue;
@@ -771,6 +732,10 @@ class cagencias_add {
 			// coordenadas
 			$agencias->coordenadas->ViewValue = $agencias->coordenadas->CurrentValue;
 			$agencias->coordenadas->ViewCustomAttributes = "";
+
+			// citas_diarias
+			$agencias->citas_diarias->ViewValue = $agencias->citas_diarias->CurrentValue;
+			$agencias->citas_diarias->ViewCustomAttributes = "";
 
 			// estatus
 			if (strval($agencias->estatus->CurrentValue) <> "") {
@@ -800,15 +765,15 @@ class cagencias_add {
 			$agencias->nombre->HrefValue = "";
 			$agencias->nombre->TooltipValue = "";
 
-			// id_ciudad
-			$agencias->id_ciudad->LinkCustomAttributes = "";
-			$agencias->id_ciudad->HrefValue = "";
-			$agencias->id_ciudad->TooltipValue = "";
-
 			// direccion
 			$agencias->direccion->LinkCustomAttributes = "";
 			$agencias->direccion->HrefValue = "";
 			$agencias->direccion->TooltipValue = "";
+
+			// id_ciudad
+			$agencias->id_ciudad->LinkCustomAttributes = "";
+			$agencias->id_ciudad->HrefValue = "";
+			$agencias->id_ciudad->TooltipValue = "";
 
 			// telef_1
 			$agencias->telef_1->LinkCustomAttributes = "";
@@ -830,6 +795,11 @@ class cagencias_add {
 			$agencias->coordenadas->HrefValue = "";
 			$agencias->coordenadas->TooltipValue = "";
 
+			// citas_diarias
+			$agencias->citas_diarias->LinkCustomAttributes = "";
+			$agencias->citas_diarias->HrefValue = "";
+			$agencias->citas_diarias->TooltipValue = "";
+
 			// estatus
 			$agencias->estatus->LinkCustomAttributes = "";
 			$agencias->estatus->HrefValue = "";
@@ -839,6 +809,10 @@ class cagencias_add {
 			// nombre
 			$agencias->nombre->EditCustomAttributes = "";
 			$agencias->nombre->EditValue = ew_HtmlEncode($agencias->nombre->CurrentValue);
+
+			// direccion
+			$agencias->direccion->EditCustomAttributes = "";
+			$agencias->direccion->EditValue = ew_HtmlEncode($agencias->direccion->CurrentValue);
 
 			// id_ciudad
 			$agencias->id_ciudad->EditCustomAttributes = "";
@@ -850,15 +824,11 @@ class cagencias_add {
 				$sWhereWrk .= "(" . $sFilterWrk . ")";
 			}
 			if ($sWhereWrk <> "") $sSqlWrk .= " WHERE " . $sWhereWrk;
-			$rswrk = $conn->Execute($sSqlWrk." order by nombre ASC");
+			$rswrk = $conn->Execute($sSqlWrk);
 			$arwrk = ($rswrk) ? $rswrk->GetRows() : array();
 			if ($rswrk) $rswrk->Close();
 			array_unshift($arwrk, array("", $Language->Phrase("PleaseSelect")));
 			$agencias->id_ciudad->EditValue = $arwrk;
-
-			// direccion
-			$agencias->direccion->EditCustomAttributes = "";
-			$agencias->direccion->EditValue = ew_HtmlEncode($agencias->direccion->CurrentValue);
 
 			// telef_1
 			$agencias->telef_1->EditCustomAttributes = "";
@@ -876,41 +846,17 @@ class cagencias_add {
 			$agencias->coordenadas->EditCustomAttributes = "";
 			$agencias->coordenadas->EditValue = ew_HtmlEncode($agencias->coordenadas->CurrentValue);
 
+			// citas_diarias
+			$agencias->citas_diarias->EditCustomAttributes = "";
+			$agencias->citas_diarias->EditValue = ew_HtmlEncode($agencias->citas_diarias->CurrentValue);
+
 			// estatus
 			$agencias->estatus->EditCustomAttributes = "";
 			$arwrk = array();
-			
-			IF(@$_SESSION[EW_SESSION_USER_LEVEL_ID]==4){
-			$arwrk[] = array("0", $agencias->estatus->FldTagCaption(1) <> "" ? $agencias->estatus->FldTagCaption(1) : "0");
-			$arwrk[] = array("3", $agencias->estatus->FldTagCaption(3) <> "" ? $agencias->estatus->FldTagCaption(3) : "3");
-			}
-			
-			IF(@$_SESSION[EW_SESSION_USER_LEVEL_ID]==5){
-			$arwrk[] = array("3", $agencias->estatus->FldTagCaption(3) <> "" ? $agencias->estatus->FldTagCaption(3) : "3");
-			$arwrk[] = array("4", $agencias->estatus->FldTagCaption(4) <> "" ? $agencias->estatus->FldTagCaption(4) : "4");
-			}
-			
-			
-			IF(@$_SESSION[EW_SESSION_USER_LEVEL_ID]==6){
-			$arwrk[] = array("1", $agencias->estatus->FldTagCaption(2) <> "" ? $agencias->estatus->FldTagCaption(2) : "1");
-			$arwrk[] = array("4", $agencias->estatus->FldTagCaption(4) <> "" ? $agencias->estatus->FldTagCaption(4) : "4");
-			}
-			
-			IF(@$_SESSION[EW_SESSION_USER_LEVEL_ID]==1){
 			$arwrk[] = array("0", $agencias->estatus->FldTagCaption(1) <> "" ? $agencias->estatus->FldTagCaption(1) : "0");
 			$arwrk[] = array("1", $agencias->estatus->FldTagCaption(2) <> "" ? $agencias->estatus->FldTagCaption(2) : "1");
 			$arwrk[] = array("3", $agencias->estatus->FldTagCaption(3) <> "" ? $agencias->estatus->FldTagCaption(3) : "3");
 			$arwrk[] = array("4", $agencias->estatus->FldTagCaption(4) <> "" ? $agencias->estatus->FldTagCaption(4) : "4");
-			}
-			
-			IF(@$_SESSION[EW_SESSION_USER_LEVEL_ID]==-1){
-			$arwrk[] = array("0", $agencias->estatus->FldTagCaption(1) <> "" ? $agencias->estatus->FldTagCaption(1) : "0");
-			$arwrk[] = array("1", $agencias->estatus->FldTagCaption(2) <> "" ? $agencias->estatus->FldTagCaption(2) : "1");
-			$arwrk[] = array("3", $agencias->estatus->FldTagCaption(3) <> "" ? $agencias->estatus->FldTagCaption(3) : "3");
-			$arwrk[] = array("4", $agencias->estatus->FldTagCaption(4) <> "" ? $agencias->estatus->FldTagCaption(4) : "4");
-			}
-			
-			
 			array_unshift($arwrk, array("", $Language->Phrase("PleaseSelect")));
 			$agencias->estatus->EditValue = $arwrk;
 
@@ -919,11 +865,11 @@ class cagencias_add {
 
 			$agencias->nombre->HrefValue = "";
 
-			// id_ciudad
-			$agencias->id_ciudad->HrefValue = "";
-
 			// direccion
 			$agencias->direccion->HrefValue = "";
+
+			// id_ciudad
+			$agencias->id_ciudad->HrefValue = "";
 
 			// telef_1
 			$agencias->telef_1->HrefValue = "";
@@ -936,6 +882,9 @@ class cagencias_add {
 
 			// coordenadas
 			$agencias->coordenadas->HrefValue = "";
+
+			// citas_diarias
+			$agencias->citas_diarias->HrefValue = "";
 
 			// estatus
 			$agencias->estatus->HrefValue = "";
@@ -961,24 +910,8 @@ class cagencias_add {
 		// Check if validation required
 		if (!EW_SERVER_VALIDATE)
 			return ($gsFormError == "");
-		if (!is_null($agencias->nombre->FormValue) && $agencias->nombre->FormValue == "") {
-			ew_AddMessage($gsFormError, $Language->Phrase("EnterRequiredField") . " - " . $agencias->nombre->FldCaption());
-		}
-		if (!is_null($agencias->id_ciudad->FormValue) && $agencias->id_ciudad->FormValue == "") {
-			ew_AddMessage($gsFormError, $Language->Phrase("EnterRequiredField") . " - " . $agencias->id_ciudad->FldCaption());
-		}
-		if (!is_null($agencias->direccion->FormValue) && $agencias->direccion->FormValue == "") {
-			ew_AddMessage($gsFormError, $Language->Phrase("EnterRequiredField") . " - " . $agencias->direccion->FldCaption());
-		}
-		if (!is_null($agencias->estatus->FormValue) && $agencias->estatus->FormValue == "") {
-			ew_AddMessage($gsFormError, $Language->Phrase("EnterRequiredField") . " - " . $agencias->estatus->FldCaption());
-		}
-
-		// Validate detail grid
-		if ($agencias->getCurrentDetailTable() == "agencias_servicios" && $GLOBALS["agencias_servicios"]->DetailAdd) {
-			$agencias_servicios_grid = new cagencias_servicios_grid(); // get detail page object
-			$agencias_servicios_grid->ValidateGridForm();
-			$agencias_servicios_grid = NULL;
+		if (!ew_CheckInteger($agencias->citas_diarias->FormValue)) {
+			ew_AddMessage($gsFormError, $agencias->citas_diarias->FldErrMsg());
 		}
 
 		// Return validate result
@@ -996,20 +929,16 @@ class cagencias_add {
 	// Add record
 	function AddRow($rsold = NULL) {
 		global $conn, $Language, $Security, $agencias;
-
-		// Begin transaction
-		if ($agencias->getCurrentDetailTable() <> "")
-			$conn->BeginTrans();
 		$rsnew = array();
 
 		// nombre
 		$agencias->nombre->SetDbValueDef($rsnew, $agencias->nombre->CurrentValue, NULL, FALSE);
 
-		// id_ciudad
-		$agencias->id_ciudad->SetDbValueDef($rsnew, $agencias->id_ciudad->CurrentValue, NULL, FALSE);
-
 		// direccion
 		$agencias->direccion->SetDbValueDef($rsnew, $agencias->direccion->CurrentValue, NULL, FALSE);
+
+		// id_ciudad
+		$agencias->id_ciudad->SetDbValueDef($rsnew, $agencias->id_ciudad->CurrentValue, NULL, FALSE);
 
 		// telef_1
 		$agencias->telef_1->SetDbValueDef($rsnew, $agencias->telef_1->CurrentValue, NULL, FALSE);
@@ -1023,8 +952,16 @@ class cagencias_add {
 		// coordenadas
 		$agencias->coordenadas->SetDbValueDef($rsnew, $agencias->coordenadas->CurrentValue, NULL, FALSE);
 
+		// citas_diarias
+		$agencias->citas_diarias->SetDbValueDef($rsnew, $agencias->citas_diarias->CurrentValue, NULL, strval($agencias->citas_diarias->CurrentValue) == "");
+
 		// estatus
 		$agencias->estatus->SetDbValueDef($rsnew, $agencias->estatus->CurrentValue, NULL, FALSE);
+
+		// id_agencias
+		if ($agencias->id_agencias->getSessionValue() <> "") {
+			$rsnew['id_agencias'] = $agencias->id_agencias->getSessionValue();
+		}
 
 		// Call Row Inserting event
 		$rs = ($rsold == NULL) ? NULL : $rsold->fields;
@@ -1048,105 +985,56 @@ class cagencias_add {
 			$agencias->id_agencias->setDbValue($conn->Insert_ID());
 			$rsnew['id_agencias'] = $agencias->id_agencias->DbValue;
 		}
-
-		// Add detail records
-		if ($AddRow) {
-			if ($agencias->getCurrentDetailTable() == "agencias_servicios" && $GLOBALS["agencias_servicios"]->DetailAdd) {
-				$GLOBALS["agencias_servicios"]->id_agencias->setSessionValue($agencias->id_agencias->CurrentValue); // Set master key
-				$agencias_servicios_grid = new cagencias_servicios_grid(); // get detail page object
-				$AddRow = $agencias_servicios_grid->GridInsert();
-				$agencias_servicios_grid = NULL;
-			}
-		}
-
-		// Commit/Rollback transaction
-		if ($agencias->getCurrentDetailTable() <> "") {
-			if ($AddRow) {
-				$conn->CommitTrans(); // Commit transaction
-			} else {
-				$conn->RollbackTrans(); // Rollback transaction
-			}
-		}
 		if ($AddRow) {
 
 			// Call Row Inserted event
 			$rs = ($rsold == NULL) ? NULL : $rsold->fields;
 			$agencias->Row_Inserted($rs, $rsnew);
-			$this->WriteAuditTrailOnAdd($rsnew);
 		}
 		return $AddRow;
 	}
 
-	// Set up detail parms based on QueryString
-	function SetUpDetailParms() {
+	// Set up master/detail based on QueryString
+	function SetUpMasterParms() {
 		global $agencias;
-		$bValidDetail = FALSE;
+		$bValidMaster = FALSE;
 
 		// Get the keys for master table
-		if (isset($_GET[EW_TABLE_SHOW_DETAIL])) {
-			$sDetailTblVar = $_GET[EW_TABLE_SHOW_DETAIL];
-			$agencias->setCurrentDetailTable($sDetailTblVar);
-		} else {
-			$sDetailTblVar = $agencias->getCurrentDetailTable();
-		}
-		if ($sDetailTblVar <> "") {
-			if ($sDetailTblVar == "agencias_servicios") {
-				if (!isset($GLOBALS["agencias_servicios"]))
-					$GLOBALS["agencias_servicios"] = new cagencias_servicios;
-				if ($GLOBALS["agencias_servicios"]->DetailAdd) {
-					if ($this->CopyRecord)
-						$GLOBALS["agencias_servicios"]->CurrentMode = "copy";
-					else
-						$GLOBALS["agencias_servicios"]->CurrentMode = "add";
-					$GLOBALS["agencias_servicios"]->CurrentAction = "gridadd";
-
-					// Save current master table to detail table
-					$GLOBALS["agencias_servicios"]->setCurrentMasterTable($agencias->TableVar);
-					$GLOBALS["agencias_servicios"]->setStartRecordNumber(1);
-					$GLOBALS["agencias_servicios"]->id_agencias->FldIsDetailKey = TRUE;
-					$GLOBALS["agencias_servicios"]->id_agencias->CurrentValue = $agencias->id_agencias->CurrentValue;
-					$GLOBALS["agencias_servicios"]->id_agencias->setSessionValue($GLOBALS["agencias_servicios"]->id_agencias->CurrentValue);
-				}
+		if (@$_GET[EW_TABLE_SHOW_MASTER] <> "") {
+			$sMasterTblVar = $_GET[EW_TABLE_SHOW_MASTER];
+			if ($sMasterTblVar == "") {
+				$bValidMaster = TRUE;
+				$this->DbMasterFilter = "";
+				$this->DbDetailFilter = "";
 			}
-		}
-	}
-
-	// Write Audit Trail start/end for grid update
-	function WriteAuditTrailDummy($typ) {
-		$table = 'agencias';
-	  $usr = CurrentUserName();
-		ew_WriteAuditTrail("log", ew_StdCurrentDateTime(), ew_ScriptName(), $usr, $typ, $table, "", "", "", "");
-	}
-
-	// Write Audit Trail (add page)
-	function WriteAuditTrailOnAdd(&$rs) {
-		global $agencias;
-		$table = 'agencias';
-
-		// Get key value
-		$key = "";
-		if ($key <> "") $key .= EW_COMPOSITE_KEY_SEPARATOR;
-		$key .= $rs['id_agencias'];
-
-		// Write Audit Trail
-		$dt = ew_StdCurrentDateTime();
-		$id = ew_ScriptName();
-	  $usr = CurrentUserName();
-		foreach (array_keys($rs) as $fldname) {
-			if ($agencias->fields[$fldname]->FldDataType <> EW_DATATYPE_BLOB) { // Ignore BLOB fields
-				if ($agencias->fields[$fldname]->FldDataType == EW_DATATYPE_MEMO) {
-					if (EW_AUDIT_TRAIL_TO_DATABASE)
-						$newvalue = $rs[$fldname];
-					else
-						$newvalue = "[MEMO]"; // Memo Field
-				} elseif ($agencias->fields[$fldname]->FldDataType == EW_DATATYPE_XML) {
-					$newvalue = "[XML]"; // XML Field
+			if ($sMasterTblVar == "agencias_servicios") {
+				$bValidMaster = TRUE;
+				if (@$_GET["id_agencias"] <> "") {
+					$GLOBALS["agencias_servicios"]->id_agencias->setQueryStringValue($_GET["id_agencias"]);
+					$agencias->id_agencias->setQueryStringValue($GLOBALS["agencias_servicios"]->id_agencias->QueryStringValue);
+					$agencias->id_agencias->setSessionValue($agencias->id_agencias->QueryStringValue);
+					if (!is_numeric($GLOBALS["agencias_servicios"]->id_agencias->QueryStringValue)) $bValidMaster = FALSE;
 				} else {
-					$newvalue = $rs[$fldname];
+					$bValidMaster = FALSE;
 				}
-				ew_WriteAuditTrail("log", $dt, $id, $usr, "A", $table, $fldname, $key, "", $newvalue);
 			}
 		}
+		if ($bValidMaster) {
+
+			// Save current master table
+			$agencias->setCurrentMasterTable($sMasterTblVar);
+
+			// Reset start record counter (new master key)
+			$this->StartRec = 1;
+			$agencias->setStartRecordNumber($this->StartRec);
+
+			// Clear previous master key from Session
+			if ($sMasterTblVar <> "agencias_servicios") {
+				if ($agencias->id_agencias->QueryStringValue == "") $agencias->id_agencias->setSessionValue("");
+			}
+		}
+		$this->DbMasterFilter = $agencias->getMasterFilter(); //  Get master filter
+		$this->DbDetailFilter = $agencias->getDetailFilter(); // Get detail filter
 	}
 
 	// Page Load event

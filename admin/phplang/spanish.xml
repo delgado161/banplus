@@ -385,7 +385,19 @@
 </menu>
 <menu id="787"><phrase id="menutext" value="Profesiones"/>
 </menu>
-<menu id="788"><phrase id="menutext" value="Pa&amp;iacute;s"/>
+<menu id="788"><phrase id="menutext" value="Pa&amp;iacute;s Formularios"/>
+</menu>
+
+<menu id="789"><phrase id="menutext" value="Estado Civil"/>
+</menu>
+<menu id="790"><phrase id="menutext" value="Municipios"/>
+</menu>
+
+<menu id="791"><phrase id="menutext" value="Estados Formularios"/>
+</menu>
+<menu id="792"><phrase id="menutext" value="Ciudad Formularios"/>
+</menu>
+<menu id="793"><phrase id="menutext" value="Prodcutos"/>
 </menu>
 
 
@@ -1120,6 +1132,195 @@
 
 
 
+<table id="z_bancos"><phrase id="tblcaption" value=" bancos"/>
+<field id="id_bancos"><phrase id="fldcaption" value="ID"/>
+</field>
+<field id="banco"><phrase id="fldcaption" value="Banco"/>
+</field>
+<field id="visibilidad"><phrase id="fldcaption" value="Visibilidad"/>
+<phrase id="fldtagcaption1" value="Si"/>
+<phrase id="fldtagcaption2" value="No"/>
+</field>
+</table>
+
+<table id="z_ciudad"><phrase id="tblcaption" value=" ciudad"/>
+<field id="id_ciudad"><phrase id="fldcaption" value="ID"/>
+</field>
+<field id="lf_estado"><phrase id="fldcaption" value="Estado"/>
+</field>
+<field id="id_banplus"><phrase id="fldcaption" value="ID BANPLUS"/>
+</field>
+<field id="ciudad"><phrase id="fldcaption" value="Ciudad"/>
+</field>
+<field id="visibilidad"><phrase id="fldcaption" value="Visibilidad"/>
+<phrase id="fldtagcaption1" value="Si"/>
+<phrase id="fldtagcaption2" value="No"/>
+</field>
+</table>
+
+<table id="z_cod_telefono"><phrase id="tblcaption" value=" cod telefono"/>
+<field id="id_cod_telefono"><phrase id="fldcaption" value="ID"/>
+</field>
+<field id="codigo"><phrase id="fldcaption" value="Código"/>
+</field>
+<field id="cod_cel"><phrase id="fldcaption" value="Celular"/>
+<phrase id="fldtagcaption1" value="Si"/>
+<phrase id="fldtagcaption2" value="No"/>
+</field>
+<field id="visibilidad"><phrase id="fldcaption" value="Visibilidad"/>
+<phrase id="fldtagcaption1" value="Si"/>
+<phrase id="fldtagcaption2" value="No"/>
+</field>
+<field id="descripcion"><phrase id="fldcaption" value="Descripción"/>
+</field>
+</table>
+
+<table id="z_codigo_postal"><phrase id="tblcaption" value=" codigo postal"/>
+<field id="id_codigo_postal"><phrase id="fldcaption" value="ID"/>
+</field>
+<field id="codigo"><phrase id="fldcaption" value="Código"/>
+</field>
+<field id="descripcion"><phrase id="fldcaption" value="Descripción"/>
+</field>
+<field id="visibilidad"><phrase id="fldcaption" value="Visibilidad"/>
+<phrase id="fldtagcaption1" value="Si"/>
+<phrase id="fldtagcaption2" value="No"/>
+</field>
+</table>
+
+<table id="z_estados"><phrase id="tblcaption" value=" estados"/>
+<field id="nombre"><phrase id="fldcaption" value="Estado"/>
+</field>
+<field id="lf_estado_pais"><phrase id="fldcaption" value="País"/>
+</field>
+<field id="visibilidad"><phrase id="fldcaption" value="Visibilidad"/>
+<phrase id="fldtagcaption1" value="Si"/>
+<phrase id="fldtagcaption2" value="No"/>
+</field>
+<field id="id2_estado"><phrase id="fldcaption" value="ID"/>
+</field>
+</table>
+
+<table id="z_municipios"><phrase id="tblcaption" value=" municipios"/>
+<field id="lp_municipio_id"><phrase id="fldcaption" value="ID"/>
+</field>
+<field id="nombre"><phrase id="fldcaption" value="Municipio"/>
+</field>
+<field id="visibilidad"><phrase id="fldcaption" value="Visibilidad"/>
+</field>
+<field id="lf_estado"><phrase id="fldcaption" value="Estado"/>
+</field>
+<field id="pk_municipio"><phrase id="fldcaption" value="ID BANPLUS"/>
+</field>
+</table>
+
+<table id="z_paises"><phrase id="tblcaption" value=" paises"/>
+<field id="lp_pais_id"><phrase id="fldcaption" value="ID"/>
+</field>
+<field id="nombre"><phrase id="fldcaption" value="País"/>
+</field>
+<field id="nacionalidad"><phrase id="fldcaption" value="Nacionalidad"/>
+</field>
+<field id="visibilidad"><phrase id="fldcaption" value="Visibilidad"/>
+<phrase id="fldtagcaption1" value="Si"/>
+<phrase id="fldtagcaption2" value="No"/>
+</field>
+</table>
+
+<table id="z_parroquias"><phrase id="tblcaption" value=" parroquias"/>
+<field id="lp_parroquia_id"><phrase id="fldcaption" value="lp parroquia id"/>
+</field>
+<field id="nombre"><phrase id="fldcaption" value="nombre"/>
+</field>
+<field id="lf_parroquia_municipio"><phrase id="fldcaption" value="lf parroquia municipio"/>
+</field>
+<field id="visibilidad"><phrase id="fldcaption" value="visibilidad"/>
+</field>
+</table>
+
+<table id="actividad_economica"><phrase id="tblcaption" value="actividad economica"/>
+<field id="id_acteconomica"><phrase id="fldcaption" value="ID"/>
+</field>
+<field id="actividad"><phrase id="fldcaption" value="Actividad"/>
+</field>
+<field id="visibilidad"><phrase id="fldcaption" value="Visibilidad"/>
+<phrase id="fldtagcaption1" value="Si"/>
+<phrase id="fldtagcaption2" value="No"/>
+</field>
+</table>
+
+<table id="agencias"><phrase id="tblcaption" value="agencias"/>
+<field id="id_agencias"><phrase id="fldcaption" value="id agencias"/>
+</field>
+<field id="nombre"><phrase id="fldcaption" value="nombre"/>
+</field>
+<field id="direccion"><phrase id="fldcaption" value="direccion"/>
+</field>
+<field id="id_ciudad"><phrase id="fldcaption" value="id ciudad"/>
+</field>
+<field id="telef_1"><phrase id="fldcaption" value="telef 1"/>
+</field>
+<field id="horario_agencia"><phrase id="fldcaption" value="horario agencia"/>
+</field>
+<field id="horario_taq_auto"><phrase id="fldcaption" value="horario taq auto"/>
+</field>
+<field id="coordenadas"><phrase id="fldcaption" value="coordenadas"/>
+</field>
+<field id="estatus"><phrase id="fldcaption" value="estatus"/>
+</field>
+</table>
+
+
+
+<table id="estado_civil"><phrase id="tblcaption" value="estado civil"/>
+<field id="id_civil"><phrase id="fldcaption" value="ID"/>
+</field>
+<field id="nombre"><phrase id="fldcaption" value="nombre"/>
+</field>
+<field id="id_char"><phrase id="fldcaption" value="ID Char"/>
+</field>
+<field id="visibilidad"><phrase id="fldcaption" value="Visibilidad"/>
+<phrase id="fldtagcaption1" value="Si"/>
+<phrase id="fldtagcaption2" value="No"/>
+</field>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table id="profesiones"><phrase id="tblcaption" value="profesiones"/>
+<field id="id_profesion"><phrase id="fldcaption" value="ID"/>
+</field>
+<field id="descripcion"><phrase id="fldcaption" value="Profesión"/>
+</field>
+</table>
+
+
+
+
+
+<table id="tipo_cuenta"><phrase id="tblcaption" value="tipo cuenta"/>
+<field id="id_cuenta"><phrase id="fldcaption" value="id cuenta"/>
+</field>
+<field id="tipo"><phrase id="fldcaption" value="tipo"/>
+</field>
+</table>
+
+<table id="tipos_productos"><phrase id="tblcaption" value="tipos productos"/>
+<field id="id_producto"><phrase id="fldcaption" value="ID"/>
+</field>
+<field id="tipo"><phrase id="fldcaption" value="Tipo de Producto"/>
+</field>
+</table>
 
 
 

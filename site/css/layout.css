@@ -158,12 +158,13 @@ h4
 }
 
 .ui-state-default{
-    color: white !important;
-    background:#002554 !important;
+    color: rgb(0,94,184) !important;
+    background:#eee !important;
 }
 
 .ui-state-active{
-    background:#87BE28 !important;
+    background:rgb(0,156,222) !important;
+    color:white  !important;
     border: none !important;
 }
 

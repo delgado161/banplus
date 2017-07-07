@@ -1054,11 +1054,37 @@ class cz_cod_telefono_list {
 			$z_cod_telefono->codigo->ViewCustomAttributes = "";
 
 			// cod_cel
-			$z_cod_telefono->cod_cel->ViewValue = $z_cod_telefono->cod_cel->CurrentValue;
+			if (strval($z_cod_telefono->cod_cel->CurrentValue) <> "") {
+				switch ($z_cod_telefono->cod_cel->CurrentValue) {
+					case "1":
+						$z_cod_telefono->cod_cel->ViewValue = $z_cod_telefono->cod_cel->FldTagCaption(1) <> "" ? $z_cod_telefono->cod_cel->FldTagCaption(1) : $z_cod_telefono->cod_cel->CurrentValue;
+						break;
+					case "0":
+						$z_cod_telefono->cod_cel->ViewValue = $z_cod_telefono->cod_cel->FldTagCaption(2) <> "" ? $z_cod_telefono->cod_cel->FldTagCaption(2) : $z_cod_telefono->cod_cel->CurrentValue;
+						break;
+					default:
+						$z_cod_telefono->cod_cel->ViewValue = $z_cod_telefono->cod_cel->CurrentValue;
+				}
+			} else {
+				$z_cod_telefono->cod_cel->ViewValue = NULL;
+			}
 			$z_cod_telefono->cod_cel->ViewCustomAttributes = "";
 
 			// visibilidad
-			$z_cod_telefono->visibilidad->ViewValue = $z_cod_telefono->visibilidad->CurrentValue;
+			if (strval($z_cod_telefono->visibilidad->CurrentValue) <> "") {
+				switch ($z_cod_telefono->visibilidad->CurrentValue) {
+					case "1":
+						$z_cod_telefono->visibilidad->ViewValue = $z_cod_telefono->visibilidad->FldTagCaption(1) <> "" ? $z_cod_telefono->visibilidad->FldTagCaption(1) : $z_cod_telefono->visibilidad->CurrentValue;
+						break;
+					case "0":
+						$z_cod_telefono->visibilidad->ViewValue = $z_cod_telefono->visibilidad->FldTagCaption(2) <> "" ? $z_cod_telefono->visibilidad->FldTagCaption(2) : $z_cod_telefono->visibilidad->CurrentValue;
+						break;
+					default:
+						$z_cod_telefono->visibilidad->ViewValue = $z_cod_telefono->visibilidad->CurrentValue;
+				}
+			} else {
+				$z_cod_telefono->visibilidad->ViewValue = NULL;
+			}
 			$z_cod_telefono->visibilidad->ViewCustomAttributes = "";
 
 			// descripcion

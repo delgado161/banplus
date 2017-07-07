@@ -443,7 +443,20 @@ class cactividad_economica_delete {
 			$actividad_economica->actividad->ViewCustomAttributes = "";
 
 			// visibilidad
-			$actividad_economica->visibilidad->ViewValue = $actividad_economica->visibilidad->CurrentValue;
+			if (strval($actividad_economica->visibilidad->CurrentValue) <> "") {
+				switch ($actividad_economica->visibilidad->CurrentValue) {
+					case "1":
+						$actividad_economica->visibilidad->ViewValue = $actividad_economica->visibilidad->FldTagCaption(1) <> "" ? $actividad_economica->visibilidad->FldTagCaption(1) : $actividad_economica->visibilidad->CurrentValue;
+						break;
+					case "0":
+						$actividad_economica->visibilidad->ViewValue = $actividad_economica->visibilidad->FldTagCaption(2) <> "" ? $actividad_economica->visibilidad->FldTagCaption(2) : $actividad_economica->visibilidad->CurrentValue;
+						break;
+					default:
+						$actividad_economica->visibilidad->ViewValue = $actividad_economica->visibilidad->CurrentValue;
+				}
+			} else {
+				$actividad_economica->visibilidad->ViewValue = NULL;
+			}
 			$actividad_economica->visibilidad->ViewCustomAttributes = "";
 
 			// id_acteconomica

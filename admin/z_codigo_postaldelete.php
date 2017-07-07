@@ -452,7 +452,20 @@ class cz_codigo_postal_delete {
 			$z_codigo_postal->Descripcion->ViewCustomAttributes = "";
 
 			// visibilidad
-			$z_codigo_postal->visibilidad->ViewValue = $z_codigo_postal->visibilidad->CurrentValue;
+			if (strval($z_codigo_postal->visibilidad->CurrentValue) <> "") {
+				switch ($z_codigo_postal->visibilidad->CurrentValue) {
+					case "1":
+						$z_codigo_postal->visibilidad->ViewValue = $z_codigo_postal->visibilidad->FldTagCaption(1) <> "" ? $z_codigo_postal->visibilidad->FldTagCaption(1) : $z_codigo_postal->visibilidad->CurrentValue;
+						break;
+					case "0":
+						$z_codigo_postal->visibilidad->ViewValue = $z_codigo_postal->visibilidad->FldTagCaption(2) <> "" ? $z_codigo_postal->visibilidad->FldTagCaption(2) : $z_codigo_postal->visibilidad->CurrentValue;
+						break;
+					default:
+						$z_codigo_postal->visibilidad->ViewValue = $z_codigo_postal->visibilidad->CurrentValue;
+				}
+			} else {
+				$z_codigo_postal->visibilidad->ViewValue = NULL;
+			}
 			$z_codigo_postal->visibilidad->ViewCustomAttributes = "";
 
 			// id_codigo_postal

@@ -8,14 +8,10 @@ Author     : Roberto Delgado
 if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "NATURAL") {
 
 
+    $_POST['act_economica'] = explode("_", $_POST['act_economica']);
+    $_POST['act_economica'] = $_POST['act_economica'][0];
 
-    $data = '';
-    foreach ($_POST as $key => $valores) {
-        $data .= ($key) . "_" . ($valores) . ",";
-    }
-
-//    var_dump($_data);
-    actualizar_campo('insertar_cita', [15, $_POST['fc_cita'], "'ACPN_" . $_POST['tp_documento'] . $_POST['n_documento'] . "'", "'" . $data . "'"]);
+//    var_dump($_POST);
 
 
     Foreach ($Estados as $estado) {
@@ -24,6 +20,12 @@ if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "NATURAL") {
 
         if ($estado['id2_estado'] == $_POST['etp_estado'])
             $_POST['etp_estado'] = $estado['nombre'];
+    }
+
+
+    foreach ($AGENCIA as $agencia) {
+        if ($agencia['id_agencias'] == $_POST['fn_agencia'])
+            $_POST['fn_agencia'] = $agencia['nombre'];
     }
 
     $_POST['dtp_ciudad'] = explode(",", $_POST['dtp_ciudad']);
@@ -40,16 +42,15 @@ if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "NATURAL") {
             $_POST['etp_ciudad'] = $Ciudad['ciudad'];
     }
 
+    actualizar_campo('inserta_cita', [$_POST['fn_agencia'], $_POST['fc_cita'], 'ACPN_' . $_POST['tp_documento'] . $_POST['n_documento'], serialize($_POST)]);
+
 
     if (!file_exists(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'])) {
         mkdir(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'], 0777, true);
     }
 
 
-
-
     $uploaddir = dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'] . "/";
-
 
     $path = $_FILES['f_cedula']['name'];
     $ext = pathinfo($path, PATHINFO_EXTENSION);
@@ -109,6 +110,7 @@ if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "NATURAL") {
 
                         },
                         success: function (data) {
+                            $('.spiner_').hide();
                             var r = confirm("\u00bfDesea realizar la solicitud de TDC?");
                             if (r == true) {
                                 txt = "You pressed OK!";
@@ -129,18 +131,22 @@ if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "NATURAL") {
 ?>
 
 <?php
-//var_dump($_POST);
-
 if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "JURIDICO") {
+
+    $_POST['act_economica'] = explode("_", $_POST['act_economica']);
+    $_POST['act_economica'] = $_POST['act_economica'][0];
 
     Foreach ($Estados as $estado) {
         if ($estado['id2_estado'] == $_POST['etp_estado'])
             $_POST['etp_estado'] = $estado['nombre'];
     }
-//
-//    $_POST['etp_ciudad'] = explode(",", $_POST['etp_ciudad']);
-//    $_POST['etp_ciudad'] = explode(",", $_POST['etp_ciudad']);
-//
+
+    foreach ($AGENCIA as $agencia) {
+        if ($agencia['id_agencias'] == $_POST['fn_agencia'])
+            $_POST['fn_agencia'] = $agencia['nombre'];
+    }
+
+
     $_POST['etp_ciudad'] = explode(",", $_POST['etp_ciudad']);
 
     $_POST['etp_municipio'] = explode(",", $_POST['etp_municipio']);
@@ -158,17 +164,14 @@ if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "JURIDICO") {
     }
 
 
+    actualizar_campo('inserta_cita', [$_POST['fn_agencia'], $_POST['fc_cita'], 'ACPJ_' . $_POST['rif'], serialize($_POST)]);
 
 
     if (!file_exists(dirname(__FILE__) . '/tmp_apertura/J_' . $_POST['rif'])) {
         mkdir(dirname(__FILE__) . '/tmp_apertura/J_' . $_POST['rif'], 0777, true);
     }
 
-
-
-
     $uploaddir = dirname(__FILE__) . '/tmp_apertura/J_' . $_POST['rif'] . "/";
-
 
     $path = $_FILES['f_reg_fiscal']['name'];
     $ext = pathinfo($path, PATHINFO_EXTENSION);
@@ -213,7 +216,6 @@ if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "JURIDICO") {
     ?>
 
 
-
     <script>
         $(document).ready(function () {
 
@@ -233,6 +235,9 @@ if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "JURIDICO") {
 
                         },
                         success: function (data) {
+
+                            $('.spiner_').hide();
+
                             var r = confirm("\u00bfDesea realizar la solicitud de TDC?");
                             if (r == true) {
                                 txt = "You pressed OK!";

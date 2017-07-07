@@ -52,9 +52,6 @@ z_codigo_postal_add.ValidateForm = function(fobj) {
 		elm = fobj.elements["x" + infix + "_visibilidad"];
 		if (elm && !ew_HasValue(elm))
 			return ew_OnError(this, elm, ewLanguage.Phrase("EnterRequiredField") + " - <?php echo ew_JsEncode2($z_codigo_postal->visibilidad->FldCaption()) ?>");
-		elm = fobj.elements["x" + infix + "_visibilidad"];
-		if (elm && !ew_CheckInteger(elm.value))
-			return ew_OnError(this, elm, "<?php echo ew_JsEncode2($z_codigo_postal->visibilidad->FldErrMsg()) ?>");
 
 		// Set up row object
 		var row = {};
@@ -136,7 +133,7 @@ $z_codigo_postal_add->ShowMessage();
 	<tr id="r_Descripcion"<?php echo $z_codigo_postal->RowAttributes() ?>>
 		<td class="ewTableHeader"><?php echo $z_codigo_postal->Descripcion->FldCaption() ?><?php echo $Language->Phrase("FieldRequiredIndicator") ?></td>
 		<td<?php echo $z_codigo_postal->Descripcion->CellAttributes() ?>><span id="el_Descripcion">
-<input type="text" name="x_Descripcion" id="x_Descripcion" size="30" maxlength="50" value="<?php echo $z_codigo_postal->Descripcion->EditValue ?>"<?php echo $z_codigo_postal->Descripcion->EditAttributes() ?>>
+<textarea name="x_Descripcion" id="x_Descripcion" cols="0" rows="0"<?php echo $z_codigo_postal->Descripcion->EditAttributes() ?>><?php echo $z_codigo_postal->Descripcion->EditValue ?></textarea>
 </span><?php echo $z_codigo_postal->Descripcion->CustomMsg ?></td>
 	</tr>
 <?php } ?>
@@ -144,7 +141,27 @@ $z_codigo_postal_add->ShowMessage();
 	<tr id="r_visibilidad"<?php echo $z_codigo_postal->RowAttributes() ?>>
 		<td class="ewTableHeader"><?php echo $z_codigo_postal->visibilidad->FldCaption() ?><?php echo $Language->Phrase("FieldRequiredIndicator") ?></td>
 		<td<?php echo $z_codigo_postal->visibilidad->CellAttributes() ?>><span id="el_visibilidad">
-<input type="text" name="x_visibilidad" id="x_visibilidad" size="30" value="<?php echo $z_codigo_postal->visibilidad->EditValue ?>"<?php echo $z_codigo_postal->visibilidad->EditAttributes() ?>>
+<div id="tp_x_visibilidad" class="<?php echo EW_ITEM_TEMPLATE_CLASSNAME ?>"><label><input type="radio" name="x_visibilidad" id="x_visibilidad" value="{value}"<?php echo $z_codigo_postal->visibilidad->EditAttributes() ?>></label></div>
+<div id="dsl_x_visibilidad" data-repeatcolumn="5" class="ewItemList">
+<?php
+$arwrk = $z_codigo_postal->visibilidad->EditValue;
+if (is_array($arwrk)) {
+	$rowswrk = count($arwrk);
+	$emptywrk = TRUE;
+	for ($rowcntwrk = 0; $rowcntwrk < $rowswrk; $rowcntwrk++) {
+		$selwrk = (strval($z_codigo_postal->visibilidad->CurrentValue) == strval($arwrk[$rowcntwrk][0])) ? " checked=\"checked\"" : "";
+		if ($selwrk <> "") $emptywrk = FALSE;
+
+		// Note: No spacing within the LABEL tag
+?>
+<?php echo ew_RepeatColumnTable($rowswrk, $rowcntwrk, 5, 1) ?>
+<label><input type="radio" name="x_visibilidad" id="x_visibilidad" value="<?php echo ew_HtmlEncode($arwrk[$rowcntwrk][0]) ?>"<?php echo $selwrk ?><?php echo $z_codigo_postal->visibilidad->EditAttributes() ?>><?php echo $arwrk[$rowcntwrk][1] ?></label>
+<?php echo ew_RepeatColumnTable($rowswrk, $rowcntwrk, 5, 2) ?>
+<?php
+	}
+}
+?>
+</div>
 </span><?php echo $z_codigo_postal->visibilidad->CustomMsg ?></td>
 	</tr>
 <?php } ?>
@@ -566,7 +583,20 @@ class cz_codigo_postal_add {
 			$z_codigo_postal->Descripcion->ViewCustomAttributes = "";
 
 			// visibilidad
-			$z_codigo_postal->visibilidad->ViewValue = $z_codigo_postal->visibilidad->CurrentValue;
+			if (strval($z_codigo_postal->visibilidad->CurrentValue) <> "") {
+				switch ($z_codigo_postal->visibilidad->CurrentValue) {
+					case "1":
+						$z_codigo_postal->visibilidad->ViewValue = $z_codigo_postal->visibilidad->FldTagCaption(1) <> "" ? $z_codigo_postal->visibilidad->FldTagCaption(1) : $z_codigo_postal->visibilidad->CurrentValue;
+						break;
+					case "0":
+						$z_codigo_postal->visibilidad->ViewValue = $z_codigo_postal->visibilidad->FldTagCaption(2) <> "" ? $z_codigo_postal->visibilidad->FldTagCaption(2) : $z_codigo_postal->visibilidad->CurrentValue;
+						break;
+					default:
+						$z_codigo_postal->visibilidad->ViewValue = $z_codigo_postal->visibilidad->CurrentValue;
+				}
+			} else {
+				$z_codigo_postal->visibilidad->ViewValue = NULL;
+			}
 			$z_codigo_postal->visibilidad->ViewCustomAttributes = "";
 
 			// codigo
@@ -595,7 +625,10 @@ class cz_codigo_postal_add {
 
 			// visibilidad
 			$z_codigo_postal->visibilidad->EditCustomAttributes = "";
-			$z_codigo_postal->visibilidad->EditValue = ew_HtmlEncode($z_codigo_postal->visibilidad->CurrentValue);
+			$arwrk = array();
+			$arwrk[] = array("1", $z_codigo_postal->visibilidad->FldTagCaption(1) <> "" ? $z_codigo_postal->visibilidad->FldTagCaption(1) : "1");
+			$arwrk[] = array("0", $z_codigo_postal->visibilidad->FldTagCaption(2) <> "" ? $z_codigo_postal->visibilidad->FldTagCaption(2) : "0");
+			$z_codigo_postal->visibilidad->EditValue = $arwrk;
 
 			// Edit refer script
 			// codigo
@@ -635,11 +668,8 @@ class cz_codigo_postal_add {
 		if (!is_null($z_codigo_postal->Descripcion->FormValue) && $z_codigo_postal->Descripcion->FormValue == "") {
 			ew_AddMessage($gsFormError, $Language->Phrase("EnterRequiredField") . " - " . $z_codigo_postal->Descripcion->FldCaption());
 		}
-		if (!is_null($z_codigo_postal->visibilidad->FormValue) && $z_codigo_postal->visibilidad->FormValue == "") {
+		if ($z_codigo_postal->visibilidad->FormValue == "") {
 			ew_AddMessage($gsFormError, $Language->Phrase("EnterRequiredField") . " - " . $z_codigo_postal->visibilidad->FldCaption());
-		}
-		if (!ew_CheckInteger($z_codigo_postal->visibilidad->FormValue)) {
-			ew_AddMessage($gsFormError, $z_codigo_postal->visibilidad->FldErrMsg());
 		}
 
 		// Return validate result

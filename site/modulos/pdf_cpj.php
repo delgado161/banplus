@@ -5,6 +5,10 @@
 // convert in PDF
 include_once "../includes/html2pdf/vendor/autoload.php";
 try {
+    foreach ($_POST as $key => $post) {
+        $_POST[$key] = htmlentities($post);
+    }
+
     $html2pdf = new HTML2PDF('P', 'A4', 'en', false, 'ISO-8859-15', array(3, 4, 3, 3));
 //      $html2pdf->setModeDebug();
     $html2pdf->setDefaultFont('Arial');

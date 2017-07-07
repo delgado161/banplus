@@ -12,12 +12,13 @@ class cagencias {
 	var $TableType = 'TABLE';
 	var $id_agencias;
 	var $nombre;
-	var $id_ciudad;
 	var $direccion;
+	var $id_ciudad;
 	var $telef_1;
 	var $horario_agencia;
 	var $horario_taq_auto;
 	var $coordenadas;
+	var $citas_diarias;
 	var $estatus;
 	var $fields = array();
 	var $UseTokenInUrl = EW_USE_TOKEN_IN_URL;
@@ -182,14 +183,14 @@ class cagencias {
 		$this->nombre = new cField('agencias', 'agencias', 'x_nombre', 'nombre', '`nombre`', 200, -1, FALSE, '`nombre`', FALSE, FALSE, 'FORMATTED TEXT');
 		$this->fields['nombre'] =& $this->nombre;
 
+		// direccion
+		$this->direccion = new cField('agencias', 'agencias', 'x_direccion', 'direccion', '`direccion`', 201, -1, FALSE, '`direccion`', FALSE, FALSE, 'FORMATTED TEXT');
+		$this->fields['direccion'] =& $this->direccion;
+
 		// id_ciudad
 		$this->id_ciudad = new cField('agencias', 'agencias', 'x_id_ciudad', 'id_ciudad', '`id_ciudad`', 3, -1, FALSE, '`id_ciudad`', FALSE, FALSE, 'FORMATTED TEXT');
 		$this->id_ciudad->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
 		$this->fields['id_ciudad'] =& $this->id_ciudad;
-
-		// direccion
-		$this->direccion = new cField('agencias', 'agencias', 'x_direccion', 'direccion', '`direccion`', 200, -1, FALSE, '`direccion`', FALSE, FALSE, 'FORMATTED TEXT');
-		$this->fields['direccion'] =& $this->direccion;
 
 		// telef_1
 		$this->telef_1 = new cField('agencias', 'agencias', 'x_telef_1', 'telef_1', '`telef_1`', 201, -1, FALSE, '`telef_1`', FALSE, FALSE, 'FORMATTED TEXT');
@@ -206,6 +207,11 @@ class cagencias {
 		// coordenadas
 		$this->coordenadas = new cField('agencias', 'agencias', 'x_coordenadas', 'coordenadas', '`coordenadas`', 200, -1, FALSE, '`coordenadas`', FALSE, FALSE, 'FORMATTED TEXT');
 		$this->fields['coordenadas'] =& $this->coordenadas;
+
+		// citas_diarias
+		$this->citas_diarias = new cField('agencias', 'agencias', 'x_citas_diarias', 'citas_diarias', '`citas_diarias`', 3, -1, FALSE, '`citas_diarias`', FALSE, FALSE, 'FORMATTED TEXT');
+		$this->citas_diarias->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
+		$this->fields['citas_diarias'] =& $this->citas_diarias;
 
 		// estatus
 		$this->estatus = new cField('agencias', 'agencias', 'x_estatus', 'estatus', '`estatus`', 3, -1, FALSE, '`estatus`', FALSE, FALSE, 'FORMATTED TEXT');
@@ -350,25 +356,51 @@ class cagencias {
 		$_SESSION[EW_PROJECT_NAME . "_" . $this->TableVar . "_" . EW_TABLE_KEY . "_" . $fld] = $v;
 	}
 
-	// Current detail table name
-	function getCurrentDetailTable() {
-		return @$_SESSION[EW_PROJECT_NAME . "_" . $this->TableVar . "_" . EW_TABLE_DETAIL_TABLE];
+	// Current master table name
+	function getCurrentMasterTable() {
+		return @$_SESSION[EW_PROJECT_NAME . "_" . $this->TableVar . "_" . EW_TABLE_MASTER_TABLE];
 	}
 
-	function setCurrentDetailTable($v) {
-		$_SESSION[EW_PROJECT_NAME . "_" . $this->TableVar . "_" . EW_TABLE_DETAIL_TABLE] = $v;
+	function setCurrentMasterTable($v) {
+		$_SESSION[EW_PROJECT_NAME . "_" . $this->TableVar . "_" . EW_TABLE_MASTER_TABLE] = $v;
 	}
 
-	// Get detail url
-	function getDetailUrl() {
+	// Session master WHERE clause
+	function getMasterFilter() {
 
-		// Detail url
-		$sDetailUrl = "";
-		if ($this->getCurrentDetailTable() == "agencias_servicios") {
-			$sDetailUrl = $GLOBALS["agencias_servicios"]->ListUrl() . "?showmaster=" . $this->TableVar;
-			$sDetailUrl .= "&id_agencias=" . $this->id_agencias->CurrentValue;
+		// Master filter
+		$sMasterFilter = "";
+		if ($this->getCurrentMasterTable() == "agencias_servicios") {
+			if ($this->id_agencias->getSessionValue() <> "")
+				$sMasterFilter .= "`id_agencias`=" . ew_QuotedValue($this->id_agencias->getSessionValue(), EW_DATATYPE_NUMBER);
+			else
+				return "";
 		}
-		return $sDetailUrl;
+		return $sMasterFilter;
+	}
+
+	// Session detail WHERE clause
+	function getDetailFilter() {
+
+		// Detail filter
+		$sDetailFilter = "";
+		if ($this->getCurrentMasterTable() == "agencias_servicios") {
+			if ($this->id_agencias->getSessionValue() <> "")
+				$sDetailFilter .= "`id_agencias`=" . ew_QuotedValue($this->id_agencias->getSessionValue(), EW_DATATYPE_NUMBER);
+			else
+				return "";
+		}
+		return $sDetailFilter;
+	}
+
+	// Master filter
+	function SqlMasterFilter_agencias_servicios() {
+		return "`id_agencias`=@id_agencias@";
+	}
+
+	// Detail filter
+	function SqlDetailFilter_agencias_servicios() {
+		return "`id_agencias`=@id_agencias@";
 	}
 
 	// Table level SQL
@@ -405,18 +437,18 @@ class cagencias {
 			case "add":
 			case "register":
 			case "addopt":
-				return FALSE;
+				return ;
 			case "edit":
 			case "update":
-				return FALSE;
+				return ;
 			case "delete":
-				return FALSE;
+				return ;
 			case "view":
-				return FALSE;
+				return ;
 			case "search":
-				return FALSE;
+				return ;
 			default:
-				return FALSE;
+				return ;
 		}
 	}
 
@@ -595,10 +627,7 @@ class cagencias {
 
 	// Edit URL
 	function EditUrl($parm = "") {
-		if ($parm <> "")
-			return $this->KeyUrl("agenciasedit.php", $this->UrlParm($parm));
-		else
-			return $this->KeyUrl("agenciasedit.php", $this->UrlParm(EW_TABLE_SHOW_DETAIL . "="));
+		return $this->KeyUrl("agenciasedit.php", $this->UrlParm($parm));
 	}
 
 	// Inline edit URL
@@ -608,10 +637,7 @@ class cagencias {
 
 	// Copy URL
 	function CopyUrl($parm = "") {
-		if ($parm <> "")
-			return $this->KeyUrl("agenciasadd.php", $this->UrlParm($parm));
-		else
-			return $this->KeyUrl("agenciasadd.php", $this->UrlParm(EW_TABLE_SHOW_DETAIL . "="));
+		return $this->KeyUrl("agenciasadd.php", $this->UrlParm($parm));
 	}
 
 	// Inline copy URL
@@ -713,12 +739,13 @@ class cagencias {
 	function LoadListRowValues(&$rs) {
 		$this->id_agencias->setDbValue($rs->fields('id_agencias'));
 		$this->nombre->setDbValue($rs->fields('nombre'));
-		$this->id_ciudad->setDbValue($rs->fields('id_ciudad'));
 		$this->direccion->setDbValue($rs->fields('direccion'));
+		$this->id_ciudad->setDbValue($rs->fields('id_ciudad'));
 		$this->telef_1->setDbValue($rs->fields('telef_1'));
 		$this->horario_agencia->setDbValue($rs->fields('horario_agencia'));
 		$this->horario_taq_auto->setDbValue($rs->fields('horario_taq_auto'));
 		$this->coordenadas->setDbValue($rs->fields('coordenadas'));
+		$this->citas_diarias->setDbValue($rs->fields('citas_diarias'));
 		$this->estatus->setDbValue($rs->fields('estatus'));
 	}
 
@@ -732,12 +759,13 @@ class cagencias {
    // Common render codes
 		// id_agencias
 		// nombre
-		// id_ciudad
 		// direccion
+		// id_ciudad
 		// telef_1
 		// horario_agencia
 		// horario_taq_auto
 		// coordenadas
+		// citas_diarias
 		// estatus
 		// id_agencias
 
@@ -747,6 +775,10 @@ class cagencias {
 		// nombre
 		$this->nombre->ViewValue = $this->nombre->CurrentValue;
 		$this->nombre->ViewCustomAttributes = "";
+
+		// direccion
+		$this->direccion->ViewValue = $this->direccion->CurrentValue;
+		$this->direccion->ViewCustomAttributes = "";
 
 		// id_ciudad
 		if (strval($this->id_ciudad->CurrentValue) <> "") {
@@ -770,10 +802,6 @@ class cagencias {
 		}
 		$this->id_ciudad->ViewCustomAttributes = "";
 
-		// direccion
-		$this->direccion->ViewValue = $this->direccion->CurrentValue;
-		$this->direccion->ViewCustomAttributes = "";
-
 		// telef_1
 		$this->telef_1->ViewValue = $this->telef_1->CurrentValue;
 		$this->telef_1->ViewCustomAttributes = "";
@@ -790,6 +818,10 @@ class cagencias {
 		$this->coordenadas->ViewValue = $this->coordenadas->CurrentValue;
 		$this->coordenadas->ViewCustomAttributes = "";
 
+		// citas_diarias
+		$this->citas_diarias->ViewValue = $this->citas_diarias->CurrentValue;
+		$this->citas_diarias->ViewCustomAttributes = "";
+
 		// estatus
 		if (strval($this->estatus->CurrentValue) <> "") {
 			switch ($this->estatus->CurrentValue) {
@@ -798,6 +830,12 @@ class cagencias {
 					break;
 				case "1":
 					$this->estatus->ViewValue = $this->estatus->FldTagCaption(2) <> "" ? $this->estatus->FldTagCaption(2) : $this->estatus->CurrentValue;
+					break;
+				case "3":
+					$this->estatus->ViewValue = $this->estatus->FldTagCaption(3) <> "" ? $this->estatus->FldTagCaption(3) : $this->estatus->CurrentValue;
+					break;
+				case "4":
+					$this->estatus->ViewValue = $this->estatus->FldTagCaption(4) <> "" ? $this->estatus->FldTagCaption(4) : $this->estatus->CurrentValue;
 					break;
 				default:
 					$this->estatus->ViewValue = $this->estatus->CurrentValue;
@@ -817,15 +855,15 @@ class cagencias {
 		$this->nombre->HrefValue = "";
 		$this->nombre->TooltipValue = "";
 
-		// id_ciudad
-		$this->id_ciudad->LinkCustomAttributes = "";
-		$this->id_ciudad->HrefValue = "";
-		$this->id_ciudad->TooltipValue = "";
-
 		// direccion
 		$this->direccion->LinkCustomAttributes = "";
 		$this->direccion->HrefValue = "";
 		$this->direccion->TooltipValue = "";
+
+		// id_ciudad
+		$this->id_ciudad->LinkCustomAttributes = "";
+		$this->id_ciudad->HrefValue = "";
+		$this->id_ciudad->TooltipValue = "";
 
 		// telef_1
 		$this->telef_1->LinkCustomAttributes = "";
@@ -846,6 +884,11 @@ class cagencias {
 		$this->coordenadas->LinkCustomAttributes = "";
 		$this->coordenadas->HrefValue = "";
 		$this->coordenadas->TooltipValue = "";
+
+		// citas_diarias
+		$this->citas_diarias->LinkCustomAttributes = "";
+		$this->citas_diarias->HrefValue = "";
+		$this->citas_diarias->TooltipValue = "";
 
 		// estatus
 		$this->estatus->LinkCustomAttributes = "";
@@ -894,21 +937,16 @@ class cagencias {
 					$XmlDoc->AddRow();
 				if ($ExportPageType == "view") {
 					$XmlDoc->AddField('nombre', $this->nombre->ExportValue($this->Export, $this->ExportOriginalValue));
-					$XmlDoc->AddField('id_ciudad', $this->id_ciudad->ExportValue($this->Export, $this->ExportOriginalValue));
 					$XmlDoc->AddField('direccion', $this->direccion->ExportValue($this->Export, $this->ExportOriginalValue));
+					$XmlDoc->AddField('id_ciudad', $this->id_ciudad->ExportValue($this->Export, $this->ExportOriginalValue));
 					$XmlDoc->AddField('telef_1', $this->telef_1->ExportValue($this->Export, $this->ExportOriginalValue));
-					$XmlDoc->AddField('horario_agencia', $this->horario_agencia->ExportValue($this->Export, $this->ExportOriginalValue));
-					$XmlDoc->AddField('horario_taq_auto', $this->horario_taq_auto->ExportValue($this->Export, $this->ExportOriginalValue));
-					$XmlDoc->AddField('coordenadas', $this->coordenadas->ExportValue($this->Export, $this->ExportOriginalValue));
-					$XmlDoc->AddField('estatus', $this->estatus->ExportValue($this->Export, $this->ExportOriginalValue));
 				} else {
+					$XmlDoc->AddField('id_agencias', $this->id_agencias->ExportValue($this->Export, $this->ExportOriginalValue));
 					$XmlDoc->AddField('nombre', $this->nombre->ExportValue($this->Export, $this->ExportOriginalValue));
 					$XmlDoc->AddField('id_ciudad', $this->id_ciudad->ExportValue($this->Export, $this->ExportOriginalValue));
-					$XmlDoc->AddField('direccion', $this->direccion->ExportValue($this->Export, $this->ExportOriginalValue));
-					$XmlDoc->AddField('telef_1', $this->telef_1->ExportValue($this->Export, $this->ExportOriginalValue));
-					$XmlDoc->AddField('horario_agencia', $this->horario_agencia->ExportValue($this->Export, $this->ExportOriginalValue));
 					$XmlDoc->AddField('horario_taq_auto', $this->horario_taq_auto->ExportValue($this->Export, $this->ExportOriginalValue));
 					$XmlDoc->AddField('coordenadas', $this->coordenadas->ExportValue($this->Export, $this->ExportOriginalValue));
+					$XmlDoc->AddField('citas_diarias', $this->citas_diarias->ExportValue($this->Export, $this->ExportOriginalValue));
 					$XmlDoc->AddField('estatus', $this->estatus->ExportValue($this->Export, $this->ExportOriginalValue));
 				}
 			}
@@ -927,21 +965,16 @@ class cagencias {
 			$Doc->BeginExportRow();
 			if ($ExportPageType == "view") {
 				$Doc->ExportCaption($this->nombre);
-				$Doc->ExportCaption($this->id_ciudad);
 				$Doc->ExportCaption($this->direccion);
+				$Doc->ExportCaption($this->id_ciudad);
 				$Doc->ExportCaption($this->telef_1);
-				$Doc->ExportCaption($this->horario_agencia);
-				$Doc->ExportCaption($this->horario_taq_auto);
-				$Doc->ExportCaption($this->coordenadas);
-				$Doc->ExportCaption($this->estatus);
 			} else {
+				$Doc->ExportCaption($this->id_agencias);
 				$Doc->ExportCaption($this->nombre);
 				$Doc->ExportCaption($this->id_ciudad);
-				$Doc->ExportCaption($this->direccion);
-				$Doc->ExportCaption($this->telef_1);
-				$Doc->ExportCaption($this->horario_agencia);
 				$Doc->ExportCaption($this->horario_taq_auto);
 				$Doc->ExportCaption($this->coordenadas);
+				$Doc->ExportCaption($this->citas_diarias);
 				$Doc->ExportCaption($this->estatus);
 			}
 			if ($this->Export == "pdf") {
@@ -977,21 +1010,16 @@ class cagencias {
 				$Doc->BeginExportRow($RowCnt); // Allow CSS styles if enabled
 				if ($ExportPageType == "view") {
 					$Doc->ExportField($this->nombre);
-					$Doc->ExportField($this->id_ciudad);
 					$Doc->ExportField($this->direccion);
+					$Doc->ExportField($this->id_ciudad);
 					$Doc->ExportField($this->telef_1);
-					$Doc->ExportField($this->horario_agencia);
-					$Doc->ExportField($this->horario_taq_auto);
-					$Doc->ExportField($this->coordenadas);
-					$Doc->ExportField($this->estatus);
 				} else {
+					$Doc->ExportField($this->id_agencias);
 					$Doc->ExportField($this->nombre);
 					$Doc->ExportField($this->id_ciudad);
-					$Doc->ExportField($this->direccion);
-					$Doc->ExportField($this->telef_1);
-					$Doc->ExportField($this->horario_agencia);
 					$Doc->ExportField($this->horario_taq_auto);
 					$Doc->ExportField($this->coordenadas);
+					$Doc->ExportField($this->citas_diarias);
 					$Doc->ExportField($this->estatus);
 				}
 				$Doc->EndExportRow();

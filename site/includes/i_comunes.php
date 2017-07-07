@@ -273,6 +273,14 @@ function execute_sql($nombre, $ArrParams = NULL) {
             //echo "<li>".$sql;
 
             break;
+        
+          case 'get_agencia_all2':
+
+            $sql = "select * from agencias where estatus=1 and citas_diarias>0 order by nombre asc";
+
+            //echo "<li>".$sql;
+
+            break;
         case 'get_buscador_resultados':
 
             $consulta = $ArrParams[0];
@@ -504,7 +512,7 @@ function execute_sql($nombre, $ArrParams = NULL) {
             break;
 
         case 'get_actividad_e':
-            $sql = "SELECT * FROM actividad_economica where visibilidad=1 order by actividad asc";
+            $sql = "SELECT * FROM actividad_economica where visibilidad=1 order by orden asc ,actividad asc ";
             break;
 
         case 'get_estados_new':
@@ -540,37 +548,58 @@ function execute_sql($nombre, $ArrParams = NULL) {
             $sql = "SELECT * FROM calendario where fecha > '" . date("Y-m-d") . " 00:00:00' and estatus=1 ";
 
 
+
+            break;
+
+        case 'get_fecha_restringida_cita':
+            $sql = " Select * from (SELECT count(*) as cupos,fecha FROM awvps_banplus._cita where fk_agencia=$ArrParams[0] group by fecha) citas
+                        where cupos>=(select citas_diarias from agencias where id_agencias=" . $ArrParams[0] . ")";
+
+            break;
+
+        case 'get_fecha_restringida_cita_2':
+            $sql = " Select * from (SELECT count(*) as cupos,fecha FROM awvps_banplus._cita where fk_agencia=$ArrParams[0] group by fecha) citas
+                        where cupos>=(select citas_diarias from agencias where id_agencias=" . $ArrParams[0] . ") and fecha ='" . $ArrParams[1] . "')";
             break;
     }
-
+//    echo $sql;
     abrirConexion();
-    sql_quote($ArrParams);
+//    sql_quote($ArrParams);
 
-    $ejecutar_sql = mysql_query($sql);
+    global $conexion;
+//    $sql = "SELECT * FROM _municipios where visibilidad=1 order by nombre asc";
+//    $ejecutar_sql = mysql_query($sql);
+    $result = $conexion->query($sql);
 
-    if (!$ejecutar_sql) {
-        hay_ataque();
-    };
+//    if (!$ejecutar_sql) {
+//        hay_ataque();
+//    };
 
-    $num_rows = mysql_num_fields($ejecutar_sql);
+    $num_rows = mysqli_num_rows($result);
     $j = 0;
     $x = 1;
 
-    while ($row = mysql_fetch_array($ejecutar_sql)) {
-        for ($j = 0; $j < $num_rows; $j++) {
-            $name = mysql_field_name($ejecutar_sql, $j);
-            $object[$x][$name] = $row[$name];
+    $j = 0;
+    while ($row = $result->fetch_assoc()) {
+        $fieldinfo = mysqli_fetch_fields($result);
+        foreach ($fieldinfo as $val) {
+            $object[$x][$val->name] = $row[$val->name];
         }
+
+
         $x++;
     }
 
-    mysql_free_result($ejecutar_sql);
+//    mysqli_free_result($ejecutar_sql);
     cerrarConexion();
     return $object;
 }
 
 function actualizar_campo($nombre, $ArrParams = NULL) {
-//    var_dump($ArrParams[3]);
+
+    abrirConexion();
+    global $conexion;
+
     switch ($nombre) {
         case 'actualiza_menu':
             $sql = "UPDATE respuestas SET contador=contador+1 WHERE id_respuestas='" . $ArrParams[0] . "'";
@@ -588,27 +617,30 @@ function actualizar_campo($nombre, $ArrParams = NULL) {
             //echo $sql;
             break;
 
-        case 'insertar_cita':
-            $sql = "INSERT INTO _cita (fk_agencia,fecha,solicitud,valores)
-                    VALUES($ArrParams[0],'" . $ArrParams[1] . "'," . $ArrParams[2] . ",'" . ($ArrParams[3]) . "');";
-            echo $sql;
-            break;
+        case 'inserta_cita':
+            $ArrParams[3] = serialize($ArrParams[3]);
+            $ArrParams[3] = $conexion->real_escape_string($ArrParams[3]);
 
+            $sql = "INSERT INTO _cita(fk_agencia,fecha,solicitud,valores)
+VALUES(" . $ArrParams[0] . ",'" . $ArrParams[1] . "','" . $ArrParams[2] . "','" . $ArrParams[3] . "');";
+            break;
 
         default:
             return NULL;
     }
 
-    abrirConexion();
-    sql_quote($ArrParams);
-    $ejecutar_sql = mysql_query($sql);
 
-    if ($Valor == 1) {
-        $ejecutar_sql = mysql_insert_id();
+    if ($conexion->query($sql) === TRUE) {
+//        echo "New record created successfully";
+    } else {
+//        echo "Error: " . $sql . "<br>" . $conn->error;
     }
 
     cerrarConexion();
-    return($ejecutar_sql);
+
+    return;
+
+
 }
 
 function traer_totales($nombre, $ArrParams = NULL) {
@@ -628,8 +660,17 @@ function traer_totales($nombre, $ArrParams = NULL) {
 
     abrirConexion();
     sql_quote($ArrParams);
-    $ejecutar_sql = mysql_query($sql);
-    $num_rows = mysql_num_rows($ejecutar_sql);
+    $result = $conexion->query($sql);
+
+//    if (!$ejecutar_sql) {
+//        hay_ataque();
+//    };
+
+    $num_rows = mysqli_num_rows($result);
+
+
+//    $ejecutar_sql = mysql_query($sql);
+//    $num_rows = mysql_num_rows($ejecutar_sql);
     echo "<li>" . $num_rows;
     cerrarConexion();
     return $num_rows;

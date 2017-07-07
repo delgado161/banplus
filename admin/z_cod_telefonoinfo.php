@@ -694,11 +694,37 @@ class cz_cod_telefono {
 		$this->codigo->ViewCustomAttributes = "";
 
 		// cod_cel
-		$this->cod_cel->ViewValue = $this->cod_cel->CurrentValue;
+		if (strval($this->cod_cel->CurrentValue) <> "") {
+			switch ($this->cod_cel->CurrentValue) {
+				case "1":
+					$this->cod_cel->ViewValue = $this->cod_cel->FldTagCaption(1) <> "" ? $this->cod_cel->FldTagCaption(1) : $this->cod_cel->CurrentValue;
+					break;
+				case "0":
+					$this->cod_cel->ViewValue = $this->cod_cel->FldTagCaption(2) <> "" ? $this->cod_cel->FldTagCaption(2) : $this->cod_cel->CurrentValue;
+					break;
+				default:
+					$this->cod_cel->ViewValue = $this->cod_cel->CurrentValue;
+			}
+		} else {
+			$this->cod_cel->ViewValue = NULL;
+		}
 		$this->cod_cel->ViewCustomAttributes = "";
 
 		// visibilidad
-		$this->visibilidad->ViewValue = $this->visibilidad->CurrentValue;
+		if (strval($this->visibilidad->CurrentValue) <> "") {
+			switch ($this->visibilidad->CurrentValue) {
+				case "1":
+					$this->visibilidad->ViewValue = $this->visibilidad->FldTagCaption(1) <> "" ? $this->visibilidad->FldTagCaption(1) : $this->visibilidad->CurrentValue;
+					break;
+				case "0":
+					$this->visibilidad->ViewValue = $this->visibilidad->FldTagCaption(2) <> "" ? $this->visibilidad->FldTagCaption(2) : $this->visibilidad->CurrentValue;
+					break;
+				default:
+					$this->visibilidad->ViewValue = $this->visibilidad->CurrentValue;
+			}
+		} else {
+			$this->visibilidad->ViewValue = NULL;
+		}
 		$this->visibilidad->ViewCustomAttributes = "";
 
 		// descripcion

@@ -690,7 +690,20 @@ class cz_codigo_postal {
 		$this->Descripcion->ViewCustomAttributes = "";
 
 		// visibilidad
-		$this->visibilidad->ViewValue = $this->visibilidad->CurrentValue;
+		if (strval($this->visibilidad->CurrentValue) <> "") {
+			switch ($this->visibilidad->CurrentValue) {
+				case "1":
+					$this->visibilidad->ViewValue = $this->visibilidad->FldTagCaption(1) <> "" ? $this->visibilidad->FldTagCaption(1) : $this->visibilidad->CurrentValue;
+					break;
+				case "0":
+					$this->visibilidad->ViewValue = $this->visibilidad->FldTagCaption(2) <> "" ? $this->visibilidad->FldTagCaption(2) : $this->visibilidad->CurrentValue;
+					break;
+				default:
+					$this->visibilidad->ViewValue = $this->visibilidad->CurrentValue;
+			}
+		} else {
+			$this->visibilidad->ViewValue = NULL;
+		}
 		$this->visibilidad->ViewCustomAttributes = "";
 
 		// id_codigo_postal
