@@ -32,11 +32,14 @@ $(document).ready(function () {
     $.datepicker.setDefaults($.datepicker.regional['es']);
 
     $('#form_ap_cuenta').submit(function () {
+
+
+
         var validado = true;
 
 
 
-        if ($('#p_formulario').val() != 'JURIDICO') {
+        if ($('#p_formulario').val() == 'NATURAL') {
 
             if (($('.requerido_2').val().length <= 0 || $('.requerido_2').val() == "" || parseFloat($('.requerido_2').val()) <= 0) && ($('.requerido_21').val().length <= 0 || $('.requerido_21').val() == "")) {
                 $('.requerido_2,.requerido_21').css('background', 'rgba(132, 189, 0, 0.15)');
@@ -201,6 +204,50 @@ $(document).ready(function () {
         });
 
 
+        if ($('#p_formulario').val() == 'CREDITO') {
+            if (($('#tp_inmueble').val() == "PROPIA") && ($('#ano_vivienda').val() <= 0 || $('#ano_vivienda').val() == "")) {
+                $('#ano_vivienda').css('background', 'rgba(255,0,0,0.30)');
+                $('#ano_vivienda').parent('div').parent('div').prev().find('._alert_span').show();
+                validado = false;
+            }
+
+            if (($('#tp_inmueble').val() == "ALQUILADA") && ($('#canon').val() <= 0 || $('#canon').val() == "")) {
+                $('#canon').css('background', 'rgba(255,0,0,0.30)');
+                $('#canon').parent('div').parent('div').prev().find('._alert_span').show();
+                validado = false;
+            }
+
+            if (($('#tp_inmueble').val() == "ALQUILADA") && ($('#canon_nombre').val() == "")) {
+                $('#canon_nombre').css('background', 'rgba(255,0,0,0.30)');
+                $('#canon_nombre').parent('div').parent('div').prev().find('._alert_span').show();
+                validado = false;
+            }
+
+            if (($('#tp_inmueble').val() == "ALQUILADA") && ($('#dctp_telefono').val() == "")) {
+                $('#dctp_telefono').css('background', 'rgba(255,0,0,0.30)');
+                $('#dctp_telefono').parent('div').parent('div').prev().find('._alert_span').show();
+                validado = false;
+            }
+
+            if (($('#tp_inmueble').val() == "ALQUILADA") && ($('#cd_telefono').val() == "")) {
+                $('#cd_telefono').css('background', 'rgba(255,0,0,0.30)');
+                $('#cd_telefono').parent('div').parent('div').prev().find('._alert_span').show();
+                validado = false;
+            }
+
+            if ($('#otros_ingresos').val() != "" && $('#concepto_empresa').val() == "") {
+                $('#concepto_empresa').css('background', 'rgba(255,0,0,0.30)');
+                $('#concepto_empresa').parent('div').parent('div').prev().find('._alert_span').show();
+                validado = false;
+            }
+
+            if ($('#concepto_empresa').val() != "" && $('#otros_ingresos').val() == "") {
+                $('#otros_ingresos').css('background', 'rgba(255,0,0,0.30)');
+                $('#otros_ingresos').parent('div').parent('div').prev().find('._alert_span').show();
+                validado = false;
+            }
+
+        }
 
 
 
@@ -265,16 +312,19 @@ $(document).ready(function () {
             },
             success: function (data) {
                 if (data == 0) {
-                  
+
                     $('#capt_').css('background', 'rgba(255,0,0,0.30)');
                     $('#capt_').val("");
                     validado = false;
-                }else{
-                      $('#capt_').css('background', 'rgba(132, 189, 0, 0.15)');
+                } else {
+                    $('#capt_').css('background', 'rgba(132, 189, 0, 0.15)');
                 }
             },
             type: 'POST'
         });
+
+
+
 
         if (!validado) {
             alert('Por favor complete los campos se\u00f1alados');
@@ -372,8 +422,8 @@ $(document).ready(function () {
     });
 
 
-    $('#canon,#sueldo,#comision,#libre_ejercicio,#otros_ingresos,.moneda_,.moneda_2,.jmoneda,.jmoneda2').val(0, 00);
-    $('#canon,#sueldo,#comision,#libre_ejercicio,#otros_ingresos,.moneda_,.moneda_2,.jmoneda,.jmoneda2').mask("###0,00", {reverse: true});
+//    $('#canon,#sueldo,#comision,#libre_ejercicio,#otros_ingresos,.moneda_,.moneda_2,.jmoneda,.jmoneda2').val(0, 00);
+    $('#canon,#sueldo,#comision,#libre_ejercicio,#otros_ingresos,.moneda_,.moneda_2,.jmoneda,.jmoneda2,.moneda_4').mask("###0,00", {reverse: true});
 
     $('#canon,#sueldo,#comision,#libre_ejercicio,#otros_ingresos').keyup(function () {
 
@@ -394,11 +444,12 @@ $(document).ready(function () {
     $('.moneda_').keyup(function () {
         var suma2 = 0;
 
-        if ($(this).val() == "" || $(this).val().length <= 0) {
-            $(this).val(0);
-        }
+
 
         $('.moneda_').each(function () {
+            if ($(this).val() == "" || $(this).val().length <= 0) {
+                $(this).val(0);
+            }
             suma2 = parseFloat($(this).val().replace(",", ".")) + suma2;
         });
         $('#go_total_ingresos').val(parseFloat(suma2.toFixed(2)));
@@ -409,11 +460,12 @@ $(document).ready(function () {
     $('.jmoneda2s').keyup(function () {
         var suma2 = 0;
 
-        if ($(this).val() == "" || $(this).val().length <= 0) {
-            $(this).val(0);
-        }
+
 
         $('.jmoneda2s').each(function () {
+            if ($(this).val() == "" || $(this).val().length <= 0) {
+                $(this).val(0);
+            }
             suma2 = parseFloat($(this).val().replace(",", ".")) + suma2;
         });
         $('#act_total_sus').val(parseFloat(suma2.toFixed(2)));
@@ -423,11 +475,12 @@ $(document).ready(function () {
     $('.jmoneda2_p').keyup(function () {
         var suma2 = 0;
 
-        if ($(this).val() == "" || $(this).val().length <= 0) {
-            $(this).val(0);
-        }
+
 
         $('.jmoneda2_p').each(function () {
+            if ($(this).val() == "" || $(this).val().length <= 0) {
+                $(this).val(0);
+            }
             suma2 = parseFloat($(this).val().replace(",", ".")) + suma2;
         });
         $('#act_total_percent').val(parseFloat(suma2.toFixed(2)));
@@ -437,11 +490,12 @@ $(document).ready(function () {
     $('.jmoneda2p').keyup(function () {
         var suma2 = 0;
 
-        if ($(this).val() == "" || $(this).val().length <= 0) {
-            $(this).val(0);
-        }
+
 
         $('.jmoneda2p').each(function () {
+            if ($(this).val() == "" || $(this).val().length <= 0) {
+                $(this).val(0);
+            }
             suma2 = parseFloat($(this).val().replace(",", ".")) + suma2;
         });
         $('#act_total_pagado').val(parseFloat(suma2.toFixed(2)));
@@ -454,11 +508,12 @@ $(document).ready(function () {
     $('.moneda_2').keyup(function () {
         var suma2 = 0;
 
-        if ($(this).val() == "" || $(this).val().length <= 0) {
-            $(this).val(0);
-        }
+
 
         $('.moneda_2').each(function () {
+            if ($(this).val() == "" || $(this).val().length <= 0) {
+                $(this).val(0);
+            }
             suma2 = parseFloat($(this).val().replace(",", ".")) + suma2;
         });
         $('#igf_total_ingresos').val(parseFloat(suma2.toFixed(2)));
@@ -468,15 +523,56 @@ $(document).ready(function () {
     $('.moneda_3').keyup(function () {
         var suma2 = 0;
 
-        if ($(this).val() == "" || $(this).val().length <= 0) {
-            $(this).val(0);
-        }
+
 
         $('.moneda_3').each(function () {
+            if ($(this).val() == "" || $(this).val().length <= 0) {
+                $(this).val(0);
+            }
             suma2 = parseFloat($(this).val().replace(",", ".")) + suma2;
         });
         $('#cctotal_ingresos').val(parseFloat(suma2.toFixed(2)));
         $('#cctotal_ingresos').val($('#cctotal_ingresos').val().replace(".", ","));
+    });
+
+    $('.moneda_4').keyup(function () {
+        var suma2 = 0;
+
+
+
+        $('.moneda_4').each(function () {
+            if ($(this).val() == "" || $(this).val().length <= 0) {
+                $(this).val('0,00');
+            }
+            suma2 = parseFloat($(this).val().replace(",", ".")) + suma2;
+        });
+        $('#df_tactivos').val(parseFloat(suma2.toFixed(2)));
+        $('#df_tactivos').val($('#df_tactivos').val().replace(".", ","));
+
+        suma3 = parseFloat($('#df_tactivos').val()) - parseFloat($('#df_tpasivo').val());
+        $('#df_patrimonio').val(parseFloat(suma3.toFixed(2)));
+        $('#df_patrimonio').val($('#df_patrimonio').val().replace(".", ","));
+
+    });
+
+    $('.moneda_5').keyup(function () {
+        var suma2 = 0;
+
+
+
+        $('.moneda_5').each(function () {
+            if ($(this).val() == "" || $(this).val().length <= 0) {
+                $(this).val('0,00');
+            }
+            suma2 = parseFloat($(this).val().replace(",", ".")) + suma2;
+        });
+        $('#df_tpasivo').val(parseFloat(suma2.toFixed(2)));
+        $('#df_tpasivo').val($('#df_tpasivo').val().replace(".", ","));
+
+        suma3 = parseFloat($('#df_tactivos').val()) - parseFloat($('#df_tpasivo').val());
+        $('#df_patrimonio').val(parseFloat(suma3.toFixed(2)));
+        $('#df_patrimonio').val($('#df_patrimonio').val().replace(".", ","));
+
     });
 
 
@@ -499,6 +595,8 @@ $(document).ready(function () {
 
 
     });
+
+
 
 
 });

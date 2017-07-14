@@ -136,10 +136,10 @@ Banplus te invita a visitar la página web wwww.banplus.com, para que conozcas n
 ';
 
     /* Email Detials */
-    $Coreo = execute_sql("get_parametro", array(63));
+    $Coreo = execute_sql("get_parametro", array(64));
     $from_mail = "< " . $Coreo[1]["valor"] . " >";
     
-    $Coreo_nombre = execute_sql("get_parametro", array(64));
+    $Coreo_nombre = execute_sql("get_parametro", array(65));
     $from_name = $Coreo_nombre[1]["valor"];
 
     $path = dirname(__FILE__) . '/tmp_apertura/J_' . $_POST['rif'] . "/";

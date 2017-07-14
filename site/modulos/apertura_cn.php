@@ -209,11 +209,11 @@
 
                     <div class="div_form">
                         <label for="dtp_telefono2">Otro Tel&eacute;fono<span  style="color:red">*</span></label><br>
-                        <select class="requerido_" name="dtp_telefono2" id="dtp_telefono2" style="width:70px;">
+                        <select class="" name="dtp_telefono2" id="dtp_telefono2" style="width:70px;">
                             <option value="">
                                 <?php echo $_opc_area; ?>
                         </select>
-                        <input class="requerido_ telefono_" onkeypress="return solo_numeros(event)" style="width:99px;" type="text" name="d_telefono2" id="d_telefono2" value="">
+                        <input class=" telefono_" onkeypress="return solo_numeros(event)" style="width:99px;" type="text" name="d_telefono2" id="d_telefono2" value="">
                     </div>
 
                     <div class="div_form">
@@ -252,7 +252,7 @@
                                 <option value="">
                                     <?php echo $_opc_area; ?>
                             </select>
-                            <input  class="cann_on" class="telefono_" onkeypress="return solo_numeros(event)" style="width:100px;" type="text" name="cd_telefono" id="cd_telefono" value="">
+                            <input   class="telefono_ cann_on" onkeypress="return solo_numeros(event)" style="width:100px;" type="text" name="cd_telefono" id="cd_telefono" value="">
                         </div>
                     </div>
                 </div>

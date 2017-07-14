@@ -23,10 +23,7 @@ if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "NATURAL") {
     }
 
 
-    foreach ($AGENCIA as $agencia) {
-        if ($agencia['id_agencias'] == $_POST['fn_agencia'])
-            $_POST['fn_agencia'] = $agencia['nombre'];
-    }
+
 
     $_POST['dtp_ciudad'] = explode(",", $_POST['dtp_ciudad']);
     $_POST['etp_ciudad'] = explode(",", $_POST['etp_ciudad']);
@@ -43,6 +40,11 @@ if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "NATURAL") {
     }
 
     actualizar_campo('inserta_cita', [$_POST['fn_agencia'], $_POST['fc_cita'], 'ACPN_' . $_POST['tp_documento'] . $_POST['n_documento'], serialize($_POST)]);
+
+    foreach ($AGENCIA as $agencia) {
+        if ($agencia['id_agencias'] == $_POST['fn_agencia'])
+            $_POST['fn_agencia'] = $agencia['nombre'];
+    }
 
 
     if (!file_exists(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'])) {
@@ -87,9 +89,18 @@ if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "NATURAL") {
         $uploadfile = $uploaddir . $_POST['tp_documento'] . $_POST['n_documento'] . '_DECLARACION.' . $ext;
         move_uploaded_file($_FILES['f_declaracion']['tmp_name'], $uploadfile);
     }
+    
+    $ruta = execute_sql("get_parametro", array(66));
+    $ruta = $ruta[1]["valor"];
     ?>
 
 
+    
+
+    <form method="POST" id="form_continuar" enctype="multipart/form-data" action="p_contenido.php?<?=$ruta?>">
+        <input   type="hidden" name="p_proceso_id" id="p_proceso_id" value="<?= ('ACPN_' . $_POST['tp_documento'] . $_POST['n_documento']) ?>">
+
+    </form>
 
     <script>
         $(document).ready(function () {
@@ -113,7 +124,7 @@ if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "NATURAL") {
                             $('.spiner_').hide();
                             var r = confirm("\u00bfDesea realizar la solicitud de TDC?");
                             if (r == true) {
-                                txt = "You pressed OK!";
+                              $('#form_continuar').submit();
                             } else {
                                 txt = "You pressed Cancel!";
                             }
@@ -141,10 +152,7 @@ if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "JURIDICO") {
             $_POST['etp_estado'] = $estado['nombre'];
     }
 
-    foreach ($AGENCIA as $agencia) {
-        if ($agencia['id_agencias'] == $_POST['fn_agencia'])
-            $_POST['fn_agencia'] = $agencia['nombre'];
-    }
+
 
 
     $_POST['etp_ciudad'] = explode(",", $_POST['etp_ciudad']);
@@ -166,6 +174,10 @@ if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "JURIDICO") {
 
     actualizar_campo('inserta_cita', [$_POST['fn_agencia'], $_POST['fc_cita'], 'ACPJ_' . $_POST['rif'], serialize($_POST)]);
 
+    foreach ($AGENCIA as $agencia) {
+        if ($agencia['id_agencias'] == $_POST['fn_agencia'])
+            $_POST['fn_agencia'] = $agencia['nombre'];
+    }
 
     if (!file_exists(dirname(__FILE__) . '/tmp_apertura/J_' . $_POST['rif'])) {
         mkdir(dirname(__FILE__) . '/tmp_apertura/J_' . $_POST['rif'], 0777, true);
