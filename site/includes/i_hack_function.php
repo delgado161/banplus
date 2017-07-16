@@ -121,9 +121,9 @@
 		$special_bad_chars = array("=","'",'"',"%", "http", "0x");
 		foreach($special_bad_chars as $skey=>$sval){
 			if( strstr($str,$sval) ){
-				echo "paso";
-				die();
-				hay_ataque();
+//				echo "paso";
+//				die();
+//				hay_ataque();
 			}
 		}	
 	}

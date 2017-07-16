@@ -1,22 +1,33 @@
 
 <?php
-
-
-
 session_start();
 $_SESSION = array();
 
 include("includes/captcha-master/simple-php-captcha.php");
 $_SESSION['captcha'] = simple_php_captcha();
-
-
 ?>
 
 <?php
+if (isset($_POST['p_proceso_id']) && !empty($_POST['p_proceso_id'])) {
+    $DATOS_ = execute_sql("get_data_sol", array($_POST['p_proceso_id']));
+    $_DAT = unserialize(unserialize($DATOS_[1]['valores']));
+}
+
+//$DATOS_ = execute_sql("get_data_sol", array('ACPN_C17146576'));
+//$_DAT = unserialize(unserialize($DATOS_[1]['valores']));
+//var_dump($_DAT);
+
+
+
 $AGENCIA = execute_sql("get_agencia_all2", array());
 $_opc_agencia = '';
 foreach ($AGENCIA as $agencia)
     $_opc_agencia .= '  <option value="' . $agencia['id_agencias'] . '">' . $agencia['nombre'];
+
+$AGENCIA2 = execute_sql("get_agencia_all3", array());
+$_opc_agencia2 = '';
+foreach ($AGENCIA2 as $agencia)
+    $_opc_agencia2 .= '  <option value="' . $agencia['id_agencias'] . '">' . $agencia['nombre'];
 
 
 $CIVIL = execute_sql("get_civil", array());
@@ -36,8 +47,9 @@ foreach ($act_eco as $economica)
 
 $tp_paises = execute_sql("get_paises", array());
 $_opc_tp_pais = '';
-foreach ($tp_paises as $tp_pais)
+foreach ($tp_paises as $tp_pais) {
     $_opc_tp_pais .= '  <option value="' . $tp_pais['nombre'] . '">' . $tp_pais['nombre'];
+}
 
 
 
@@ -92,7 +104,7 @@ foreach ($tp_paises as $tp_pais)
 
 $tp_feriado = execute_sql("get_fecha_new", array());
 
-
+$Parroquias = execute_sql("get_parroquias_new", array());
 ?>
 
 <script    src="https://code.jquery.com/jquery-3.2.1.min.js"    ></script>
@@ -102,12 +114,13 @@ $tp_feriado = execute_sql("get_fecha_new", array());
 <script src="<?php echo URL_SITE; ?>js/new_js.js" type="text/javascript"></script>	
 <script>
     $(document).ready(function () {
-        
-        
+
+
         var Ciudades = {};
         var Municipios = {};
         var Agencia = {};
         var Feriado = {};
+        var Parroquia = {};
 <?php
 $Ciudades = execute_sql("get_ciudad_new", array());
 
@@ -118,6 +131,12 @@ $Municipios = execute_sql("get_municipio_new", array());
 $_opc_municipios = '';
 foreach ($Municipios as $municipio)
     echo "Municipios['" . $municipio['lf_estado'] . "_" . $municipio['pk_municipio'] . "']='" . $municipio['nombre'] . "';";
+
+
+foreach ($Parroquias as $parroquia)
+    echo "Parroquia['" . $parroquia['lp_parroquia_id'] . "_" . $parroquia['lf_parroquia_municipio'] . "']='" . $parroquia['nombre'] . "';";
+
+
 
 foreach ($AGENCIA as $agencia)
     echo "Agencia['" . $agencia['id_agencias'] . "']='" . $agencia['direccion'] . "';";
@@ -151,6 +170,22 @@ foreach ($AGENCIA as $agencia)
             });
 
 
+        });
+
+
+        $('._municipio').change(function () {
+            var KEY = $(this).val();
+            KEY = KEY.split(',');
+            KEY = KEY[1];
+            var ID_SELECT = ($(this).parent().next('.parroquia').find('select').attr('id'));
+            $('#' + ID_SELECT).find('option').remove().end();
+            $('#' + ID_SELECT).append($("<option></option>").attr("value", '').text('Seleccione...'));
+            $.each(Parroquia, function (index, value) {
+                index = index.split('_');
+                if (KEY == index[0]) {
+                    $('#' + ID_SELECT).append($("<option></option>").attr("value", index).text(value));
+                }
+            });
         });
 
 <?php
@@ -215,7 +250,7 @@ echo "];";
         });
 
 
-//        var array = ["2017-06-22", "2017-06-29", "2017-07-06"];
+        //        var array = ["2017-06-22", "2017-06-29", "2017-07-06"];
         $("#fc_cita").datepicker({
             dateFormat: "dd/mm/yy",
             yearRange: '-0:+0',
@@ -232,6 +267,55 @@ echo "];";
                 return [show];
             }
         });
+
+
+<?php if (!empty($_DAT['dtp_estado'])) { ?>
+
+
+            $('#dtp_estado').trigger("change");
+
+            $('#dtp_ciudad').find('option').each(function () {
+                if ($(this).text() == '<?= $_DAT['dtp_ciudad'] ?>') {
+                    $(this).attr('selected', 'selected');
+                }
+            });
+
+            $('#dtp_municipio').find('option').each(function () {
+                if ($(this).text() == '<?= $_DAT['dtp_municipio'] ?>') {
+                    $(this).attr('selected', 'selected');
+                }
+            });
+
+            $('#dtp_municipio').trigger("change");
+            $('#dtp_parroquia').find('option').each(function () {
+                if ($(this).text() == '<?= $_DAT['dtp_parroquia'] ?>') {
+                    $(this).attr('selected', 'selected');
+                }
+            });
+            
+            
+            $('#etp_estado').trigger("change");
+            $('#etp_ciudad').find('option').each(function () {
+                if ($(this).text() == '<?= $_DAT['etp_ciudad'] ?>') {
+                    $(this).attr('selected', 'selected');
+                }
+            });
+            
+            $('#etp_municipio').find('option').each(function () {
+                if ($(this).text() == '<?= $_DAT['etp_municipio'] ?>') {
+                    $(this).attr('selected', 'selected');
+                }
+            });
+            
+             $('#etp_municipio').trigger("change");
+            $('#etp_parroquia').find('option').each(function () {
+                if ($(this).text() == '<?= $_DAT['etp_parroquia'] ?>') {
+                    $(this).attr('selected', 'selected');
+                }
+            });
+            
+
+<?php } ?>
 
     });</script>
 

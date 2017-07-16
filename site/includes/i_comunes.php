@@ -16,6 +16,7 @@ function sql_quote($value) {
         }
     }
     return $value;
+
 }
 
 function execute_sql($nombre, $ArrParams = NULL) {
@@ -273,14 +274,23 @@ function execute_sql($nombre, $ArrParams = NULL) {
             //echo "<li>".$sql;
 
             break;
-        
-          case 'get_agencia_all2':
+
+        case 'get_agencia_all2':
 
             $sql = "select * from agencias where estatus=1 and citas_diarias>0 order by nombre asc";
 
             //echo "<li>".$sql;
 
             break;
+
+        case 'get_agencia_all3':
+
+            $sql = "select * from agencias where estatus=1  order by nombre asc";
+
+            //echo "<li>".$sql;
+
+            break;
+
         case 'get_buscador_resultados':
 
             $consulta = $ArrParams[0];
@@ -544,6 +554,12 @@ function execute_sql($nombre, $ArrParams = NULL) {
             $sql = "SELECT * FROM _municipios where visibilidad=1 order by nombre asc";
             break;
 
+
+        case 'get_parroquias_new':
+            $sql = "SELECT * FROM _parroquias where visibilidad=1 order by nombre asc";
+            //    echo $sql;
+            break;
+
         case 'get_fecha_new':
             $sql = "SELECT * FROM calendario where fecha > '" . date("Y-m-d") . " 00:00:00' and estatus=1 ";
 
@@ -561,6 +577,14 @@ function execute_sql($nombre, $ArrParams = NULL) {
             $sql = " Select * from (SELECT count(*) as cupos,fecha FROM awvps_banplus._cita where fk_agencia=$ArrParams[0] group by fecha) citas
                         where cupos>=(select citas_diarias from agencias where id_agencias=" . $ArrParams[0] . ") and fecha ='" . $ArrParams[1] . "')";
             break;
+        
+         case 'get_data_sol':
+            $sql = "SELECT * FROM _cita where solicitud='" . $ArrParams[0] . "'order by id_cita desc limit 1";
+            break;
+        
+        
+        
+        
     }
 //    echo $sql;
     abrirConexion();
@@ -593,6 +617,7 @@ function execute_sql($nombre, $ArrParams = NULL) {
 //    mysqli_free_result($ejecutar_sql);
     cerrarConexion();
     return $object;
+
 }
 
 function actualizar_campo($nombre, $ArrParams = NULL) {
@@ -623,6 +648,8 @@ function actualizar_campo($nombre, $ArrParams = NULL) {
 
             $sql = "INSERT INTO _cita(fk_agencia,fecha,solicitud,valores)
 VALUES(" . $ArrParams[0] . ",'" . $ArrParams[1] . "','" . $ArrParams[2] . "','" . $ArrParams[3] . "');";
+           
+//            echo $sql;
             break;
 
         default:
@@ -639,7 +666,6 @@ VALUES(" . $ArrParams[0] . ",'" . $ArrParams[1] . "','" . $ArrParams[2] . "','" 
     cerrarConexion();
 
     return;
-
 
 }
 
@@ -674,6 +700,7 @@ function traer_totales($nombre, $ArrParams = NULL) {
     echo "<li>" . $num_rows;
     cerrarConexion();
     return $num_rows;
+
 }
 
 function seteo($cadena) {
@@ -683,6 +710,7 @@ function seteo($cadena) {
     //echo "cadena cad1='".$cad1."' ///";
     $cad = $cad . $cad1;
     return $cad;
+
 }
 
 ?>
