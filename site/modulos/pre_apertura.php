@@ -134,7 +134,7 @@ foreach ($Municipios as $municipio)
 
 
 foreach ($Parroquias as $parroquia)
-    echo "Parroquia['" . $parroquia['lp_parroquia_id'] . "_" . $parroquia['lf_parroquia_municipio'] . "']='" . $parroquia['nombre'] . "';";
+    echo "Parroquia['" . $parroquia['lf_parroquia_municipio'] . "_" . $parroquia['lp_parroquia_id'] . "']='" . $parroquia['nombre'] . "';";
 
 
 
@@ -181,6 +181,7 @@ foreach ($AGENCIA as $agencia)
             $('#' + ID_SELECT).find('option').remove().end();
             $('#' + ID_SELECT).append($("<option></option>").attr("value", '').text('Seleccione...'));
             $.each(Parroquia, function (index, value) {
+               
                 index = index.split('_');
                 if (KEY == index[0]) {
                     $('#' + ID_SELECT).append($("<option></option>").attr("value", index).text(value));

@@ -48,8 +48,8 @@
                     </div>
 
                     <div class="div_form">
-                        <label for="pasaporte">Pasaporte<span  style="color:red">*</span></label><br>
-                        <input value="" style="width: 158px;" class="requerido_" onkeypress="return solo_numeros(event)" type="text" name="pasaporte" id="pasaporte" >
+                        <label for="pasaporte">Pasaporte</label><br>
+                        <input value="" style="width: 158px;" class="" onkeypress="return solo_numeros(event)" type="text" name="pasaporte" id="pasaporte" >
                     </div>
 
                     <div class="div_form">
@@ -479,7 +479,7 @@
                         </div>
                         <div class="div_form">
                             <label for="auto_placa">Placa</label><br>
-                            <input class="valida_prod" onkeypress="return solo_letras2(event)" style="width:173px;" type="text" name="auto_ano" id="auto_ano"  maxlength="250">
+                            <input class="valida_prod" onkeypress="return solo_letras2(event)" style="width:173px;" type="text" name="auto_placa" id="auto_placa"  maxlength="250">
                         </div>
                     </div>
                 </div>
@@ -644,13 +644,13 @@
 
                     <div class="div_form municipio">
                         <label for="etp_municipio">Municipio<span  style="color:red">*</span></label><br>
-                        <select class="requerido_" name="etp_municipio" id="etp_municipio" style="width:185px;">
+                        <select class="requerido_ _municipio" name="etp_municipio" id="etp_municipio" style="width:185px;">
                             <option value="" >Seleccione...
                         </select>
                     </div>
 
 
-                    <div class="div_form municipio">
+                    <div class="div_form parroquia">
                         <label for="etp_parroquia">Parroquia<span  style="color:red">*</span></label><br>
                         <select class="requerido_" name="etp_parroquia" id="etp_parroquia" style="width:185px;">
                             <option value="" >Seleccione...
@@ -688,8 +688,8 @@
                     <div class="sep_2"></div>
 
                     <div class="div_form">
-                        <label for="d_ceq"> Tipo del &aacute;rea de la residencia <span  style="color:red">*</span></label><br>
-                        <select class=" requerido_" name="ee_ceq" id="d_ceq" style="width:92px;">
+                        <label for="ee_ceq"> Tipo del &aacute;rea de la residencia <span  style="color:red">*</span></label><br>
+                        <select class=" requerido_" name="ee_ceq" id="ee_ceq" style="width:92px;">
                             <option value="" >Seleccione...</option>
                             <option value="QUINTA">Quinta</option>
                             <option value="EDIFICIO">Edificio</option>
@@ -766,54 +766,54 @@
 
                     <div class="div_form">
                         <label for="df_banco"><b>Activos</b><br>1. banco:</label><br>
-                        <input class=" moneda_4" onkeypress="return solo_moneda(event)" style="width:105px;text-align: right;" type="text" name="df_banco" id="df_banco"  >
+                        <input class="requerido_ moneda_4" onkeypress="return solo_moneda(event)" style="width:105px;text-align: right;" type="text" name="df_banco" id="df_banco"  >
                     </div>
                     <div class="div_form">
                         <label for="df_invercion"><br>2. Inverciones:</label><br>
-                        <input class=" moneda_4" onkeypress="return solo_moneda(event)" style="width:105px;text-align: right;" type="text" name="df_invercion" id="df_invercion"  >
+                        <input class="requerido_ moneda_4" onkeypress="return solo_moneda(event)" style="width:105px;text-align: right;" type="text" name="df_invercion" id="df_invercion"  >
                     </div>
                     <div class="div_form">
                         <label for="df_mobiliario"><br>3. Mobiliario:</label><br>
-                        <input class=" moneda_4" onkeypress="return solo_moneda(event)" style="width:105px;text-align: right;" type="text" name="df_mobiliario" id="df_mobiliario"  >
+                        <input class="requerido_ moneda_4" onkeypress="return solo_moneda(event)" style="width:105px;text-align: right;" type="text" name="df_mobiliario" id="df_mobiliario"  >
                     </div>
                     <div class="div_form">
                         <label for="df_vehivulo"><br>4. Veh&iacute;culos:</label><br>
-                        <input class=" moneda_4" onkeypress="return solo_moneda(event)" style="width:100px;text-align: right;" type="text" name="df_vehivulo" id="df_vehivulo"  >
+                        <input class="requerido_ moneda_4" onkeypress="return solo_moneda(event)" style="width:100px;text-align: right;" type="text" name="df_vehivulo" id="df_vehivulo"  >
                     </div>
                     <div class="div_form">
                         <label for="df_inmuebles"><br>5. Inmuebles:</label><br>
-                        <input class=" moneda_4" onkeypress="return solo_moneda(event)" style="width:100px;text-align: right;" type="text" name="df_inmuebles" id="df_inmuebles"  >
+                        <input class="requerido_ moneda_4" onkeypress="return solo_moneda(event)" style="width:100px;text-align: right;" type="text" name="df_inmuebles" id="df_inmuebles"  >
                     </div>
                     <div class="div_form">
                         <label for="df_tactivos"><br><b>Total Activos</b> (1+2+3+4+5):</label><br>
-                        <input class="" onkeypress="return solo_moneda(event)" style="width:135px;text-align: right;background: #e6e6e6;" type="text" name="df_tactivos" id="df_tactivos" value="0,00"  readonly>
+                        <input class="requerido_" onkeypress="return solo_moneda(event)" style="width:135px;text-align: right;background: #e6e6e6;" type="text" name="df_tactivos" id="df_tactivos" value="0,00"  readonly>
                     </div>
 
                     <!--##################### DIV SEPARADOR ############################-->       
                     <div class="sep_2"></div>
                     <div class="div_form">
                         <label for="df_tarjetas"><b>Pasivo y patrimonio</b><br>7. tarjetas:</label><br>
-                        <input class=" moneda_5" onkeypress="return solo_moneda(event)" style="width:100px;text-align: right;" type="text" name="df_tarjetas" id="df_tarjetas"  >
+                        <input class="requerido_ moneda_5" onkeypress="return solo_moneda(event)" style="width:100px;text-align: right;" type="text" name="df_tarjetas" id="df_tarjetas"  >
                     </div>
                     <div class="div_form">
                         <label for="df_prestamos"><br>8. Prestamos:</label><br>
-                        <input class=" moneda_5" onkeypress="return solo_moneda(event)" style="width:97px;text-align: right;" type="text" name="df_prestamos" id="df_prestamos"  >
+                        <input class="requerido_ moneda_5" onkeypress="return solo_moneda(event)" style="width:97px;text-align: right;" type="text" name="df_prestamos" id="df_prestamos"  >
                     </div>
                     <div class="div_form">
                         <label for="df_hipoteca"><br>9. Hipoteca:</label><br>
-                        <input class=" moneda_5" onkeypress="return solo_moneda(event)" style="width:94px;text-align: right;" type="text" name="df_hipoteca" id="df_hipoteca"  >
+                        <input class="requerido_ moneda_5" onkeypress="return solo_moneda(event)" style="width:94px;text-align: right;" type="text" name="df_hipoteca" id="df_hipoteca"  >
                     </div>
                     <div class="div_form">
                         <label for="df_tpasivo"><br>10. <b>total pasivo (7+8+9)</b>:</label><br>
-                        <input class="" onkeypress="return solo_moneda(event)" style="width:121px;text-align: right;background: #e6e6e6;" type="text" name="df_tpasivo" id="df_tpasivo" value="0,00" readonly >
+                        <input class="requerido_" onkeypress="return solo_moneda(event)" style="width:121px;text-align: right;background: #e6e6e6;" type="text" name="df_tpasivo" id="df_tpasivo" value="0,00" readonly >
                     </div>
                     <div class="div_form">
                         <label for="df_patrimonio"><br>Patrimonio (6-10):</label><br>
-                        <input class=" moneda_3" onkeypress="return solo_moneda(event)" style="width:95px;text-align: right;background: #e6e6e6;" type="text" name="df_patrimonio" id="df_patrimonio" value="0,00" readonly >
+                        <input class="requerido_ moneda_3" onkeypress="return solo_moneda(event)" style="width:95px;text-align: right;background: #e6e6e6;" type="text" name="df_patrimonio" id="df_patrimonio" value="0,00" readonly >
                     </div>
                     <div class="div_form">
                         <label for="df_total"><br><b>Total pasivo y patrimonio:</b></label><br>
-                        <input class=" moneda_3" onkeypress="return solo_moneda(event)" style="width:140px;text-align: right;" type="text" name="df_total" id="df_total"  >
+                        <input class="requerido_ moneda_3" onkeypress="return solo_moneda(event)" style="width:140px;text-align: right;" type="text" name="df_total" id="df_total"  >
                     </div>
 
 
@@ -851,8 +851,8 @@
                             <div class="div_form">
                                 <label for="tp_cuenta<?= $i; ?>">Tipo de cuenta:</label><br>
                                 <div style="width:100%;height: 4px;" ></div>
-                                Corriente<input type="radio" value="C" name="tp_cuenta<?= $i; ?>">
-                                Ahorros<input type="radio" value="A" name="tp_cuenta<?= $i; ?>">
+                                Corriente<input class="" type="radio" value="C" name="tp_cuenta<?= $i; ?>">
+                                Ahorros<input class="" type="radio" value="A" name="tp_cuenta<?= $i; ?>">
                             </div>
 
 
@@ -902,12 +902,14 @@
                             </div>
 
                             <div class="div_form">
-                                <label for="tjp_banco<?= $i; ?>">Tipo de tarjeta:</label><br>
-                                <select  class="valida_prod" name="tjp_banco<?= $i; ?>" id="tjp_banco<?= $i; ?>" style="width:130px;">
+                                <label for="tjp_tj<?= $i; ?>">Tipo de tarjeta:</label><br>
+                                <select  class="valida_prod" name="tjp_tj<?= $i; ?>" id="tjp_tj<?= $i; ?>" style="width:130px;">
                                     <option value="" >Seleccione...</option>
+                                     <option value="BLACK">Black</option>
                                     <option value="CL&Aacute;SICA">Cl&aacute;sica</option>
                                     <option value="DORADA">Dorada</option>
                                     <option value="PLATINUM">Platinum</option>
+                                     <option value="OTRO">Otro</option>
 
                                 </select>
                             </div>
@@ -926,24 +928,25 @@
                 <h3>AUTORIZACI&Oacute;N DE CARGO EN CUENTA<span style="float:right;display: none;" class="_alert_span"><img src="img/Error-128.png" alt="" height="20" width="20"style="margin-top: -3px;"></span></h3>
 
                 <div>
-                    <div class="div_form">
-                        <label for="autor_autorizacion">Autorizo a cargar mensualmente el pago:</label><br>
-                        <input class="" onkeypress="return solo_email(event)" type="text" name="autor_autorizacion" id="autor_autorizacion"  style="width:381px;">
+                    <div class="prod_banplus ref_ban_comer"> 
+                        <div class="div_form">
+                            <label for="autor_autorizacion">Autorizo a cargar mensualmente el pago:</label><br>
+                            <input class="valida_prod" onkeypress="return solo_email(event)" type="text" name="autor_autorizacion" id="autor_autorizacion"  style="width:381px;">
+                        </div>
+
+
+                        <div class="div_form">
+                            <label for="autor_tpago">Titularidad:</label><br>
+                            <div style="width:100%;height: 4px;" ></div>
+                            M&iacute;nimo <input type="radio" value="M" name="autor_tpago">
+                            Total <input type="radio" value="T" name="autor_tpago">
+                        </div>
+
+                        <div class="div_form">
+                            <label for="autor_cuenta">En mi cuenta N&ordm;:</label><br>
+                            <input class="valida_prod cta_banco" size="24" onkeypress="return solo_numeros(event)" style="width:230px;" type="text" name="autor_cuenta" id="autor_cuenta"  >
+                        </div>
                     </div>
-
-
-                    <div class="div_form">
-                        <label for="autor_tpago">Titularidad:</label><br>
-                        <div style="width:100%;height: 4px;" ></div>
-                        M&iacute;nimo <input type="radio" value="M" name="autor_tpago">
-                        Total <input type="radio" value="T" name="autor_tpago">
-                    </div>
-
-                    <div class="div_form">
-                        <label for="autor_cuenta">En mi cuenta N&ordm;:</label><br>
-                        <input class=" cta_banco" size="24" onkeypress="return solo_numeros(event)" style="width:230px;" type="text" name="autor_cuenta" id="autor_cuenta"  >
-                    </div>
-
                 </div>
                 <h3>DIRECCI&Oacute;N DE CORRESPONDENCIA<span style="float:right;display: none;" class="_alert_span"><img src="img/Error-128.png" alt="" height="20" width="20"style="margin-top: -3px;"></span></h3>
 
@@ -980,59 +983,59 @@
                     <?php
                     for ($i = 0; $i <= 1; $i++) {
                         ?>
+                        <div class="prod_banplus ref_ban_comer"> 
+                            <div class="div_form">
+                                <label for="ts_p_nombre<?= $i; ?>">Primer Nombre<span  style="color:red">*</span></label><br>
+                                <input style="width: 173px;" class="valida_prod" onkeypress="return solo_letras(event)" type="text" name="ts_p_nombre<?= $i; ?>" id="ts_p_nombre<?= $i; ?>"  maxlength="50">
+                            </div>
+                            <div class="div_form">
+                                <label for="ts_s_nombre<?= $i; ?>">Segundo Nombre:</label><br>
+                                <input style="width: 173px;" onkeypress="return solo_letras(event)" type="text" name="ts_s_nombre<?= $i; ?>" id="ts_s_nombre<?= $i; ?>"  maxlength="50">
+                            </div>
+                            <div class="div_form">
+                                <label for="p_apellido<?= $i; ?>">Primer Apellido<span  style="color:red">*</span></label><br>
+                                <input style="width: 173px;" class="valida_prod" onkeypress="return solo_letras(event)" type="text" name="ts_p_apellido<?= $i; ?>" id="ts_p_apellido<?= $i; ?>"  maxlength="50">
+                            </div>
+                            <div class="div_form">
+                                <label for="ts_s_apellido<?= $i; ?>">Segundo Apellido:</label><br>
+                                <input style="width: 173px;"  onkeypress="return solo_letras(event)" type="text" name="ts_s_apellido<?= $i; ?>" id="ts_s_apellido<?= $i; ?>"  maxlength="50">
+                            </div>
 
-                        <div class="div_form">
-                            <label for="ts_p_nombre<?= $i; ?>">Primer Nombre<span  style="color:red">*</span></label><br>
-                            <input style="width: 173px;" class="requerido_" onkeypress="return solo_letras(event)" type="text" name="ts_p_nombre<?= $i; ?>" id="ts_p_nombre<?= $i; ?>"  maxlength="50">
-                        </div>
-                        <div class="div_form">
-                            <label for="ts_s_nombre<?= $i; ?>">Segundo Nombre:</label><br>
-                            <input style="width: 173px;" onkeypress="return solo_letras(event)" type="text" name="ts_s_nombre<?= $i; ?>" id="ts_s_nombre<?= $i; ?>"  maxlength="50">
-                        </div>
-                        <div class="div_form">
-                            <label for="p_apellido<?= $i; ?>">Primer Apellido<span  style="color:red">*</span></label><br>
-                            <input style="width: 173px;" class="requerido_" onkeypress="return solo_letras(event)" type="text" name="ts_p_apellido<?= $i; ?>" id="ts_p_apellido<?= $i; ?>"  maxlength="50">
-                        </div>
-                        <div class="div_form">
-                            <label for="ts_s_apellido<?= $i; ?>">Segundo Apellido:</label><br>
-                            <input style="width: 173px;"  onkeypress="return solo_letras(event)" type="text" name="ts_s_apellido<?= $i; ?>" id="ts_s_apellido<?= $i; ?>"  maxlength="50">
-                        </div>
+                            <!--##################### DIV SEPARADOR ############################--> 
+                            <div class="sep_2"></div>
 
-                        <!--##################### DIV SEPARADOR ############################--> 
-                        <div class="sep_2"></div>
+                            <div class="div_form">
+                                <label for="tp_documento">C&eacute;dula de Identidad<span  style="color:red">*</span></label><br>
+                                <select name="ts_tp_documento<?= $i; ?>" id="ts_tp_documento<?= $i; ?>" class="valida_prod">
+                                    <option value="" >
+                                    <option value="C">V
+                                    <option value="E">E
+                                </select>
+                                <input style="width: 130px;" class="valida_prod" onkeypress="return solo_numeros(event)" type="text" name="ts_n_documento<?= $i; ?>" id="ts_n_documento<?= $i; ?>" >
+                            </div>
 
-                        <div class="div_form">
-                            <label for="tp_documento">C&eacute;dula de Identidad<span  style="color:red">*</span></label><br>
-                            <select name="ts_tp_documento<?= $i; ?>" id="ts_tp_documento<?= $i; ?>" class="requerido_">
-                                <option value="" >
-                                <option value="C">V
-                                <option value="E">E
-                            </select>
-                            <input style="width: 130px;" class="requerido_" onkeypress="return solo_numeros(event)" type="text" name="ts_n_documento<?= $i; ?>" id="ts_n_documento<?= $i; ?>" >
+                            <div class="div_form">
+                                <label for="fc_nac">Fecha de nacimiento<span  style="color:red">*</span></label><br>
+                                <input class="valida_prod" style="width:110px;background: #e6e6e6;" type="text" name="ts_fc_nac<?= $i; ?>"  id="ts_fc_nac<?= $i; ?>"  readonly>
+                            </div>
+
+                            <div class="div_form">
+                                <label for="tp_sexo" >Sexo<span  style="color:red">*</span></label>
+                                <div style="width:100%;height: 4px;" ></div>
+                                M<input type="radio" value="M" name="ts_tp_sexo<?= $i; ?>">
+                                F<input type="radio" value="F" name="ts_tp_sexo<?= $i; ?>">
+                            </div>
+
+                            <div class="div_form">
+                                <label for="p_apellido">PARENTESCO<span  style="color:red">*</span></label><br>
+                                <input style="width: 135px;" class="valida_prod" onkeypress="return solo_letras(event)" type="text" name="ts_parentesco<?= $i; ?>" id="ts_parentesco<?= $i; ?>"  maxlength="50">
+                            </div>
+
+                            <div class="div_form">
+                                <label for="s_apellido">FIRMA del solicitante Suplementario:</label><br>
+                                <input style="width: 200px;background: #e6e6e6;"  onkeypress="return solo_letras(event)" type="text" name="firma_tarjeta_s<?= $i; ?>" id="firma_tarjeta_s<?= $i; ?>"  maxlength="50" readonly>
+                            </div>
                         </div>
-
-                        <div class="div_form">
-                            <label for="fc_nac">Fecha de nacimiento<span  style="color:red">*</span></label><br>
-                            <input class="requerido_" style="width:110px;background: #e6e6e6;" type="text" name="ts_fc_nac<?= $i; ?>"  id="ts_fc_nac<?= $i; ?>"  readonly>
-                        </div>
-
-                        <div class="div_form">
-                            <label for="tp_sexo" >Sexo<span  style="color:red">*</span></label>
-                            <div style="width:100%;height: 4px;" ></div>
-                            M<input type="radio" value="M" name="ts_tp_sexo<?= $i; ?>">
-                            F<input type="radio" value="F" name="ts_tp_sexo<?= $i; ?>">
-                        </div>
-
-                        <div class="div_form">
-                            <label for="p_apellido">PARENTESCO<span  style="color:red">*</span></label><br>
-                            <input style="width: 135px;" class="requerido_" onkeypress="return solo_letras(event)" type="text" name="ts_parentesco<?= $i; ?>" id="ts_parentesco<?= $i; ?>"  maxlength="50">
-                        </div>
-
-                        <div class="div_form">
-                            <label for="s_apellido">FIRMA del solicitante Suplementario:</label><br>
-                            <input style="width: 200px;"  onkeypress="return solo_letras(event)" type="text" name="firma_tarjeta_s<?= $i; ?>" id="firma_tarjeta_s<?= $i; ?>"  maxlength="50">
-                        </div>
-
                         <?php
                     }
                     ?>
@@ -1070,7 +1073,7 @@
                             Si es profesional de libre ejercicio certificaci&oacute;n de ingresos firmada por un contador p&uacute;blico colegiado donde indique y confirme la profesi&oacute;n del solicitante y el origen de los fondos o si es due&ntilde;o o socio de la empresa Registro Mercantil y su modificaci&oacute;n.<span  style="color:red">*</span></label><br><br>
                         <input name="f_constancia" type="file" class="custom-file-input requerido_" style="width: 100%;"><span class='error' style="padding: 5px;"></span>
                     </div>
-                    <div class="separador_" style=""></div>
+                    
 
                     <div class="separador_" style=""></div>
                     <div style="float:left;padding:5px;width: 97%;">

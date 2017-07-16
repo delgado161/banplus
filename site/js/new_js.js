@@ -209,43 +209,66 @@ $(document).ready(function () {
                 $('#ano_vivienda').css('background', 'rgba(255,0,0,0.30)');
                 $('#ano_vivienda').parent('div').parent('div').prev().find('._alert_span').show();
                 validado = false;
+            }else{
+                  $('#ano_vivienda').css('background', 'rgba(132, 189, 0, 0.15)');
             }
 
             if (($('#tp_inmueble').val() == "ALQUILADA") && ($('#canon').val() <= 0 || $('#canon').val() == "")) {
                 $('#canon').css('background', 'rgba(255,0,0,0.30)');
                 $('#canon').parent('div').parent('div').prev().find('._alert_span').show();
                 validado = false;
+            }else{
+                 $('#canon').css('background', 'rgba(132, 189, 0, 0.15)');
             }
 
             if (($('#tp_inmueble').val() == "ALQUILADA") && ($('#canon_nombre').val() == "")) {
                 $('#canon_nombre').css('background', 'rgba(255,0,0,0.30)');
                 $('#canon_nombre').parent('div').parent('div').prev().find('._alert_span').show();
                 validado = false;
+            }else{
+                $('#canon_nombre').css('background', 'rgba(132, 189, 0, 0.15)');
             }
 
             if (($('#tp_inmueble').val() == "ALQUILADA") && ($('#dctp_telefono').val() == "")) {
                 $('#dctp_telefono').css('background', 'rgba(255,0,0,0.30)');
                 $('#dctp_telefono').parent('div').parent('div').prev().find('._alert_span').show();
                 validado = false;
+            }else{
+                $('#dctp_telefono').css('background', 'rgba(132, 189, 0, 0.15)');
             }
 
             if (($('#tp_inmueble').val() == "ALQUILADA") && ($('#cd_telefono').val() == "")) {
                 $('#cd_telefono').css('background', 'rgba(255,0,0,0.30)');
                 $('#cd_telefono').parent('div').parent('div').prev().find('._alert_span').show();
                 validado = false;
+             }else{
+                $('#cd_telefono').css('background', 'rgba(132, 189, 0, 0.15)');
             }
 
             if ($('#otros_ingresos').val() != "" && $('#concepto_empresa').val() == "") {
                 $('#concepto_empresa').css('background', 'rgba(255,0,0,0.30)');
                 $('#concepto_empresa').parent('div').parent('div').prev().find('._alert_span').show();
                 validado = false;
+            }else{
+                 $('#concepto_empresa').css('background', 'rgba(132, 189, 0, 0.15)');
             }
 
             if ($('#concepto_empresa').val() != "" && $('#otros_ingresos').val() == "") {
                 $('#otros_ingresos').css('background', 'rgba(255,0,0,0.30)');
                 $('#otros_ingresos').parent('div').parent('div').prev().find('._alert_span').show();
                 validado = false;
+            }else{
+                $('#otros_ingresos').css('background', 'rgba(132, 189, 0, 0.15)');
             }
+            
+            if (!regex.test($('#ccemail').val())) {
+            $('#ccemail').css('background', 'rgba(255,0,0,0.30)');
+            $('#ccemail').parent('div').parent('div').prev().find('._alert_span').show();
+            validado = false;
+        }else{
+             $('#ccemail').css('background', 'rgba(132, 189, 0, 0.15)');
+        }
+            
 
         }
 
@@ -363,7 +386,7 @@ $(document).ready(function () {
         yearRange: '-100:-18'
     });
 
-    $(".fechas,#cierre_fiscal,#ult_fecha,#ccfc_nac,#fc_egreso,#balance_al").datepicker({
+    $(".fechas,#cierre_fiscal,#ult_fecha,#ccfc_nac,#fc_egreso,#balance_al,#ts_fc_nac0,#ts_fc_nac1").datepicker({
         dateFormat: "dd/mm/yy",
         yearRange: '-100:+0'
     });
@@ -423,7 +446,7 @@ $(document).ready(function () {
 
 
 //    $('#canon,#sueldo,#comision,#libre_ejercicio,#otros_ingresos,.moneda_,.moneda_2,.jmoneda,.jmoneda2').val(0, 00);
-    $('#canon,#sueldo,#comision,#libre_ejercicio,#otros_ingresos,.moneda_,.moneda_2,.jmoneda,.jmoneda2,.moneda_4').mask("###0,00", {reverse: true});
+    $('#ccsueldo,#sueldo2,#df_tactivos,#df_patrimonio,#df_tpasivo,#canon,#sueldo,#comision,#libre_ejercicio,#otros_ingresos,.moneda_,.moneda_2,.jmoneda,.jmoneda2,.moneda_4').mask("###0,00", {reverse: true});
 
     $('#canon,#sueldo,#comision,#libre_ejercicio,#otros_ingresos').keyup(function () {
 
