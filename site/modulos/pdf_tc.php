@@ -1,6 +1,6 @@
 <?php
 
-ini_set('display_errors', 0);
+//ini_set('display_errors', 1);
 //var_dump($_POST);
 //return;
 //exit();
@@ -21,7 +21,7 @@ try {
 
     $conte = '
 <style type="text/css">
-    td {border: 1px solid rgb(129,129,129); width:100%;}
+    td {border: 1px solid rgb(129,129,129); width:100%;min-height:10px;}
     table{width:100%;}
     .seccion{text-align: center;width:100%;background: rgb(150,150,150);font-weight: bold;font-size: 10px;}
     .bloque{width:100%;border: none;}
@@ -41,10 +41,262 @@ try {
 <table style=" border-collapse: collapse;">
     <tr>
         <td  style="width:33.33%;border:none;padding-right:10px;vertical-align: top;">
+           <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="titulo2">
+                       PARA USO EXCLUSIVO DEL BANCO
+                    </td>               
+                </tr>
+            </table>
+            <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="etiqueta" style="width:50%;border-right: 1px solid rgb(129,129,129);">
+                    <input type="checkbox"  checked=""> Aprobado
+                    <input type="checkbox"  checked=""> Negado                    
+                </td>
+                    <td class="etiqueta" style="width:50%;"> Monto del Cr&eacute;dito Otorgado:</td>
+                </tr>
+                
+                <tr class="valores">
+                    <td  style="width:50%;border-left:none;font-size:8px">&nbsp;</td>
+                    <td  style="width:50%;border-right:none;font-size:8px">&nbsp;</td>
+                </tr>
+            </table>
+             <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="etiqueta" style="width:70%;border-right: 1px solid rgb(129,129,129);">
+                  Motivo:                  
+                </td>
+                    <td class="etiqueta" style="width:30%;">Fecha de Aprobaci&oacute;n:</td>
+                </tr>
+                
+                <tr class="valores">
+                    <td  style="width:70%;border-left:none;font-size:8px">&nbsp;</td>
+                    <td  style="width:30%;border-right:none;font-size:8px">&nbsp;</td>
+                </tr>
+            </table>
+            <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="etiqueta" style="width:50%;border-right: 1px solid rgb(129,129,129);">
+                  Tipo de Tarjeta:                  
+                </td>
+                    <td class="etiqueta" style="width:50%;">Recomendado por:</td>
+                </tr>
+                
+                <tr class="valores">
+                    <td  style="width:50%;border-left:none;font-size:8px">&nbsp;</td>
+                    <td  style="width:50%;border-right:none;font-size:8px">&nbsp;</td>
+                </tr>
+            </table>
+            <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="etiqueta" style="width:40%;border-right: 1px solid rgb(129,129,129);">
+                  Agencia:                  
+                </td>
+                    <td class="etiqueta" style="width:30%;border-right: 1px solid rgb(129,129,129);">Promotor:</td>
+                     <td class="etiqueta" style="width:30%;">Ejecutivo:</td>
+                </tr>
+                
+                <tr class="valores">
+                    <td  style="width:40%;border-left:none;font-size:8px">&nbsp;</td>
+                    <td  style="width:30%;border-left:none;font-size:8px">&nbsp;</td>
+                    <td  style="width:30%;border-right:none;font-size:8px">&nbsp;</td>
+                </tr>
+            </table>
+            <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="etiqueta" style="width:100%">
+                 Nombre de la Persona que Autoriza / Niega            
+                </td>
+                   
+                </tr>
+                
+                <tr class="valores">
+                   
+                    <td  style="width:100%;border-left:none;border-right:none;font-size:8px">&nbsp;</td>
+                </tr>
+            </table>
+              <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="etiqueta" style="width:70%;border-right: 1px solid rgb(129,129,129);">
+                 Firma:                  
+                </td>
+                    <td class="etiqueta" style="width:30%;">Fecha:</td>
+                </tr>
+                
+                <tr class="valores">
+                    <td  style="width:70%;border-left:none;font-size:8px">&nbsp;</td>
+                    <td  style="width:30%;border-right:none;font-size:8px">&nbsp;</td>
+                </tr>
+            </table>
+          <br>
+              <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="titulo2">
+                       FIADOR (EN CASO DE SER REQUERIDO)
+                    </td>               
+                </tr>
+                 
+            </table>
+             <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="etiqueta" style="width:100%">Yo(nosotros):<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+</u>           </td>
+                </tr>
+                <tr>
+                    <td class="etiqueta" style="width:100%;text-align:justify;">
+                    Titular(es) de la C&eacute;dula de Identidad N&ordm;<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> declaro(amos): Me(nos) constituyo(&iacute;mos) en fiador(es) solidario(s) y principal(es) a favor de <b>BANPLUS</b>,
+                    por todas las obligaciones a cargo de la persona identificada en esta solicitud, de nacionalidad,<u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> mayor de edad domiciliada 
+                    en <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> y titular de la C&eacute;dula de Identidad N&ordm; <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>
+                     denominada a los efectos de esta fianza como <b>EL CLIENTE,</b> que se originen a partir de la emisi&oacute;n y ultilizaci&oacute;n de cualquier Tarjeta de Cr&eacute;dito expedida a favor de 
+                     <b>EL CLIENTE </b>por <b>BANPLUS</b>. Los t&eacute;rminos y condiciones de las obligaciones afianzadas est&aacute;n contenidos en el Contrato de Tarjeta de Cr&eacute;dito Banplus,
+                     debidamente aprobado por la Superintendencia de Bancos y Otras Instituciones Financieras (ahora Superintendencia de las Instituciones del Sector Bancario), as&iacute; como por aquellas que en el futuro se modifiquen total o parcialmente. Las 
+                     presente fianza se mantendr&aacute; vigente mientras subsistan las obligaciones afianzadas, incluidos todos sus gastos as&iacute; como los
+                     gastos de cobranza judicial y/o extrajudicial y costos judiciales. Ser&aacute; por cuenta del(los) fiador(es) informarse la pr&oacute;rroga concedida o la mora del cliente,
+                     si fuere en el caso, quedando por tanto, el banco revelado de cumplir con lo prescrito en 1816 del C&oacute;digo Civil Venezolano. As&iacute; mismo declaro(amos)
+                     en forma expresa, que renuncio(amos) a los beneficios contenidos en los art&iacute;culos 1812, 1819, 1833, 1834 y 1836 ejusdem. Para todos los efectos de la presente fianza,
+                     se elige como domicilio especial la ciudad de Caracas, sin perjuicio para BANPLUS de acudir a cualquier jurisdicci&oacute;n que fuere competente conforma a la ley. Finalmente doy(damos) de que los datos aqu&iacute; suministrados
+                     son ciertos y autorizo(amos) a <b>BANPLUS</b> para conformar los mismos.
+                    </td>
+                </tr>
+                <tr>
+                    <td class="etiqueta" style="width:100%;text-align:right;">
+                   <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>
+                    </td>
+                </tr>
+                 <tr>
+                    <td  class="etiqueta" style="width:100%;text-align:right;">
+                         Firma del(los) Fiador(es)
+                    </td>
+                </tr>
+              
+            </table>
+            <br>
+              <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="titulo2">
+                       FORMALIZACI&Oacute;N DE LA SOLICITUD
+                    </td>               
+                </tr>
+                
+            </table>
+              <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="etiqueta" style="width:100%;text-align:justify;">
+                   YO <u>' . $_POST['p_nombre'] . ' ' . $_POST['s_nombre'] . ' ' . $_POST['p_apellido'] . ' ' . $_POST['s_apellido'] . '</u>, C.I.:<u>' . $_POST['n_documento'] . '</u>
+                   en mi car&aacute;cter de solicitando declaro: 1) La informaci&oacute;n que he suminstrado y que consta en el presente formulario
+                   y sus anexos es ver&iacute;dica, por lo que autorizo expresamente a BANPLUS, a consultar y corroborar mis antecedentes financieros, acudiendo a las fuentes de informaci&oacute;n
+                   adecuadas y autorizadas por la ley. <b>La presente autorizaci&oacute;n podr&aacute; ser revocada por quien suscribe en cualquier momento, previa notificaci&oacute;n a BANPLUS con por lo menos treinta (30) d&iacute;as de anticipaci&oacute;n.</b> 2) En caso de error o
+                   falsedad en el suminstro de la informaci&oacute;n, se considerar&aacute; nula la presente solicitud, la misma quedar&aacute; sujeta a los t&eacute;rminos y condiciones del Contraro de Tarjeta de Cr&eacute;dito Banplus, debidamente aprobado por la Superintendencia de Bancos y Otras Instituciones Financieras
+                   (ahora Superintendencia de las instituciones del Sector Bancario) el cual declaro conocer, aceptar y adherirme en todas y cada una de sus partes vigentes a la presente fecha, as&iacute; como aquellas que en el futuro las modifiquen
+                   total o parcialmente, dejando constancia de ello a tenor de lo dispuesto en el articulo 17 de la Resoluci&oacute;n No. 083.11 de fecha 15 de marzo de 2011, emanada de la Superintendencia de las instituciones del Sector Bancario, contentiva de las "Normas Relativas a la Protecci&oacute;n de los Usuarios y Usuarias de los Servicios Financieros"
+                   publicada en la Gaceta Oficial de la Rep&uacute;blica Bolivariana de Venezuela No. 39.635 de fecha 16 de marzo de 2011 4) A los efectos de recepci&oacute;n de cualquier tipo de correspondencia relativa a la Tarjeta de Cr&eacute;dito
+                   BANPLUS, es la direcci&oacute;n de correspondencia que indico en la presente por lo menos diez (10) d&iacute;as h&aacute;biles bancarios de anticipaci&oacute;n con el objeto de que dichas comunicaciones
+                   , notificaciones, tarjetas y estados de cuenta puedan ser recibidos oportunamente por mi persona. 5)
+ Por &uacute;ltimo, bajo fe de juramento declaro que los fondos empleados para la ejecuci&oacute;n de cualquier operaci&oacute;n con <b>BANPLUS</b> se originan y ultilizar&aacute;n en las operaciones
+ l&iacute;citas, con estricto apego a la Legislaci&oacute;n Venezolana y a la del pa&iacute;s del cual se remitan o de donde provengan.
+ </td>
+                </tr>
+                <tr>
+                    <td class="etiqueta" style="width:100%;">
+                  En Caracas, a los<u>' . date('d') . '</u> d&iacute;as del mes de<u>' . date('m') . '</u> de <u>' . date('Y') . '</u>.
+                  <br>
+                    </td>
+                </tr>
+                <tr>
+                <td class="etiqueta" style="width:100%;text-align:right;">
+                   <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>
+                    </td>
+                </tr>
+                 <tr>
+                    <td  class="etiqueta" style="width:100%;text-align:right;">
+                         Firma del Solicitante
+                    </td>
+                </tr>
+              
+            </table>
+            
+        </td>
+        <td  style="width:33.33%;border:none;padding-right:10px;vertical-align: top;">
+          <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="" style="text-align:right;border:none; background: rgb(0,37,84);color:rgb(209,211,212);font-size:18px;">
+                     <br><br><br> <b>Disfrute de todas las ventajas que<br> le ofrece Su Tarjeta de Cr&eacute;dito Banplus</b>
+                    </td>               
+                </tr>
+                
+                <tr>
+                    <td class="etiqueta" style="width:100%;borde: none;height:5px;background: rgb(0,37,84);"   >  </td>
+                </tr>  
+                <tr>
+                    <td class="etiqueta" style="width:100%;borde: none;height:5px;"   >  </td>
+                </tr> 
+                
+            </table>
+            <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                <tr>
+                    <td class="etiqueta" style="width:100%;text-align:left;color:rgb(0,37,84);font-size:14px;">
+                  <b>Recaudos para solicitar<br>la Tarjeta de Cr&eacute;dito Banplus</b>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="etiqueta" style="width:100%;text-align:left;color:rgb(0,37,84);font-size:14px;">
+                    <br>                 
+                    <b>Trabajador Dependiente</b>
+                    </td>
+                </tr>
+                 <tr>
+                    <td class="etiqueta" style="width:100%;text-align:justify;font-size:12px;">
+                - Solicitud de Tarjeta de Cr&eacute;dito, completamente llena y firmada, sin tachaduras ni enmiendas<br>
+                - Fotocopia legible de la c&eacute;dula de identidad del solicitante titular y de los suplementarios (en caso que tambien soliciten Tarjetas Suplementarias).<br>
+                - Fotocopia del Registro de Informaci&oacute;n Fiscal RIF del solicitante.<br>
+                - Completar el Balance Personal en la solicitud.<br>
+                - Original de los tres (3) &uacute;ltimos estados de cuenta bancarios firmados y sellados por el banco emisor.<br>
+                - Constancia de trabajo original membretada con firma y sello de la empresa, con vigencia m&aacute;xima de tres (3) meses indicando ingreso mensual o anual, cargo que desempe&ntilde;a y antig&uuml;edad en la empresa (mayor a doce (12) meses).<br>
+                - Si tiene una actividad adicional, justificar los otros ingresos con un documento original que indique la procedencia de los fondos (Certificaci&oacute;n de ingresos en original, con vigencia m&aacute;xima de tres meses suscrita y sellada por un contador p&uacute;blico colegiado).
+                </td>
+                </tr>
+                <tr>
+                    <td class="etiqueta" style="width:100%;text-align:left;color:rgb(0,37,84);font-size:14px;">
+                    <br>                 
+                    <b>Trabajador Independiente</b>
+                    </td>
+                </tr>
+                  <tr>
+                    <td class="etiqueta" style="width:100%;text-align:justify;font-size:12px;">
+                - Solicitud de Tarjeta de Cr&eacute;dito, completamente llena y firmada, sin tachaduras ni enmiendas<br>
+                - Fotocopia legible de la c&eacute;dula de identidad del solicitante titular y de los suplementarios (en caso que tambi&eacute;n soliciten Tarjetas Suplementarias).<br>
+                - Fotocopia del Registro de Informaci&oacute;n Fiscal RIF del solicitante.<br>
+                - Completar el Balance Personal en la solicitud.<br>
+                - Original de los tres (3) &uacute;ltimos estados de cuenta bancarios firmados y sellados por el banco emisor.<br>
+                - Certificaci&oacute;n de ingresos en original, con vigencia m&aacute;xima de tres meses suscrita y sellada por un contador p&uacute;blico colegiado.<br>
+                - Si es profesional de libre ejercicio, fotocopia del carnet del colegio respectivo, salvo que la certificaci&oacute;n de ingresos est&eacute; firmada por un contador p&uacute;blico colegiado, donde indique y confirme la profesi&oacute;n del solicitante y el origen de los fondos.<br>
+                - Si es due&ntilde;o o socio de la empresa, Registro Mercantil y su modificaci&oacute;n<br><br>
+                
+                Complete, firme su solicitud y entr&eacute;guela, junto con el resto de los documentos, en cualquiera de nuestras Agencias Banplus.
+
+                </td>
+                </tr>
+
+                       </table>
+        </td>
+        <td  style="width:33.33%;border:none;padding-right:10px;vertical-align: top;">
+           
+        </td>
+    </tr>
+</table>
+
+</page>
+<page  backleft="0mm" backright="0mm">
+<table style=" border-collapse: collapse;">
+    <tr>
+        <td  style="width:33.33%;border:none;padding-right:10px;vertical-align: top;">
         <table style="border-collapse: collapse;border:none;font-size:11px;" >
                 <tr>
                     <td style="border:none;">
-                    <img src="../img/logo_banplus.jpg" width="190px;" />
+                    <img src="../img/logo_banplus.jpg" width="180px;" />
                     </td>                
                 </tr>
                 <tr>
@@ -54,9 +306,9 @@ try {
                 </tr>
                 <tr>
                     <td class="titulo" style="text-align:right;">
-                       <input type="checkbox" checked="checked" > <img src="../img/visa.png" width="50px;" /> 
+                       <input type="checkbox"  > <img src="../img/visa.png" width="50px;" /> 
  &nbsp;&nbsp;                      
-<input type="checkbox" checked="checked" > <img src="../img/MasterCard.png" width="40px;" /> &nbsp;&nbsp; 
+<input type="checkbox"  > <img src="../img/MasterCard.png" width="40px;" /> &nbsp;&nbsp; 
                     </td>               
                 </tr>
                  <tr>
@@ -99,7 +351,7 @@ try {
             </table>
              <table style="border-collapse: collapse;border:none;font-size:11px;" >
                 <tr>
-                    <td class="etiqueta" style="width:50%;border-right: 1px solid rgb(129,129,129);"> C&eacute;dula de Identidad:';
+                    <td class="etiqueta" style="width:40%;border-right: 1px solid rgb(129,129,129);"> C&eacute;dula de Identidad:';
 
     if ($_POST['tp_documento'] == "C")
         $conte .= '&nbsp;&nbsp;V<input type="checkbox" checked="checked" >';
@@ -113,23 +365,23 @@ try {
 
     $conte .= '              
                     </td>
-                    <td class="etiqueta" style="width:50%;"> RIF:</td>
+                    <td class="etiqueta" style="width:60%;"> RIF:</td>
                 </tr>
                 
                  <tr class="valores">
-                    <td  style="width:50%;border-left:none;"> ' . $_POST['n_documento'] . '</td>
-                    <td  style="width:50%;border-right:none;"> ' . $_POST['pn_rif'] . '</td>
+                    <td  style="width:40%;border-left:none;"> ' . $_POST['n_documento'] . '</td>
+                    <td  style="width:60%;border-right:none;"> ' . $_POST['rif'] . '</td>
                 </tr>
             </table>
             <table style="border-collapse: collapse;border:none;font-size:11px;" >
                 <tr>
-                    <td class="etiqueta" style="width:50%;border-right: 1px solid rgb(129,129,129);"> Pasaporte: </td>
-                    <td class="etiqueta" style="width:50%;"> Lugar y fecha de Nacimiento:</td>
+                    <td class="etiqueta" style="width:40%;border-right: 1px solid rgb(129,129,129);"> Pasaporte: </td>
+                    <td class="etiqueta" style="width:60%;"> Lugar y fecha de Nacimiento:</td>
                 </tr>
                 
                 <tr class="valores">
-                    <td  style="width:50%;border-left:none;">' . $_POST['pasaporte'] . '</td>
-                    <td  style="width:50%;border-right:none;">' . $_POST['tp_pais'] . ' ' . $_POST['tp_estado'] . ' ' . $_POST['tp_ciudad'] . ' ' . $_POST['fc_nac'] . '</td>
+                    <td  style="width:40%;border-left:none;">' . $_POST['pasaporte'] . '</td>
+                    <td  style="width:60%;border-right:none;">' . $_POST['tp_pais'] . ' ' . $_POST['tp_estado'] . ' ' . $_POST['tp_ciudad'] . ' ' . $_POST['fc_nac'] . '</td>
                 </tr>
             </table>
              <table style="border-collapse: collapse;border:none;font-size:11px;" >
@@ -138,14 +390,14 @@ try {
                     <td class="etiqueta" style="width:50%;"> Tiempo en el Pa&iacute;s:</td>
                 </tr>
                 
-                 <tr class="valores">tiempo_pais
+                 <tr class="valores">
                     <td  style="width:50%;border-left:none;">' . $_POST['naturalizado'] . '</td>
                     <td  style="width:50%;border-right:none;">' . $_POST['tiempo_antiguo'] . ' ' . $_POST['tiempo_pais'] . '</td>
                 </tr>
             </table>
              <table style="border-collapse: collapse;border:none;font-size:11px;" >
                 <tr>
-                    <td class="etiqueta" style="width:50%;border-right: 1px solid rgb(129,129,129);"> Estado civil:  ';
+                    <td class="etiqueta" style="width:40%;border-right: 1px solid rgb(129,129,129);"> Estado civil:  ';
 
 
 
@@ -162,11 +414,11 @@ try {
     $conte .= '       
                  
                    </td>
-                    <td class="etiqueta" style="width:50%;">Profesi&oacute;n:</td>
+                    <td class="etiqueta" style="width:60%;">Profesi&oacute;n:</td>
                 </tr>
                 
                <tr class="valores">
-                    <td  style="width:50%;border-left:none;">';
+                    <td  style="width:40%;border-left:none;">';
 
 
     if ($_POST['tp_civil'] == "Divorciado")
@@ -181,7 +433,7 @@ try {
     $conte .= '  
                      
                     </td>
-                    <td  style="width:50%;border-right:none;">' . $_POST['tp_profecion'] . '</td>
+                    <td  style="width:60%;border-right:none;">' . $_POST['tp_profecion'] . '</td>
                 </tr>
             </table>
              <table style="border-collapse: collapse;border:none;font-size:11px;" >
@@ -191,7 +443,7 @@ try {
                 </tr>
                 
                  <tr class="valores">
-                    <td  style="width:50%;border-left:none;">' . $_POST['tp_profecion'] . '</td>
+                    <td  style="width:50%;border-left:none;">' . $_POST['g_familiar'] . '</td>
                     <td  style="width:50%;border-right:none;">' . $_POST['dtp_telefonoH'] . ' ' . $_POST['d_telefonoh'] . ' / ' . $_POST['dtp_telefono2'] . ' ' . $_POST['d_telefono2'] . ' </td>
                 </tr>
             </table>
@@ -215,13 +467,13 @@ try {
                     <td class="etiqueta" style="width:100%;" colspan="2"> Nombres y Apellidos: </td>
                 </tr>
                 
-                 <tr class="valores">
-                   <td  style="width:50%;border-right:none;border-left:none;">' . $_POST['ccp_nombre'] . ' ' . $_POST['ccs_nombre'] . ' ' . $_POST['ccp_apellido'] . ' ' . $_POST['ccs_apellido'] . '</td>
+                 <tr class="valores" colspan="2">
+                   <td  style="width:100%;border-right:none;border-left:none;">' . $_POST['ccp_nombre'] . ' ' . $_POST['ccs_nombre'] . ' ' . $_POST['ccp_apellido'] . ' ' . $_POST['ccs_apellido'] . '</td>
                 </tr>
             </table>
             <table style="border-collapse: collapse;border:none;font-size:11px;" >
                 <tr>
-                    <td class="etiqueta" style="width:50%;border-right: 1px solid rgb(129,129,129);"> C&eacute;dula de Identidad:
+                    <td class="etiqueta" style="width:40%;border-right: 1px solid rgb(129,129,129);"> C&eacute;dula de Identidad:
                      ';
     if ($_POST['cctp_documento'] == "C")
         $conte .= '&nbsp;&nbsp;V<input type="checkbox" checked="checked" >';
@@ -233,25 +485,25 @@ try {
     else
         $conte .= '&nbsp;&nbsp;E<input type="checkbox"  >';
     $conte .= '    </td>
-                       <td class="etiqueta" style="width:50%;"> Lugar y fecha de Nacimiento:</td>
+                       <td class="etiqueta" style="width:60%;"> Lugar y fecha de Nacimiento:</td>
                 </tr>
                 
                  <tr class="valores">
-                    <td  style="width:50%;border-left:none;">' . $_POST['CCn_documento'] . '</td>
-                    <td  style="width:50%;border-right:none;"> ' . $_POST['cctp_pais'] . ' ' . $_POST['cctp_estado'] . ' ' . $_POST['cctp_ciudad'] . ' ' . $_POST['ccfc_nac'] . '</td>
+                    <td  style="width:40%;border-left:none;">' . $_POST['CCn_documento'] . '</td>
+                    <td  style="width:60%;border-right:none;"> ' . $_POST['cctp_pais'] . ' ' . $_POST['cctp_estado'] . ' ' . $_POST['cctp_ciudad'] . ' ' . $_POST['ccfc_nac'] . '</td>
                 </tr>
             </table>
              <table style="border-collapse: collapse;border:none;font-size:11px;" >
                 <tr>
                     <td class="etiqueta" style="width:50%;border-right: 1px solid rgb(129,129,129);"> Empresa donde trabaja actualmente: </td>
-                    <td class="etiqueta" style="width:20%;border-right: 1px solid rgb(129,129,129);"> Tel&eacute;fonos: </td>
-                    <td class="etiqueta" style="width:30%;"> Sueldo Mensual Bs.:</td>
+                    <td class="etiqueta" style="width:23%;border-right: 1px solid rgb(129,129,129);"> Tel&eacute;fonos: </td>
+                    <td class="etiqueta" style="width:27%;"> Sueldo Mensual Bs.:</td>
                 </tr>
                 
                   <tr class="valores">
                     <td  style="width:50%;border-left:none;">' . $_POST['cct_empresa_'] . '</td>
-                    <td  style="width:20%;border-left:none;">' . $_POST['dcc_dtp_telefonoH'] . ' ' . $_POST['dcc_d_telefonoh'] . ' / ' . $_POST['dcc_dtp_telefono2'] . ' ' . $_POST['dcc_d_telefono2'] . '</td>
-                     <td  style="width:30%;border-right:none;">' . $_POST['ccsueldo'] . '</td>
+                    <td  style="width:23%;border-left:none;">' . $_POST['dcc_dtp_telefonoH'] . ' ' . $_POST['dcc_d_telefonoh'] . ' ' . $_POST['dcc_dtp_telefono2'] . ' ' . $_POST['dcc_d_telefono2'] . '</td>
+                     <td  style="width:27%;border-right:none;text-align:right;">' . $_POST['ccsueldo'] . '</td>
                 </tr>
             </table>
             <table style="border-collapse: collapse;border:none;font-size:11px;" >
@@ -318,29 +570,29 @@ try {
              <table style="border-collapse: collapse;border:none;font-size:11px;" >
                              
                 <tr>
-                    <td class="etiqueta" style="width:25%;border-right: 1px solid rgb(129,129,129);" > Parroquia: </td>
-                   <td class="etiqueta" style="width:25%;border-right: 1px solid rgb(129,129,129);" > Estado: </td>
-                    <td class="etiqueta" style="width:25%;border-right: 1px solid rgb(129,129,129);" > Ciudad: </td>
-                   <td class="etiqueta" style="width:25%;" > Zona Postal: </td>
+                    <td class="etiqueta" style="width:29%;border-right: 1px solid rgb(129,129,129);" > Parroquia: </td>
+                   <td class="etiqueta" style="width:2s%;border-right: 1px solid rgb(129,129,129);" > Estado: </td>
+                    <td class="etiqueta" style="width:29%;border-right: 1px solid rgb(129,129,129);" > Ciudad: </td>
+                   <td class="etiqueta" style="width:16%;" > Zona Postal: </td>
                 </tr>
                 
                  <tr class="valores">
-                    <td  style="width:25%;border-left:none;" >' . $_POST['dtp_parroquia'] . '</td>
-                   <td  style="width:25%;" >' . $_POST['dtp_estado'] . ' </td>
-                    <td  style="width:25%;" >' . $_POST['dtp_ciudad'] . '</td>
-                     <td  style="width:25%;border-right:none;" >' . $_POST['d_postal'] . ' </td>
+                    <td  style="width:29%;border-left:none;" >' . $_POST['dtp_parroquia'] . '</td>
+                   <td  style="width:26%;" >' . $_POST['dtp_estado'] . ' </td>
+                    <td  style="width:29%;" >' . $_POST['dtp_ciudad'] . '</td>
+                     <td  style="width:16%;border-right:none;" >' . $_POST['d_postal'] . ' </td>
                 </tr>
             </table>
              <table style="border-collapse: collapse;border:none;font-size:11px;" >
                              
                 <tr>
                     <td class="etiqueta" style="width:50%;border-right: 1px solid rgb(129,129,129);" > Tel&eacute;fonos: </td>
-                   <td class="etiqueta" style="width:50%;" >Vivienda:';
+                   <td class="etiqueta" style="width:50%;" >Vivienda: ';
 
     if ($_POST['tp_inmueble'] == "DE MIS PADRES")
-        $conte .= '<input type="checkbox" checked="checked" >De mis padre';
+        $conte .= '<input type="checkbox" checked="checked" > De mis padre';
     else
-        $conte .= '<input type="checkbox"  >De mis padre';
+        $conte .= '<input type="checkbox"  > De mis padre';
 
     if ($_POST['tp_inmueble'] == "PROPIA")
         $conte .= '<input type="checkbox" checked="checked" > Propia';
@@ -425,27 +677,27 @@ try {
                 </tr>
                 
                  <tr class="valores">
-                    <td  style="width:100%;border-left:none;border-right:none;" > rrrr';
+                    <td  style="width:100%;border-left:none;border-right:none;" > ';
 
-//     if ($_POST['tp_inmueble'] == "DE UN FAMILIAR")
-//        $conte .= '&nbsp; &nbsp;<input type="checkbox" checked="checked" > Apartamentos';
-//    else
-//        $conte .= '&nbsp; &nbsp;<input type="checkbox"  > Apartamentos';
-//
-//    if ($_POST['tp_inmueble'] == "ALQUILADA")
-//        $conte .= '&nbsp;<input type="checkbox" checked="checked" > Terrenos';
-//    else
-//        $conte .= '&nbsp;<input type="checkbox"  > Terrenos';
-//    
-//     if ($_POST['tp_inmueble'] == "DE UN FAMILIAR")
-//        $conte .= '&nbsp;<input type="checkbox" checked="checked" > Locales';
-//    else
-//        $conte .= '&nbsp;<input type="checkbox"  > Locales';
-//
-//    if ($_POST['tp_inmueble'] == "ALQUILADA")
-//        $conte .= '&nbsp;<input type="checkbox" checked="checked" > Otros';
-//    else
-//        $conte .= '&nbsp;<input type="checkbox"  > Otros';
+    if ($_POST['otras_pA'] == "APARTAMENTOS")
+        $conte .= '&nbsp; &nbsp;<input type="checkbox" checked="checked" > Apartamentos';
+    else
+        $conte .= '&nbsp; &nbsp;<input type="checkbox"  > Apartamentos';
+
+    if ($_POST['otras_pT'] == "TERRENOS")
+        $conte .= '&nbsp;<input type="checkbox" checked="checked" > Terrenos';
+    else
+        $conte .= '&nbsp;<input type="checkbox"  > Terrenos';
+
+    if ($_POST['otras_pL'] == "LOCALES")
+        $conte .= '&nbsp;<input type="checkbox" checked="checked" > Locales';
+    else
+        $conte .= '&nbsp;<input type="checkbox"  > Locales';
+
+    if ($_POST['otras_pO'] == "OTROS")
+        $conte .= '&nbsp;<input type="checkbox" checked="checked" > Otros';
+    else
+        $conte .= '&nbsp;<input type="checkbox"  > Otros';
 
 
 
@@ -454,7 +706,7 @@ try {
                     
                 </tr>
             </table>
-             <table style="border-collapse: collapse;border:none;font-size:11px;" >
+<table style="border-collapse: collapse;border:none;font-size:11px;" >
                              
                 <tr>
                     <td class="etiqueta" style="width:50%;border-right: 1px solid rgb(129,129,129);" > Automov&iacute;l: </td>
@@ -478,11 +730,11 @@ try {
                      <td  style="width:50%;border-right:none;" >   ' . $_POST['auto_placa'] . '</td>
                 </tr>
             </table>
+     
 
 
 </td>';
-    
-    
+
     $conte .= '  
     
         <td  style="width:33.33%;border:none;vertical-align: top;padding-right:10px;">
@@ -625,17 +877,17 @@ try {
              <table style="border-collapse: collapse;border:none;font-size:11px;" >
                              
                 <tr>
-                    <td class="etiqueta" style="width:25%;border-right: 1px solid rgb(129,129,129);" > Municipio: </td>
-                   <td class="etiqueta" style="width:25%;border-right: 1px solid rgb(129,129,129);" > Estado: </td>
-                    <td class="etiqueta" style="width:25%;border-right: 1px solid rgb(129,129,129);" > Ciudad: </td>
-                   <td class="etiqueta" style="width:25%;" > Zona Postal: </td>
+                    <td class="etiqueta" style="width:29%;border-right: 1px solid rgb(129,129,129);" > Municipio: </td>
+                   <td class="etiqueta" style="width:26%;border-right: 1px solid rgb(129,129,129);" > Estado: </td>
+                    <td class="etiqueta" style="width:29%;border-right: 1px solid rgb(129,129,129);" > Ciudad: </td>
+                   <td class="etiqueta" style="width:16%;" > Zona Postal: </td>
                 </tr>
                 
                  <tr class="valores">
-                    <td  style="width:25%;border-left:none;" >  ' . $_POST['etp_municipio'] . ' </td>
-                   <td  style="width:25%;" >  ' . $_POST['etp_estado'] . '</td>
-                    <td  style="width:25%;" >  ' . $_POST['etp_ciudad'] . ' </td>
-                     <td  style="width:25%;border-right:none;" >  ' . $_POST['e_postal'] . ' </td>
+                    <td  style="width:29%;border-left:none;" >  ' . $_POST['etp_municipio'] . ' </td>
+                   <td  style="width:26%;" >  ' . $_POST['etp_estado'] . '</td>
+                    <td  style="width:29%;" >  ' . $_POST['etp_ciudad'] . ' </td>
+                     <td  style="width:16%;border-right:none;" >  ' . $_POST['e_postal'] . ' </td>
                 </tr>
             </table>
              <table style="border-collapse: collapse;border:none;font-size:11px;" >
@@ -654,14 +906,14 @@ try {
              <table style="border-collapse: collapse;border:none;font-size:11px;" >
                              
                 <tr>
-                    <td class="etiqueta" style="width:70%;border-right: 1px solid rgb(129,129,129);" > Correo Electr&oacute;nico: </td>
-                   <td class="etiqueta" style="width:30%;" >Sector Econ&oacute;mico:
+                    <td class="etiqueta" style="width:60%;border-right: 1px solid rgb(129,129,129);" > Correo Electr&oacute;nico: </td>
+                   <td class="etiqueta" style="width:40%;" >Sector Econ&oacute;mico:
                     </td>
                 </tr>
                 
                 <tr class="valores">
-                    <td  style="width:70%;border-left:none;" > ' . $_POST['ramo_empresa'] . ' </td>
-                     <td  style="width:30%;border-right:none;" > ' . $_POST['emp_email'] . '</td>
+                    <td  style="width:60%;border-left:none;" > ' . $_POST['emp_email'] . ' </td>
+                     <td  style="width:40%;border-right:none;" > ' . $_POST['ramo_empresa'] . '</td>
                 </tr>
             </table>
              <table style="border-collapse: collapse;border:none;font-size:11px;" >
@@ -685,8 +937,8 @@ try {
                 </tr>
                 
                 <tr class="valores">
-                    <td  style="width:50%;border-left:none;" > ' . $_POST['sueldo'] . ' </td>
-                     <td  style="width:50%;border-right:none;" > ' . $_POST['otros_ingresos'] . '</td>
+                    <td  style="width:50%;border-left:none;text-align:right;" > ' . $_POST['sueldo'] . ' </td>
+                     <td  style="width:50%;border-right:none;text-align:right;" > ' . $_POST['otros_ingresos'] . '</td>
                 </tr>
             </table>
              <table style="border-collapse: collapse;border:none;font-size:11px;" >
@@ -704,14 +956,14 @@ try {
             <table style="border-collapse: collapse;border:none;font-size:11px;" >
                              
                 <tr>
-                    <td class="etiqueta" style="width:70%;border-right: 1px solid rgb(129,129,129);" > Nombre de la Empresa donde trabajo anteriolmente: </td>
-                   <td class="etiqueta" style="width:30%;" >Sector Econ&oacute;mico:
+                    <td class="etiqueta" style="width:65%;border-right: 1px solid rgb(129,129,129);" > Nombre de la Empresa donde trabajo anteriolmente: </td>
+                   <td class="etiqueta" style="width:35%;" >Sector Econ&oacute;mico:
                     </td>
                 </tr>
                 
                 <tr class="valores">
-                    <td  style="width:70%;border-left:none;" > ' . $_POST['n_empresa2'] . '</td>
-                     <td  style="width:30%;border-right:none;" > ' . $_POST['ramo_empresa2'] . '</td>
+                    <td  style="width:65%;border-left:none;" > ' . $_POST['n_empresa2'] . '</td>
+                     <td  style="width:35%;border-right:none;" > ' . $_POST['ramo_empresa2'] . '</td>
                 </tr>
             </table>
               <table style="border-collapse: collapse;border:none;font-size:11px;" >
@@ -723,7 +975,7 @@ try {
                 
                 <tr class="valores">
                     <td  style="width:50%;border-left:none;" > ' . $_POST['cargo_empresa2'] . '</td>
-                     <td  style="width:50%;border-right:none;" > ' . $_POST['sueldo2'] . ' </td>
+                     <td  style="width:50%;border-right:none;text-align:right;" > ' . $_POST['sueldo2'] . ' </td>
                 </tr>
             </table>
              <table style="border-collapse: collapse;border:none;font-size:11px;" >
@@ -770,39 +1022,39 @@ try {
                              
                 <tr class="valores">
                     <td  style="width:25%;background:rgb(200,200,200);height:20px;border-left:none;border-right:none" >1. Banco</td>
-                    <td  style="width:25%;text-align:center;border-left:none;border-right:none" >' . $_POST['df_banco'] . '</td>
+                    <td  style="width:25%;text-align:center;border-left:none;border-right:none;text-align:right;" >' . $_POST['df_banco'] . ' </td>
                     <td  style="width:25%;background:rgb(200,200,200);border-left:none;border-right:none" >7. Tarjetas de Cr&eacute;dito </td>
-                    <td  style="width:25%;text-align:center;border-right:none;" > ' . $_POST['df_tarjetas'] . ' </td>
+                    <td  style="width:25%;text-align:center;border-right:none;;text-align:right;" > ' . $_POST['df_tarjetas'] . ' </td>
                 </tr>
                 <tr class="valores">
                     <td  style="width:25%;background:rgb(200,200,200);height:20px;border-left:none;border-right:none" >2. Inversiones</td>
-                    <td  style="width:25%;text-align:center;border-left:none;border-right:none" >' . $_POST['df_invercion'] . '</td>
+                    <td  style="width:25%;text-align:center;border-left:none;border-right:none;text-align:right;" >' . $_POST['df_invercion'] . '&nbsp;</td>
                     <td  style="width:25%;background:rgb(200,200,200);border-left:none;border-right:none" >8. Pr&eacute;stamos  </td>
-                    <td  style="width:25%;text-align:center;border-right:none;" > ' . $_POST['df_prestamos'] . ' </td>
+                    <td  style="width:25%;text-align:center;border-right:none;;text-align:right;" > ' . $_POST['df_prestamos'] . '&nbsp;</td>
                 </tr>  
                 <tr class="valores">
                     <td  style="width:25%;background:rgb(200,200,200);height:20px;border-left:none;border-right:none" >3. Moviliario</td>
-                    <td  style="width:25%;text-align:center;border-left:none;border-right:none" >' . $_POST['df_mobiliario'] . '</td>
+                    <td  style="width:25%;text-align:center;border-left:none;border-right:none;text-align:right;" >' . $_POST['df_mobiliario'] . '&nbsp;</td>
                     <td  style="width:25%;background:rgb(200,200,200);border-left:none;border-right:none" >9. Hipotecas por Pagar  </td>
-                    <td  style="width:25%;text-align:center;border-right:none;" > ' . $_POST['df_hipoteca'] . ' </td>
+                    <td  style="width:25%;text-align:center;border-right:none;;text-align:right;" > ' . $_POST['df_hipoteca'] . '&nbsp;</td>
                 </tr> 
                  <tr class="valores">
                     <td  style="width:25%;background:rgb(200,200,200);height:20px;border-left:none;border-right:none" >4. Veh&iacute;culos</td>
-                    <td  style="width:25%;text-align:center;border-left:none;border-right:none" >' . $_POST['df_vehivulo'] . '</td>
+                    <td  style="width:25%;text-align:center;border-left:none;border-right:none;text-align:right;" >' . $_POST['df_vehivulo'] . '&nbsp;</td>
                     <td  style="width:25%;background:rgb(200,200,200);border-left:none;border-right:none" ><b>10. Total Pasivo</b><br>(7+8+9)</td>
-                    <td  style="width:25%;text-align:center;border-right:none;" > ' . $_POST['df_tpasivo'] . ' </td>
+                    <td  style="width:25%;text-align:center;border-right:none;;text-align:right;" > ' . $_POST['df_tpasivo'] . '&nbsp;</td>
                 </tr> 
                  <tr class="valores">
                     <td  style="width:25%;background:rgb(200,200,200);height:20px;border-left:none;border-right:none" >5. Inmuebles</td>
-                    <td  style="width:25%;text-align:center;border-left:none;border-right:none" >' . $_POST['df_inmuebles'] . '</td>
+                    <td  style="width:25%;text-align:center;border-left:none;border-right:none;text-align:right;" >' . $_POST['df_inmuebles'] . '&nbsp;</td>
                     <td  style="width:25%;background:rgb(200,200,200);border-left:none;border-right:none" >11. Patrimonio (6-10)</td>
-                    <td  style="width:25%;text-align:center;border-right:none;" > ' . $_POST['df_patrimonio'] . ' </td>
+                    <td  style="width:25%;text-align:center;border-right:none;;text-align:right;" > ' . $_POST['df_patrimonio'] . '&nbsp;</td>
                 </tr> 
                  <tr class="valores">
                     <td  style="width:25%;background:rgb(200,200,200);height:20px;border-left:none;border-right:none" ><b>6. Total Activos</b><br>(1+2+3+4+5)</td>
-                    <td  style="width:25%;text-align:center;border-left:none;border-right:none" >' . $_POST['df_tactivos'] . '</td>
+                    <td  style="width:25%;text-align:center;border-left:none;border-right:none;text-align:right;" >' . $_POST['df_tactivos'] . '&nbsp;</td>
                     <td  style="width:25%;background:rgb(200,200,200);border-left:none;border-right:none;" ><b>10. Total Pasivo y Patrimonio</b></td>
-                    <td  style="width:25%;text-align:center;border-right:none;" >' . $_POST['df_total'] . '  </td>
+                    <td  style="width:25%;text-align:center;border-right:none;;text-align:right;" >' . $_POST['df_total'] . '&nbsp;</td>
                 </tr> 
 
             </table>
@@ -810,7 +1062,7 @@ try {
 
 
 </td>
-        <td  style="width:33.33%;border:none;vertical-align: top;padding-right:10px;">
+      <td  style="width:33.33%;border:none;vertical-align: top;padding-right:10px;">
         <table style="border-collapse: collapse;border:none;font-size:11px;" >
                 <tr>
                     <td class="titulo2">
@@ -916,17 +1168,18 @@ try {
                        REFERENCIAS DE TARJETAS DE CREDITO
                     </td>               
                 </tr>
+                 <tr>
+                    <td class="etiqueta" style="width:100%;borde: none;height:2px;"  colspan="3">  </td>
+                </tr>   
             </table>';
 
     for ($i = 0; $i <= 3; $i++) {
 
         $conte .= '  <table style="border-collapse: collapse;border:none;font-size:11px;" >
+                    
                 <tr>
-                    <td class="etiqueta" style="width:100%;borde: none;height:2px;"  colspan="3">  </td>
-                </tr>        
-                <tr>
-                    <td class="etiqueta" style="width:30%;border-right: 1px solid rgb(129,129,129);" > Banco </td>
-                     <td class="etiqueta" style=width:62%;border-right: 1px solid rgb(129,129,129);" > Tarjeta N&ordm; </td>
+                    <td class="etiqueta" style="width:42%;border-right: 1px solid rgb(129,129,129);" > Banco </td>
+                     <td class="etiqueta" style=width:50%;border-right: 1px solid rgb(129,129,129);" > Tarjeta N&ordm; </td>
                    <td class="etiqueta" style="width:8%;" >';
 
         if ($_POST['tjp_titularidad' . $i] == "T")
@@ -939,8 +1192,8 @@ try {
         $conte .= '   </td>
                 </tr>
                 <tr class="valores">
-                    <td  style="width:30%;border-left:none;" > ' . $_POST['tjp_banco' . $i] . '  </td>
-                    <td  style="width:62%;border-left:none;" > ' . $_POST['tjp_cuenta' . $i] . '  </td>
+                    <td  style="width:42%;border-left:none;" > ' . $_POST['tjp_banco' . $i] . '  </td>
+                    <td  style="width:50%;border-left:none;" > ' . $_POST['tjp_cuenta' . $i] . '  </td>
                      <td  style="width:8%;border-right:none;" >  ';
         if ($_POST['tjp_titularidad' . $i] == "S")
             $conte .= '&nbsp;<input type="checkbox" checked="checked" >S';
@@ -955,7 +1208,7 @@ try {
             </table> 
              <table style="border-collapse: collapse;border:none;font-size:11px;" >
                 <tr>
-                    <td class="etiqueta" style="width:30%;border-right: 1px solid rgb(129,129,129);" >';
+                    <td class="etiqueta" style="width:50%;border-right: 1px solid rgb(129,129,129);" >';
 
         if ($_POST['tjp_tj' . $i] == "CLÁSICA")
             $conte .= '&nbsp;<input type="checkbox" checked="checked" >Cl&aacute;sica';
@@ -963,40 +1216,40 @@ try {
             $conte .= '&nbsp;<input type="checkbox"  >Cl&aacute;sica';
 
         if ($_POST['tjp_tj' . $i] == "DORADA")
-            $conte .= '&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" checked="checked" >Dorada<br>';
+            $conte .= '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" checked="checked" >Dorada';
         else
-            $conte .= '&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox"  >Dorada<br>';
+            $conte .= '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox"  >Dorada';
 
         if ($_POST['tjp_tj' . $i] == "PLATINUM")
             $conte .= '&nbsp;<input type="checkbox" checked="checked" >Platinum';
         else
             $conte .= '&nbsp;<input type="checkbox"  >Platinum';
 
-        if ($_POST['tjp_tj' . $i] == "BLACK")
-            $conte .= ' &nbsp;&nbsp;<input type="checkbox" checked="checked" >Black';
-        else
-            $conte .= ' &nbsp;&nbsp;<input type="checkbox"  >Black';
+
 
 
         $conte .= '          
                   
                     </td>
-                     <td class="etiqueta" style=width:35%;" > L&iacute;mite de Cr&eacute;dito </td>
-                     <td class="etiqueta" style="width:35%;" >Saldo Actual</td>
+                     <td class="etiqueta" style=width:25%;" > L&iacute;mite de Cr&eacute;dito </td>
+                     <td class="etiqueta" style="width:25%;" >Saldo Actual</td>
                 </tr>
                 <tr class="valores">
-                    <td  style="width:30%;border-left:none;" >';
+                    <td  style="width:50%;border-left:none;" >';
+        if ($_POST['tjp_tj' . $i] == "BLACK")
+            $conte .= ' <input type="checkbox" checked="checked" >Black';
+        else
+            $conte .= ' <input type="checkbox"  >Black';
+
 
         if ($_POST['tjp_tj' . $i] == "OTRO")
             $conte .= ' &nbsp;<input type="checkbox" checked="checked" >Otros';
         else
             $conte .= ' &nbsp;<input type="checkbox"  >Otros';
 
-
-
-        $conte .= '   </td>
-                    <td  style="width:35%;border-left:none;border-right:none;" > ' . $_POST['tjp_limite' . $i] . ' </td>
-                     <td  style="width:35%;border-left:none;border-right:none;" > ' . $_POST['tjp_saldo' . $i] . '             </td>
+        $conte .= ' </td>
+                    <td  style="width:25%;border-left:none;border-right:none;" > ' . $_POST['tjp_limite' . $i] . ' </td>
+                     <td  style="width:25%;border-left:none;border-right:none;" > ' . $_POST['tjp_saldo' . $i] . '             </td>
                 </tr>
               
             </table> ';
@@ -1044,7 +1297,7 @@ try {
                 </tr>
               
             </table> 
-             <table style="border-collapse: collapse;border:none;font-size:11px;" >
+ <table style="border-collapse: collapse;border:none;font-size:11px;" >
                 <tr>
                    <td class="etiqueta" style="width:100%;" >
                    En mi cuenta Banplus N&ordm;
@@ -1084,15 +1337,14 @@ try {
                 </tr>
               
             </table> 
-            
-            <table style="border-collapse: collapse;border:none;font-size:11px;" >
+ <table style="border-collapse: collapse;border:none;font-size:11px;" >
                 <tr>
-                   <td class="etiqueta" style="width:100%;" >
+                   <td class="etiqueta" style="width:100%;" colspan="2" >
                   ESTADOS DE CUENTA Y CORRESPONDENCIA
                 </td>
                 </tr>
                 <tr class="valores">
-                      <td  style="width:100%;border-left:none;border-right:none;" >';
+                      <td  style="width:55%;border-left:none;border-right:none;" >';
 
 
     if (!empty($_POST['corresp_correo']))
@@ -1103,7 +1355,15 @@ try {
     $conte .= '
                           Correo Electr&oacute;nico:' . $_POST['corresp_correo'] . '
                          
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+   
+                     </td>';
+
+
+
+
+    $conte .= '
+   <td  style="width:35%;border-left:none;border-right:none;" >';
+
     if ($_POST['env_tarjeta'] == "H")
         $conte .= '<input type="checkbox" checked="checked" >Habitaci&oacute;n ';
     else
@@ -1113,18 +1373,15 @@ try {
         $conte .= '<input type="checkbox" checked="checked" >Oficina';
     else
         $conte .= '<input type="checkbox" >Oficina';
-
-
-
     $conte .= '
-                     </td>
+    </td>
+
                 </tr>
               <tr>
-                    <td class="etiqueta" style="width:100%;borde: none;height:2px;"  >  </td>
+                    <td class="etiqueta" style="width:100%;borde: none;height:2px;"  colspan="2">  </td>
                 </tr> 
             </table> 
-             
-            <table style="border-collapse: collapse;border:none;font-size:11px;" >
+   <table style="border-collapse: collapse;border:none;font-size:11px;" >
                 <tr>
                     <td class="titulo2">
                        SOLICITUD DE TARJETAS SUPLEMENTARIAS
@@ -1163,8 +1420,8 @@ try {
                 <tr>
                     <td class="etiqueta" style="width:50%;border-right: 1px solid rgb(129,129,129);"> Fecha de Nacimiento:</td>
                     <td class="etiqueta" style="width:50%;"> C&eacute;dula de Identidad:';
-    
-     if ($_POST['ts_tp_documento0'] == "C")
+
+    if ($_POST['ts_tp_documento0'] == "C")
         $conte .= '&nbsp;&nbsp;V<input type="checkbox" checked="checked" >';
     else
         $conte .= '&nbsp;&nbsp;V<input type="checkbox"  >';
@@ -1184,7 +1441,7 @@ try {
                     <td  style="width:50%;border-right:none;">       ' . $_POST['ts_n_documento0'] . '  </td>
                 </tr>
             </table>
-            <table style="border-collapse: collapse;border:none;font-size:11px;" >
+              <table style="border-collapse: collapse;border:none;font-size:11px;" >
                 <tr>
                     <td class="etiqueta" style="width:50%;border-right: 1px solid rgb(129,129,129);"> Parentesco:</td>
                     <td class="etiqueta" style="width:50%;"> Firma del Solicitante Suplementario</td>
@@ -1224,7 +1481,7 @@ try {
                 <tr>
                     <td class="etiqueta" style="width:50%;border-right: 1px solid rgb(129,129,129);"> Fecha de Nacimiento:</td>
                     <td class="etiqueta" style="width:50%;"> C&eacute;dula de Identidad:';
-                      if ($_POST['ts_tp_documento1'] == "C")
+    if ($_POST['ts_tp_documento1'] == "C")
         $conte .= '&nbsp;&nbsp;V<input type="checkbox" checked="checked" >';
     else
         $conte .= '&nbsp;&nbsp;V<input type="checkbox"  >';
@@ -1258,6 +1515,8 @@ try {
             </table>
             
         </td>
+    
+   
     </tr>
     
 
@@ -1276,7 +1535,7 @@ try {
 
     $html2pdf->writeHTML($conte);
     $html2pdf->Output(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'] . '/' . $_POST['tp_documento'] . $_POST['n_documento'] . '_SOLI_TARJETA.pdf', 'F');
-//  $html2pdf->Output('_APERTURA.pdf');
+//    $html2pdf->Output('_APERTURA.pdf');
 
     exit();
 } catch (HTML2PDF_exception $e) {

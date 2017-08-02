@@ -425,6 +425,8 @@
 </field>
 <field id="horario_taq_auto"><phrase id="fldcaption" value="Horario de Taquilla"/>
 </field>
+<field id="citas_diarias"><phrase id="fldcaption" value="Citas Diarias"/>
+</field>
 <field id="coordenadas"><phrase id="fldcaption" value="Coordenadas Geogr&amp;aacute;ficas"/>
 </field>
 <field id="estatus"><phrase id="fldcaption" value="Estatus"/>
@@ -544,7 +546,7 @@
 </field>
 <field id="titulo"><phrase id="fldcaption" value="T&amp;iacute;tulo"/>
 </field>
-<field id="titulomes"><phrase id="fldcaption" value="Título"/>
+<field id="titulomes"><phrase id="fldcaption" value="T&amp;iacute;tulo"/>
 </field>
 <field id="sumario"><phrase id="fldcaption" value="Sumario"/>
 </field>
@@ -1161,7 +1163,7 @@
 <table id="z_cod_telefono"><phrase id="tblcaption" value=" cod telefono"/>
 <field id="id_cod_telefono"><phrase id="fldcaption" value="ID"/>
 </field>
-<field id="codigo"><phrase id="fldcaption" value="Código"/>
+<field id="codigo"><phrase id="fldcaption" value="C&amp;oacute;digo"/>
 </field>
 <field id="cod_cel"><phrase id="fldcaption" value="Celular"/>
 <phrase id="fldtagcaption1" value="Si"/>
@@ -1171,16 +1173,16 @@
 <phrase id="fldtagcaption1" value="Si"/>
 <phrase id="fldtagcaption2" value="No"/>
 </field>
-<field id="descripcion"><phrase id="fldcaption" value="Descripción"/>
+<field id="descripcion"><phrase id="fldcaption" value="Descripci&amp;oacute;n"/>
 </field>
 </table>
 
 <table id="z_codigo_postal"><phrase id="tblcaption" value=" codigo postal"/>
 <field id="id_codigo_postal"><phrase id="fldcaption" value="ID"/>
 </field>
-<field id="codigo"><phrase id="fldcaption" value="Código"/>
+<field id="codigo"><phrase id="fldcaption" value="C&amp;oacute;digo"/>
 </field>
-<field id="descripcion"><phrase id="fldcaption" value="Descripción"/>
+<field id="descripcion"><phrase id="fldcaption" value="Descripci&amp;oacute;n"/>
 </field>
 <field id="visibilidad"><phrase id="fldcaption" value="Visibilidad"/>
 <phrase id="fldtagcaption1" value="Si"/>
@@ -1191,7 +1193,7 @@
 <table id="z_estados"><phrase id="tblcaption" value=" estados"/>
 <field id="nombre"><phrase id="fldcaption" value="Estado"/>
 </field>
-<field id="lf_estado_pais"><phrase id="fldcaption" value="País"/>
+<field id="lf_estado_pais"><phrase id="fldcaption" value="Pa&amp;iacute;s"/>
 </field>
 <field id="visibilidad"><phrase id="fldcaption" value="Visibilidad"/>
 <phrase id="fldtagcaption1" value="Si"/>
@@ -1217,7 +1219,7 @@
 <table id="z_paises"><phrase id="tblcaption" value=" paises"/>
 <field id="lp_pais_id"><phrase id="fldcaption" value="ID"/>
 </field>
-<field id="nombre"><phrase id="fldcaption" value="País"/>
+<field id="nombre"><phrase id="fldcaption" value="Pa&amp;iacute;s"/>
 </field>
 <field id="nacionalidad"><phrase id="fldcaption" value="Nacionalidad"/>
 </field>
@@ -1264,6 +1266,8 @@
 </field>
 <field id="horario_taq_auto"><phrase id="fldcaption" value="horario taq auto"/>
 </field>
+<field id="citas_diarias"><phrase id="fldcaption" value="Citas Diarias"/>
+</field>
 <field id="coordenadas"><phrase id="fldcaption" value="coordenadas"/>
 </field>
 <field id="estatus"><phrase id="fldcaption" value="estatus"/>
@@ -1300,7 +1304,7 @@
 <table id="profesiones"><phrase id="tblcaption" value="profesiones"/>
 <field id="id_profesion"><phrase id="fldcaption" value="ID"/>
 </field>
-<field id="descripcion"><phrase id="fldcaption" value="Profesión"/>
+<field id="descripcion"><phrase id="fldcaption" value="Profesi&amp;oacute;n"/>
 </field>
 </table>
 

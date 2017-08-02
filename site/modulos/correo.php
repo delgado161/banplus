@@ -5,6 +5,83 @@ Author     : Roberto Delgado
 <?php
 include_once "../includes/i_funciones.php";
 
+if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "CREDITO") {
+
+
+    $subject = 'SOLICITUD DE TARJETA DE CREDITO';
+    $mail_to = $_POST['email'];
+    $message = '
+<html>
+<head>
+  <title>SOLICITUD DE TARJETA DE CREDITO</title>
+</head>
+<body>
+<p style="text-align:justify">
+DEFINIR CUERPO DE CORREO
+</p>
+  
+</body>
+</html>
+';
+
+    /* Email Detials */
+    $Coreo = execute_sql("get_parametro", array(64));
+    $from_mail = "< " . $Coreo[1]["valor"] . " >";
+
+    $Coreo_nombre = execute_sql("get_parametro", array(65));
+    $from_name = $Coreo_nombre[1]["valor"];
+
+    $path = dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'] . "/";
+    $filename = $_POST['tp_documento'] . $_POST['n_documento'] . '_SOLI_TARJETA.pdf';
+
+    enviar_email_2($from_name, $from_mail, $message, $path, $filename, $subject, $mail_to);
+
+//    $myfile = fopen(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'] . '.zip', "w") or die("Unable to open file!");
+//    fclose($myfile);
+
+
+    $zip = new ZipArchive;
+    if ($zip->open(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'] . '.zip', ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
+
+
+        if ($handle = opendir(dirname(__FILE__) . '\tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'] . "/")) {
+// Add all files inside the directory
+            while (false !== ($entry = readdir($handle))) {
+                if ($entry != "." && $entry != ".." && !is_dir(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'] . "/" . $entry)) {
+                    $zip->addFile(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'] . "/" . $entry, $_POST['tp_documento'] . $_POST['n_documento'] . "/" . $entry);
+                }
+            }
+            closedir($handle);
+        }
+        $zip->close();
+    }
+
+
+    $message = '
+<html>
+<head>
+  <title>Solicitud de tarjeta de credito</title>
+</head>
+<body>
+<p style="text-align:justify">
+Usted tiene una nueva solicitud de tarjeta de credito.<br><br>
+<b>Nombre y Apellido:</b> ' . $_POST['p_nombre'] . ' ' . $_POST['s_nombre'] . ' ' . $_POST['p_apellido'] . ' ' . $_POST['s_apellido'] . '. <br><br>
+<b>Cedula: :</b> ' . $_POST['tp_documento'] . $_POST['n_documento'] . '. <br><br>
+
+<br></br>
+</p>
+  
+</body>
+</html>
+';
+
+
+    $subject = 'Solicitud de tarjeta de credito desde la página web Persona Natural';
+    $filename = $_POST['tp_documento'] . $_POST['n_documento'] . '.zip';
+    $path = dirname(__FILE__) . '/tmp_apertura/';
+    enviar_email_3($from_name, $from_mail, $message, $path, $filename, $subject, $mail_to);
+}
+
 
 if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "NATURAL") {
 

@@ -227,7 +227,7 @@
                             </div>
                             <div class="div_form">
                                 <label for="rele_rif<?php echo $i; ?>">N&ordm; de r.i.f:</label><br>
-                                <b>J -</b> <input style="width: 100px;" class="valida_prod" onkeypress="return solo_numeros(event)" type="text" name="rele_rif<?php echo $i; ?>" id="rele_rif<?php echo $i; ?>" value="">
+                                <b>J -</b> <input style="width: 100px;" class="valida_prod rele_rif" onkeypress="return solo_numeros(event)" type="text" name="rele_rif<?php echo $i; ?>" id="rele_rif<?php echo $i; ?>" value="">
                             </div>
                             <div class="div_form">
                                 <label for="rele_telefono<?php echo $i; ?>">Tel&eacute;fono:</label><br>
@@ -709,7 +709,7 @@
                 <h3>Agencia<span style="float:right;display: none;" class="_alert_span"><img src="img/Error-128.png" alt="" height="25" width="25"style="margin-top: -5px;"></span></h3>
                 <div>
                     <div class="div_form" >
-                        <label for="fn_agencia">Aegencia:</label><br>
+                        <label for="fn_agencia">Agencia:</label><br>
                         <select class="requerido_" name="fn_agencia" id="fn_agencia" style="width:400px;">
                             <option value="">Seleccione...
                                 <?php echo $_opc_agencia ?>
@@ -730,6 +730,24 @@
                 </div>
 
 
+            </div>
+            
+             <div class="sep_2"></div>
+
+            <div class="div_form" style="text-align: right;float: right;">
+                <?php
+                echo '<img src="' . $_SESSION['captcha']['image_src'] . '" alt="CAPTCHA code">';
+                ?>
+                <br>
+                <input id="capt_" name="capt_" type="text" class="" style="width: 150px;" ><br>
+                <br>
+                <button  style="    background-color: #2D4B71;padding: 5px;
+                         /*font: normal 11px Arial, Georgia, Verdana, Geneva, Helvetica, sans-serif;*/
+                         color: #FFF;
+                         background-color: #2D4B71;
+                         border: 0;
+                         cursor: pointer;
+                         " type="submit" value="Submit">Enviar</button>
             </div>
 
 

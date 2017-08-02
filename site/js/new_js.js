@@ -32,26 +32,19 @@ $(document).ready(function () {
     $.datepicker.setDefaults($.datepicker.regional['es']);
 
     $('#form_ap_cuenta').submit(function () {
-
-
-
+        $('._alert_span').hide();
         var validado = true;
 
-
-
         if ($('#p_formulario').val() == 'NATURAL') {
-
             if (($('.requerido_2').val().length <= 0 || $('.requerido_2').val() == "" || parseFloat($('.requerido_2').val()) <= 0) && ($('.requerido_21').val().length <= 0 || $('.requerido_21').val() == "")) {
                 $('.requerido_2,.requerido_21').css('background', 'rgba(132, 189, 0, 0.15)');
             } else {
                 if (($('.requerido_2').val().length <= 0 || $('.requerido_2').val() == "" || parseFloat($('.requerido_2').val()) <= 0)) {
                     $('.requerido_2').css('background', 'rgba(255,0,0,0.30)');
                     $(this).parent('div').parent('div').prev().find('._alert_span').show();
-
                     validado = false;
                 } else {
                     $('.requerido_2').css('background', 'rgba(132, 189, 0, 0.15)');
-                    $(this).parent('div').parent('div').prev().find('._alert_span').hide();
                 }
 
                 if (($('.requerido_21').val().length <= 0 || $('.requerido_21').val() == "")) {
@@ -61,23 +54,15 @@ $(document).ready(function () {
                     validado = false;
                 } else {
                     $('.requerido_21').css('background', 'rgba(132, 189, 0, 0.15)');
-                    $(this).parent('div').parent('div').prev().find('._alert_span').hide();
                 }
             }
-
-
-
-
         }
-
-
 
 
         $('.prod_banplus,.cc_banplus,.ref_ban_comer').each(function () {
             var validado2 = true;
             var campos = $(this).find('.valida_prod').length;
             var contador = 1;
-
 
             $(this).find('.valida_prod').each(function () {
                 if ($(this).val().length <= 0 || $(this).val() == "" || parseFloat($(this).val()) <= 0) {
@@ -91,18 +76,12 @@ $(document).ready(function () {
                 }
             });
 
-
             if (!validado2) {
                 $(this).find('.valida_prod').addClass('requerido_');
-//                $(this).parent('div').parent('div').prev().find('._alert_span').show();
-//                $(this).parent('div').parent('div').prev().css("cssText", "background: rgba(255,0,0,0.7) !important;");
-
-//                validado = false;
             }
             else {
                 $(this).find('.valida_prod').removeClass('requerido_');
                 $(this).find('.valida_prod').css('background', 'rgba(132, 189, 0, 0.15)');
-//                $(this).parent('div').parent('div').prev().find('._alert_span').hide();
             }
 
 
@@ -115,7 +94,6 @@ $(document).ready(function () {
                 else {
                     $('.cc_banplus2').find('input').each(function () {
                         $(this).css('background', 'rgba(132, 189, 0, 0.15)');
-                        $(this).parent('div').parent('div').prev().find('._alert_span').hide();
                         $(this).removeClass('requerido_');
                     });
                 }
@@ -128,21 +106,13 @@ $(document).ready(function () {
                 }
                 else {
                     $('.ref_adjunto').css('background', 'rgba(132, 189, 0, 0.15)');
-                    $(this).parent('div').parent('div').prev().find('._alert_span').hide();
                     $('.ref_adjunto').removeClass('requerido_');
-
                 }
-
             }
-
         });
 
 
-
-
-
         $('.custom-file-input').each(function () {
-
             var ext = $(this).val().split('.').pop().toLowerCase();
 
             if ($(this).val().length <= 0 || $(this).val() == "" || parseFloat($(this).val()) <= 0) {
@@ -159,7 +129,7 @@ $(document).ready(function () {
                         $(this).css('background', 'rgba(255,0,0,0.30)');
                         $(this).parent('div').parent('div').prev().find('._alert_span').show();
                         validado = false;
-                        $(this).next('span').html('EL ARCHIVO DEBE PESAR MENOR A 2MB');
+                        $(this).next('span').html('EL ARCHIVO DEBE TENER UN PESO MENOR A 2MB');
                     } else {
                         $(this).next('span').html('');
                         $(this).css('background', 'rgba(132, 189, 0, 0.15)');
@@ -171,7 +141,6 @@ $(document).ready(function () {
         });
 
 
-
         $('.requerido_').each(function () {
             if ($(this).val().length <= 0 || $(this).val() == "") {
                 $(this).css('background', 'rgba(255,0,0,0.30)');
@@ -180,27 +149,18 @@ $(document).ready(function () {
             } else {
 
                 if ($(this).hasClass('telefono_')) {
-
                     if (!regex2.test($(this).val())) {
                         $(this).css('background', 'rgba(255,0,0,0.30)');
                         $(this).parent('div').parent('div').prev().find('._alert_span').show();
                         validado = false;
                     } else {
-                        $(this).parent('div').parent('div').prev().find('._alert_span').hide();
                         $(this).css('background', 'rgba(132, 189, 0, 0.15)');
                     }
 
-
                 } else {
-                    $(this).parent('div').parent('div').prev().find('._alert_span').hide();
                     $(this).css('background', 'rgba(132, 189, 0, 0.15)');
                 }
-
-
-
             }
-
-
         });
 
 
@@ -209,23 +169,23 @@ $(document).ready(function () {
                 $('#ano_vivienda').css('background', 'rgba(255,0,0,0.30)');
                 $('#ano_vivienda').parent('div').parent('div').prev().find('._alert_span').show();
                 validado = false;
-            }else{
-                  $('#ano_vivienda').css('background', 'rgba(132, 189, 0, 0.15)');
+            } else {
+                $('#ano_vivienda').css('background', 'rgba(132, 189, 0, 0.15)');
             }
 
             if (($('#tp_inmueble').val() == "ALQUILADA") && ($('#canon').val() <= 0 || $('#canon').val() == "")) {
                 $('#canon').css('background', 'rgba(255,0,0,0.30)');
                 $('#canon').parent('div').parent('div').prev().find('._alert_span').show();
                 validado = false;
-            }else{
-                 $('#canon').css('background', 'rgba(132, 189, 0, 0.15)');
+            } else {
+                $('#canon').css('background', 'rgba(132, 189, 0, 0.15)');
             }
 
             if (($('#tp_inmueble').val() == "ALQUILADA") && ($('#canon_nombre').val() == "")) {
                 $('#canon_nombre').css('background', 'rgba(255,0,0,0.30)');
                 $('#canon_nombre').parent('div').parent('div').prev().find('._alert_span').show();
                 validado = false;
-            }else{
+            } else {
                 $('#canon_nombre').css('background', 'rgba(132, 189, 0, 0.15)');
             }
 
@@ -233,7 +193,7 @@ $(document).ready(function () {
                 $('#dctp_telefono').css('background', 'rgba(255,0,0,0.30)');
                 $('#dctp_telefono').parent('div').parent('div').prev().find('._alert_span').show();
                 validado = false;
-            }else{
+            } else {
                 $('#dctp_telefono').css('background', 'rgba(132, 189, 0, 0.15)');
             }
 
@@ -241,7 +201,7 @@ $(document).ready(function () {
                 $('#cd_telefono').css('background', 'rgba(255,0,0,0.30)');
                 $('#cd_telefono').parent('div').parent('div').prev().find('._alert_span').show();
                 validado = false;
-             }else{
+            } else {
                 $('#cd_telefono').css('background', 'rgba(132, 189, 0, 0.15)');
             }
 
@@ -249,32 +209,26 @@ $(document).ready(function () {
                 $('#concepto_empresa').css('background', 'rgba(255,0,0,0.30)');
                 $('#concepto_empresa').parent('div').parent('div').prev().find('._alert_span').show();
                 validado = false;
-            }else{
-                 $('#concepto_empresa').css('background', 'rgba(132, 189, 0, 0.15)');
+            } else {
+                $('#concepto_empresa').css('background', 'rgba(132, 189, 0, 0.15)');
             }
 
             if ($('#concepto_empresa').val() != "" && $('#otros_ingresos').val() == "") {
                 $('#otros_ingresos').css('background', 'rgba(255,0,0,0.30)');
                 $('#otros_ingresos').parent('div').parent('div').prev().find('._alert_span').show();
                 validado = false;
-            }else{
+            } else {
                 $('#otros_ingresos').css('background', 'rgba(132, 189, 0, 0.15)');
             }
-            
-            if (!regex.test($('#ccemail').val())) {
-            $('#ccemail').css('background', 'rgba(255,0,0,0.30)');
-            $('#ccemail').parent('div').parent('div').prev().find('._alert_span').show();
-            validado = false;
-        }else{
-             $('#ccemail').css('background', 'rgba(132, 189, 0, 0.15)');
+
+            if ( $('#ccemail').val()!="" && !regex.test($('#ccemail').val())) {
+                $('#ccemail').css('background', 'rgba(255,0,0,0.30)');
+                $('#ccemail').parent('div').parent('div').prev().find('._alert_span').show();
+                validado = false;
+            } else {
+                $('#ccemail').css('background', 'rgba(132, 189, 0, 0.15)');
+            }
         }
-            
-
-        }
-
-
-
-
 
         if ($('#edad').val() < 18) {
             $('#edad').css('background', 'rgba(255,0,0,0.30)');
@@ -303,8 +257,6 @@ $(document).ready(function () {
             validado = false;
         }
 
-
-
         if ($('#p_formulario').val() == 'JURIDICO') {
             if (parseFloat($('#act_total_sus').val()) <= 0) {
                 $('#act_total_sus').css('background', 'rgba(255,0,0,0.30)');
@@ -323,9 +275,7 @@ $(document).ready(function () {
                 $('#act_total_pagado').parent('div').parent('div').prev().find('._alert_span').show();
                 validado = false;
             }
-
         }
-
 
         $.ajax({
             url: 'includes/captcha-master/valida_capt.php',
@@ -345,9 +295,6 @@ $(document).ready(function () {
             },
             type: 'POST'
         });
-
-
-
 
         if (!validado) {
             alert('Por favor complete los campos se\u00f1alados');
@@ -370,13 +317,6 @@ $(document).ready(function () {
             });
 
         }
-
-
-
-
-
-
-
 
         return validado;
 
@@ -446,7 +386,7 @@ $(document).ready(function () {
 
 
 //    $('#canon,#sueldo,#comision,#libre_ejercicio,#otros_ingresos,.moneda_,.moneda_2,.jmoneda,.jmoneda2').val(0, 00);
-    $('#ccsueldo,#sueldo2,#df_tactivos,#df_patrimonio,#df_tpasivo,#canon,#sueldo,#comision,#libre_ejercicio,#otros_ingresos,.moneda_,.moneda_2,.jmoneda,.jmoneda2,.moneda_4').mask("###0,00", {reverse: true});
+    $('.tjp_limite,#df_prestamos,#ccsueldo,#sueldo2,#df_tactivos,#df_patrimonio,#df_total,#df_tpasivo,#canon,#sueldo,#comision,#libre_ejercicio,#otros_ingresos,.moneda_,.moneda_2,.jmoneda,.jmoneda2,.moneda_4').mask("###0,00", {reverse: true});
 
     $('#canon,#sueldo,#comision,#libre_ejercicio,#otros_ingresos').keyup(function () {
 
@@ -459,7 +399,7 @@ $(document).ready(function () {
     });
 
 
-    $('#rif').mask('00000000-0');
+    $('#rif,.rele_rif').mask('00000000-0');
     $('.telefono_').mask('000-0000');
     $('.cta_banco').mask('00000000000000000000');
 
@@ -575,6 +515,10 @@ $(document).ready(function () {
         suma3 = parseFloat($('#df_tactivos').val()) - parseFloat($('#df_tpasivo').val());
         $('#df_patrimonio').val(parseFloat(suma3.toFixed(2)));
         $('#df_patrimonio').val($('#df_patrimonio').val().replace(".", ","));
+        
+         suma4 = parseFloat($('#df_tactivos').val()) + parseFloat($('#df_patrimonio').val());
+        $('#df_total').val(parseFloat(suma4.toFixed(2)));
+        $('#df_total').val($('#df_total').val().replace(".", ","));
 
     });
 
@@ -595,6 +539,10 @@ $(document).ready(function () {
         suma3 = parseFloat($('#df_tactivos').val()) - parseFloat($('#df_tpasivo').val());
         $('#df_patrimonio').val(parseFloat(suma3.toFixed(2)));
         $('#df_patrimonio').val($('#df_patrimonio').val().replace(".", ","));
+        
+         suma4 = parseFloat($('#df_tactivos').val()) + parseFloat($('#df_patrimonio').val());
+        $('#df_total').val(parseFloat(suma4.toFixed(2)));
+        $('#df_total').val($('#df_total').val().replace(".", ","));
 
     });
 
