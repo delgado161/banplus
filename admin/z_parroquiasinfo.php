@@ -1,20 +1,19 @@
 <?php
 
 // Global variable for table object
-$z_municipios = NULL;
+$z_parroquias = NULL;
 
 //
-// Table class for _municipios
+// Table class for _parroquias
 //
-class cz_municipios {
-	var $TableVar = 'z_municipios';
-	var $TableName = '_municipios';
+class cz_parroquias {
+	var $TableVar = 'z_parroquias';
+	var $TableName = '_parroquias';
 	var $TableType = 'TABLE';
-	var $lp_municipio_id;
+	var $lp_parroquia_id;
 	var $nombre;
+	var $lf_parroquia_municipio;
 	var $visibilidad;
-	var $lf_estado;
-	var $pk_municipio;
 	var $fields = array();
 	var $UseTokenInUrl = EW_USE_TOKEN_IN_URL;
 	var $Export; // Export
@@ -165,32 +164,26 @@ class cz_municipios {
 	//
 	// Table class constructor
 	//
-	function cz_municipios() {
+	function cz_parroquias() {
 		global $Language;
 		$this->AllowAddDeleteRow = ew_AllowAddDeleteRow(); // Allow add/delete row
 
-		// lp_municipio_id
-		$this->lp_municipio_id = new cField('z_municipios', '_municipios', 'x_lp_municipio_id', 'lp_municipio_id', '`lp_municipio_id`', 200, -1, FALSE, '`lp_municipio_id`', FALSE, FALSE, 'FORMATTED TEXT');
-		$this->fields['lp_municipio_id'] =& $this->lp_municipio_id;
+		// lp_parroquia_id
+		$this->lp_parroquia_id = new cField('z_parroquias', '_parroquias', 'x_lp_parroquia_id', 'lp_parroquia_id', '`lp_parroquia_id`', 200, -1, FALSE, '`lp_parroquia_id`', FALSE, FALSE, 'FORMATTED TEXT');
+		$this->fields['lp_parroquia_id'] =& $this->lp_parroquia_id;
 
 		// nombre
-		$this->nombre = new cField('z_municipios', '_municipios', 'x_nombre', 'nombre', '`nombre`', 200, -1, FALSE, '`nombre`', FALSE, FALSE, 'FORMATTED TEXT');
+		$this->nombre = new cField('z_parroquias', '_parroquias', 'x_nombre', 'nombre', '`nombre`', 200, -1, FALSE, '`nombre`', FALSE, FALSE, 'FORMATTED TEXT');
 		$this->fields['nombre'] =& $this->nombre;
 
+		// lf_parroquia_municipio
+		$this->lf_parroquia_municipio = new cField('z_parroquias', '_parroquias', 'x_lf_parroquia_municipio', 'lf_parroquia_municipio', '`lf_parroquia_municipio`', 200, -1, FALSE, '`lf_parroquia_municipio`', FALSE, FALSE, 'FORMATTED TEXT');
+		$this->fields['lf_parroquia_municipio'] =& $this->lf_parroquia_municipio;
+
 		// visibilidad
-		$this->visibilidad = new cField('z_municipios', '_municipios', 'x_visibilidad', 'visibilidad', '`visibilidad`', 16, -1, FALSE, '`visibilidad`', FALSE, FALSE, 'FORMATTED TEXT');
+		$this->visibilidad = new cField('z_parroquias', '_parroquias', 'x_visibilidad', 'visibilidad', '`visibilidad`', 16, -1, FALSE, '`visibilidad`', FALSE, FALSE, 'FORMATTED TEXT');
 		$this->visibilidad->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
 		$this->fields['visibilidad'] =& $this->visibilidad;
-
-		// lf_estado
-		$this->lf_estado = new cField('z_municipios', '_municipios', 'x_lf_estado', 'lf_estado', '`lf_estado`', 3, -1, FALSE, '`lf_estado`', FALSE, FALSE, 'FORMATTED TEXT');
-		$this->lf_estado->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
-		$this->fields['lf_estado'] =& $this->lf_estado;
-
-		// pk_municipio
-		$this->pk_municipio = new cField('z_municipios', '_municipios', 'x_pk_municipio', 'pk_municipio', '`pk_municipio`', 3, -1, FALSE, '`pk_municipio`', FALSE, FALSE, 'FORMATTED TEXT');
-		$this->pk_municipio->FldDefaultErrMsg = $Language->Phrase("IncorrectInteger");
-		$this->fields['pk_municipio'] =& $this->pk_municipio;
 	}
 
 	// Get field values
@@ -245,7 +238,7 @@ class cz_municipios {
 
 	// Search highlight name
 	function HighlightName() {
-		return "z_municipios_Highlight";
+		return "z_parroquias_Highlight";
 	}
 
 	// Advanced search
@@ -332,7 +325,7 @@ class cz_municipios {
 
 	// Table level SQL
 	function SqlFrom() { // From
-		return "`_municipios`";
+		return "`_parroquias`";
 	}
 
 	function SqlSelect() { // Select
@@ -474,13 +467,13 @@ class cz_municipios {
 		}
 		if (substr($names, -1) == ",") $names = substr($names, 0, strlen($names)-1);
 		if (substr($values, -1) == ",") $values = substr($values, 0, strlen($values)-1);
-		return "INSERT INTO `_municipios` ($names) VALUES ($values)";
+		return "INSERT INTO `_parroquias` ($names) VALUES ($values)";
 	}
 
 	// UPDATE statement
 	function UpdateSQL(&$rs) {
 		global $conn;
-		$SQL = "UPDATE `_municipios` SET ";
+		$SQL = "UPDATE `_parroquias` SET ";
 		foreach ($rs as $name => $value) {
 			$SQL .= $this->fields[$name]->FldExpression . "=";
 			$SQL .= ew_QuotedValue($value, $this->fields[$name]->FldDataType) . ",";
@@ -492,8 +485,8 @@ class cz_municipios {
 
 	// DELETE statement
 	function DeleteSQL(&$rs) {
-		$SQL = "DELETE FROM `_municipios` WHERE ";
-		$SQL .= ew_QuotedName('lp_municipio_id') . '=' . ew_QuotedValue($rs['lp_municipio_id'], $this->lp_municipio_id->FldDataType) . ' AND ';
+		$SQL = "DELETE FROM `_parroquias` WHERE ";
+		$SQL .= ew_QuotedName('lp_parroquia_id') . '=' . ew_QuotedValue($rs['lp_parroquia_id'], $this->lp_parroquia_id->FldDataType) . ' AND ';
 		if (substr($SQL, -5) == " AND ") $SQL = substr($SQL, 0, strlen($SQL)-5);
 		if ($this->CurrentFilter <> "")	$SQL .= " AND " . $this->CurrentFilter;
 		return $SQL;
@@ -501,13 +494,13 @@ class cz_municipios {
 
 	// Key filter WHERE clause
 	function SqlKeyFilter() {
-		return "`lp_municipio_id` = '@lp_municipio_id@'";
+		return "`lp_parroquia_id` = '@lp_parroquia_id@'";
 	}
 
 	// Key filter
 	function KeyFilter() {
 		$sKeyFilter = $this->SqlKeyFilter();
-		$sKeyFilter = str_replace("@lp_municipio_id@", ew_AdjustSql($this->lp_municipio_id->CurrentValue), $sKeyFilter); // Replace key value
+		$sKeyFilter = str_replace("@lp_parroquia_id@", ew_AdjustSql($this->lp_parroquia_id->CurrentValue), $sKeyFilter); // Replace key value
 		return $sKeyFilter;
 	}
 
@@ -521,7 +514,7 @@ class cz_municipios {
 		if (@$_SESSION[$name] <> "") {
 			return $_SESSION[$name];
 		} else {
-			return "z_municipioslist.php";
+			return "z_parroquiaslist.php";
 		}
 	}
 
@@ -531,17 +524,17 @@ class cz_municipios {
 
 	// List URL
 	function ListUrl() {
-		return "z_municipioslist.php";
+		return "z_parroquiaslist.php";
 	}
 
 	// View URL
 	function ViewUrl() {
-		return $this->KeyUrl("z_municipiosview.php", $this->UrlParm());
+		return $this->KeyUrl("z_parroquiasview.php", $this->UrlParm());
 	}
 
 	// Add URL
 	function AddUrl() {
-		$AddUrl = "z_municipiosadd.php";
+		$AddUrl = "z_parroquiasadd.php";
 
 //		$sUrlParm = $this->UrlParm();
 //		if ($sUrlParm <> "")
@@ -552,7 +545,7 @@ class cz_municipios {
 
 	// Edit URL
 	function EditUrl($parm = "") {
-		return $this->KeyUrl("z_municipiosedit.php", $this->UrlParm($parm));
+		return $this->KeyUrl("z_parroquiasedit.php", $this->UrlParm($parm));
 	}
 
 	// Inline edit URL
@@ -562,7 +555,7 @@ class cz_municipios {
 
 	// Copy URL
 	function CopyUrl($parm = "") {
-		return $this->KeyUrl("z_municipiosadd.php", $this->UrlParm($parm));
+		return $this->KeyUrl("z_parroquiasadd.php", $this->UrlParm($parm));
 	}
 
 	// Inline copy URL
@@ -572,15 +565,15 @@ class cz_municipios {
 
 	// Delete URL
 	function DeleteUrl() {
-		return $this->KeyUrl("z_municipiosdelete.php", $this->UrlParm());
+		return $this->KeyUrl("z_parroquiasdelete.php", $this->UrlParm());
 	}
 
 	// Add key value to URL
 	function KeyUrl($url, $parm = "") {
 		$sUrl = $url . "?";
 		if ($parm <> "") $sUrl .= $parm . "&";
-		if (!is_null($this->lp_municipio_id->CurrentValue)) {
-			$sUrl .= "lp_municipio_id=" . urlencode($this->lp_municipio_id->CurrentValue);
+		if (!is_null($this->lp_parroquia_id->CurrentValue)) {
+			$sUrl .= "lp_parroquia_id=" . urlencode($this->lp_parroquia_id->CurrentValue);
 		} else {
 			return "javascript:alert(ewLanguage.Phrase('InvalidRecord'));";
 		}
@@ -602,7 +595,7 @@ class cz_municipios {
 
 	// Add URL parameter
 	function UrlParm($parm = "") {
-		$UrlParm = ($this->UseTokenInUrl) ? "t=z_municipios" : "";
+		$UrlParm = ($this->UseTokenInUrl) ? "t=z_parroquias" : "";
 		if ($parm <> "") {
 			if ($UrlParm <> "")
 				$UrlParm .= "&";
@@ -622,7 +615,7 @@ class cz_municipios {
 			$arKeys = ew_StripSlashes($_GET["key_m"]);
 			$cnt = count($arKeys);
 		} elseif (isset($_GET)) {
-			$arKeys[] = @$_GET["lp_municipio_id"]; // lp_municipio_id
+			$arKeys[] = @$_GET["lp_parroquia_id"]; // lp_parroquia_id
 
 			//return $arKeys; // do not return yet, so the values will also be checked by the following code
 		}
@@ -641,7 +634,7 @@ class cz_municipios {
 		$sKeyFilter = "";
 		foreach ($arKeys as $key) {
 			if ($sKeyFilter <> "") $sKeyFilter .= " OR ";
-			$this->lp_municipio_id->CurrentValue = $key;
+			$this->lp_parroquia_id->CurrentValue = $key;
 			$sKeyFilter .= "(" . $this->KeyFilter() . ")";
 		}
 		return $sKeyFilter;
@@ -660,11 +653,10 @@ class cz_municipios {
 
 	// Load row values from recordset
 	function LoadListRowValues(&$rs) {
-		$this->lp_municipio_id->setDbValue($rs->fields('lp_municipio_id'));
+		$this->lp_parroquia_id->setDbValue($rs->fields('lp_parroquia_id'));
 		$this->nombre->setDbValue($rs->fields('nombre'));
+		$this->lf_parroquia_municipio->setDbValue($rs->fields('lf_parroquia_municipio'));
 		$this->visibilidad->setDbValue($rs->fields('visibilidad'));
-		$this->lf_estado->setDbValue($rs->fields('lf_estado'));
-		$this->pk_municipio->setDbValue($rs->fields('pk_municipio'));
 	}
 
 	// Render list row values
@@ -675,19 +667,40 @@ class cz_municipios {
 		$this->Row_Rendering();
 
    // Common render codes
-		// lp_municipio_id
+		// lp_parroquia_id
 		// nombre
+		// lf_parroquia_municipio
 		// visibilidad
-		// lf_estado
-		// pk_municipio
-		// lp_municipio_id
+		// lp_parroquia_id
 
-		$this->lp_municipio_id->ViewValue = $this->lp_municipio_id->CurrentValue;
-		$this->lp_municipio_id->ViewCustomAttributes = "";
+		$this->lp_parroquia_id->ViewValue = $this->lp_parroquia_id->CurrentValue;
+		$this->lp_parroquia_id->ViewCustomAttributes = "";
 
 		// nombre
 		$this->nombre->ViewValue = $this->nombre->CurrentValue;
 		$this->nombre->ViewCustomAttributes = "";
+
+		// lf_parroquia_municipio
+		if (strval($this->lf_parroquia_municipio->CurrentValue) <> "") {
+			$sFilterWrk = "`lp_municipio_id` = '" . ew_AdjustSql($this->lf_parroquia_municipio->CurrentValue) . "'";
+		$sSqlWrk = "SELECT `nombre` FROM `_municipios`";
+		$sWhereWrk = "";
+		if ($sFilterWrk <> "") {
+			if ($sWhereWrk <> "") $sWhereWrk .= " AND ";
+			$sWhereWrk .= "(" . $sFilterWrk . ")";
+		}
+		if ($sWhereWrk <> "") $sSqlWrk .= " WHERE " . $sWhereWrk;
+			$rswrk = $conn->Execute($sSqlWrk);
+			if ($rswrk && !$rswrk->EOF) { // Lookup values found
+				$this->lf_parroquia_municipio->ViewValue = $rswrk->fields('nombre');
+				$rswrk->Close();
+			} else {
+				$this->lf_parroquia_municipio->ViewValue = $this->lf_parroquia_municipio->CurrentValue;
+			}
+		} else {
+			$this->lf_parroquia_municipio->ViewValue = NULL;
+		}
+		$this->lf_parroquia_municipio->ViewCustomAttributes = "";
 
 		// visibilidad
 		if (strval($this->visibilidad->CurrentValue) <> "") {
@@ -706,57 +719,25 @@ class cz_municipios {
 		}
 		$this->visibilidad->ViewCustomAttributes = "";
 
-		// lf_estado
-		$this->lf_estado->ViewValue = $this->lf_estado->CurrentValue;
-		if (strval($this->lf_estado->CurrentValue) <> "") {
-			$sFilterWrk = "`id2_estado` = " . ew_AdjustSql($this->lf_estado->CurrentValue) . "";
-		$sSqlWrk = "SELECT `nombre` FROM `_estados`";
-		$sWhereWrk = "";
-		if ($sFilterWrk <> "") {
-			if ($sWhereWrk <> "") $sWhereWrk .= " AND ";
-			$sWhereWrk .= "(" . $sFilterWrk . ")";
-		}
-		if ($sWhereWrk <> "") $sSqlWrk .= " WHERE " . $sWhereWrk;
-			$rswrk = $conn->Execute($sSqlWrk);
-			if ($rswrk && !$rswrk->EOF) { // Lookup values found
-				$this->lf_estado->ViewValue = $rswrk->fields('nombre');
-				$rswrk->Close();
-			} else {
-				$this->lf_estado->ViewValue = $this->lf_estado->CurrentValue;
-			}
-		} else {
-			$this->lf_estado->ViewValue = NULL;
-		}
-		$this->lf_estado->ViewCustomAttributes = "";
-
-		// pk_municipio
-		$this->pk_municipio->ViewValue = $this->pk_municipio->CurrentValue;
-		$this->pk_municipio->ViewCustomAttributes = "";
-
-		// lp_municipio_id
-		$this->lp_municipio_id->LinkCustomAttributes = "";
-		$this->lp_municipio_id->HrefValue = "";
-		$this->lp_municipio_id->TooltipValue = "";
+		// lp_parroquia_id
+		$this->lp_parroquia_id->LinkCustomAttributes = "";
+		$this->lp_parroquia_id->HrefValue = "";
+		$this->lp_parroquia_id->TooltipValue = "";
 
 		// nombre
 		$this->nombre->LinkCustomAttributes = "";
 		$this->nombre->HrefValue = "";
 		$this->nombre->TooltipValue = "";
 
+		// lf_parroquia_municipio
+		$this->lf_parroquia_municipio->LinkCustomAttributes = "";
+		$this->lf_parroquia_municipio->HrefValue = "";
+		$this->lf_parroquia_municipio->TooltipValue = "";
+
 		// visibilidad
 		$this->visibilidad->LinkCustomAttributes = "";
 		$this->visibilidad->HrefValue = "";
 		$this->visibilidad->TooltipValue = "";
-
-		// lf_estado
-		$this->lf_estado->LinkCustomAttributes = "";
-		$this->lf_estado->HrefValue = "";
-		$this->lf_estado->TooltipValue = "";
-
-		// pk_municipio
-		$this->pk_municipio->LinkCustomAttributes = "";
-		$this->pk_municipio->HrefValue = "";
-		$this->pk_municipio->TooltipValue = "";
 
 		// Call Row Rendered event
 		$this->Row_Rendered();
@@ -799,17 +780,15 @@ class cz_municipios {
 				else
 					$XmlDoc->AddRow();
 				if ($ExportPageType == "view") {
-					$XmlDoc->AddField('lp_municipio_id', $this->lp_municipio_id->ExportValue($this->Export, $this->ExportOriginalValue));
+					$XmlDoc->AddField('lp_parroquia_id', $this->lp_parroquia_id->ExportValue($this->Export, $this->ExportOriginalValue));
 					$XmlDoc->AddField('nombre', $this->nombre->ExportValue($this->Export, $this->ExportOriginalValue));
+					$XmlDoc->AddField('lf_parroquia_municipio', $this->lf_parroquia_municipio->ExportValue($this->Export, $this->ExportOriginalValue));
 					$XmlDoc->AddField('visibilidad', $this->visibilidad->ExportValue($this->Export, $this->ExportOriginalValue));
-					$XmlDoc->AddField('lf_estado', $this->lf_estado->ExportValue($this->Export, $this->ExportOriginalValue));
-					$XmlDoc->AddField('pk_municipio', $this->pk_municipio->ExportValue($this->Export, $this->ExportOriginalValue));
 				} else {
-					$XmlDoc->AddField('lp_municipio_id', $this->lp_municipio_id->ExportValue($this->Export, $this->ExportOriginalValue));
+					$XmlDoc->AddField('lp_parroquia_id', $this->lp_parroquia_id->ExportValue($this->Export, $this->ExportOriginalValue));
 					$XmlDoc->AddField('nombre', $this->nombre->ExportValue($this->Export, $this->ExportOriginalValue));
+					$XmlDoc->AddField('lf_parroquia_municipio', $this->lf_parroquia_municipio->ExportValue($this->Export, $this->ExportOriginalValue));
 					$XmlDoc->AddField('visibilidad', $this->visibilidad->ExportValue($this->Export, $this->ExportOriginalValue));
-					$XmlDoc->AddField('lf_estado', $this->lf_estado->ExportValue($this->Export, $this->ExportOriginalValue));
-					$XmlDoc->AddField('pk_municipio', $this->pk_municipio->ExportValue($this->Export, $this->ExportOriginalValue));
 				}
 			}
 			$Recordset->MoveNext();
@@ -826,17 +805,15 @@ class cz_municipios {
 		if ($Doc->Horizontal) { // Horizontal format, write header
 			$Doc->BeginExportRow();
 			if ($ExportPageType == "view") {
-				$Doc->ExportCaption($this->lp_municipio_id);
+				$Doc->ExportCaption($this->lp_parroquia_id);
 				$Doc->ExportCaption($this->nombre);
+				$Doc->ExportCaption($this->lf_parroquia_municipio);
 				$Doc->ExportCaption($this->visibilidad);
-				$Doc->ExportCaption($this->lf_estado);
-				$Doc->ExportCaption($this->pk_municipio);
 			} else {
-				$Doc->ExportCaption($this->lp_municipio_id);
+				$Doc->ExportCaption($this->lp_parroquia_id);
 				$Doc->ExportCaption($this->nombre);
+				$Doc->ExportCaption($this->lf_parroquia_municipio);
 				$Doc->ExportCaption($this->visibilidad);
-				$Doc->ExportCaption($this->lf_estado);
-				$Doc->ExportCaption($this->pk_municipio);
 			}
 			if ($this->Export == "pdf") {
 				$Doc->EndExportRow(TRUE);
@@ -870,17 +847,15 @@ class cz_municipios {
 				$this->RenderListRow();
 				$Doc->BeginExportRow($RowCnt); // Allow CSS styles if enabled
 				if ($ExportPageType == "view") {
-					$Doc->ExportField($this->lp_municipio_id);
+					$Doc->ExportField($this->lp_parroquia_id);
 					$Doc->ExportField($this->nombre);
+					$Doc->ExportField($this->lf_parroquia_municipio);
 					$Doc->ExportField($this->visibilidad);
-					$Doc->ExportField($this->lf_estado);
-					$Doc->ExportField($this->pk_municipio);
 				} else {
-					$Doc->ExportField($this->lp_municipio_id);
+					$Doc->ExportField($this->lp_parroquia_id);
 					$Doc->ExportField($this->nombre);
+					$Doc->ExportField($this->lf_parroquia_municipio);
 					$Doc->ExportField($this->visibilidad);
-					$Doc->ExportField($this->lf_estado);
-					$Doc->ExportField($this->pk_municipio);
 				}
 				$Doc->EndExportRow();
 			}

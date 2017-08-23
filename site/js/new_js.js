@@ -118,11 +118,11 @@ $(document).ready(function () {
             if ($(this).val().length <= 0 || $(this).val() == "" || parseFloat($(this).val()) <= 0) {
                 $(this).css('background', 'rgba(132, 189, 0, 0.15)');
             } else {
-                if ($.inArray(ext, ['jpg', 'jpeg', 'pdf', 'JPG', 'JPGE', 'PDF']) == -1) {
+                if ($.inArray(ext, [ 'pdf', 'PDF']) == -1) {
                     $(this).css('background', 'rgba(255,0,0,0.30)');
                     $(this).parent('div').parent('div').prev().find('._alert_span').show();
                     validado = false;
-                    $(this).next('span').html(' FORMATO INVALIDO SOLO SE PERMITEN PNG, JPG, JPEG, PDF');
+                    $(this).next('span').html(' FORMATO INVALIDO SOLO SE PERMITEN PDF');
                 } else {
                     var file_size = $(this)[0].files[0].size;
                     if (file_size > 2097152) {
@@ -133,7 +133,7 @@ $(document).ready(function () {
                     } else {
                         $(this).next('span').html('');
                         $(this).css('background', 'rgba(132, 189, 0, 0.15)');
-                        $(this).parent('div').parent('div').prev().find('._alert_span').show();
+                        $(this).parent('div').parent('div').prev().find('._alert_span').hide();
 
                     }
                 }
@@ -387,6 +387,15 @@ $(document).ready(function () {
 
 //    $('#canon,#sueldo,#comision,#libre_ejercicio,#otros_ingresos,.moneda_,.moneda_2,.jmoneda,.jmoneda2').val(0, 00);
     $('.tjp_limite,#df_prestamos,#ccsueldo,#sueldo2,#df_tactivos,#df_patrimonio,#df_total,#df_tpasivo,#canon,#sueldo,#comision,#libre_ejercicio,#otros_ingresos,.moneda_,.moneda_2,.jmoneda,.jmoneda2,.moneda_4').mask("###0,00", {reverse: true});
+
+    $('.tjp_limite').keyup(function () {
+        
+         suma = parseFloat($(this).val())
+        $(this).val(suma.toFixed(2));
+      
+        $(this).val( $(this).val().replace(".", ","));
+        
+    });
 
     $('#canon,#sueldo,#comision,#libre_ejercicio,#otros_ingresos').keyup(function () {
 

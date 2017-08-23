@@ -395,12 +395,12 @@
                     </div>
 
                     <div class="div_form">
-                        <label for="edctp_telefono2">Otro Tel&eacute;fono<span  style="color:red">*</span></label><br>
-                        <select class="requerido_" name="edctp_telefono2" id="edctp_telefono2" style="width:70px;">
+                        <label for="edctp_telefono2">Otro Tel&eacute;fono</label><br>
+                        <select class="" name="edctp_telefono2" id="edctp_telefono2" style="width:70px;">
                             <option value="" >
                                <?php echo (!empty($_DAT['edctp_telefono2']) ? str_replace('value="' . $_DAT['edctp_telefono2'] . '"', 'value="' . $_DAT['edctp_telefono2' . $i] . '" selected', $_opc_area) : $_opc_area); ?>
                         </select>
-                        <input value="<?= (!empty($_DAT['ecd_telefono2']) ? $_DAT['ecd_telefono2'] : '') ?>" class="telefono_ requerido_" onkeypress="return solo_numeros(event)" style="width:100px;" type="text" name="ecd_telefono2" id="ecd_telefono2" >
+                        <input value="<?= (!empty($_DAT['ecd_telefono2']) ? $_DAT['ecd_telefono2'] : '') ?>" class="telefono_ " onkeypress="return solo_numeros(event)" style="width:100px;" type="text" name="ecd_telefono2" id="ecd_telefono2" >
                     </div>
                 </div>
 
@@ -494,17 +494,17 @@
                         ?>
                         <div class="prod_banplus ref_ban_comer"> 
                             <div class="div_form">
-                                <label for="rc_empresa<?= $i; ?>">Empresa / Comercio<span  style="color:red">*</span></label><br>
+                                <label for="rc_empresa<?= $i; ?>">Empresa / Comercio</label><br>
                                 <input class="valida_prod" style="width: 202px;" onkeypress="return solo_letras2(event)" type="text" name="rc_empresa<?= $i; ?>" id="rc_empresa<?= $i; ?>"  maxlength="250">
                             </div>
 
                             <div class="div_form">
-                                <label for="rctp_ramo<?= $i; ?>">Activida / Ramo<span  style="color:red">*</span></label><br>
+                                <label for="rctp_ramo<?= $i; ?>">Activida / Ramo</label><br>
                                 <input class="valida_prod" onkeypress="return solo_letras(event)" type="text" name="rctp_ramo<?= $i; ?>" id="rctp_ramo<?= $i; ?>"  maxlength="250">
                             </div>
 
                             <div class="div_form">
-                                <label for="rtp_telefonoH<?= $i; ?>">Tel&eacute;fono Hab.<span  style="color:red">*</span></label><br>
+                                <label for="rtp_telefonoH<?= $i; ?>">Tel&eacute;fono Hab.</label><br>
                                 <select class="valida_prod" name="dtp_telefonoH<?= $i; ?>" id="dtp_telefonoH<?= $i; ?>" style="width:70px;">
                                     <option value="" >
                                         <?php echo $_opc_area; ?>
@@ -513,7 +513,7 @@
                             </div>
 
                             <div class="div_form">
-                                <label for="dtp_telefono2<?= $i; ?>">Otro Tel&eacute;fono<span  style="color:red">*</span></label><br>
+                                <label for="dtp_telefono2<?= $i; ?>">Otro Tel&eacute;fono</label><br>
                                 <select class="valida_prod" name="dtp_telefono2<?= $i; ?>" id="dtp_telefono2<?= $i; ?>" style="width:70px;">
                                     <option value="" >
                                         <?php echo $_opc_area; ?>
@@ -682,7 +682,7 @@
                 </div>
 
 
-                <h3>INGRESO DEL CONYUGE O CONCUBINO<span style="float:right;display: none;" class="_alert_span"><img src="img/Error-128.png" alt="" height="20" width="20"style="margin-top: -3px;"></span></h3>
+                <h3>INGRESO DEL C&Oacute;NYUGE O CONCUBINO<span style="float:right;display: none;" class="_alert_span"><img src="img/Error-128.png" alt="" height="20" width="20"style="margin-top: -3px;"></span></h3>
                 <div class="cc_banplus2"> 
 
                     <div class="div_form">

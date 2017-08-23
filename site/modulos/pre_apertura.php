@@ -13,8 +13,8 @@ if (isset($_POST['p_proceso_id']) && !empty($_POST['p_proceso_id'])) {
     $_DAT = unserialize(unserialize($DATOS_[1]['valores']));
 }
 
-$DATOS_ = execute_sql("get_data_sol", array('SOLTC_17146576'));
-$_DAT = unserialize(unserialize($DATOS_[1]['valores']));
+//$DATOS_ = execute_sql("get_data_sol", array('SOLTC_17146576'));
+//$_DAT = unserialize(unserialize($DATOS_[1]['valores']));
 //var_dump($_DAT);
 
 

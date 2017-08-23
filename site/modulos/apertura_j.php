@@ -477,22 +477,22 @@
 
 
                     <div class="div_form">
-                        <label for="ult_fecha">Fecha<span  style="color:red">*</span></label><br>
-                        <input class="requerido_" style="width:80px;background: #e6e6e6;" type="text" name="ult_fecha" id="ult_fecha" value="" readonly>
+                        <label for="ult_fecha">Fecha</label><br>
+                        <input class="" style="width:80px;background: #e6e6e6;" type="text" name="ult_fecha" id="ult_fecha" value="" readonly>
                     </div>
 
                     <div class="div_form">
-                        <label for="ult_registro">N&ordm; registro<span  style="color:red">*</span></label><br>
-                        <input style="width: 299px;" class="requerido_" onkeypress="return solo_letras2(event)" type="text" name="ult_registro" id="ult_registro" value="" maxlength="250">
+                        <label for="ult_registro">N&ordm; registro</label><br>
+                        <input style="width: 299px;" class="" onkeypress="return solo_letras2(event)" type="text" name="ult_registro" id="ult_registro" value="" maxlength="250">
                     </div>
                     <div class="div_form">
-                        <label for="ult_tomo">tomo<span  style="color:red">*</span></label><br>
-                        <input style="width: 85px;" class="requerido_" onkeypress="return solo_letra2s(event)" type="text" name="ult_tomo" id="ult_tomo" value="" maxlength="50">
+                        <label for="ult_tomo">tomo</label><br>
+                        <input style="width: 85px;" class="" onkeypress="return solo_letra2s(event)" type="text" name="ult_tomo" id="ult_tomo" value="" maxlength="50">
                     </div>
 
                     <div class="div_form">
-                        <label for="ult_lugar">lugar<span  style="color:red">*</span></label><br>
-                        <input style="width: 230px;" class="requerido_" onkeypress="return solo_letras(event)" type="text" name="ult_lugar" id="ult_lugar" value="" maxlength="50">
+                        <label for="ult_lugar">lugar</label><br>
+                        <input style="width: 230px;" class="" onkeypress="return solo_letras(event)" type="text" name="ult_lugar" id="ult_lugar" value="" maxlength="50">
                     </div>
 
                 </div>
@@ -576,7 +576,7 @@
                         ?>
 
                         <div class="div_form">
-                            <label for="p_nombre<?= $i; ?>">Primer Nombre<span  style="color:red">*</span></label><br>
+                            <label for="p_nombre<?= $i; ?>">Primer Nombre</label><br>
                             <input style="width: 128px;" class="<?= $class ?>" onkeypress="return solo_letras(event)" type="text" name="p_nombre<?= $i; ?>" id="p_nombre<?= $i; ?>" value="" maxlength="50">
                         </div>
                         <div class="div_form">
@@ -584,7 +584,7 @@
                             <input style="width: 128px;" class="" onkeypress="return solo_letras(event)" type="text" name="s_nombre<?= $i; ?>" id="s_nombre<?= $i; ?>" value="" maxlength="50">
                         </div>
                         <div class="div_form">
-                            <label for="p_apellido<?= $i; ?>">Primer Apellido<span  style="color:red">*</span></label><br>
+                            <label for="p_apellido<?= $i; ?>">Primer Apellido</label><br>
                             <input style="width: 128px;" class="<?= $class ?>" onkeypress="return solo_letras(event)" type="text" name="p_apellido<?= $i; ?>" id="p_apellido<?= $i; ?>" value="" maxlength="50">
                         </div>
                         <div class="div_form">
@@ -593,7 +593,7 @@
                         </div>
 
                         <div class="div_form">
-                            <label for="tp_documento<?= $i; ?>">C.I / PASAPORTE <span  style="color:red">*</span></label><br>
+                            <label for="tp_documento<?= $i; ?>">C.I / PASAPORTE </label><br>
                             <select name="tp_documento<?= $i; ?>" id="tp_documento<?= $i; ?>" class="<?= $class ?>">
                                 <option value="">
                                 <option value="V">V
@@ -614,7 +614,7 @@
                             $class = "valida_prod";
                         ?>
                         <div class="div_form">
-                            <label for="tp_nacionalidad<?= $i; ?>">Nacionalidad<span  style="color:red">*</span></label><br>
+                            <label for="tp_nacionalidad<?= $i; ?>">Nacionalidad</label><br>
                             <select class="<?= $class ?>" name="tp_nacionalidad<?= $i; ?>" id="tp_nacionalidad<?= $i; ?>" style="width:110px; ">
                                 <option value="">Seleccione...
                                     <?php echo $_opc_tp_nacionalidad; ?>
@@ -622,7 +622,7 @@
                         </div>
 
                         <div class="div_form">
-                            <label for="tp_profecion<?= $i; ?>">Profesi&oacute;n u oficio<span  style="color:red">*</span></label><br>
+                            <label for="tp_profecion<?= $i; ?>">Profesi&oacute;n u oficio</label><br>
                             <select class="<?= $class ?>" name="tp_profecion<?= $i; ?>" id="tp_profecion<?= $i; ?>" style="width:124px;">
                                 <option value="">Seleccione...
                                     <?php echo $_opc_profesion ?>
@@ -630,13 +630,13 @@
                         </div>
 
                         <div class="div_form">
-                            <label for="tp_ocupacion<?= $i; ?>">Ocupaci&oacute;n<span  style="color:red">*</span></label><br>
+                            <label for="tp_ocupacion<?= $i; ?>">Ocupaci&oacute;n</label><br>
                             <input style="width: 101px;" class="<?= $class ?>" onkeypress="return solo_letras(event)" type="text" name="tp_ocupacion<?= $i; ?>" id="tp_ocupacion<?= $i; ?>" value="" maxlength="100">
 
                         </div>
 
                         <div class="div_form">
-                            <label for="dtp_telefonoH<?= $i; ?>">Tel&eacute;fono Hab.<span  style="color:red">*</span></label><br>
+                            <label for="dtp_telefonoH<?= $i; ?>">Tel&eacute;fono Hab.</label><br>
                             <select class="<?= $class ?>" name="dtp_telefonoH<?= $i; ?>" id="dtp_telefonoH<?= $i; ?>" style="width:60px;">
                                 <option value="">
                                     <?php echo $_opc_area; ?>
@@ -645,7 +645,7 @@
                         </div>
 
                         <div class="div_form">
-                            <label for="dtp_telefono2<?= $i; ?>">Otro Tel&eacute;fono<span  style="color:red">*</span></label><br>
+                            <label for="dtp_telefono2<?= $i; ?>">Otro Tel&eacute;fono</label><br>
                             <select class="<?= $class ?>" name="dtp_telefono2<?= $i; ?>" id="dtp_telefono2<?= $i; ?>" style="width:60px;">
                                 <option value="">
                                     <?php echo $_opc_area; ?>
@@ -654,7 +654,7 @@
                         </div>
 
                         <div class="div_form">
-                            <label for="dtp_celular<?= $i; ?>">Celular<span  style="color:red">*</span></label><br>
+                            <label for="dtp_celular<?= $i; ?>">Celular</label><br>
                             <select class="<?= $class ?>" name="dtp_celular<?= $i; ?>" id="dtp_celular<?= $i; ?>" style="width:60px;">
                                 <option value="">
                                     <?php echo $_opc_cel; ?>
@@ -752,9 +752,6 @@
 
 
 
-            <div style="float:left;padding:5px;width: 95%;text-align: right;margin-top: 20px;">
-                <button type="submit" value="Submit">Enviar</button>
-            </div>
 
         </div>
     </form>

@@ -5,45 +5,45 @@ ob_start(); // Turn on output buffering
 <?php include_once "ewcfg8.php" ?>
 <?php include_once "ewmysql8.php" ?>
 <?php include_once "phpfn8.php" ?>
-<?php include_once "z_municipiosinfo.php" ?>
+<?php include_once "z_parroquiasinfo.php" ?>
 <?php include_once "userfn8.php" ?>
 <?php ew_Header(FALSE) ?>
 <?php
 
 // Create page object
-$z_municipios_view = new cz_municipios_view();
-$Page =& $z_municipios_view;
+$z_parroquias_view = new cz_parroquias_view();
+$Page =& $z_parroquias_view;
 
 // Page init
-$z_municipios_view->Page_Init();
+$z_parroquias_view->Page_Init();
 
 // Page main
-$z_municipios_view->Page_Main();
+$z_parroquias_view->Page_Main();
 ?>
 <?php include_once "header.php" ?>
-<?php if ($z_municipios->Export == "") { ?>
+<?php if ($z_parroquias->Export == "") { ?>
 <script type="text/javascript">
 <!--
 
 // Create page object
-var z_municipios_view = new ew_Page("z_municipios_view");
+var z_parroquias_view = new ew_Page("z_parroquias_view");
 
 // page properties
-z_municipios_view.PageID = "view"; // page ID
-z_municipios_view.FormID = "fz_municipiosview"; // form ID
-var EW_PAGE_ID = z_municipios_view.PageID; // for backward compatibility
+z_parroquias_view.PageID = "view"; // page ID
+z_parroquias_view.FormID = "fz_parroquiasview"; // form ID
+var EW_PAGE_ID = z_parroquias_view.PageID; // for backward compatibility
 
 // extend page with Form_CustomValidate function
-z_municipios_view.Form_CustomValidate =  
+z_parroquias_view.Form_CustomValidate =  
  function(fobj) { // DO NOT CHANGE THIS LINE!
 
  	// Your custom validation code here, return false if invalid. 
  	return true;
  }
 <?php if (EW_CLIENT_VALIDATE) { ?>
-z_municipios_view.ValidateRequired = true; // uses JavaScript validation
+z_parroquias_view.ValidateRequired = true; // uses JavaScript validation
 <?php } else { ?>
-z_municipios_view.ValidateRequired = false; // no JavaScript validation
+z_parroquias_view.ValidateRequired = false; // no JavaScript validation
 <?php } ?>
 
 //-->
@@ -56,58 +56,51 @@ z_municipios_view.ValidateRequired = false; // no JavaScript validation
 
 </script>
 <?php } ?>
-<p class="phpmaker ewTitle"><?php echo $Language->Phrase("View") ?>&nbsp;<?php echo $Language->Phrase("TblTypeTABLE") ?><?php echo $z_municipios->TableCaption() ?>
-&nbsp;&nbsp;<?php $z_municipios_view->ExportOptions->Render("body"); ?>
+<p class="phpmaker ewTitle"><?php echo $Language->Phrase("View") ?>&nbsp;<?php echo $Language->Phrase("TblTypeTABLE") ?><?php echo $z_parroquias->TableCaption() ?>
+&nbsp;&nbsp;<?php $z_parroquias_view->ExportOptions->Render("body"); ?>
 </p>
-<?php if ($z_municipios->Export == "") { ?>
+<?php if ($z_parroquias->Export == "") { ?>
 <p class="phpmaker">
-<a href="<?php echo $z_municipios_view->ListUrl ?>"><?php echo $Language->Phrase("BackToList") ?></a>&nbsp;
-<a href="<?php echo $z_municipios_view->AddUrl ?>"><?php echo $Language->Phrase("ViewPageAddLink") ?></a>&nbsp;
-<a href="<?php echo $z_municipios_view->EditUrl ?>"><?php echo $Language->Phrase("ViewPageEditLink") ?></a>&nbsp;
-<a href="<?php echo $z_municipios_view->DeleteUrl ?>"><?php echo $Language->Phrase("ViewPageDeleteLink") ?></a>&nbsp;
+<a href="<?php echo $z_parroquias_view->ListUrl ?>"><?php echo $Language->Phrase("BackToList") ?></a>&nbsp;
+<a href="<?php echo $z_parroquias_view->AddUrl ?>"><?php echo $Language->Phrase("ViewPageAddLink") ?></a>&nbsp;
+<a href="<?php echo $z_parroquias_view->EditUrl ?>"><?php echo $Language->Phrase("ViewPageEditLink") ?></a>&nbsp;
+<a href="<?php echo $z_parroquias_view->DeleteUrl ?>"><?php echo $Language->Phrase("ViewPageDeleteLink") ?></a>&nbsp;
 <?php } ?>
 </p>
-<?php $z_municipios_view->ShowPageHeader(); ?>
+<?php $z_parroquias_view->ShowPageHeader(); ?>
 <?php
-$z_municipios_view->ShowMessage();
+$z_parroquias_view->ShowMessage();
 ?>
 <p>
 <table cellspacing="0" class="ewGrid"><tr><td class="ewGridContent">
 <div class="ewGridMiddlePanel">
 <table cellspacing="0" class="ewTable">
-<?php if ($z_municipios->lp_municipio_id->Visible) { // lp_municipio_id ?>
-	<tr id="r_lp_municipio_id"<?php echo $z_municipios->RowAttributes() ?>>
-		<td class="ewTableHeader"><?php echo $z_municipios->lp_municipio_id->FldCaption() ?></td>
-		<td<?php echo $z_municipios->lp_municipio_id->CellAttributes() ?>>
-<div<?php echo $z_municipios->lp_municipio_id->ViewAttributes() ?>><?php echo $z_municipios->lp_municipio_id->ViewValue ?></div></td>
+<?php if ($z_parroquias->lp_parroquia_id->Visible) { // lp_parroquia_id ?>
+	<tr id="r_lp_parroquia_id"<?php echo $z_parroquias->RowAttributes() ?>>
+		<td class="ewTableHeader"><?php echo $z_parroquias->lp_parroquia_id->FldCaption() ?></td>
+		<td<?php echo $z_parroquias->lp_parroquia_id->CellAttributes() ?>>
+<div<?php echo $z_parroquias->lp_parroquia_id->ViewAttributes() ?>><?php echo $z_parroquias->lp_parroquia_id->ViewValue ?></div></td>
 	</tr>
 <?php } ?>
-<?php if ($z_municipios->nombre->Visible) { // nombre ?>
-	<tr id="r_nombre"<?php echo $z_municipios->RowAttributes() ?>>
-		<td class="ewTableHeader"><?php echo $z_municipios->nombre->FldCaption() ?></td>
-		<td<?php echo $z_municipios->nombre->CellAttributes() ?>>
-<div<?php echo $z_municipios->nombre->ViewAttributes() ?>><?php echo $z_municipios->nombre->ViewValue ?></div></td>
+<?php if ($z_parroquias->nombre->Visible) { // nombre ?>
+	<tr id="r_nombre"<?php echo $z_parroquias->RowAttributes() ?>>
+		<td class="ewTableHeader"><?php echo $z_parroquias->nombre->FldCaption() ?></td>
+		<td<?php echo $z_parroquias->nombre->CellAttributes() ?>>
+<div<?php echo $z_parroquias->nombre->ViewAttributes() ?>><?php echo $z_parroquias->nombre->ViewValue ?></div></td>
 	</tr>
 <?php } ?>
-<?php if ($z_municipios->visibilidad->Visible) { // visibilidad ?>
-	<tr id="r_visibilidad"<?php echo $z_municipios->RowAttributes() ?>>
-		<td class="ewTableHeader"><?php echo $z_municipios->visibilidad->FldCaption() ?></td>
-		<td<?php echo $z_municipios->visibilidad->CellAttributes() ?>>
-<div<?php echo $z_municipios->visibilidad->ViewAttributes() ?>><?php echo $z_municipios->visibilidad->ViewValue ?></div></td>
+<?php if ($z_parroquias->lf_parroquia_municipio->Visible) { // lf_parroquia_municipio ?>
+	<tr id="r_lf_parroquia_municipio"<?php echo $z_parroquias->RowAttributes() ?>>
+		<td class="ewTableHeader"><?php echo $z_parroquias->lf_parroquia_municipio->FldCaption() ?></td>
+		<td<?php echo $z_parroquias->lf_parroquia_municipio->CellAttributes() ?>>
+<div<?php echo $z_parroquias->lf_parroquia_municipio->ViewAttributes() ?>><?php echo $z_parroquias->lf_parroquia_municipio->ViewValue ?></div></td>
 	</tr>
 <?php } ?>
-<?php if ($z_municipios->lf_estado->Visible) { // lf_estado ?>
-	<tr id="r_lf_estado"<?php echo $z_municipios->RowAttributes() ?>>
-		<td class="ewTableHeader"><?php echo $z_municipios->lf_estado->FldCaption() ?></td>
-		<td<?php echo $z_municipios->lf_estado->CellAttributes() ?>>
-<div<?php echo $z_municipios->lf_estado->ViewAttributes() ?>><?php echo $z_municipios->lf_estado->ViewValue ?></div></td>
-	</tr>
-<?php } ?>
-<?php if ($z_municipios->pk_municipio->Visible) { // pk_municipio ?>
-	<tr id="r_pk_municipio"<?php echo $z_municipios->RowAttributes() ?>>
-		<td class="ewTableHeader"><?php echo $z_municipios->pk_municipio->FldCaption() ?></td>
-		<td<?php echo $z_municipios->pk_municipio->CellAttributes() ?>>
-<div<?php echo $z_municipios->pk_municipio->ViewAttributes() ?>><?php echo $z_municipios->pk_municipio->ViewValue ?></div></td>
+<?php if ($z_parroquias->visibilidad->Visible) { // visibilidad ?>
+	<tr id="r_visibilidad"<?php echo $z_parroquias->RowAttributes() ?>>
+		<td class="ewTableHeader"><?php echo $z_parroquias->visibilidad->FldCaption() ?></td>
+		<td<?php echo $z_parroquias->visibilidad->CellAttributes() ?>>
+<div<?php echo $z_parroquias->visibilidad->ViewAttributes() ?>><?php echo $z_parroquias->visibilidad->ViewValue ?></div></td>
 	</tr>
 <?php } ?>
 </table>
@@ -115,11 +108,11 @@ $z_municipios_view->ShowMessage();
 </td></tr></table>
 <p>
 <?php
-$z_municipios_view->ShowPageFooter();
+$z_parroquias_view->ShowPageFooter();
 if (EW_DEBUG_ENABLED)
 	echo ew_DebugMsg();
 ?>
-<?php if ($z_municipios->Export == "") { ?>
+<?php if ($z_parroquias->Export == "") { ?>
 <script language="JavaScript" type="text/javascript">
 <!--
 
@@ -131,23 +124,23 @@ if (EW_DEBUG_ENABLED)
 <?php } ?>
 <?php include_once "footer.php" ?>
 <?php
-$z_municipios_view->Page_Terminate();
+$z_parroquias_view->Page_Terminate();
 ?>
 <?php
 
 //
 // Page class
 //
-class cz_municipios_view {
+class cz_parroquias_view {
 
 	// Page ID
 	var $PageID = 'view';
 
 	// Table name
-	var $TableName = '_municipios';
+	var $TableName = '_parroquias';
 
 	// Page object name
-	var $PageObjName = 'z_municipios_view';
+	var $PageObjName = 'z_parroquias_view';
 
 	// Page name
 	function PageName() {
@@ -157,8 +150,8 @@ class cz_municipios_view {
 	// Page URL
 	function PageUrl() {
 		$PageUrl = ew_CurrentPage() . "?";
-		global $z_municipios;
-		if ($z_municipios->UseTokenInUrl) $PageUrl .= "t=" . $z_municipios->TableVar . "&"; // Add page token
+		global $z_parroquias;
+		if ($z_parroquias->UseTokenInUrl) $PageUrl .= "t=" . $z_parroquias->TableVar . "&"; // Add page token
 		return $PageUrl;
 	}
 
@@ -261,12 +254,12 @@ class cz_municipios_view {
 
 	// Validate page request
 	function IsPageRequest() {
-		global $objForm, $z_municipios;
-		if ($z_municipios->UseTokenInUrl) {
+		global $objForm, $z_parroquias;
+		if ($z_parroquias->UseTokenInUrl) {
 			if ($objForm)
-				return ($z_municipios->TableVar == $objForm->GetValue("t"));
+				return ($z_parroquias->TableVar == $objForm->GetValue("t"));
 			if (@$_GET["t"] <> "")
-				return ($z_municipios->TableVar == $_GET["t"]);
+				return ($z_parroquias->TableVar == $_GET["t"]);
 		} else {
 			return TRUE;
 		}
@@ -275,21 +268,21 @@ class cz_municipios_view {
 	//
 	// Page class constructor
 	//
-	function cz_municipios_view() {
+	function cz_parroquias_view() {
 		global $conn, $Language;
 
 		// Language object
 		if (!isset($Language)) $Language = new cLanguage();
 
-		// Table object (z_municipios)
-		if (!isset($GLOBALS["z_municipios"])) {
-			$GLOBALS["z_municipios"] = new cz_municipios();
-			$GLOBALS["Table"] =& $GLOBALS["z_municipios"];
+		// Table object (z_parroquias)
+		if (!isset($GLOBALS["z_parroquias"])) {
+			$GLOBALS["z_parroquias"] = new cz_parroquias();
+			$GLOBALS["Table"] =& $GLOBALS["z_parroquias"];
 		}
 		$KeyUrl = "";
-		if (@$_GET["lp_municipio_id"] <> "") {
-			$this->RecKey["lp_municipio_id"] = $_GET["lp_municipio_id"];
-			$KeyUrl .= "&lp_municipio_id=" . urlencode($this->RecKey["lp_municipio_id"]);
+		if (@$_GET["lp_parroquia_id"] <> "") {
+			$this->RecKey["lp_parroquia_id"] = $_GET["lp_parroquia_id"];
+			$KeyUrl .= "&lp_parroquia_id=" . urlencode($this->RecKey["lp_parroquia_id"]);
 		}
 		$this->ExportPrintUrl = $this->PageUrl() . "export=print" . $KeyUrl;
 		$this->ExportHtmlUrl = $this->PageUrl() . "export=html" . $KeyUrl;
@@ -305,7 +298,7 @@ class cz_municipios_view {
 
 		// Table name (for backward compatibility)
 		if (!defined("EW_TABLE_NAME"))
-			define("EW_TABLE_NAME", '_municipios', TRUE);
+			define("EW_TABLE_NAME", '_parroquias', TRUE);
 
 		// Start timer
 		if (!isset($GLOBALS["gTimer"])) $GLOBALS["gTimer"] = new cTimer();
@@ -324,7 +317,7 @@ class cz_municipios_view {
 	//
 	function Page_Init() {
 		global $gsExport, $gsExportFile, $UserProfile, $Language, $Security, $objForm;
-		global $z_municipios;
+		global $z_parroquias;
 
 		// Global Page Loading event (in userfn*.php)
 		Page_Loading();
@@ -371,48 +364,48 @@ class cz_municipios_view {
 	// Page main
 	//
 	function Page_Main() {
-		global $Language, $z_municipios;
+		global $Language, $z_parroquias;
 		$sReturnUrl = "";
 		$bMatchRecord = FALSE;
 		if ($this->IsPageRequest()) { // Validate request
-			if (@$_GET["lp_municipio_id"] <> "") {
-				$z_municipios->lp_municipio_id->setQueryStringValue($_GET["lp_municipio_id"]);
-				$this->RecKey["lp_municipio_id"] = $z_municipios->lp_municipio_id->QueryStringValue;
+			if (@$_GET["lp_parroquia_id"] <> "") {
+				$z_parroquias->lp_parroquia_id->setQueryStringValue($_GET["lp_parroquia_id"]);
+				$this->RecKey["lp_parroquia_id"] = $z_parroquias->lp_parroquia_id->QueryStringValue;
 			} else {
-				$sReturnUrl = "z_municipioslist.php"; // Return to list
+				$sReturnUrl = "z_parroquiaslist.php"; // Return to list
 			}
 
 			// Get action
-			$z_municipios->CurrentAction = "I"; // Display form
-			switch ($z_municipios->CurrentAction) {
+			$z_parroquias->CurrentAction = "I"; // Display form
+			switch ($z_parroquias->CurrentAction) {
 				case "I": // Get a record to display
 					if (!$this->LoadRow()) { // Load record based on key
 						if ($this->getSuccessMessage() == "" && $this->getFailureMessage() == "")
 							$this->setFailureMessage($Language->Phrase("NoRecord")); // Set no record message
-						$sReturnUrl = "z_municipioslist.php"; // No matching record, return to list
+						$sReturnUrl = "z_parroquiaslist.php"; // No matching record, return to list
 					}
 			}
 		} else {
-			$sReturnUrl = "z_municipioslist.php"; // Not page request, return to list
+			$sReturnUrl = "z_parroquiaslist.php"; // Not page request, return to list
 		}
 		if ($sReturnUrl <> "")
 			$this->Page_Terminate($sReturnUrl);
 
 		// Render row
-		$z_municipios->RowType = EW_ROWTYPE_VIEW;
-		$z_municipios->ResetAttrs();
+		$z_parroquias->RowType = EW_ROWTYPE_VIEW;
+		$z_parroquias->ResetAttrs();
 		$this->RenderRow();
 	}
 
 	// Set up starting record parameters
 	function SetUpStartRec() {
-		global $z_municipios;
+		global $z_parroquias;
 		if ($this->DisplayRecs == 0)
 			return;
 		if ($this->IsPageRequest()) { // Validate request
 			if (@$_GET[EW_TABLE_START_REC] <> "") { // Check for "start" parameter
 				$this->StartRec = $_GET[EW_TABLE_START_REC];
-				$z_municipios->setStartRecordNumber($this->StartRec);
+				$z_parroquias->setStartRecordNumber($this->StartRec);
 			} elseif (@$_GET[EW_TABLE_PAGE_NO] <> "") {
 				$PageNo = $_GET[EW_TABLE_PAGE_NO];
 				if (is_numeric($PageNo)) {
@@ -422,36 +415,36 @@ class cz_municipios_view {
 					} elseif ($this->StartRec >= intval(($this->TotalRecs-1)/$this->DisplayRecs)*$this->DisplayRecs+1) {
 						$this->StartRec = intval(($this->TotalRecs-1)/$this->DisplayRecs)*$this->DisplayRecs+1;
 					}
-					$z_municipios->setStartRecordNumber($this->StartRec);
+					$z_parroquias->setStartRecordNumber($this->StartRec);
 				}
 			}
 		}
-		$this->StartRec = $z_municipios->getStartRecordNumber();
+		$this->StartRec = $z_parroquias->getStartRecordNumber();
 
 		// Check if correct start record counter
 		if (!is_numeric($this->StartRec) || $this->StartRec == "") { // Avoid invalid start record counter
 			$this->StartRec = 1; // Reset start record counter
-			$z_municipios->setStartRecordNumber($this->StartRec);
+			$z_parroquias->setStartRecordNumber($this->StartRec);
 		} elseif (intval($this->StartRec) > intval($this->TotalRecs)) { // Avoid starting record > total records
 			$this->StartRec = intval(($this->TotalRecs-1)/$this->DisplayRecs)*$this->DisplayRecs+1; // Point to last page first record
-			$z_municipios->setStartRecordNumber($this->StartRec);
+			$z_parroquias->setStartRecordNumber($this->StartRec);
 		} elseif (($this->StartRec-1) % $this->DisplayRecs <> 0) {
 			$this->StartRec = intval(($this->StartRec-1)/$this->DisplayRecs)*$this->DisplayRecs+1; // Point to page boundary
-			$z_municipios->setStartRecordNumber($this->StartRec);
+			$z_parroquias->setStartRecordNumber($this->StartRec);
 		}
 	}
 
 	// Load row based on key values
 	function LoadRow() {
-		global $conn, $Security, $z_municipios;
-		$sFilter = $z_municipios->KeyFilter();
+		global $conn, $Security, $z_parroquias;
+		$sFilter = $z_parroquias->KeyFilter();
 
 		// Call Row Selecting event
-		$z_municipios->Row_Selecting($sFilter);
+		$z_parroquias->Row_Selecting($sFilter);
 
 		// Load SQL based on filter
-		$z_municipios->CurrentFilter = $sFilter;
-		$sSql = $z_municipios->SQL();
+		$z_parroquias->CurrentFilter = $sFilter;
+		$sSql = $z_parroquias->SQL();
 		$res = FALSE;
 		$rs = ew_LoadRecordset($sSql);
 		if ($rs && !$rs->EOF) {
@@ -464,72 +457,52 @@ class cz_municipios_view {
 
 	// Load row values from recordset
 	function LoadRowValues(&$rs) {
-		global $conn, $z_municipios;
+		global $conn, $z_parroquias;
 		if (!$rs || $rs->EOF) return;
 
 		// Call Row Selected event
 		$row =& $rs->fields;
-		$z_municipios->Row_Selected($row);
-		$z_municipios->lp_municipio_id->setDbValue($rs->fields('lp_municipio_id'));
-		$z_municipios->nombre->setDbValue($rs->fields('nombre'));
-		$z_municipios->visibilidad->setDbValue($rs->fields('visibilidad'));
-		$z_municipios->lf_estado->setDbValue($rs->fields('lf_estado'));
-		$z_municipios->pk_municipio->setDbValue($rs->fields('pk_municipio'));
+		$z_parroquias->Row_Selected($row);
+		$z_parroquias->lp_parroquia_id->setDbValue($rs->fields('lp_parroquia_id'));
+		$z_parroquias->nombre->setDbValue($rs->fields('nombre'));
+		$z_parroquias->lf_parroquia_municipio->setDbValue($rs->fields('lf_parroquia_municipio'));
+		$z_parroquias->visibilidad->setDbValue($rs->fields('visibilidad'));
 	}
 
 	// Render row values based on field settings
 	function RenderRow() {
-		global $conn, $Security, $Language, $z_municipios;
+		global $conn, $Security, $Language, $z_parroquias;
 
 		// Initialize URLs
-		$this->AddUrl = $z_municipios->AddUrl();
-		$this->EditUrl = $z_municipios->EditUrl();
-		$this->CopyUrl = $z_municipios->CopyUrl();
-		$this->DeleteUrl = $z_municipios->DeleteUrl();
-		$this->ListUrl = $z_municipios->ListUrl();
+		$this->AddUrl = $z_parroquias->AddUrl();
+		$this->EditUrl = $z_parroquias->EditUrl();
+		$this->CopyUrl = $z_parroquias->CopyUrl();
+		$this->DeleteUrl = $z_parroquias->DeleteUrl();
+		$this->ListUrl = $z_parroquias->ListUrl();
 
 		// Call Row_Rendering event
-		$z_municipios->Row_Rendering();
+		$z_parroquias->Row_Rendering();
 
 		// Common render codes for all row types
-		// lp_municipio_id
+		// lp_parroquia_id
 		// nombre
+		// lf_parroquia_municipio
 		// visibilidad
-		// lf_estado
-		// pk_municipio
 
-		if ($z_municipios->RowType == EW_ROWTYPE_VIEW) { // View row
+		if ($z_parroquias->RowType == EW_ROWTYPE_VIEW) { // View row
 
-			// lp_municipio_id
-			$z_municipios->lp_municipio_id->ViewValue = $z_municipios->lp_municipio_id->CurrentValue;
-			$z_municipios->lp_municipio_id->ViewCustomAttributes = "";
+			// lp_parroquia_id
+			$z_parroquias->lp_parroquia_id->ViewValue = $z_parroquias->lp_parroquia_id->CurrentValue;
+			$z_parroquias->lp_parroquia_id->ViewCustomAttributes = "";
 
 			// nombre
-			$z_municipios->nombre->ViewValue = $z_municipios->nombre->CurrentValue;
-			$z_municipios->nombre->ViewCustomAttributes = "";
+			$z_parroquias->nombre->ViewValue = $z_parroquias->nombre->CurrentValue;
+			$z_parroquias->nombre->ViewCustomAttributes = "";
 
-			// visibilidad
-			if (strval($z_municipios->visibilidad->CurrentValue) <> "") {
-				switch ($z_municipios->visibilidad->CurrentValue) {
-					case "1":
-						$z_municipios->visibilidad->ViewValue = $z_municipios->visibilidad->FldTagCaption(1) <> "" ? $z_municipios->visibilidad->FldTagCaption(1) : $z_municipios->visibilidad->CurrentValue;
-						break;
-					case "0":
-						$z_municipios->visibilidad->ViewValue = $z_municipios->visibilidad->FldTagCaption(2) <> "" ? $z_municipios->visibilidad->FldTagCaption(2) : $z_municipios->visibilidad->CurrentValue;
-						break;
-					default:
-						$z_municipios->visibilidad->ViewValue = $z_municipios->visibilidad->CurrentValue;
-				}
-			} else {
-				$z_municipios->visibilidad->ViewValue = NULL;
-			}
-			$z_municipios->visibilidad->ViewCustomAttributes = "";
-
-			// lf_estado
-			$z_municipios->lf_estado->ViewValue = $z_municipios->lf_estado->CurrentValue;
-			if (strval($z_municipios->lf_estado->CurrentValue) <> "") {
-				$sFilterWrk = "`id2_estado` = " . ew_AdjustSql($z_municipios->lf_estado->CurrentValue) . "";
-			$sSqlWrk = "SELECT `nombre` FROM `_estados`";
+			// lf_parroquia_municipio
+			if (strval($z_parroquias->lf_parroquia_municipio->CurrentValue) <> "") {
+				$sFilterWrk = "`lp_municipio_id` = '" . ew_AdjustSql($z_parroquias->lf_parroquia_municipio->CurrentValue) . "'";
+			$sSqlWrk = "SELECT `nombre` FROM `_municipios`";
 			$sWhereWrk = "";
 			if ($sFilterWrk <> "") {
 				if ($sWhereWrk <> "") $sWhereWrk .= " AND ";
@@ -538,49 +511,57 @@ class cz_municipios_view {
 			if ($sWhereWrk <> "") $sSqlWrk .= " WHERE " . $sWhereWrk;
 				$rswrk = $conn->Execute($sSqlWrk);
 				if ($rswrk && !$rswrk->EOF) { // Lookup values found
-					$z_municipios->lf_estado->ViewValue = $rswrk->fields('nombre');
+					$z_parroquias->lf_parroquia_municipio->ViewValue = $rswrk->fields('nombre');
 					$rswrk->Close();
 				} else {
-					$z_municipios->lf_estado->ViewValue = $z_municipios->lf_estado->CurrentValue;
+					$z_parroquias->lf_parroquia_municipio->ViewValue = $z_parroquias->lf_parroquia_municipio->CurrentValue;
 				}
 			} else {
-				$z_municipios->lf_estado->ViewValue = NULL;
+				$z_parroquias->lf_parroquia_municipio->ViewValue = NULL;
 			}
-			$z_municipios->lf_estado->ViewCustomAttributes = "";
-
-			// pk_municipio
-			$z_municipios->pk_municipio->ViewValue = $z_municipios->pk_municipio->CurrentValue;
-			$z_municipios->pk_municipio->ViewCustomAttributes = "";
-
-			// lp_municipio_id
-			$z_municipios->lp_municipio_id->LinkCustomAttributes = "";
-			$z_municipios->lp_municipio_id->HrefValue = "";
-			$z_municipios->lp_municipio_id->TooltipValue = "";
-
-			// nombre
-			$z_municipios->nombre->LinkCustomAttributes = "";
-			$z_municipios->nombre->HrefValue = "";
-			$z_municipios->nombre->TooltipValue = "";
+			$z_parroquias->lf_parroquia_municipio->ViewCustomAttributes = "";
 
 			// visibilidad
-			$z_municipios->visibilidad->LinkCustomAttributes = "";
-			$z_municipios->visibilidad->HrefValue = "";
-			$z_municipios->visibilidad->TooltipValue = "";
+			if (strval($z_parroquias->visibilidad->CurrentValue) <> "") {
+				switch ($z_parroquias->visibilidad->CurrentValue) {
+					case "1":
+						$z_parroquias->visibilidad->ViewValue = $z_parroquias->visibilidad->FldTagCaption(1) <> "" ? $z_parroquias->visibilidad->FldTagCaption(1) : $z_parroquias->visibilidad->CurrentValue;
+						break;
+					case "0":
+						$z_parroquias->visibilidad->ViewValue = $z_parroquias->visibilidad->FldTagCaption(2) <> "" ? $z_parroquias->visibilidad->FldTagCaption(2) : $z_parroquias->visibilidad->CurrentValue;
+						break;
+					default:
+						$z_parroquias->visibilidad->ViewValue = $z_parroquias->visibilidad->CurrentValue;
+				}
+			} else {
+				$z_parroquias->visibilidad->ViewValue = NULL;
+			}
+			$z_parroquias->visibilidad->ViewCustomAttributes = "";
 
-			// lf_estado
-			$z_municipios->lf_estado->LinkCustomAttributes = "";
-			$z_municipios->lf_estado->HrefValue = "";
-			$z_municipios->lf_estado->TooltipValue = "";
+			// lp_parroquia_id
+			$z_parroquias->lp_parroquia_id->LinkCustomAttributes = "";
+			$z_parroquias->lp_parroquia_id->HrefValue = "";
+			$z_parroquias->lp_parroquia_id->TooltipValue = "";
 
-			// pk_municipio
-			$z_municipios->pk_municipio->LinkCustomAttributes = "";
-			$z_municipios->pk_municipio->HrefValue = "";
-			$z_municipios->pk_municipio->TooltipValue = "";
+			// nombre
+			$z_parroquias->nombre->LinkCustomAttributes = "";
+			$z_parroquias->nombre->HrefValue = "";
+			$z_parroquias->nombre->TooltipValue = "";
+
+			// lf_parroquia_municipio
+			$z_parroquias->lf_parroquia_municipio->LinkCustomAttributes = "";
+			$z_parroquias->lf_parroquia_municipio->HrefValue = "";
+			$z_parroquias->lf_parroquia_municipio->TooltipValue = "";
+
+			// visibilidad
+			$z_parroquias->visibilidad->LinkCustomAttributes = "";
+			$z_parroquias->visibilidad->HrefValue = "";
+			$z_parroquias->visibilidad->TooltipValue = "";
 		}
 
 		// Call Row Rendered event
-		if ($z_municipios->RowType <> EW_ROWTYPE_AGGREGATEINIT)
-			$z_municipios->Row_Rendered();
+		if ($z_parroquias->RowType <> EW_ROWTYPE_AGGREGATEINIT)
+			$z_parroquias->Row_Rendered();
 	}
 
 	// PDF Export

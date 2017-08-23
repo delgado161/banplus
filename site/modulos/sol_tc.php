@@ -741,12 +741,12 @@
                     <div class="sep_2"></div>
 
                     <div class="div_form">
-                        <label for="edctp_fax">fax<span  style="color:red">*</span></label><br>
-                        <select class="requerido_" name="edctp_fax" id="edctp_fax" style="width:70px;">
+                        <label for="edctp_fax">fax</label><br>
+                        <select class="" name="edctp_fax" id="edctp_fax" style="width:70px;">
                             <option value="" >
                                 <?php echo $_opc_area; ?>
                         </select>
-                        <input class="requerido_ telefono_" onkeypress="return solo_numeros(event)" style="width:100px;" type="text" name="ecd_fax" id="ecd_fax" >
+                        <input class=" telefono_" onkeypress="return solo_numeros(event)" style="width:100px;" type="text" name="ecd_fax" id="ecd_fax" >
                     </div>
 
                     <div class="div_form">
@@ -847,8 +847,8 @@
                             </div>
 
                             <div class="div_form">
-                                <label for="cuenta<?= $i; ?>">N&ordm; de Cuenta o TDC:</label><br>
-                                <input value="<?= (!empty($_DAT['cuenta' . ($i - 1)]) ? $_DAT['cuenta' . ($i - 1)] : '') ?>" class="valida_prod cta_banco" size="24" onkeypress="return solo_numeros(event)" style="width:230px;" type="text" name="cuenta<?= $i; ?>" id="cuenta<?= $i; ?>"  >
+                                <label for="cuenta<?= $i; ?>">N&ordm; de Cuenta:</label><br>
+                                <input value="<?= (!empty($_DAT['cuenta' . ($i - 1)]) ? $_DAT['cuenta' . ($i - 1)] : '') ?>" class="valida_prod cta_banco" maxlength="24" onkeypress="return solo_numeros(event)" style="width:230px;" type="text" name="cuenta<?= $i; ?>" id="cuenta<?= $i; ?>"  >
                             </div>
 
 
@@ -886,7 +886,7 @@
 
                             <div class="div_form">
                                 <label for="tjp_cuenta<?= $i; ?>">Tarjeta N&ordm;:</label><br>
-                                <input class="valida_prod cta_banco" size="24" onkeypress="return solo_numeros(event)" style="width:142px;" type="text" name="tjp_cuenta<?= $i; ?>" id="tjp_cuenta<?= $i; ?>"  >
+                                <input class="valida_prod" maxlength="16" onkeypress="return solo_numeros(event)" style="width:142px;" type="text" name="tjp_cuenta<?= $i; ?>" id="tjp_cuenta<?= $i; ?>"  >
                             </div>
                             <div class="div_form">
                                 <label for="tjp_titularidad<?= $i; ?>">Titularidad:</label><br>
@@ -898,12 +898,12 @@
 
                             <div class="div_form">
                                 <label for="tjp_limite<?= $i; ?>">L&iacute;mite de cr&eacute;dito:</label><br>
-                                <input class="valida_prod tjp_limite" size="24" onkeypress="return solo_numeros(event)" style="width:100px;text-align: right;" type="text" name="tjp_limite<?= $i; ?>" id="tjp_limite<?= $i; ?>"  >
+                                <input class="valida_prod maxlength tjp_limite" maxlength="24" onkeypress="return solo_numeros(event)" style="width:100px;text-align: right;" type="text" name="tjp_limite<?= $i; ?>" id="tjp_limite<?= $i; ?>"  >
                             </div>
 
                             <div class="div_form">
                                 <label for="tjp_saldo<?= $i; ?>">Saldo Actual:</label><br>
-                                <input class="valida_prod tjp_limite" size="24" onkeypress="return solo_numeros(event)" style="width:100px;text-align: right;" type="text" name="tjp_saldo<?= $i; ?>" id="tjp_saldo<?= $i; ?>"  >
+                                <input class="valida_prod tjp_limite" maxlength="24" onkeypress="return solo_numeros(event)" style="width:100px;text-align: right;" type="text" name="tjp_saldo<?= $i; ?>" id="tjp_saldo<?= $i; ?>"  >
                             </div>
 
                             <div class="div_form">
@@ -949,7 +949,7 @@
 
                         <div class="div_form">
                             <label for="autor_cuenta">En mi cuenta N&ordm;:</label><br>
-                            <input class="valida_prod cta_banco" size="24" onkeypress="return solo_numeros(event)" style="width:230px;" type="text" name="autor_cuenta" id="autor_cuenta"  >
+                            <input class="valida_prod cta_banco" maxlength="24" onkeypress="return solo_numeros(event)" style="width:230px;" type="text" name="autor_cuenta" id="autor_cuenta"  >
                         </div>
                     </div>
                 </div>
@@ -1016,7 +1016,7 @@
                                     <option value="C">V
                                     <option value="E">E
                                 </select>
-                                <input style="width: 130px;" class="valida_prod" onkeypress="return solo_numeros(event)" type="text" name="ts_n_documento<?= $i; ?>" id="ts_n_documento<?= $i; ?>" >
+                                <input maxlength="8" style="width: 130px;" class="valida_prod" onkeypress="return solo_numeros(event)" type="text" name="ts_n_documento<?= $i; ?>" id="ts_n_documento<?= $i; ?>" >
                             </div>
 
                             <div class="div_form">
