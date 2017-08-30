@@ -118,7 +118,7 @@ $(document).ready(function () {
             if ($(this).val().length <= 0 || $(this).val() == "" || parseFloat($(this).val()) <= 0) {
                 $(this).css('background', 'rgba(132, 189, 0, 0.15)');
             } else {
-                if ($.inArray(ext, [ 'pdf', 'PDF']) == -1) {
+                if ($.inArray(ext, ['pdf', 'PDF']) == -1) {
                     $(this).css('background', 'rgba(255,0,0,0.30)');
                     $(this).parent('div').parent('div').prev().find('._alert_span').show();
                     validado = false;
@@ -221,7 +221,7 @@ $(document).ready(function () {
                 $('#otros_ingresos').css('background', 'rgba(132, 189, 0, 0.15)');
             }
 
-            if ( $('#ccemail').val()!="" && !regex.test($('#ccemail').val())) {
+            if ($('#ccemail').val() != "" && !regex.test($('#ccemail').val())) {
                 $('#ccemail').css('background', 'rgba(255,0,0,0.30)');
                 $('#ccemail').parent('div').parent('div').prev().find('._alert_span').show();
                 validado = false;
@@ -389,12 +389,12 @@ $(document).ready(function () {
     $('.tjp_limite,#df_prestamos,#ccsueldo,#sueldo2,#df_tactivos,#df_patrimonio,#df_total,#df_tpasivo,#canon,#sueldo,#comision,#libre_ejercicio,#otros_ingresos,.moneda_,.moneda_2,.jmoneda,.jmoneda2,.moneda_4').mask("###0,00", {reverse: true});
 
     $('.tjp_limite').keyup(function () {
-        
-         suma = parseFloat($(this).val())
+
+        suma = parseFloat($(this).val())
         $(this).val(suma.toFixed(2));
-      
-        $(this).val( $(this).val().replace(".", ","));
-        
+
+        $(this).val($(this).val().replace(".", ","));
+
     });
 
     $('#canon,#sueldo,#comision,#libre_ejercicio,#otros_ingresos').keyup(function () {
@@ -524,8 +524,8 @@ $(document).ready(function () {
         suma3 = parseFloat($('#df_tactivos').val()) - parseFloat($('#df_tpasivo').val());
         $('#df_patrimonio').val(parseFloat(suma3.toFixed(2)));
         $('#df_patrimonio').val($('#df_patrimonio').val().replace(".", ","));
-        
-         suma4 = parseFloat($('#df_tactivos').val()) + parseFloat($('#df_patrimonio').val());
+
+        suma4 = parseFloat($('#df_tactivos').val()) + parseFloat($('#df_patrimonio').val());
         $('#df_total').val(parseFloat(suma4.toFixed(2)));
         $('#df_total').val($('#df_total').val().replace(".", ","));
 
@@ -548,8 +548,8 @@ $(document).ready(function () {
         suma3 = parseFloat($('#df_tactivos').val()) - parseFloat($('#df_tpasivo').val());
         $('#df_patrimonio').val(parseFloat(suma3.toFixed(2)));
         $('#df_patrimonio').val($('#df_patrimonio').val().replace(".", ","));
-        
-         suma4 = parseFloat($('#df_tactivos').val()) + parseFloat($('#df_patrimonio').val());
+
+        suma4 = parseFloat($('#df_tactivos').val()) + parseFloat($('#df_patrimonio').val());
         $('#df_total').val(parseFloat(suma4.toFixed(2)));
         $('#df_total').val($('#df_total').val().replace(".", ","));
 

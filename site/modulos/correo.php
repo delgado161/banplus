@@ -79,7 +79,7 @@ Usted tiene una nueva solicitud de tarjeta de credito.<br><br>
     $subject = 'Solicitud de tarjeta de credito desde la página web Persona Natural';
     $filename = $_POST['tp_documento'] . $_POST['n_documento'] . '.zip';
     $path = dirname(__FILE__) . '/tmp_apertura/';
-    enviar_email_3($from_name, $from_mail, $message, $path, $filename, $subject, $mail_to);
+    enviar_email_3($from_name, $from_mail, $message, $path, $filename, $subject, $from_mail);
 }
 
 
@@ -173,7 +173,7 @@ Usted tiene una nueva solicitud de apertura de cuenta persona natural por proces
     $subject = 'Solicitud de Preapertura de cuenta página web Persona Natural';
     $filename = $_POST['tp_documento'] . $_POST['n_documento'] . '.zip';
     $path = dirname(__FILE__) . '/tmp_apertura/';
-    enviar_email_3($from_name, $from_mail, $message, $path, $filename, $subject, $mail_to);
+    enviar_email_3($from_name, $from_mail, $message, $path, $filename, $subject, $from_mail);
 }
 
 
@@ -225,7 +225,7 @@ Banplus te invita a visitar la página web wwww.banplus.com, para que conozcas n
     
     
     enviar_email_2($from_name, $from_mail, $message, $path, $filename, $subject, $mail_to);
-exit();
+
 //    $myfile = fopen(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'] . '.zip', "w") or die("Unable to open file!");
 //    fclose($myfile);
 
@@ -269,7 +269,7 @@ Solicitudes de preapertura de cuenta página web Persona Jurídica.<br><br>
     $subject = 'Solicitudes de preapertura de cuenta página web Persona Jurídica';
     $filename = 'J_' . $_POST['rif']. '.zip';
     $path = dirname(__FILE__) . '/tmp_apertura/';
-    enviar_email_3($from_name, $from_mail, $message, $path, $filename, $subject, $mail_to);
+    enviar_email_3($from_name, $from_mail, $message, $path, $filename, $subject, $from_mail);
 }
 
 
