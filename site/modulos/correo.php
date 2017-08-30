@@ -26,6 +26,7 @@ DEFINIR CUERPO DE CORREO
 
     /* Email Detials */
     $Coreo = execute_sql("get_parametro", array(64));
+    $from_mail2 = $Coreo[1]["valor"];
     $from_mail = "< " . $Coreo[1]["valor"] . " >";
 
     $Coreo_nombre = execute_sql("get_parametro", array(65));
@@ -79,7 +80,7 @@ Usted tiene una nueva solicitud de tarjeta de credito.<br><br>
     $subject = 'Solicitud de tarjeta de credito desde la página web Persona Natural';
     $filename = $_POST['tp_documento'] . $_POST['n_documento'] . '.zip';
     $path = dirname(__FILE__) . '/tmp_apertura/';
-    enviar_email_3($from_name, $from_mail, $message, $path, $filename, $subject, $from_mail);
+    enviar_email_3($from_name, $from_mail, $message, $path, $filename, $subject, $from_mail2);
 }
 
 
@@ -120,6 +121,7 @@ Banplus te invita a visitar la página web wwww.banplus.com, para que conozcas n
 
     /* Email Detials */
     $Coreo = execute_sql("get_parametro", array(64));
+    $from_mail2 = $Coreo[1]["valor"];
     $from_mail = "< " . $Coreo[1]["valor"] . " >";
 
     $Coreo_nombre = execute_sql("get_parametro", array(65));
@@ -169,11 +171,12 @@ Usted tiene una nueva solicitud de apertura de cuenta persona natural por proces
 </html>
 ';
 
-
+    var_dump($from_mail2);
+    echo "correo";
     $subject = 'Solicitud de Preapertura de cuenta página web Persona Natural';
     $filename = $_POST['tp_documento'] . $_POST['n_documento'] . '.zip';
     $path = dirname(__FILE__) . '/tmp_apertura/';
-    enviar_email_3($from_name, $from_mail, $message, $path, $filename, $subject, $from_mail);
+    enviar_email_3($from_name, $from_mail, $message, $path, $filename, $subject, $from_mail2);
 }
 
 
@@ -214,16 +217,17 @@ Banplus te invita a visitar la página web wwww.banplus.com, para que conozcas n
 
     /* Email Detials */
     $Coreo = execute_sql("get_parametro", array(64));
+    $from_mail2 = $Coreo[1]["valor"];
     $from_mail = "< " . $Coreo[1]["valor"] . " >";
-    
+
     $Coreo_nombre = execute_sql("get_parametro", array(65));
     $from_name = $Coreo_nombre[1]["valor"];
 
     $path = dirname(__FILE__) . '/tmp_apertura/J_' . $_POST['rif'] . "/";
     $filename = 'J_' . $_POST['rif'] . '_APERTURAPJ.pdf';
 
-    
-    
+
+
     enviar_email_2($from_name, $from_mail, $message, $path, $filename, $subject, $mail_to);
 
 //    $myfile = fopen(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'] . '.zip', "w") or die("Unable to open file!");
@@ -231,13 +235,13 @@ Banplus te invita a visitar la página web wwww.banplus.com, para que conozcas n
 
 
     $zip = new ZipArchive;
-    if ($zip->open(dirname(__FILE__) . '/tmp_apertura/' . 'J_' . $_POST['rif']. '.zip', ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
+    if ($zip->open(dirname(__FILE__) . '/tmp_apertura/' . 'J_' . $_POST['rif'] . '.zip', ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
 
 
         if ($handle = opendir($path)) {
 // Add all files inside the directory
             while (false !== ($entry = readdir($handle))) {
-                if ($entry != "." && $entry != ".." && !is_dir($path. $entry)) {
+                if ($entry != "." && $entry != ".." && !is_dir($path . $entry)) {
                     $zip->addFile($path . $entry, 'J_' . $_POST['rif'] . "/" . $entry);
                 }
             }
@@ -267,11 +271,10 @@ Solicitudes de preapertura de cuenta página web Persona Jurídica.<br><br>
 
 
     $subject = 'Solicitudes de preapertura de cuenta página web Persona Jurídica';
-    $filename = 'J_' . $_POST['rif']. '.zip';
+    $filename = 'J_' . $_POST['rif'] . '.zip';
     $path = dirname(__FILE__) . '/tmp_apertura/';
-    enviar_email_3($from_name, $from_mail, $message, $path, $filename, $subject, $from_mail);
+    enviar_email_3($from_name, $from_mail, $message, $path, $filename, $subject, $from_mail2);
 }
-
 
 function enviar_email_3($from_name, $from_mail, $message, $path, $filename, $subject, $mail_to) {
 // a random hash will be necessary to send mixed content
@@ -310,17 +313,17 @@ function enviar_email_3($from_name, $from_mail, $message, $path, $filename, $sub
     $body .= "--" . $separator . "--";
 
 //SEND Mail
-
+    var_dump($mail_to);
     mail($mail_to, $subject, $body, $headers);
-
 }
+
 function enviar_email_2($from_name, $from_mail, $message, $path, $filename, $subject, $mail_to) {
 // a random hash will be necessary to send mixed content
     $separator = md5(time());
 
 // carriage return type (RFC)
     $eol = "\r\n";
-   
+
 // main header (multipart mandatory)
     $headers = "From:" . $from_name . $from_mail . $eol;
     $headers .= "MIME-Version: 1.0" . $eol;
@@ -351,7 +354,6 @@ function enviar_email_2($from_name, $from_mail, $message, $path, $filename, $sub
     $body .= "--" . $separator . "--";
 
 //SEND Mail
-        var_dump($mail_to,$subject);
-   echo  mail($mail_to, $subject, $body, $headers);
 
+    echo mail($mail_to, $subject, $body, $headers);
 }
