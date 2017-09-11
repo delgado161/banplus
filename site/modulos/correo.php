@@ -25,14 +25,14 @@ DEFINIR CUERPO DE CORREO
 ';
 
     /* Email Detials */
-    $Coreo = execute_sql("get_parametro", array(64));
+    $Coreo = execute_sql("get_parametro", array(68));
     $from_mail2 = $Coreo[1]["valor"];
     $from_mail = "< " . $Coreo[1]["valor"] . " >";
 
-    $Coreo_nombre = execute_sql("get_parametro", array(65));
+    $Coreo_nombre = execute_sql("get_parametro", array(69));
     $from_name = $Coreo_nombre[1]["valor"];
-
-    $path = dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'] . "/";
+    $path = dirname(__FILE__) . '/tmp_apertura/' . date('Ymd') . '/TARJ_C/' . $_POST['tp_documento'] . $_POST['n_documento'] . "/";
+//    $path = dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'] . "/";
     $filename = $_POST['tp_documento'] . $_POST['n_documento'] . '_SOLI_TARJETA.pdf';
 
     enviar_email_2($from_name, $from_mail, $message, $path, $filename, $subject, $mail_to);
@@ -42,14 +42,14 @@ DEFINIR CUERPO DE CORREO
 
 
     $zip = new ZipArchive;
-    if ($zip->open(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'] . '.zip', ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
+    if ($zip->open(dirname(__FILE__) . '/tmp_apertura/' . date('Ymd') . '/TARJ_C/' . $_POST['tp_documento'] . $_POST['n_documento'] . '.zip', ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
 
 
-        if ($handle = opendir(dirname(__FILE__) . '\tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'] . "/")) {
+        if ($handle = opendir(dirname(__FILE__) . '\tmp_apertura/' . date('Ymd') . '/TARJ_C/' . $_POST['tp_documento'] . $_POST['n_documento'] . "/")) {
 // Add all files inside the directory
             while (false !== ($entry = readdir($handle))) {
-                if ($entry != "." && $entry != ".." && !is_dir(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'] . "/" . $entry)) {
-                    $zip->addFile(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'] . "/" . $entry, $_POST['tp_documento'] . $_POST['n_documento'] . "/" . $entry);
+                if ($entry != "." && $entry != ".." && !is_dir(dirname(__FILE__) . '/tmp_apertura/' . date('Ymd') . '/TARJ_C/' . $_POST['tp_documento'] . $_POST['n_documento'] . "/" . $entry)) {
+                    $zip->addFile(dirname(__FILE__) . '/tmp_apertura/' . date('Ymd') . '/TARJ_C/' . $_POST['tp_documento'] . $_POST['n_documento'] . "/" . $entry, $_POST['tp_documento'] . $_POST['n_documento'] . "/" . $entry);
                 }
             }
             closedir($handle);
@@ -79,7 +79,7 @@ Usted tiene una nueva solicitud de tarjeta de credito.<br><br>
 
     $subject = 'Solicitud de tarjeta de credito desde la página web Persona Natural';
     $filename = $_POST['tp_documento'] . $_POST['n_documento'] . '.zip';
-    $path = dirname(__FILE__) . '/tmp_apertura/';
+    $path = dirname(__FILE__) . '/tmp_apertura/'. date('Ymd') . '/TARJ_C/';
     enviar_email_3($from_name, $from_mail, $message, $path, $filename, $subject, $from_mail2);
 }
 
@@ -127,7 +127,7 @@ Banplus te invita a visitar la página web wwww.banplus.com, para que conozcas n
     $Coreo_nombre = execute_sql("get_parametro", array(65));
     $from_name = $Coreo_nombre[1]["valor"];
 
-    $path = dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'] . "/";
+    $path = dirname(__FILE__) . '/tmp_apertura/' . date('Ymd') . '/APERTUNA_N/' . $_POST['tp_documento'] . $_POST['n_documento'] . "/";
     $filename = $_POST['tp_documento'] . $_POST['n_documento'] . '_APERTURA.pdf';
 
     enviar_email_2($from_name, $from_mail, $message, $path, $filename, $subject, $mail_to);
@@ -137,14 +137,14 @@ Banplus te invita a visitar la página web wwww.banplus.com, para que conozcas n
 
 
     $zip = new ZipArchive;
-    if ($zip->open(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'] . '.zip', ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
+    if ($zip->open(dirname(__FILE__) . '/tmp_apertura/' . date('Ymd') . '/APERTUNA_N/' . $_POST['tp_documento'] . $_POST['n_documento'] . '.zip', ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
 
 
-        if ($handle = opendir(dirname(__FILE__) . '\tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'] . "/")) {
+        if ($handle = opendir(dirname(__FILE__) . '\tmp_apertura/'. date('Ymd') . '/APERTUNA_N/'  . $_POST['tp_documento'] . $_POST['n_documento'] . "/")) {
 // Add all files inside the directory
             while (false !== ($entry = readdir($handle))) {
-                if ($entry != "." && $entry != ".." && !is_dir(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'] . "/" . $entry)) {
-                    $zip->addFile(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'] . "/" . $entry, $_POST['tp_documento'] . $_POST['n_documento'] . "/" . $entry);
+                if ($entry != "." && $entry != ".." && !is_dir(dirname(__FILE__) . '/tmp_apertura/' . date('Ymd') . '/APERTUNA_N/' . $_POST['tp_documento'] . $_POST['n_documento'] . "/" . $entry)) {
+                    $zip->addFile(dirname(__FILE__) . '/tmp_apertura/' . date('Ymd') . '/APERTUNA_N/' . $_POST['tp_documento'] . $_POST['n_documento'] . "/" . $entry, $_POST['tp_documento'] . $_POST['n_documento'] . "/" . $entry);
                 }
             }
             closedir($handle);
@@ -175,7 +175,7 @@ Usted tiene una nueva solicitud de apertura de cuenta persona natural por proces
     echo "correo";
     $subject = 'Solicitud de Preapertura de cuenta página web Persona Natural';
     $filename = $_POST['tp_documento'] . $_POST['n_documento'] . '.zip';
-    $path = dirname(__FILE__) . '/tmp_apertura/';
+    $path = dirname(__FILE__) . '/tmp_apertura/'. date('Ymd') . '/APERTUNA_N/' ;
     enviar_email_3($from_name, $from_mail, $message, $path, $filename, $subject, $from_mail2);
 }
 
@@ -223,7 +223,7 @@ Banplus te invita a visitar la página web wwww.banplus.com, para que conozcas n
     $Coreo_nombre = execute_sql("get_parametro", array(65));
     $from_name = $Coreo_nombre[1]["valor"];
 
-    $path = dirname(__FILE__) . '/tmp_apertura/J_' . $_POST['rif'] . "/";
+    $path = dirname(__FILE__) . '/tmp_apertura/'. date('Ymd') . '/APERTUNA_J/'.'J_'  . $_POST['rif'] . "/";
     $filename = 'J_' . $_POST['rif'] . '_APERTURAPJ.pdf';
 
 
@@ -235,7 +235,7 @@ Banplus te invita a visitar la página web wwww.banplus.com, para que conozcas n
 
 
     $zip = new ZipArchive;
-    if ($zip->open(dirname(__FILE__) . '/tmp_apertura/' . 'J_' . $_POST['rif'] . '.zip', ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
+    if ($zip->open(dirname(__FILE__) . '/tmp_apertura/'. date('Ymd') . '/APERTUNA_J/'.'J_'  . $_POST['rif'] . '.zip', ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
 
 
         if ($handle = opendir($path)) {
@@ -272,7 +272,7 @@ Solicitudes de preapertura de cuenta página web Persona Jurídica.<br><br>
 
     $subject = 'Solicitudes de preapertura de cuenta página web Persona Jurídica';
     $filename = 'J_' . $_POST['rif'] . '.zip';
-    $path = dirname(__FILE__) . '/tmp_apertura/';
+    $path = dirname(__FILE__) . '/tmp_apertura/'. date('Ymd') . '/APERTUNA_J/';
     enviar_email_3($from_name, $from_mail, $message, $path, $filename, $subject, $from_mail2);
 }
 
@@ -315,6 +315,7 @@ function enviar_email_3($from_name, $from_mail, $message, $path, $filename, $sub
 //SEND Mail
     var_dump($mail_to);
     mail($mail_to, $subject, $body, $headers);
+
 }
 
 function enviar_email_2($from_name, $from_mail, $message, $path, $filename, $subject, $mail_to) {
@@ -356,4 +357,5 @@ function enviar_email_2($from_name, $from_mail, $message, $path, $filename, $sub
 //SEND Mail
 
     echo mail($mail_to, $subject, $body, $headers);
+
 }

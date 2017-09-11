@@ -51,7 +51,7 @@ noticias_add.ValidateForm = function(fobj) {
 			return ew_OnError(this, elm, ewLanguage.Phrase("EnterRequiredField") + " - <?php echo ew_JsEncode2($noticias->tipo->FldCaption()) ?>");
 		elm = fobj.elements["x" + infix + "_titulo"];
 		if (elm && !ew_HasValue(elm))
-			return ew_OnError(this, elm, ewLanguage.Phrase("EnterRequiredField") + " - <?php echo "Título"  ?>");
+			return ew_OnError(this, elm, ewLanguage.Phrase("EnterRequiredField") + " - <?php echo "Tï¿½tulo"  ?>");
 		elm = fobj.elements["x" + infix + "_contenido"];
 		if (tipo ==1){
 			if (elm && !ew_HasValue(elm))
@@ -231,7 +231,7 @@ if (is_array($noticias->tipo->EditValue)) {
 	<tr id="r_titulo"<?php echo $noticias->RowAttributes() ?>>
 		<td class="ewTableHeader"><?php echo $noticias->titulo->FldCaption() ?><?php echo $Language->Phrase("FieldRequiredIndicator") ?></td>
 		<td<?php echo $noticias->titulo->CellAttributes() ?>><span id="el_titulo">
-<input type="text" name="x_titulo" id="x_titulo" size="100" maxlength="100" value="<?php echo $noticias->titulo->EditValue ?>"<?php echo $noticias->titulo->EditAttributes() ?>>
+<input type="text" name="x_titulo" id="x_titulo" size="150" maxlength="150" value="<?php echo $noticias->titulo->EditValue ?>"<?php echo $noticias->titulo->EditAttributes() ?>>
 </span><?php echo $noticias->titulo->CustomMsg ?></td>
 	</tr>
 <?php } ?>

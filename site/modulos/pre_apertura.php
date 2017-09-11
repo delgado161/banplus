@@ -224,7 +224,7 @@ echo "];";
                     $("#fc_cita").datepicker({
                         dateFormat: "dd/mm/yy",
                         yearRange: '-0:+0',
-                        minDate: +19,
+                        minDate: +5,
                         maxDate: +150,
                         beforeShowDay: function (date) {
                             var show = true;
@@ -255,7 +255,7 @@ echo "];";
         $("#fc_cita").datepicker({
             dateFormat: "dd/mm/yy",
             yearRange: '-0:+0',
-            minDate: +19,
+            minDate: +5,
             maxDate: +150,
             beforeShowDay: function (date) {
                 var show = true;

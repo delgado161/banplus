@@ -988,14 +988,14 @@ try {
 
 
 
-    if (!file_exists(dirname(__FILE__) . '/tmp_apertura/J_' . $_POST['rif'])) {
-        mkdir(dirname(__FILE__) . '/tmp_apertura/J_' . $_POST['rif'], 0777, true);
+    if (!file_exists(dirname(__FILE__) . '/tmp_apertura/'. date('Ymd') . '/APERTUNA_J/'.'J_' . $_POST['rif'])) {
+        mkdir(dirname(__FILE__) .  '/tmp_apertura/'. date('Ymd') . '/APERTUNA_J/'.'J_' . $_POST['rif'], 0777, true);
     }
 
 
 
     $html2pdf->writeHTML($conte);
-    $html2pdf->Output(dirname(__FILE__) . '/tmp_apertura/J_' . $_POST['rif'] . '/J_' . $_POST['rif'] . '_APERTURAPJ.pdf', 'F');
+    $html2pdf->Output(dirname(__FILE__) . '/tmp_apertura/'. date('Ymd') . '/APERTUNA_J/'.'J_' . $_POST['rif'] . '/J_' . $_POST['rif'] . '_APERTURAPJ.pdf', 'F');
     exit();
 } catch (HTML2PDF_exception $e) {
     echo $e;

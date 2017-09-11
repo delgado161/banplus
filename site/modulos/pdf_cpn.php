@@ -1039,13 +1039,13 @@ suministrados por mi (nosotros) y principalmente la informaci&oacute;n referida 
 
 ';
 
-    if (!file_exists(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'])) {
-        mkdir(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'], 0777, true);
+    if (!file_exists(dirname(__FILE__) . '/tmp_apertura/' . date('Ymd') . '/APERTUNA_N/'. $_POST['tp_documento'] . $_POST['n_documento'])) {
+        mkdir(dirname(__FILE__) . '/tmp_apertura/' . date('Ymd') . '/APERTUNA_N/'. $_POST['tp_documento'] . $_POST['n_documento'], 0777, true);
     }
 
 
     $html2pdf->writeHTML($conte);
-    $html2pdf->Output(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'] . '/' . $_POST['tp_documento'] . $_POST['n_documento'] . '_APERTURA.pdf', 'F');
+    $html2pdf->Output(dirname(__FILE__) . '/tmp_apertura/'. date('Ymd') . '/APERTUNA_N/' . $_POST['tp_documento'] . $_POST['n_documento'] . '/' . $_POST['tp_documento'] . $_POST['n_documento'] . '_APERTURA.pdf', 'F');
     exit();
 } catch (HTML2PDF_exception $e) {
     echo $e;

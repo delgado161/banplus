@@ -39,14 +39,14 @@ if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "NATURAL") {
             $_POST['etp_ciudad'] = $Ciudad['ciudad'];
     }
 
-        $_POST['dtp_municipio'] = explode(",", $_POST['dtp_municipio']);
-    
-        foreach ($Municipios as $municipio) {
+    $_POST['dtp_municipio'] = explode(",", $_POST['dtp_municipio']);
+
+    foreach ($Municipios as $municipio) {
 //
-          if ($municipio['lf_estado'] == $_POST['dtp_municipio'][0] && $_POST['dtp_municipio'][1] == $municipio['pk_municipio'])
+        if ($municipio['lf_estado'] == $_POST['dtp_municipio'][0] && $_POST['dtp_municipio'][1] == $municipio['pk_municipio'])
             $_POST['dtp_municipio'] = $municipio['nombre'];;
     }
-    
+
     actualizar_campo('inserta_cita', [$_POST['fn_agencia'], $_POST['fc_cita'], 'ACPN_' . $_POST['tp_documento'] . $_POST['n_documento'], serialize($_POST)]);
 
     foreach ($AGENCIA as $agencia) {
@@ -55,12 +55,12 @@ if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "NATURAL") {
     }
 
 
-    if (!file_exists(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'])) {
-        mkdir(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'], 0777, true);
+    if (!file_exists(dirname(__FILE__) . '/tmp_apertura/' . date('Ymd') . '/APERTUNA_N/' . $_POST['tp_documento'] . $_POST['n_documento'])) {
+        mkdir(dirname(__FILE__) . '/tmp_apertura/' . date('Ymd') . '/APERTUNA_N/' . $_POST['tp_documento'] . $_POST['n_documento'], 0777, true);
     }
 
 
-    $uploaddir = dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'] . "/";
+    $uploaddir = dirname(__FILE__) . '/tmp_apertura/' . date('Ymd') . '/APERTUNA_N/' . $_POST['tp_documento'] . $_POST['n_documento'] . "/";
 
     $path = $_FILES['f_cedula']['name'];
     $ext = pathinfo($path, PATHINFO_EXTENSION);
@@ -134,7 +134,7 @@ if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "NATURAL") {
                             if (r == true) {
                                 $('#form_continuar').submit();
                             } else {
-                                txt = "You pressed Cancel!";
+                                location.href = 'p_contenido.php'
                             }
                         },
                         type: 'POST'
@@ -187,11 +187,11 @@ if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "JURIDICO") {
             $_POST['fn_agencia'] = $agencia['nombre'];
     }
 
-    if (!file_exists(dirname(__FILE__) . '/tmp_apertura/J_' . $_POST['rif'])) {
-        mkdir(dirname(__FILE__) . '/tmp_apertura/J_' . $_POST['rif'], 0777, true);
+    if (!file_exists(dirname(__FILE__) . '/tmp_apertura/' . date('Ymd') . '/APERTUNA_J/' . 'J_' . $_POST['rif'])) {
+        mkdir(dirname(__FILE__) . '/tmp_apertura/' . date('Ymd') . '/APERTUNA_J/' . 'J_' . $_POST['rif'], 0777, true);
     }
 
-    $uploaddir = dirname(__FILE__) . '/tmp_apertura/J_' . $_POST['rif'] . "/";
+    $uploaddir = dirname(__FILE__) . '/tmp_apertura/' . date('Ymd') . '/APERTUNA_J/' . 'J_' . $_POST['rif'] . "/";
 
     $path = $_FILES['f_reg_fiscal']['name'];
     $ext = pathinfo($path, PATHINFO_EXTENSION);
@@ -257,13 +257,14 @@ if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "JURIDICO") {
                         success: function (data) {
 
                             $('.spiner_').hide();
-//
-//                            var r = confirm("\u00bfDesea realizar la solicitud de TDC?");
-//                            if (r == true) {
-//                                txt = "You pressed OK!";
-//                            } else {
-//                                txt = "You pressed Cancel!";
-//                            }
+                            location.href = 'p_contenido.php';
+                            //
+                            //                            var r = confirm("\u00bfDesea realizar la solicitud de TDC?");
+                            //                            if (r == true) {
+                            //                                txt = "You pressed OK!";
+                            //                            } else {
+                            //                                txt = "You pressed Cancel!";
+                            //                            }
                         },
                         type: 'POST'
                     });
@@ -322,8 +323,8 @@ if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "CREDITO") {
             $_POST['dtp_municipio'] = $municipio['nombre'];;
     }
 
-        $_POST['dtp_parroquia'] = explode(",", $_POST['dtp_parroquia']);
-    
+    $_POST['dtp_parroquia'] = explode(",", $_POST['dtp_parroquia']);
+
     foreach ($Parroquias as $parroquia) {
 //
         if ($parroquia['lf_parroquia_municipio'] == $_POST['dtp_parroquia'][0] && $_POST['dtp_parroquia'][1] == $parroquia['lp_parroquia_id'])
@@ -342,15 +343,16 @@ if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "CREDITO") {
             $_POST['fn_agencia'] = $agencia['nombre'];
     }
 
-    if (!file_exists(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'])) {
-        mkdir(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'], 0777, true);
-    } else {
-        unlink(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento']);
-        mkdir(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'], 0777, true);
+    if (!file_exists(dirname(__FILE__) . '/tmp_apertura/' . date('Ymd') . '/TARJ_C/' . $_POST['tp_documento'] . $_POST['n_documento'])) {
+        mkdir(dirname(__FILE__) . '/tmp_apertura/' . date('Ymd') . '/TARJ_C/' . $_POST['tp_documento'] . $_POST['n_documento'], 0777, true);
     }
+//    } else {
+//        unlink(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento']);
+//        mkdir(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'], 0777, true);
+//    }
 
 
-    $uploaddir = dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'] . "/";
+    $uploaddir = dirname(__FILE__) . '/tmp_apertura/' . date('Ymd') . '/TARJ_C/' . $_POST['tp_documento'] . $_POST['n_documento'] . "/";
 
     $path = $_FILES['f_cedula']['name'];
     $ext = pathinfo($path, PATHINFO_EXTENSION);
@@ -379,14 +381,13 @@ if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "CREDITO") {
         $uploadfile = $uploaddir . $_POST['tp_documento'] . $_POST['n_documento'] . '_DECLARACION.' . $ext;
         move_uploaded_file($_FILES['f_declaracion']['tmp_name'], $uploadfile);
     }
-    
-      $ruta = execute_sql("get_parametro", array(67));
+
+    $ruta = execute_sql("get_parametro", array(67));
     $ruta = $ruta[1]["valor"];
-    
     ?>
 
-    
-    
+
+
     <form method="POST" id="form_continuar" enctype="multipart/form-data" action="p_contenido.php?<?= $ruta ?>">
         <input   type="hidden" name="p_proceso_id" id="p_proceso_id" value="<?= ('SOLTC_' . $_POST['tp_documento'] . $_POST['n_documento']) ?>">
     </form>
@@ -403,25 +404,25 @@ if (isset($_POST['p_formulario']) && $_POST['p_formulario'] == "CREDITO") {
                 },
                 success: function (data) {
 
-                                        $.ajax({
-                                            url: 'modulos/correo.php',
-                                            data: <?php echo json_encode($_POST) ?>,
-                                            error: function (xhr, status, error) {
-                    
-                                            },
-                                            success: function (data) {
-                    
-                                                $('.spiner_').hide();
-                    
-                                                var r = confirm("\u00bfDesea realizar una pertura de Cuenta?");
-                                                if (r == true) {
-                                                      $('#form_continuar').submit();
-                                                } else {
-                                                    txt = "You pressed Cancel!";
-                                                }
-                                            },
-                                            type: 'POST'
-                                        });
+                    $.ajax({
+                        url: 'modulos/correo.php',
+                        data: <?php echo json_encode($_POST) ?>,
+                        error: function (xhr, status, error) {
+
+                        },
+                        success: function (data) {
+
+                            $('.spiner_').hide();
+
+                            var r = confirm("\u00bfDesea realizar una pertura de Cuenta?");
+                            if (r == true) {
+                                $('#form_continuar').submit();
+                            } else {
+                               location.href = 'p_contenido.php';
+                            }
+                        },
+                        type: 'POST'
+                    });
                 },
                 type: 'POST'
             });

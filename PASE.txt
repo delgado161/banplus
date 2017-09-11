@@ -47,3 +47,27 @@ PAQUETE SITE
 \site\modulos\valida_fecha.php
 
 \site\p_contenido.php
+
+$$$$$$$$$$$$$$$
+
+INSERT INTO `awvps_banplus`.`parametros` (`id_parametro`, `nombre`, `estatus`) VALUES ('68', 'Correo Tarjeta de Credito', '1');
+INSERT INTO `awvps_banplus`.`parametros` (`id_parametro`, `nombre`, `estatus`) VALUES ('69', 'Nombre Correo TC', '1');
+ALTER TABLE `awvps_banplus`.`noticias` 
+CHANGE COLUMN `titulo` `titulo` VARCHAR(150) NULL DEFAULT NULL ;
+
+
+
+admin\noticiasedit.php
+admin\noticiasadd.php
+
+site\css\site.css
+
+site\modulos\envia_correos.php
+site\modulos\correo.php
+
+site\modulos\pdf_cpn.php
+site\modulos\pdf_cpj.php
+site\modulos\pdf_tc.php
+C:\xampp\htdocs\Banplus_3\site\modulos\pre_apertura.php
+
+$$$$$$$$$$$$$$

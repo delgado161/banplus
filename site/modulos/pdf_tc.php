@@ -7,6 +7,7 @@
 //ob_start();
 //$content = ob_get_clean();
 // convert in PDF
+
 include_once "../includes/html2pdf/vendor/autoload.php";
 try {
 
@@ -679,22 +680,22 @@ try {
                  <tr class="valores">
                     <td  style="width:100%;border-left:none;border-right:none;" > ';
 
-    if ($_POST['otras_pA'] == "APARTAMENTOS")
+    if (isset($_POST['otras_pA']) && $_POST['otras_pA'] == "APARTAMENTOS")
         $conte .= '&nbsp; &nbsp;<input type="checkbox" checked="checked" > Apartamentos';
     else
         $conte .= '&nbsp; &nbsp;<input type="checkbox"  > Apartamentos';
 
-    if ($_POST['otras_pT'] == "TERRENOS")
+    if (isset($_POST['otras_pT']) && $_POST['otras_pT'] == "TERRENOS")
         $conte .= '&nbsp;<input type="checkbox" checked="checked" > Terrenos';
     else
         $conte .= '&nbsp;<input type="checkbox"  > Terrenos';
 
-    if ($_POST['otras_pL'] == "LOCALES")
+    if (isset($_POST['otras_pL']) && $_POST['otras_pL'] == "LOCALES")
         $conte .= '&nbsp;<input type="checkbox" checked="checked" > Locales';
     else
         $conte .= '&nbsp;<input type="checkbox"  > Locales';
 
-    if ($_POST['otras_pO'] == "OTROS")
+    if (isset($_POST['otras_pO']) && $_POST['otras_pO'] == "OTROS")
         $conte .= '&nbsp;<input type="checkbox" checked="checked" > Otros';
     else
         $conte .= '&nbsp;<input type="checkbox"  > Otros';
@@ -1105,12 +1106,12 @@ try {
                     <td  style="width:24%;border-left:none;" > ' . $_POST['tp_banco1'] . '</td>
                     <td  style="width:68%;border-left:none;" > ' . $_POST['cuenta1'] . ' </td>
                      <td  style="width:8%;border-right:none;" > ';
-    if ($_POST['tp_cuenta1'] == "C")
+    if ( isset($_POST['tp_cuenta1']) && $_POST['tp_cuenta1'] == "C")
         $conte .= '&nbsp;<input type="checkbox" checked="checked" >C <br>';
     else
         $conte .= '&nbsp;<input type="checkbox"  >C <br>';
 
-    if ($_POST['tp_cuenta1'] == "A")
+    if (isset($_POST['tp_cuenta1']) && $_POST['tp_cuenta1'] == "A")
         $conte .= '&nbsp;<input type="checkbox" checked="checked" >A';
     else
         $conte .= '&nbsp;<input type="checkbox"  >A';
@@ -1123,12 +1124,12 @@ try {
                      <td  style="width:24%;border-left:none;" > ' . $_POST['tp_banco2'] . ' </td>
                     <td  style="width:68%;border-left:none;" > ' . $_POST['cuenta2'] . ' </td>
                      <td  style="width:8%;border-right:none;" >                       ';
-    if ($_POST['tp_cuenta2'] == "C")
+    if (isset($_POST['tp_cuenta2']) && $_POST['tp_cuenta2'] == "C")
         $conte .= '&nbsp;<input type="checkbox" checked="checked" >C <br>';
     else
         $conte .= '&nbsp;<input type="checkbox"  >C <br>';
 
-    if ($_POST['tp_cuenta2'] == "A")
+    if (isset($_POST['tp_cuenta2']) && $_POST['tp_cuenta2'] == "A")
         $conte .= '&nbsp;<input type="checkbox" checked="checked" >A';
     else
         $conte .= '&nbsp;<input type="checkbox"  >A';
@@ -1141,12 +1142,12 @@ try {
                     <td  style="width:24%;border-left:none;" > ' . $_POST['tp_banco3'] . ' </td>
                     <td  style="width:68%;border-left:none;" > ' . $_POST['cuenta3'] . ' </td>
                      <td  style="width:8%;border-right:none;" > ';
-    if ($_POST['tp_cuenta3'] == "C")
+    if (isset($_POST['tp_cuenta3']) && $_POST['tp_cuenta3'] == "C")
         $conte .= '&nbsp;<input type="checkbox" checked="checked" >C <br>';
     else
         $conte .= '&nbsp;<input type="checkbox"  >C <br>';
 
-    if ($_POST['tp_cuenta3'] == "A")
+    if (isset($_POST['tp_cuenta3']) && $_POST['tp_cuenta3'] == "A")
         $conte .= '&nbsp;<input type="checkbox" checked="checked" >A';
     else
         $conte .= '&nbsp;<input type="checkbox"  >A';
@@ -1182,7 +1183,7 @@ try {
                      <td class="etiqueta" style=width:50%;border-right: 1px solid rgb(129,129,129);" > Tarjeta N&ordm; </td>
                    <td class="etiqueta" style="width:8%;" >';
 
-        if ($_POST['tjp_titularidad' . $i] == "T")
+        if (isset($_POST['tjp_titularidad' . $i]) && $_POST['tjp_titularidad' . $i] == "T")
             $conte .= '&nbsp;<input type="checkbox" checked="checked" >T';
         else
             $conte .= '&nbsp;<input type="checkbox"  >T';
@@ -1195,7 +1196,7 @@ try {
                     <td  style="width:42%;border-left:none;" > ' . $_POST['tjp_banco' . $i] . '  </td>
                     <td  style="width:50%;border-left:none;" > ' . $_POST['tjp_cuenta' . $i] . '  </td>
                      <td  style="width:8%;border-right:none;" >  ';
-        if ($_POST['tjp_titularidad' . $i] == "S")
+        if (isset($_POST['tjp_titularidad' . $i]) && $_POST['tjp_titularidad' . $i] == "S")
             $conte .= '&nbsp;<input type="checkbox" checked="checked" >S';
         else
             $conte .= '&nbsp;<input type="checkbox"  >S';
@@ -1210,17 +1211,17 @@ try {
                 <tr>
                     <td class="etiqueta" style="width:50%;border-right: 1px solid rgb(129,129,129);" >';
 
-        if ($_POST['tjp_tj' . $i] == "CLÁSICA")
+        if (isset($_POST['tjp_tj' . $i]) && $_POST['tjp_tj' . $i] == "CLÁSICA")
             $conte .= '&nbsp;<input type="checkbox" checked="checked" >Cl&aacute;sica';
         else
             $conte .= '&nbsp;<input type="checkbox"  >Cl&aacute;sica';
 
-        if ($_POST['tjp_tj' . $i] == "DORADA")
+        if (isset($_POST['tjp_tj' . $i]) && $_POST['tjp_tj' . $i] == "DORADA")
             $conte .= '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" checked="checked" >Dorada';
         else
             $conte .= '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox"  >Dorada';
 
-        if ($_POST['tjp_tj' . $i] == "PLATINUM")
+        if (isset($_POST['tjp_tj' . $i]) && $_POST['tjp_tj' . $i] == "PLATINUM")
             $conte .= '&nbsp;<input type="checkbox" checked="checked" >Platinum';
         else
             $conte .= '&nbsp;<input type="checkbox"  >Platinum';
@@ -1236,13 +1237,13 @@ try {
                 </tr>
                 <tr class="valores">
                     <td  style="width:50%;border-left:none;" >';
-        if ($_POST['tjp_tj' . $i] == "BLACK")
+        if (isset($_POST['tjp_tj' . $i]) && $_POST['tjp_tj' . $i] == "BLACK")
             $conte .= ' <input type="checkbox" checked="checked" >Black';
         else
             $conte .= ' <input type="checkbox"  >Black';
 
 
-        if ($_POST['tjp_tj' . $i] == "OTRO")
+        if (isset($_POST['tjp_tj' . $i]) &&  $_POST['tjp_tj' . $i] == "OTRO")
             $conte .= ' &nbsp;<input type="checkbox" checked="checked" >Otros';
         else
             $conte .= ' &nbsp;<input type="checkbox"  >Otros';
@@ -1276,12 +1277,12 @@ try {
                    <td class="etiqueta" style="width:100%;" >
                    Autorizo a cargar mensualmente el pago';
 
-    if ($_POST['autor_tpago'] == "T")
+    if (isset($_POST['autor_tpago']) &&  $_POST['autor_tpago'] == "T")
         $conte .= '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total<input type="checkbox" checked="checked" >';
     else
         $conte .= '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total<input type="checkbox"  >';
 
-    if ($_POST['autor_tpago'] == "M")
+    if (isset($_POST['autor_tpago']) &&  $_POST['autor_tpago'] == "M")
         $conte .= ' &nbsp;&nbsp;&nbsp;M&iacute;nimo<input type="checkbox" checked="checked" >';
     else
         $conte .= ' &nbsp;&nbsp;&nbsp;M&iacute;nimo<input type="checkbox"  >';
@@ -1401,12 +1402,12 @@ try {
                      <td  style="width:80%;border-left:none;">' . $_POST['ts_p_nombre0'] . ' ' . $_POST['ts_s_nombre0'] . ' ' . $_POST['ts_p_apellido0'] . ' ' . $_POST['ts_s_apellido0'] . '</td>
                     <td  style="width:20%;border-right:none;">';
 
-    if ($_POST['ts_tp_sexo0'] == "M")
+    if (isset( $_POST['ts_tp_sexo0']) && $_POST['ts_tp_sexo0'] == "M")
         $conte .= '&nbsp;&nbsp;<input type="checkbox"  checked="checked"> M';
     else
         $conte .= '&nbsp;&nbsp;<input type="checkbox"  > M';
 
-    if ($_POST['ts_tp_sexo0'] == "F")
+    if (isset( $_POST['ts_tp_sexo0']) &&  $_POST['ts_tp_sexo0'] == "F")
         $conte .= ' &nbsp;&nbsp;<input type="checkbox"  checked="checked"> F';
     else
         $conte .= ' &nbsp;&nbsp;<input type="checkbox"  > F';
@@ -1421,12 +1422,12 @@ try {
                     <td class="etiqueta" style="width:50%;border-right: 1px solid rgb(129,129,129);"> Fecha de Nacimiento:</td>
                     <td class="etiqueta" style="width:50%;"> C&eacute;dula de Identidad:';
 
-    if ($_POST['ts_tp_documento0'] == "C")
+    if (isset( $_POST['ts_tp_documento0']) &&  $_POST['ts_tp_documento0'] == "C")
         $conte .= '&nbsp;&nbsp;V<input type="checkbox" checked="checked" >';
     else
         $conte .= '&nbsp;&nbsp;V<input type="checkbox"  >';
 
-    if ($_POST['ts_tp_documento0'] == "E")
+    if (isset( $_POST['ts_tp_documento0']) &&  $_POST['ts_tp_documento0'] == "E")
         $conte .= '&nbsp;&nbsp;E<input type="checkbox" checked="checked" >';
     else
         $conte .= '&nbsp;&nbsp;E<input type="checkbox"  >';
@@ -1463,12 +1464,12 @@ try {
                     <td  style="width:80%;border-left:none;">' . $_POST['ts_p_nombre1'] . ' ' . $_POST['ts_s_nombre1'] . ' ' . $_POST['ts_p_apellido1'] . ' ' . $_POST['ts_s_apellido1'] . '</td>
                     <td  style="width:20%;border-right:none;">';
 
-    if ($_POST['ts_tp_sexo1'] == "M")
+    if (isset( $_POST['ts_tp_sexo1']) && $_POST['ts_tp_sexo1'] == "M")
         $conte .= '&nbsp;&nbsp;<input type="checkbox"  checked="checked"> M';
     else
         $conte .= '&nbsp;&nbsp;<input type="checkbox"  > M';
 
-    if ($_POST['ts_tp_sexo1'] == "F")
+    if (isset( $_POST['ts_tp_sexo1']) && $_POST['ts_tp_sexo1'] == "F")
         $conte .= ' &nbsp;&nbsp;<input type="checkbox"  checked="checked"> F';
     else
         $conte .= ' &nbsp;&nbsp;<input type="checkbox"  > F';
@@ -1481,12 +1482,12 @@ try {
                 <tr>
                     <td class="etiqueta" style="width:50%;border-right: 1px solid rgb(129,129,129);"> Fecha de Nacimiento:</td>
                     <td class="etiqueta" style="width:50%;"> C&eacute;dula de Identidad:';
-    if ($_POST['ts_tp_documento1'] == "C")
+    if (isset( $_POST['ts_tp_documento1']) &&  $_POST['ts_tp_documento1'] == "C")
         $conte .= '&nbsp;&nbsp;V<input type="checkbox" checked="checked" >';
     else
         $conte .= '&nbsp;&nbsp;V<input type="checkbox"  >';
 
-    if ($_POST['ts_tp_documento1'] == "E")
+    if (isset( $_POST['ts_tp_documento1']) &&  $_POST['ts_tp_documento1'] == "E")
         $conte .= '&nbsp;&nbsp;E<input type="checkbox" checked="checked" >';
     else
         $conte .= '&nbsp;&nbsp;E<input type="checkbox"  >';
@@ -1528,13 +1529,13 @@ try {
 
 ';
 
-    if (!file_exists(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'])) {
-        mkdir(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'], 0777, true);
+    if (!file_exists(dirname(__FILE__) . date('Ymd') . '/TARJ_C/' . $_POST['tp_documento'] . $_POST['n_documento'])) {
+        mkdir(dirname(__FILE__) . '/tmp_apertura/' . date('Ymd') . '/TARJ_C/' . $_POST['tp_documento'] . $_POST['n_documento'], 0777, true);
     }
 
 
     $html2pdf->writeHTML($conte);
-    $html2pdf->Output(dirname(__FILE__) . '/tmp_apertura/' . $_POST['tp_documento'] . $_POST['n_documento'] . '/' . $_POST['tp_documento'] . $_POST['n_documento'] . '_SOLI_TARJETA.pdf', 'F');
+    $html2pdf->Output(dirname(__FILE__) . '/tmp_apertura/' . date('Ymd') . '/TARJ_C/' . $_POST['tp_documento'] . $_POST['n_documento'] . '/' . $_POST['tp_documento'] . $_POST['n_documento'] . '_SOLI_TARJETA.pdf', 'F');
 //    $html2pdf->Output('_APERTURA.pdf');
 
     exit();

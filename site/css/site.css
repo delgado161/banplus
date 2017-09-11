@@ -2235,11 +2235,11 @@ width: 94%;
 
 .linea_ef_2 {
 
-    border-bottom: 1px solid rgb(0,94,184);
+    /*border-bottom: 1px solid rgb(0,94,184);*/
     color:rgb(0,94,184);
     padding-left: 15px;
     padding-top: 5px;
-    width: 139px;
+/*    width: 200px;*/
     margin-left: 60px;
 
 }

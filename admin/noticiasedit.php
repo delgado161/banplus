@@ -254,7 +254,7 @@ if (is_array($noticias->tipo->EditValue)) {
 	<tr id="r_titulo"<?php echo $noticias->RowAttributes() ?>>
 		<td class="ewTableHeader"><?php echo $noticias->titulo->FldCaption() ?><?php echo $Language->Phrase("FieldRequiredIndicator") ?></td>
 		<td<?php echo $noticias->titulo->CellAttributes() ?>><span id="el_titulo">
-<input type="text" name="x_titulo" id="x_titulo" size="100" maxlength="100" value="<?php echo $noticias->titulo->EditValue ?>"<?php echo $noticias->titulo->EditAttributes() ?>>
+<input type="text" name="x_titulo" id="x_titulo" size="150" maxlength="150" value="<?php echo $noticias->titulo->EditValue ?>"<?php echo $noticias->titulo->EditAttributes() ?>>
 </span><?php echo $noticias->titulo->CustomMsg ?></td>
 	</tr>
 <?php } ?>
